@@ -17,4 +17,8 @@
     <PackageReference Include="MudBlazor" Version="6.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Admegatest.Services\Admegatest.Services.csproj" />
+  </ItemGroup>
+
 </Project>
