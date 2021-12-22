@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\" />
+    <Compile Remove="wwwroot\css\**" />
+    <Content Remove="wwwroot\css\**" />
+    <EmbeddedResource Remove="wwwroot\css\**" />
+    <None Remove="wwwroot\css\**" />
   </ItemGroup>
 
   <ItemGroup>
