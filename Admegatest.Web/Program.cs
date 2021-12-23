@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Admegatest.Services.Authentication;
+using Blazored.LocalStorage;
+using Admegatest.Services.IServices;
+using Admegatest.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-// Custom Authentication
-builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthenticationStateProvider>();
-// MudBlazor
 builder.Services.AddMudServices();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthenticationStateProvider>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

@@ -5,44 +5,73 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Admegatest.Core.Models;
+using Admegatest.Services.IServices;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Admegatest.Services.Authentication
 {
     public class AdmegatestAuthenticationStateProvider : AuthenticationStateProvider
     {
-        public AdmegatestAuthenticationStateProvider()
-        {
+        private ILocalStorageService _localStorageService { get; }
+        private IUserService _userService { get; set; }
 
+        public AdmegatestAuthenticationStateProvider(ILocalStorageService localStorageService,
+            IUserService userService)
+        {
+            _localStorageService = localStorageService;
+            _userService = userService;
         }
 
-        public override Task<AuthenticationState> GetAuthenticationStateAsync()
+        public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            throw new NotImplementedException();
+            string accessToken = await _localStorageService.GetItemAsync<string>("accessToken");
+
+            ClaimsIdentity identity = new ClaimsIdentity();
+
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                User user = await _userService.GetUserByAccessToken(accessToken);
+                identity = GetClaimsIdentity(user);
+            }
+
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            var authenticationState = new AuthenticationState(claimsPrincipal);
+
+            return await Task.FromResult(authenticationState);
         }
 
         public async Task MarkUserAsAuthenticated(User user)
         {
-            throw new NotImplementedException();
+            await _localStorageService.SetItemAsync("accessToken", user.AccessToken);
+            await _localStorageService.SetItemAsync("refreshToken", user.RefreshToken);
+
+            var identity = GetClaimsIdentity(user);
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            var authenticationState = new AuthenticationState(claimsPrincipal);
+
+            NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
         public async Task MarkUserAsLoggedOut()
         {
-            throw new NotImplementedException();
+            await _localStorageService.RemoveItemAsync("accessToken");
+            await _localStorageService.RemoveItemAsync("refreshToken");
+
+            var identity = new ClaimsIdentity();
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            var authenticationState = new AuthenticationState(claimsPrincipal);
+
+            NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
         private ClaimsIdentity GetClaimsIdentity(User user)
         {
-            var claimsIdentity = new ClaimsIdentity();
-
-            if (user.Email != null)
+            var claimsIdentity = new ClaimsIdentity(new[]
             {
-                claimsIdentity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role.RoleDescription),
-                }, "apiauth_type");
-            }
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, user.Role.RoleDescription),
+            }, "apiauth_type");
 
             return claimsIdentity;
         }
