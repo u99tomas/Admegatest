@@ -12,9 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
+
+//builder.Services.conf
 builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthenticationStateProvider>();
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();

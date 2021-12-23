@@ -10,19 +10,19 @@ namespace Admegatest.Services.Services
 {
     public class UserService : IUserService
     {
-        public Task<User> GetUserByAccessToken(string accessToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<User> Login(User user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user);
         }
 
-        public Task<User> RegisterUser(User user)
+        public Task<User> Register(User user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user);
+        }
+
+        public Task<User> GetUserByAccessToken(string accessToken)
+        {
+            return Task.FromResult(new User { Email = "admegatest@gmail.com", Password = "Megasoft"});
         }
     }
 }

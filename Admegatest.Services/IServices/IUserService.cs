@@ -10,7 +10,7 @@ namespace Admegatest.Services.IServices
     public interface IUserService
     {
         public Task<User> Login(User user);
-        public Task<User> RegisterUser(User user);
+        public Task<User> Register(User user);
         public Task<User> GetUserByAccessToken(string accessToken);
     }
 }
