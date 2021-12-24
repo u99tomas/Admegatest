@@ -9,6 +9,7 @@
 <MudSnackbarProvider />
 
 <AuthorizeView>
+
     <Authorized>
         <MudLayout>
             <MudAppBar>
@@ -22,7 +23,9 @@
             </MudMainContent>
         </MudLayout>
     </Authorized>
+
     <NotAuthorized>
         <RedirectToLogin></RedirectToLogin>
     </NotAuthorized>
+
 </AuthorizeView>
