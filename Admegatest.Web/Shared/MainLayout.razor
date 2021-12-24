@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using Admegatest.Web.Components.AuthenticationAndAuthorization
+@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 
 <PageTitle>Admegatest</PageTitle>
@@ -22,27 +23,6 @@
         </MudLayout>
     </Authorized>
     <NotAuthorized>
-        <Admegatest.Web.Components.RedirectToLogin></Admegatest.Web.Components.RedirectToLogin>
+        <RedirectToLogin></RedirectToLogin>
     </NotAuthorized>
 </AuthorizeView>
-
-@code {
-    [CascadingParameter]
-    protected Task<AuthenticationState> AuthStat { get; set; }
-    bool _drawerOpen = true;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-
-    protected async override Task OnInitializedAsync()
-    {
-        base.OnInitialized();
-        var user = (await AuthStat).User;
-        //if (!user.Identity.IsAuthenticated)
-        //{
-        //    NavigationManager.NavigateTo($"/login?returnUrl={Uri.EscapeDataString(NavigationManager.Uri)}");
-        //}
-    }
-}

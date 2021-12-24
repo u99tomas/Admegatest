@@ -71,7 +71,6 @@ namespace Admegatest.Web.Pages.Account
 
         private async Task RedirectToRoleHomePageAsync()
         {
-            var uri = _navigationManager.Uri;
             var user = await GetUserAsync();
 
             if (user.IsInRole("IsCustomer"))
