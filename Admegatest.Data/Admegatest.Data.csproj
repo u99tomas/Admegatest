@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IRepositories\" />
+    <Folder Include="InterfacesForRepositories\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

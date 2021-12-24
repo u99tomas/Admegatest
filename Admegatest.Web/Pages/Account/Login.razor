@@ -2,24 +2,26 @@
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 
+<div style="height: 100vh;">
+    <div style="position:absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+        <MudCard>
+            <MudCardContent>
+                <img src="images/logos/megasoft-vertical-260x190.png" />
+                <MudForm>
+                    <MudTextField T="string" Label="Email" Required="true" RequiredError="¡El correo electronico es requerido!"
+                                  Validation="@(new EmailAddressAttribute() {ErrorMessage = "La dirección de correo electrónico es inválida"})" />
+                    <MudTextField T="string" Label="Password" @ref="pwField1"
+                                  InputType="InputType.Password"
+                                  Required="true"
+                                  RequiredError="¡Se requiere contraseña!" />
+                </MudForm>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Iniciar sesión</MudButton>
+            </MudCardActions>
+        </MudCard>
 
-<div style="width: 23rem; height: 40rem;">
-    <MudCard>
-        <MudCardContent>
-            <MudForm >
-                <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!"
-                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "La dirección de correo electrónico es inválida"})"/>
-                <MudTextField T="string" Label="Password" @ref="pwField1"
-                              InputType="InputType.Password"
-                               Required="true"
-                              RequiredError="¡Se requiere contraseña!"/>
-            </MudForm>
-        </MudCardContent>
-        <MudCardActions>
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Iniciar sesión</MudButton>
-        </MudCardActions>
-    </MudCard>
-    
+    </div>
 </div>
 
 @code {
