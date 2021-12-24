@@ -4,6 +4,7 @@ using Admegatest.Services.IServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using System.Security.Claims;
 
 namespace Admegatest.Web.Pages.Account
 {
@@ -19,6 +20,7 @@ namespace Admegatest.Web.Pages.Account
         private bool success;
         private MudTextField<string> _emailField;
         private MudTextField<string> _passwordField;
+        private List<string> Errors = new List<string>();
 
         protected async override Task OnInitializedAsync()
         {
@@ -27,12 +29,11 @@ namespace Admegatest.Web.Pages.Account
 
         private async Task CheckIfUserIsAuthenticated()
         {
-            var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
-            var claimsPrincipal = authState.User;
+            var user = await GetUserAsync();
 
-            if (claimsPrincipal.Identity.IsAuthenticated)
+            if (user.Identity.IsAuthenticated)
             {
-                //RedirectToRoleHomePage(); 
+                await RedirectToRoleHomePageAsync(); 
             }
         }
 
@@ -43,15 +44,21 @@ namespace Admegatest.Web.Pages.Account
 
             if (returnedUser == null)
             {
-
+                ShowErrorInvalidUser();
             }
             else
             {
                 var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
                 await admegatestAuthenticationStateProvider.MarkUserAsAuthenticated(returnedUser);
-                RedirectToRoleHomePage();
+                await RedirectToRoleHomePageAsync();
             }
 
+        }
+
+        private void ShowErrorInvalidUser()
+        {
+            var invalidUser = "El usuario ingresado es incorrecto.";
+            Errors.Add(invalidUser);
         }
 
         private User GetUserFromForm()
@@ -62,9 +69,36 @@ namespace Admegatest.Web.Pages.Account
             return user;
         }
 
-        private void RedirectToRoleHomePage()
+        private async Task RedirectToRoleHomePageAsync()
         {
-            _navigationManager.NavigateTo("/index");
+            var uri = _navigationManager.Uri;
+            var user = await GetUserAsync();
+
+            if (user.IsInRole("IsCustomer"))
+            {
+                _navigationManager.NavigateTo("/customer/home");
+            }
+
+            if (user.IsInRole("IsEmployee"))
+            {
+                _navigationManager.NavigateTo("/employee/home");
+            }
+
+            ShowErrorCantRedirectUser();
+        }
+
+        private void ShowErrorCantRedirectUser()
+        {
+            var cantRedirectUser = "El usuario no tiene un rol asignado por lo que no puede ser redireccionado a la página de inicio" +
+                ", por favor contáctese con soporte técnico.";
+            Errors.Add(cantRedirectUser);
+        }
+
+        private async Task<ClaimsPrincipal> GetUserAsync()
+        {
+            var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            return user;
         }
     }
 }

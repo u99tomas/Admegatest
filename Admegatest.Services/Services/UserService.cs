@@ -12,6 +12,9 @@ namespace Admegatest.Services.Services
     {
         public Task<User> Login(User user)
         {
+            user.AccessToken = "AccessToken123";
+            user.RefreshToken = "RefreshToken123";
+            user.Role = new Role { RoleDescription = "IsCustomer", RoleId = 1};
             return Task.FromResult(user);
         }
 
@@ -22,7 +25,7 @@ namespace Admegatest.Services.Services
 
         public Task<User> GetUserByAccessToken(string accessToken)
         {
-            return Task.FromResult(new User { Email = "admegatest@gmail.com", Password = "Megasoft"});
+            return Task.FromResult(new User { Email = "admegatest@gmail.com", Password = "Megasoft", Role = new Role { RoleDescription = "IsCustomer", RoleId = 1 } });
         }
     }
 }

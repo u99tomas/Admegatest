@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@page "/"
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using Admegatest.Core.Models
@@ -7,7 +8,9 @@
     <div class="login-container__card-wrapper">
         <MudCard>
             <MudCardContent>
-                <img src="images/logos/megasoft-vertical-260x190.png" />
+                <div class="d-flex justify-center">
+                    <img src="images/logos/megasoft-vertical-260x190.png"/>
+                </div>
                 <MudForm @bind-IsValid="@success">
                     <MudTextField T="string" Label="Email" @ref="_emailField" Required="true" RequiredError="¡El correo electronico es requerido!"
                                   Validation="@(new EmailAddressAttribute() {ErrorMessage = "La dirección de correo electrónico es inválida"})" />
@@ -22,5 +25,18 @@
                            Disabled="@(!success)" Class="ml-auto" OnClick=ValidateUser>Iniciar sesión</MudButton>
             </MudCardActions>
         </MudCard>
+
+        @if (Errors.Count != 0)
+        {
+            <MudExpansionPanels Class="mt-5">
+                <MudExpansionPanel Text="@($"Ver Errores ({Errors.Count})")">
+                    @foreach (var error in Errors)
+                    {
+                        <MudText Color="@Color.Error">@error</MudText>
+                    }
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        }
+
     </div>
 </div>
