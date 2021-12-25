@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace Admegatest.Data
 {
-    public class AdmegatestDbContext : DbContext
+    public class AdmegatestDBContext : DbContext
     {
-        public AdmegatestDbContext(DbContextOptions<AdmegatestDbContext> options) : base(options)
+        public AdmegatestDBContext()
+        {
+
+        }
+
+        public AdmegatestDBContext(DbContextOptions<AdmegatestDBContext> options) : base(options)
         {
 
         }

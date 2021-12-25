@@ -6,20 +6,30 @@ using Admegatest.Services.Authentication;
 using Blazored.LocalStorage;
 using Admegatest.Services.IServices;
 using Admegatest.Services.Services;
+using Admegatest.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddAuthorization();
 
+#region Services of NuGet packages
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
+#endregion
 
-//builder.Services.conf
+#region Services related to databases, authentication and authorization
 builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthenticationStateProvider>();
-builder.Services.AddAuthorization();
+builder.Services.AddDbContext<AdmegatestDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AdmegatestDB")));
+#endregion
+
+#region Services of Admegatest.Services project
 builder.Services.AddScoped<IUserService, UserService>();
+#endregion
 
 var app = builder.Build();
 
