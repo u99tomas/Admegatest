@@ -26,11 +26,6 @@ namespace Admegatest.Data.Repositories
             _jwtsettings = jwtsettings.Value;
         }
 
-        public Task<User> GetUserByAccessToken(string accessToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<UserWithToken?> Login(User user)
         {
             var userFound = await _admegatestDBContext.Users.Include(u => u.Role)
@@ -83,6 +78,54 @@ namespace Admegatest.Data.Repositories
             refreshToken.ExpiryDate = DateTime.UtcNow.AddMonths(1);
 
             return refreshToken;
+        }
+
+        public async Task<User> GetUserByAccessToken(string accessToken)
+        {
+            User user = await GetUserFromAccessToken(accessToken);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
+
+        private async Task<User> GetUserFromAccessToken(string accessToken)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
+
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+                SecurityToken securityToken;
+                var principle = tokenHandler.ValidateToken(accessToken, tokenValidationParameters, out securityToken);
+
+                JwtSecurityToken jwtSecurityToken = securityToken as JwtSecurityToken;
+
+                if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var userId = principle.FindFirst(ClaimTypes.Name)?.Value + 1;
+
+                    return await _admegatestDBContext.Users.Include(u => u.Role)
+                                        .Where(u => u.UserId == Convert.ToInt32(userId)).FirstOrDefaultAsync();
+                }
+            }
+            catch (Exception)
+            {
+                return new User();
+            }
+
+            return new User();
         }
     }
 }

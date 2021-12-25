@@ -32,7 +32,7 @@ namespace Admegatest.Services.Services
 
         public Task<User> GetUserByAccessToken(string accessToken)
         {
-            return Task.FromResult(new User());
+            return _userRepository.GetUserByAccessToken(accessToken);
         }
     }
 }
