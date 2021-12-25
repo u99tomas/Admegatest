@@ -1,5 +1,9 @@
 ﻿using Admegatest.Core.Models;
+using Admegatest.Core.Models.AuthenticationAndAuthorization;
+using Admegatest.Data;
+using Admegatest.Data.Repositories;
 using Admegatest.Services.IServices;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +14,15 @@ namespace Admegatest.Services.Services
 {
     public class UserService : IUserService
     {
-        public Task<User> Login(User user)
+        private readonly UserRepository _userRepository;
+
+        public UserService(AdmegatestDBContext admegatestDBContext, IOptions<JWTSettings> jwtsettings)
         {
-            user.AccessToken = "AccessToken123";
-            user.RefreshToken = "RefreshToken123";
-            user.Role = new Role { RoleDescription = "IsCustomer", RoleId = 1};
-            return Task.FromResult(user);
+            _userRepository = new UserRepository(admegatestDBContext, jwtsettings);
+        }
+        public Task<UserWithToken?> Login(User user)
+        {
+            return _userRepository.Login(user);
         }
 
         public Task<User> Register(User user)
@@ -25,7 +32,7 @@ namespace Admegatest.Services.Services
 
         public Task<User> GetUserByAccessToken(string accessToken)
         {
-            return Task.FromResult(new User { Email = "admegatest@gmail.com", Password = "Megasoft", Role = new Role { RoleDescription = "IsCustomer", RoleId = 1 } });
+            return Task.FromResult(new User());
         }
     }
 }

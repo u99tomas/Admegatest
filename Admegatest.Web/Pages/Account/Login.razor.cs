@@ -33,12 +33,13 @@ namespace Admegatest.Web.Pages.Account
 
             if (user.Identity.IsAuthenticated)
             {
-                await RedirectToRoleHomePageAsync(); 
+                await RedirectToRoleHomePageAsync();
             }
         }
 
         private async void ValidateUser()
         {
+            Errors.Clear();
             var user = GetUserFromForm();
             var returnedUser = await _userService.Login(user);
 
@@ -58,7 +59,7 @@ namespace Admegatest.Web.Pages.Account
         private void ShowErrorInvalidUser()
         {
             var invalidUser = "El usuario ingresado es incorrecto.";
-            Errors.Add(invalidUser);
+            ShowErrorToUser(invalidUser);
         }
 
         private User GetUserFromForm()
@@ -90,7 +91,13 @@ namespace Admegatest.Web.Pages.Account
         {
             var cantRedirectUser = "El usuario no tiene un rol asignado por lo que no puede ser redireccionado a la página de inicio" +
                 ", por favor contáctese con soporte técnico.";
-            Errors.Add(cantRedirectUser);
+            ShowErrorToUser(cantRedirectUser);
+        }
+
+        private void ShowErrorToUser(string error)
+        {
+            Errors.Add(error);
+            StateHasChanged();
         }
 
         private async Task<ClaimsPrincipal> GetUserAsync()
@@ -99,5 +106,6 @@ namespace Admegatest.Web.Pages.Account
             var user = authState.User;
             return user;
         }
+
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Admegatest.Core\Admegatest.Core.csproj" />
+    <ProjectReference Include="..\Admegatest.Data\Admegatest.Data.csproj" />
   </ItemGroup>
 
 </Project>

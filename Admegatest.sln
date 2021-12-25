@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Data", "Admegate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Services", "Admegatest.Services\Admegatest.Services.csproj", "{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Components", "Admegatest.Components\Admegatest.Components.csproj", "{B0F56DB5-25F8-48D6-BABB-E603F66707DA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

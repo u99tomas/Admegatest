@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Admegatest.Services.IServices
+namespace Admegatest.Data.InterfacesForRepositories
 {
-    public interface IUserService
+    public interface IUserRepository
     {
-        public Task<UserWithToken?> Login(User user);
-        public Task<User> Register(User user);
+        public Task<UserWithToken> Login(User user);
         public Task<User> GetUserByAccessToken(string accessToken);
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Admegatest.Core.Models;
+using Admegatest.Core.Models.AuthenticationAndAuthorization;
 using Admegatest.Services.IServices;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -41,12 +42,12 @@ namespace Admegatest.Services.Authentication
             return await Task.FromResult(authenticationState);
         }
 
-        public async Task MarkUserAsAuthenticated(User user)
+        public async Task MarkUserAsAuthenticated(UserWithToken userWithToken)
         {
-            await _localStorageService.SetItemAsync("accessToken", user.AccessToken);
-            await _localStorageService.SetItemAsync("refreshToken", user.RefreshToken);
+            await _localStorageService.SetItemAsync("accessToken", userWithToken.AccessToken);
+            await _localStorageService.SetItemAsync("refreshToken", userWithToken.RefreshToken);
 
-            var identity = GetClaimsIdentity(user);
+            var identity = GetClaimsIdentity(userWithToken);
             var claimsPrincipal = new ClaimsPrincipal(identity);
             var authenticationState = new AuthenticationState(claimsPrincipal);
 
