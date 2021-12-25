@@ -24,7 +24,7 @@ builder.Services.AddBlazoredLocalStorage();
 #region Services related to databases, authentication and authorization
 builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthenticationStateProvider>();
 builder.Services.AddDbContext<AdmegatestDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AdmegatestDB")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AdmegatestDb")));
 #endregion
 
 #region Services of Admegatest.Services project
