@@ -8,8 +8,7 @@ namespace Admegatest.Core.Models.AuthenticationAndAuthorization
 {
     public class UserWithToken : User
     {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
+        public string Token { get; set; }
 
         public UserWithToken(User user)
         {

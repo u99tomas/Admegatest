@@ -26,7 +26,7 @@ namespace Admegatest.Services.Authentication
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string accessToken = await _localStorageService.GetItemAsync<string>("accessToken");
+            string accessToken = await _localStorageService.GetItemAsync<string>("token");
 
             ClaimsIdentity identity = new ClaimsIdentity();
 
@@ -44,8 +44,7 @@ namespace Admegatest.Services.Authentication
 
         public async Task MarkUserAsAuthenticated(UserWithToken userWithToken)
         {
-            await _localStorageService.SetItemAsync("accessToken", userWithToken.AccessToken);
-            await _localStorageService.SetItemAsync("refreshToken", userWithToken.RefreshToken);
+            await _localStorageService.SetItemAsync("token", userWithToken.Token);
 
             var identity = GetClaimsIdentity(userWithToken);
             var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -56,8 +55,7 @@ namespace Admegatest.Services.Authentication
 
         public async Task MarkUserAsLoggedOut()
         {
-            await _localStorageService.RemoveItemAsync("accessToken");
-            await _localStorageService.RemoveItemAsync("refreshToken");
+            await _localStorageService.RemoveItemAsync("token");
 
             var identity = new ClaimsIdentity();
             var claimsPrincipal = new ClaimsPrincipal(identity);

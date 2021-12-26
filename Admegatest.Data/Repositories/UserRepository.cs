@@ -37,13 +37,8 @@ namespace Admegatest.Data.Repositories
                 return null;
             }
 
-            var refreshToken = GenerateRefreshToken();
-            userFound.RefreshTokens.Add(refreshToken);
-            await _admegatestDBContext.SaveChangesAsync();
-
             var userWithToken = new UserWithToken(userFound);
-            userWithToken.RefreshToken = refreshToken.Token;
-            userWithToken.AccessToken = GenerateAccessToken(userFound.UserId);
+            userWithToken.Token = GenerateAccessToken(userFound.UserId);
 
             return userWithToken;
         }
@@ -75,21 +70,6 @@ namespace Admegatest.Data.Repositories
             return tokenHandler.WriteToken(token);
         }
 
-        private RefreshToken GenerateRefreshToken()
-        {
-            RefreshToken refreshToken = new RefreshToken();
-
-            var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                refreshToken.Token = Convert.ToBase64String(randomNumber);
-            }
-            refreshToken.ExpiryDate = DateTime.UtcNow.AddMonths(1);
-
-            return refreshToken;
-        }
-
         public async Task<User> GetUserByAccessToken(string accessToken)
         {
             User user = await GetUserFromAccessToken(accessToken);
@@ -114,7 +94,8 @@ namespace Admegatest.Data.Repositories
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
                 };
 
                 SecurityToken securityToken;
@@ -138,35 +119,5 @@ namespace Admegatest.Data.Repositories
             return new User();
         }
 
-        public async Task<UserWithToken> RefreshToken(RefreshRequest refreshRequest)
-        {
-            User user = await GetUserFromAccessToken(refreshRequest.AccessToken);
-
-            if (user != null && ValidateRefreshToken(user, refreshRequest.RefreshToken))
-            {
-                UserWithToken userWithToken = new UserWithToken(user);
-                userWithToken.AccessToken = GenerateAccessToken(user.UserId);
-
-                return userWithToken;
-            }
-
-            return null;
-        }
-
-        private bool ValidateRefreshToken(User user, string refreshToken)
-        {
-
-            RefreshToken? refreshTokenUser = _admegatestDBContext.RefreshTokens
-                .Where(rt => (rt.Token == refreshToken) && (rt.UserId == user.UserId))
-                .OrderByDescending(rt => rt.ExpiryDate)
-                .FirstOrDefault();
-
-            if (refreshTokenUser != null && refreshTokenUser.ExpiryDate > DateTime.UtcNow)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
