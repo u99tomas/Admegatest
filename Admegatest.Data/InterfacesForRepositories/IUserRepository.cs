@@ -12,5 +12,6 @@ namespace Admegatest.Data.InterfacesForRepositories
     {
         public Task<UserWithToken> Login(User user);
         public Task<User> GetUserByAccessToken(string accessToken);
+        public Task<UserWithToken> RefreshToken(RefreshRequest refreshRequest);
     }
 }

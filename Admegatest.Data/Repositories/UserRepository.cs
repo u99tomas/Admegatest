@@ -128,5 +128,36 @@ namespace Admegatest.Data.Repositories
 
             return new User();
         }
+
+        public async Task<UserWithToken> RefreshToken(RefreshRequest refreshRequest)
+        {
+            User user = await GetUserFromAccessToken(refreshRequest.AccessToken);
+
+            if (user != null && ValidateRefreshToken(user, refreshRequest.RefreshToken))
+            {
+                UserWithToken userWithToken = new UserWithToken(user);
+                userWithToken.AccessToken = GenerateAccessToken(user.UserId);
+
+                return userWithToken;
+            }
+
+            return null;
+        }
+
+        private bool ValidateRefreshToken(User user, string refreshToken)
+        {
+
+            RefreshToken? refreshTokenUser = _admegatestDBContext.RefreshTokens
+                .Where(rt => (rt.Token == refreshToken) && (rt.UserId == user.UserId))
+                .OrderByDescending(rt => rt.ExpiryDate)
+                .FirstOrDefault();
+
+            if (refreshTokenUser != null && refreshTokenUser.ExpiryDate > DateTime.UtcNow)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
