@@ -66,13 +66,18 @@ namespace Admegatest.Services.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
-        private ClaimsIdentity GetClaimsIdentity(User user)
+        private ClaimsIdentity GetClaimsIdentity(User? user)
         {
-            var claimsIdentity = new ClaimsIdentity(new[]
+            var claimsIdentity = new ClaimsIdentity();
+
+            if(user.Name != null)
             {
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, user.Role.RoleDescription),
-            }, "apiauth_type");
+                claimsIdentity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Role, user.Role.RoleDescription),
+                }, "apiauth_type");
+            }
 
             return claimsIdentity;
         }
