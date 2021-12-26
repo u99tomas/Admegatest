@@ -9,9 +9,9 @@
         <MudCard>
             <MudCardContent>
                 <div class="d-flex justify-center">
-                    <img src="images/logos/megasoft-vertical-260x190.png"/>
+                    <img src="images/logos/megasoft-vertical-260x190.png" />
                 </div>
-                <MudForm @bind-IsValid="@success">
+                <MudForm @bind-IsValid="@_success">
                     <MudTextField T="string" Label="Email" @ref="_emailField" Required="true" RequiredError="¡El correo electronico es requerido!"
                                   Validation="@(new EmailAddressAttribute() {ErrorMessage = "La dirección de correo electrónico es inválida"})" />
                     <MudTextField T="string" Label="Contraseña" @ref="_passwordField"
@@ -22,7 +22,17 @@
             </MudCardContent>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                           Disabled="@(!success)" Class="ml-auto" OnClick=ValidateUser>Iniciar sesión</MudButton>
+                           Disabled="@(!_success || _loggingIn)" Class="ml-auto" OnClick=ValidateUser>
+                    @if (_loggingIn)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Iniciando sesión</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Iniciar sesión</MudText>
+                    }
+                </MudButton>
             </MudCardActions>
         </MudCard>
 

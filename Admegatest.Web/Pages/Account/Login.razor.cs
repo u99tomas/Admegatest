@@ -17,10 +17,11 @@ namespace Admegatest.Web.Pages.Account
         [Inject]
         private IUserService _userService { get; set; }
 
-        private bool success;
+        private bool _success;
         private MudTextField<string> _emailField;
         private MudTextField<string> _passwordField;
         private List<string> Errors = new List<string>();
+        private bool _loggingIn = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -33,18 +34,21 @@ namespace Admegatest.Web.Pages.Account
 
             if (user.Identity.IsAuthenticated)
             {
-                RedirectToRoleHomePageAsync(user);
+                ShowLoadingButton();
+                RedirectToRoleHomePage(user);
             }
         }
 
         private async void ValidateUser()
         {
             Errors.Clear();
+            ShowLoadingButton();
             var userFromForm = GetUserFromForm();
             var returnedUser = await _userService.Login(userFromForm);
 
             if (returnedUser == null)
             {
+                HideLoadingButton();
                 ShowErrorInvalidUser();
             }
             else
@@ -52,9 +56,21 @@ namespace Admegatest.Web.Pages.Account
                 var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
                 await admegatestAuthenticationStateProvider.MarkUserAsAuthenticated(returnedUser);
                 var user = await GetUserAsync();
-                RedirectToRoleHomePageAsync(user);
+                RedirectToRoleHomePage(user);
             }
 
+        }
+
+        private void ShowLoadingButton()
+        {
+            _loggingIn = true;
+            StateHasChanged();
+        }
+
+        private void HideLoadingButton()
+        {
+            _loggingIn = true;
+            StateHasChanged();
         }
 
         private void ShowErrorInvalidUser()
@@ -71,7 +87,7 @@ namespace Admegatest.Web.Pages.Account
             return user;
         }
 
-        private void RedirectToRoleHomePageAsync(ClaimsPrincipal user)
+        private void RedirectToRoleHomePage(ClaimsPrincipal user)
         {
 
             if (user.IsInRole("IsCustomer"))
