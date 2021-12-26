@@ -70,7 +70,7 @@ namespace Admegatest.Services.Authentication
         {
             var claimsIdentity = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Role, user.Role.RoleDescription),
             }, "apiauth_type");
 

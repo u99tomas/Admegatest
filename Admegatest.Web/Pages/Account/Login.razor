@@ -12,8 +12,11 @@
                     <img src="images/logos/megasoft-vertical-260x190.png" />
                 </div>
                 <MudForm @bind-IsValid="@_success">
-                    <MudTextField T="string" Label="Email" @ref="_emailField" Required="true" RequiredError="¡El correo electronico es requerido!"
-                                  Validation="@(new EmailAddressAttribute() {ErrorMessage = "La dirección de correo electrónico es inválida"})" />
+                    <MudTextField T="string" Label="Usuario" @ref="_userField"
+                                  InputType="InputType.Text"
+                                  Required="true"
+                                  RequiredError="¡Se requiere usuario!" />
+
                     <MudTextField T="string" Label="Contraseña" @ref="_passwordField"
                                   InputType="InputType.Password"
                                   Required="true"

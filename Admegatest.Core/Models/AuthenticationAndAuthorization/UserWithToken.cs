@@ -15,7 +15,7 @@ namespace Admegatest.Core.Models.AuthenticationAndAuthorization
         {
             this.UserId = user.UserId;
             this.Role = user.Role;
-            this.Email = user.Email;
+            this.Name = user.Name;
             this.Password = user.Password;
         }
     }

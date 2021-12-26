@@ -18,7 +18,7 @@ namespace Admegatest.Web.Pages.Account
         private IUserService _userService { get; set; }
 
         private bool _success;
-        private MudTextField<string> _emailField;
+        private MudTextField<string> _userField;
         private MudTextField<string> _passwordField;
         private List<string> Errors = new List<string>();
         private bool _loggingIn = false;
@@ -69,7 +69,7 @@ namespace Admegatest.Web.Pages.Account
 
         private void HideLoadingButton()
         {
-            _loggingIn = true;
+            _loggingIn = false;
             StateHasChanged();
         }
 
@@ -81,9 +81,9 @@ namespace Admegatest.Web.Pages.Account
 
         private User GetUserFromForm()
         {
-            var email = _emailField.Value;
+            var userName = _userField.Value;
             var password = _passwordField.Value;
-            var user = new User { Email = email, Password = password };
+            var user = new User { Name = userName, Password = password };
             return user;
         }
 

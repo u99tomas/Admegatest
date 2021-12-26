@@ -28,8 +28,9 @@ namespace Admegatest.Data.Repositories
 
         public async Task<UserWithToken?> Login(User user)
         {
+            user.Password = GetEncryptedPassword(user.Password);
             var userFound = await _admegatestDBContext.Users.Include(u => u.Role)
-                .Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefaultAsync();
+                .Where(u => u.Name == user.Name && u.Password == user.Password).FirstOrDefaultAsync();
 
             if (userFound == null)
             {
@@ -45,6 +46,14 @@ namespace Admegatest.Data.Repositories
             userWithToken.AccessToken = GenerateAccessToken(userFound.UserId);
 
             return userWithToken;
+        }
+
+        private string GetEncryptedPassword(string password)
+        {
+            var provider = MD5.Create();
+            string salt = "S0m3R@nd0mSalt";
+            byte[] bytes = provider.ComputeHash(Encoding.UTF32.GetBytes(salt + password));
+            return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
 
         private string GenerateAccessToken(int userId)
