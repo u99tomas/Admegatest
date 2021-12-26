@@ -33,15 +33,15 @@ namespace Admegatest.Web.Pages.Account
 
             if (user.Identity.IsAuthenticated)
             {
-                await RedirectToRoleHomePageAsync();
+                RedirectToRoleHomePageAsync(user);
             }
         }
 
         private async void ValidateUser()
         {
             Errors.Clear();
-            var user = GetUserFromForm();
-            var returnedUser = await _userService.Login(user);
+            var userFromForm = GetUserFromForm();
+            var returnedUser = await _userService.Login(userFromForm);
 
             if (returnedUser == null)
             {
@@ -51,7 +51,8 @@ namespace Admegatest.Web.Pages.Account
             {
                 var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
                 await admegatestAuthenticationStateProvider.MarkUserAsAuthenticated(returnedUser);
-                await RedirectToRoleHomePageAsync();
+                var user = await GetUserAsync();
+                RedirectToRoleHomePageAsync(user);
             }
 
         }
@@ -70,9 +71,8 @@ namespace Admegatest.Web.Pages.Account
             return user;
         }
 
-        private async Task RedirectToRoleHomePageAsync()
+        private void RedirectToRoleHomePageAsync(ClaimsPrincipal user)
         {
-            var user = await GetUserAsync();
 
             if (user.IsInRole("IsCustomer"))
             {

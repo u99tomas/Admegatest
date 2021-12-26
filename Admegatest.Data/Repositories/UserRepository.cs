@@ -42,14 +42,13 @@ namespace Admegatest.Data.Repositories
 
             var userWithToken = new UserWithToken(userFound);
             userWithToken.RefreshToken = refreshToken.Token;
-            userWithToken.AccessToken = GenerateAccessToken(user.UserId);
+            userWithToken.AccessToken = GenerateAccessToken(userFound.UserId);
 
             return userWithToken;
         }
 
         private string GenerateAccessToken(int userId)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -61,6 +60,8 @@ namespace Admegatest.Data.Repositories
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
             };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
@@ -114,7 +115,7 @@ namespace Admegatest.Data.Repositories
 
                 if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var userId = principle.FindFirst(ClaimTypes.Name)?.Value + 1;
+                    var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
 
                     return await _admegatestDBContext.Users.Include(u => u.Role)
                                         .Where(u => u.UserId == Convert.ToInt32(userId)).FirstOrDefaultAsync();
