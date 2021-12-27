@@ -26,13 +26,13 @@ namespace Admegatest.Services.Authentication
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string accessToken = await _localStorageService.GetItemAsync<string>("token");
+            string token = await _localStorageService.GetItemAsync<string>("token");
 
             ClaimsIdentity identity = new ClaimsIdentity();
 
-            if (!string.IsNullOrEmpty(accessToken))
+            if (!string.IsNullOrEmpty(token))
             {
-                var user = await _userService.GetUserByAccessToken(accessToken);
+                var user = await _userService.GetUserByToken(token);
                 identity = GetClaimsIdentity(user);
             }
 

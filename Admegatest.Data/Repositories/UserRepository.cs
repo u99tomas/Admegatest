@@ -82,7 +82,7 @@ namespace Admegatest.Data.Repositories
             return tokenDescriptor;
         }
 
-        public async Task<User?> GetUserByAccessToken(string token)
+        public async Task<User?> GetUserByToken(string token)
         {
             int userId = GetUserIdFromToken(token);
 
@@ -139,7 +139,6 @@ namespace Admegatest.Data.Repositories
             }
 
             return -1;
-
         }
     }
 }
