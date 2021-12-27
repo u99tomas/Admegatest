@@ -28,27 +28,26 @@ namespace Admegatest.Services.Authentication
         {
             string token = await _localStorageService.GetItemAsync<string>("token");
 
-            ClaimsIdentity identity = new ClaimsIdentity();
-
-            if (!string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
-                var user = await _userService.GetUserByToken(token);
-                identity = GetClaimsIdentity(user);
+                return await Task.FromResult(GetAnonymousAuthenticationState());
             }
 
-            var claimsPrincipal = new ClaimsPrincipal(identity);
-            var authenticationState = new AuthenticationState(claimsPrincipal);
+            var user = await _userService.GetUserByToken(token);
 
-            return await Task.FromResult(authenticationState);
+            if (user == null)
+            {
+                return await Task.FromResult(GetAnonymousAuthenticationState());
+            }
+
+            return await Task.FromResult(GetAuthenticationState(user));
         }
 
         public async Task MarkUserAsAuthenticated(UserWithToken userWithToken)
         {
             await _localStorageService.SetItemAsync("token", userWithToken.Token);
 
-            var identity = GetClaimsIdentity(userWithToken);
-            var claimsPrincipal = new ClaimsPrincipal(identity);
-            var authenticationState = new AuthenticationState(claimsPrincipal);
+            var authenticationState = GetAuthenticationState(userWithToken);
 
             NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
@@ -57,27 +56,31 @@ namespace Admegatest.Services.Authentication
         {
             await _localStorageService.RemoveItemAsync("token");
 
-            var identity = new ClaimsIdentity();
-            var claimsPrincipal = new ClaimsPrincipal(identity);
-            var authenticationState = new AuthenticationState(claimsPrincipal);
+            var authenticationState = GetAnonymousAuthenticationState();
 
             NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
-        private ClaimsIdentity GetClaimsIdentity(User? user)
+        private AuthenticationState GetAnonymousAuthenticationState()
         {
-            if (user == null)
-            {
-                return new ClaimsIdentity();
-            }
+            var identity = new ClaimsIdentity();
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            var authenticationState = new AuthenticationState(claimsPrincipal);
+            return authenticationState;
+        }
 
+        private AuthenticationState GetAuthenticationState(User user)
+        {
             var claimsIdentity = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Role, user.Role.RoleDescription),
             }, "apiauth_type");
 
-            return claimsIdentity;
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+            var authenticationState = new AuthenticationState(claimsPrincipal);
+
+            return authenticationState;
         }
     }
 }
