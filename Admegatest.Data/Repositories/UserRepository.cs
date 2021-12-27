@@ -53,21 +53,33 @@ namespace Admegatest.Data.Repositories
 
         private string GenerateAccessToken(int userId)
         {
-            var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, Convert.ToString(userId))
-                }),
-                Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
-            };
-
+            var tokenDescriptor = GetSecurityTokenDescriptor(userId);
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private SecurityTokenDescriptor GetSecurityTokenDescriptor(int userId)
+        {
+            var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
+
+            var claimsIdentity = new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.Name, Convert.ToString(userId))
+            });
+
+            var oneDay = DateTime.UtcNow.AddDays(1);
+
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claimsIdentity,
+                Expires = oneDay,
+                SigningCredentials = signingCredentials,
+            };
+
+            return tokenDescriptor;
         }
 
         public async Task<User> GetUserByAccessToken(string accessToken)
