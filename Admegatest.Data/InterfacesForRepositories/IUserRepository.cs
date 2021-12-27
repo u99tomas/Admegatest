@@ -11,6 +11,6 @@ namespace Admegatest.Data.InterfacesForRepositories
     public interface IUserRepository
     {
         public Task<UserWithToken> Login(User user);
-        public Task<User> GetUserByAccessToken(string accessToken);
+        public Task<User?> GetUserByAccessToken(string token);
     }
 }

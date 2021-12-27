@@ -12,6 +12,6 @@ namespace Admegatest.Services.IServices
     {
         public Task<UserWithToken?> Login(User user);
         public Task<User> Register(User user);
-        public Task<User> GetUserByAccessToken(string accessToken);
+        public Task<User?> GetUserByAccessToken(string token);
     }
 }

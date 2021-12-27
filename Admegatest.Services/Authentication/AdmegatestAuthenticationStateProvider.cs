@@ -32,7 +32,7 @@ namespace Admegatest.Services.Authentication
 
             if (!string.IsNullOrEmpty(accessToken))
             {
-                User user = await _userService.GetUserByAccessToken(accessToken);
+                var user = await _userService.GetUserByAccessToken(accessToken);
                 identity = GetClaimsIdentity(user);
             }
 
@@ -68,7 +68,7 @@ namespace Admegatest.Services.Authentication
         {
             var claimsIdentity = new ClaimsIdentity();
 
-            if(user.Name != null)
+            if(user != null)
             {
                 claimsIdentity = new ClaimsIdentity(new[]
                 {

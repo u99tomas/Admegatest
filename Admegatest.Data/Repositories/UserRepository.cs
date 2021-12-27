@@ -82,54 +82,64 @@ namespace Admegatest.Data.Repositories
             return tokenDescriptor;
         }
 
-        public async Task<User> GetUserByAccessToken(string accessToken)
+        public async Task<User?> GetUserByAccessToken(string token)
         {
-            User user = await GetUserFromAccessToken(accessToken);
+            int userId = GetUserIdFromToken(token);
 
-            if (user == null)
+            if (userId > 0)
             {
-                return null;
+                return await _admegatestDBContext.Users.Include(u => u.Role)
+                    .Where(u => u.UserId == Convert.ToInt32(userId)).FirstOrDefaultAsync();
             }
 
-            return user;
+            return null;
         }
 
-        private async Task<User> GetUserFromAccessToken(string accessToken)
+        private int GetUserIdFromToken(string token)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken securityToken;
+            ClaimsPrincipal claimsPrincipal;
+
             try
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_jwtsettings.SecretKey);
-
-                var tokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                };
-
-                SecurityToken securityToken;
-                var principle = tokenHandler.ValidateToken(accessToken, tokenValidationParameters, out securityToken);
-
-                JwtSecurityToken jwtSecurityToken = securityToken as JwtSecurityToken;
-
-                if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
-
-                    return await _admegatestDBContext.Users.Include(u => u.Role)
-                                        .Where(u => u.UserId == Convert.ToInt32(userId)).FirstOrDefaultAsync();
-                }
+                claimsPrincipal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
             }
             catch (Exception)
             {
-                return new User();
+                return -1;
             }
 
-            return new User();
-        }
+            JwtSecurityToken? jwtSecurityToken = securityToken as JwtSecurityToken;
 
+            if (jwtSecurityToken == null)
+            {
+                return -1;
+            }
+
+            bool signatureAlgorithmIsValid = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                StringComparison.InvariantCultureIgnoreCase);
+
+            if (signatureAlgorithmIsValid)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value ?? "-1";
+                return Convert.ToInt32(userId);
+            }
+
+            return -1;
+
+        }
     }
 }
