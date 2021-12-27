@@ -66,16 +66,16 @@ namespace Admegatest.Services.Authentication
 
         private ClaimsIdentity GetClaimsIdentity(User? user)
         {
-            var claimsIdentity = new ClaimsIdentity();
-
-            if(user != null)
+            if (user == null)
             {
-                claimsIdentity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, user.Role.RoleDescription),
-                }, "apiauth_type");
+                return new ClaimsIdentity();
             }
+
+            var claimsIdentity = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, user.Role.RoleDescription),
+            }, "apiauth_type");
 
             return claimsIdentity;
         }
