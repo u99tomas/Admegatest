@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace Admegatest.Web.Components.AuthenticationAndAuthorization
+namespace Admegatest.Web.Shared.Buttons
 {
     public partial class LogoutButton
     {

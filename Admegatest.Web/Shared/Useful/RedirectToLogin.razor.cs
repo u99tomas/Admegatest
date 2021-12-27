@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Admegatest.Web.Components.AuthenticationAndAuthorization
+namespace Admegatest.Web.Shared.Useful
 {
     public partial class RedirectToLogin
     {
