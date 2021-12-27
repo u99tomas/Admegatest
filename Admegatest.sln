@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Web", "Admegates
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Core", "Admegatest.Core\Admegatest.Core.csproj", "{198A6F0A-479D-4FD1-87D5-03F321E50E3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admegatest.Data", "Admegatest.Data\Admegatest.Data.csproj", "{60EE0399-79C8-4512-A851-5B3500F221E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Data", "Admegatest.Data\Admegatest.Data.csproj", "{60EE0399-79C8-4512-A851-5B3500F221E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admegatest.Services", "Admegatest.Services\Admegatest.Services.csproj", "{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admegatest.Components", "Admegatest.Components\Admegatest.Components.csproj", "{B0F56DB5-25F8-48D6-BABB-E603F66707DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Services", "Admegatest.Services\Admegatest.Services.csproj", "{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B25BA4-1B2F-4A72-ADB3-B6E3D8E41CCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0F56DB5-25F8-48D6-BABB-E603F66707DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
