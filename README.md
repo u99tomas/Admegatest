@@ -1,7 +1,6 @@
-
-# Admegatest
-
-![Admegatest Logo](design/images/logos/megasoft-260x190.png  "Admegatest Logo")
+<p align="center">
+  <img src="design/images/logos/megasoft-260x190.png" />
+</p>
 
 # Instalando la aplicación
 
