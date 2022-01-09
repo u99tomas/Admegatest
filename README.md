@@ -12,6 +12,6 @@
 5. Cree una base de datos llamada **Admegatest**
 6. Habrá el proyecto que ha descargado con Visual Studio
 7. Dentro del buscador del Visual Studio escriba **Package Manager Console**
-8. Ejecute el siguiente comando para crear las tablas necesarias en la base de datos: <br/>
+8. Dentro de la consola Ejecute el siguiente comando para crear las tablas necesarias en la base de datos: <br/>
 `enter code here`
 9. Le recomendamos descargar alguno de los siguientes softwares, algia uno de su preferencia: [GitHub Desktop](https://desktop.github.com/) - [TortoiseGit](https://tortoisegit.org/) - [GitKraken](https://www.gitkraken.com/)
