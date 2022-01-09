@@ -7927,11 +7927,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\Admegatest.Services.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\Admegatest.Services.Tests.csproj",
       "projectName": "Admegatest.Services.Tests",
-      "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\Admegatest.Services.Tests.csproj",
+      "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\Admegatest.Services.Tests.csproj",
       "packagesPath": "C:\\Users\\agu99\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\obj\\",
+      "outputPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\tests\\Admegatest\\Admegatest.Services.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7951,11 +7951,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj": {
-              "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj"
+            "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj": {
+              "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj"
             },
-            "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Services\\Admegatest.Services.csproj": {
-              "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Services\\Admegatest.Services.csproj"
+            "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Services\\Admegatest.Services.csproj": {
+              "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Services\\Admegatest.Services.csproj"
             }
           }
         }

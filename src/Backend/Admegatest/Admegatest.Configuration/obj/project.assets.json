@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj",
+      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj",
       "projectName": "Admegatest.Configuration",
-      "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj",
+      "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj",
       "packagesPath": "C:\\Users\\agu99\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\obj\\",
+      "outputPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

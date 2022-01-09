@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\Admegatest.Exceptions.csproj",
+      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\Admegatest.Exceptions.csproj",
       "projectName": "Admegatest.Exceptions",
-      "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\Admegatest.Exceptions.csproj",
+      "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\Admegatest.Exceptions.csproj",
       "packagesPath": "C:\\Users\\agu99\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\obj\\",
+      "outputPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Exceptions\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

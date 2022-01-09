@@ -1820,11 +1820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\Admegatest.Data.csproj",
+      "projectUniqueName": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\Admegatest.Data.csproj",
       "projectName": "Admegatest.Data",
-      "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\Admegatest.Data.csproj",
+      "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\Admegatest.Data.csproj",
       "packagesPath": "C:\\Users\\agu99\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\obj\\",
+      "outputPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1844,14 +1844,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj": {
-              "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj"
+            "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj": {
+              "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Configuration\\Admegatest.Configuration.csproj"
             },
-            "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Core\\Admegatest.Core.csproj": {
-              "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Core\\Admegatest.Core.csproj"
+            "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Core\\Admegatest.Core.csproj": {
+              "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Core\\Admegatest.Core.csproj"
             },
-            "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj": {
-              "projectPath": "C:\\Users\\agu99\\Desktop\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj"
+            "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj": {
+              "projectPath": "C:\\Users\\agu99\\Desktop\\Mega\\Megasoft\\src\\Backend\\Admegatest\\Admegatest.Extensions\\Admegatest.Extensions.csproj"
             }
           }
         }
