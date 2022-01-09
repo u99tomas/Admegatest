@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Admegatest.Configuration/1.0.0": {
+        "runtime": {
+          "Admegatest.Configuration.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Admegatest.Configuration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

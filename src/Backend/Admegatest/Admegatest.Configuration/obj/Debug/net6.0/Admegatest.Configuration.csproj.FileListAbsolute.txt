@@ -1,0 +1,12 @@
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\bin\Debug\net6.0\Admegatest.Configuration.deps.json
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\bin\Debug\net6.0\Admegatest.Configuration.dll
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\bin\Debug\net6.0\ref\Admegatest.Configuration.dll
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\bin\Debug\net6.0\Admegatest.Configuration.pdb
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.csproj.AssemblyReference.cache
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.AssemblyInfoInputs.cache
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.AssemblyInfo.cs
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.csproj.CoreCompileInputs.cache
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.dll
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\ref\Admegatest.Configuration.dll
+C:\Users\agu99\Desktop\Mega\Megasoft\src\Backend\Admegatest\Admegatest.Configuration\obj\Debug\net6.0\Admegatest.Configuration.pdb
