@@ -4,9 +4,9 @@
 
 # Instalando la aplicación
 
-1. Descargue [Visual Studio 2022 ](https://visualstudio.microsoft.com/vs/) y [Microsoft SQL Server Management Studio](https://aka.ms/ssmsfullsetup)
-2. Ingrese al software **Sql Server Configuration Manager** e inicie el servicio **SQL Server (MSSQLSERVER)**
-3. Clone (Descargue) este repositorio
+1. Clone (Descargue) este repositorio
+2. Descargue [Visual Studio 2022 ](https://visualstudio.microsoft.com/vs/) y [Microsoft SQL Server Management Studio](https://aka.ms/ssmsfullsetup)
+3. Ingrese al software **Sql Server Configuration Manager** e inicie el servicio **SQL Server (MSSQLSERVER)**
 4. Habra **Microsoft SQL Server Management Studio**
 5. Cree una base de datos llamada **Admegatest**
 6. Habrá el proyecto que ha descargado con Visual Studio
