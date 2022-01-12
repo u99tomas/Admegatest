@@ -6,5 +6,6 @@ namespace Admegatest.Services.Interfaces.Account
     {
         public Task<User?> Login(User user);
         public Task<User?> GetUserByToken(string token);
+        public Task<List<User>> GetAllUsers();
     }
 }

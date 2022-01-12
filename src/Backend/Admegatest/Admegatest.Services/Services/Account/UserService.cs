@@ -16,6 +16,11 @@ namespace Admegatest.Services.Services.Account
             _userRepository = new UserRepository(admegatestDbContext, jwtsettings);
         }
 
+        public Task<List<User>> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
+        }
+
         public Task<User?> GetUserByToken(string token)
         {
             return _userRepository.GetUserByToken(token);

@@ -21,7 +21,9 @@
                 <NavMenu />
             </MudDrawer>
             <MudMainContent>
-                @Body
+                <div class="ma-5">
+                    @Body
+                </div>
             </MudMainContent>
         </MudLayout>
     </Authorized>
@@ -31,3 +33,7 @@
     </NotAuthorized>
 
 </AuthorizeView>
+
+@code {
+    private string _search { get; set; }
+}

@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Web", "src\UI\Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Services.Tests", "tests\Admegatest\Admegatest.Services.Tests\Admegatest.Services.Tests.csproj", "{0DFD9F55-EE86-43A3-9892-CD1644D93056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admegatest.Web.Components", "src\UI\Admegatest\Admegatest.Web.Components\Admegatest.Web.Components.csproj", "{DAEEF70B-BFFE-4F89-98BA-402325894823}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Web.Components", "src\UI\Admegatest\Admegatest.Web.Components\Admegatest.Web.Components.csproj", "{DAEEF70B-BFFE-4F89-98BA-402325894823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

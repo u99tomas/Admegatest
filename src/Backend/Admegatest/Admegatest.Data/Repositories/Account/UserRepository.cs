@@ -14,12 +14,12 @@ namespace Admegatest.Data.Repositories.Account
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AdmegatestDbContext _admegatestDBContext;
+        private readonly AdmegatestDbContext _admegatestDbContext;
         private readonly JWTSettings _jwtsettings;
 
         public UserRepository(AdmegatestDbContext admegatestDBContext, IOptions<JWTSettings> jwtsettings)
         {
-            _admegatestDBContext = admegatestDBContext;
+            _admegatestDbContext = admegatestDBContext;
             _jwtsettings = jwtsettings.Value;
         }
 
@@ -29,8 +29,8 @@ namespace Admegatest.Data.Repositories.Account
 
             if (userId > 0)
             {
-                return await _admegatestDBContext.Users.Include(u => u.Role)
-                    .Where(u => u.UserId == Convert.ToInt32(userId)).FirstOrDefaultAsync();
+                return await _admegatestDbContext.Users
+                    .Where(u => u.Id == Convert.ToInt32(userId)).FirstOrDefaultAsync();
             }
 
             return null;
@@ -86,7 +86,7 @@ namespace Admegatest.Data.Repositories.Account
         {
             user.Password = user.Password.ToMD5();
 
-            var userFound = await _admegatestDBContext.Users.Include(u => u.Role)
+            var userFound = await _admegatestDbContext.Users
                 .Where(u => u.Name == user.Name && u.Password == user.Password)
                 .FirstOrDefaultAsync();
 
@@ -95,7 +95,7 @@ namespace Admegatest.Data.Repositories.Account
                 return null;
             }
 
-            userFound.Token = GenerateAccessToken(userFound.UserId);
+            userFound.Token = GenerateAccessToken(userFound.Id);
 
             return userFound;
         }
@@ -132,5 +132,9 @@ namespace Admegatest.Data.Repositories.Account
             return tokenDescriptor;
         }
 
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _admegatestDbContext.Users.ToListAsync();
+        }
     }
 }

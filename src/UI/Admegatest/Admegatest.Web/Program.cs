@@ -30,6 +30,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, AdmegatestAuthentication
 
 #region Admegatest services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 #endregion
 
 #region Account services configuration
