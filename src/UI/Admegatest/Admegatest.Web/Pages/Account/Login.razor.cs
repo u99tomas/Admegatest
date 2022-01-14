@@ -101,15 +101,6 @@ namespace Admegatest.Web.Pages.Account
                 _navigationManager.NavigateTo("/employee/home");
                 return;
             }
-
-            ShowErrorCantRedirectUser();
-        }
-
-        private void ShowErrorCantRedirectUser()
-        {
-            var cantRedirectUser = "El usuario no tiene un rol asignado por lo que no puede ser redireccionado a la página de inicio" +
-                ", por favor contáctese con soporte técnico.";
-            ShowErrorToUser(cantRedirectUser);
         }
 
         private void ShowErrorToUser(string error)
