@@ -25,8 +25,8 @@
             </MudCardContent>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                           Disabled="@(!_success || _loggingIn)" Class="ml-auto" OnClick=ValidateUserAsync>
-                    @if (_loggingIn)
+                           Disabled="@(!_success || _loading)" Class="ml-auto" OnClick=LoginAsync>
+                    @if (_loading)
                     {
                         <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
                         <MudText Class="ms-2">Iniciando sesión</MudText>
@@ -39,11 +39,11 @@
             </MudCardActions>
         </MudCard>
 
-        @if (Error != null)
+        @if (_error != null)
         {
             <MudExpansionPanels Class="mt-5">
                 <MudExpansionPanel Text="Error">
-                    <MudText Color="@Color.Error">@Error</MudText>
+                    <MudText Color="@Color.Error">@_error</MudText>
                 </MudExpansionPanel>
             </MudExpansionPanels>
         }

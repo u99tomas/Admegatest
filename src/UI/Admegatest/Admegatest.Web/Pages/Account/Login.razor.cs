@@ -10,18 +10,21 @@ namespace Admegatest.Web.Pages.Account
 {
     public partial class Login
     {
+        #region Injections
         [Inject]
         private AuthenticationStateProvider _authenticationStateProvider { get; set; }
         [Inject]
         private NavigationManager _navigationManager { get; set; }
         [Inject]
         private IUserService _userService { get; set; }
+        #endregion
 
-        private bool _success;
         private MudTextField<string> _userField;
         private MudTextField<string> _passwordField;
-        private string Error = null;
-        private bool _loggingIn = false;
+
+        private bool _success;
+        private string? _error = null;
+        private bool _loading = false;
 
         protected async override Task OnInitializedAsync()
         {
@@ -35,15 +38,16 @@ namespace Admegatest.Web.Pages.Account
             if (user.Identity.IsAuthenticated)
             {
                 ShowLoadingButton();
-                await RedirectToRoleHomePageAsync();
+                RedirectToRoleHomePage(user);
             }
         }
 
-        private async Task ValidateUserAsync()
+        private async Task LoginAsync()
         {
-            Error = null;
+            _error = null;
             ShowLoadingButton();
-            var userFromForm = GetUserFromForm();
+
+            var userFromForm = new User { Name = _userField.Value, Password = _passwordField.Value };
             var returnedUser = await _userService.LoginAsync(userFromForm);
 
             if (returnedUser == null)
@@ -55,42 +59,33 @@ namespace Admegatest.Web.Pages.Account
             {
                 var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
                 await admegatestAuthenticationStateProvider.MarkUserAsAuthenticatedAsync(returnedUser);
-                await RedirectToRoleHomePageAsync();
+                var user = await GetUserAsync();
+                RedirectToRoleHomePage(user);
             }
 
         }
 
         private void ShowLoadingButton()
         {
-            _loggingIn = true;
+            _loading = true;
             StateHasChanged();
         }
 
         private void HideLoadingButton()
         {
-            _loggingIn = false;
+            _loading = false;
             StateHasChanged();
         }
 
         private void ShowErrorInvalidUser()
         {
             var invalidUser = "El usuario ingresado es incorrecto.";
-            Error = invalidUser;
+            _error = invalidUser;
             StateHasChanged();
         }
 
-        private User GetUserFromForm()
+        private void RedirectToRoleHomePage(ClaimsPrincipal user)
         {
-            var userName = _userField.Value;
-            var password = _passwordField.Value;
-            var user = new User { Name = userName, Password = password };
-            return user;
-        }
-
-        private async Task RedirectToRoleHomePageAsync()
-        {
-            var user = await GetUserAsync();
-
             if (user.IsInRole("IsCustomer"))
             {
                 _navigationManager.NavigateTo("/customer/home");
