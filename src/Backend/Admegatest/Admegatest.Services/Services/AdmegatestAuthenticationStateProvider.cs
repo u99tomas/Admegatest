@@ -37,7 +37,7 @@ namespace Admegatest.Services.Services.Account
                 return await Task.FromResult(GetAnonymousAuthenticationState());
             }
 
-            return await Task.FromResult(await GetAuthenticationStateAsync(user));
+            return await GetAuthenticationStateAsync(user);
         }
 
         public async Task MarkUserAsAuthenticatedAsync(User user)
@@ -46,7 +46,7 @@ namespace Admegatest.Services.Services.Account
 
             var authenticationState = GetAuthenticationStateAsync(user);
 
-            NotifyAuthenticationStateChanged(await Task.FromResult(authenticationState));
+            NotifyAuthenticationStateChanged(authenticationState);
         }
 
         public async Task MarkUserAsLoggedOutAsync()

@@ -41,7 +41,7 @@
 
     private async Task<TableData<User>> ServerReload(TableState state)
     {
-        IEnumerable<User> data = await _userService.GetAllUsers();
+        IEnumerable<User> data = await _userService.GetAllUsersAsync();
 
         data = data.Where(element =>
         {
