@@ -16,19 +16,19 @@ namespace Admegatest.Services.Services.Account
             _userRepository = new UserRepository(admegatestDbContext, jwtsettings);
         }
 
-        public Task<List<User>> GetAllUsers()
+        public Task<List<User>> GetAllUsersAsync()
         {
-            return _userRepository.GetAllUsers();
+            return _userRepository.GetAllUsersAsync();
         }
 
-        public Task<User?> GetUserByToken(string token)
+        public Task<User?> GetUserByTokenAsync(string token)
         {
-            return _userRepository.GetUserByToken(token);
+            return _userRepository.GetUserByTokenAsync(token);
         }
 
-        public Task<User?> Login(User user)
+        public Task<User?> LoginAsync(User user)
         {
-            return _userRepository.Login(user);
+            return _userRepository.LoginAsync(user);
         }
     }
 }

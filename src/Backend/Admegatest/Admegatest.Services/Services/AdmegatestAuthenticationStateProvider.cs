@@ -30,7 +30,7 @@ namespace Admegatest.Services.Services.Account
                 return await Task.FromResult(GetAnonymousAuthenticationState());
             }
 
-            var user = await _userService.GetUserByToken(token);
+            var user = await _userService.GetUserByTokenAsync(token);
 
             if (user == null)
             {
@@ -40,7 +40,7 @@ namespace Admegatest.Services.Services.Account
             return await Task.FromResult(await GetAuthenticationStateAsync(user));
         }
 
-        public async Task MarkUserAsAuthenticated(User user)
+        public async Task MarkUserAsAuthenticatedAsync(User user)
         {
             await _localStorageService.SetItemAsync("token", user.Token);
 
@@ -49,7 +49,7 @@ namespace Admegatest.Services.Services.Account
             NotifyAuthenticationStateChanged(await Task.FromResult(authenticationState));
         }
 
-        public async Task MarkUserAsLoggedOut()
+        public async Task MarkUserAsLoggedOutAsync()
         {
             await _localStorageService.RemoveItemAsync("token");
 
@@ -73,7 +73,7 @@ namespace Admegatest.Services.Services.Account
                 new Claim(ClaimTypes.Name, user.Name),
             }, "apiauth_type");
 
-            var userRoles = await GetAllRolesOfUserAsClaim(user.Id);
+            var userRoles = await GetAllRolesOfUserAsClaimAsync(user.Id);
             claimsIdentity.AddClaims(userRoles);
 
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -82,9 +82,9 @@ namespace Admegatest.Services.Services.Account
             return authenticationState;
         }
 
-        private async Task<IEnumerable<Claim>> GetAllRolesOfUserAsClaim(int userId)
+        private async Task<IEnumerable<Claim>> GetAllRolesOfUserAsClaimAsync(int userId)
         {
-            var userRoles = await _roleService.GetAllRolesOfUser(userId);
+            var userRoles = await _roleService.GetAllRolesOfUserAsync(userId);
             return userRoles.Select(r => new Claim(ClaimTypes.Role, r.RoleName));
         }
     }

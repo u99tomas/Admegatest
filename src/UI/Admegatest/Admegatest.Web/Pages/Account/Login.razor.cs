@@ -44,7 +44,7 @@ namespace Admegatest.Web.Pages.Account
             Errors.Clear();
             ShowLoadingButton();
             var userFromForm = GetUserFromForm();
-            var returnedUser = await _userService.Login(userFromForm);
+            var returnedUser = await _userService.LoginAsync(userFromForm);
 
             if (returnedUser == null)
             {
@@ -54,7 +54,7 @@ namespace Admegatest.Web.Pages.Account
             else
             {
                 var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
-                await admegatestAuthenticationStateProvider.MarkUserAsAuthenticated(returnedUser);
+                await admegatestAuthenticationStateProvider.MarkUserAsAuthenticatedAsync(returnedUser);
                 await RedirectToRoleHomePageAsync();
             }
 

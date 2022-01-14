@@ -16,6 +16,7 @@ builder.Services.AddServerSideBlazor();
 #region Database services
 builder.Services.AddDbContext<AdmegatestDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AdmegatestDb")));
+//builder.Services.AddTransient<AdmegatestDbContext>();
 #endregion
 
 #region NuGet packages services

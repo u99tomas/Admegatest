@@ -15,10 +15,10 @@ namespace Admegatest.Web.Components.Buttons
         private NavigationManager _navigationManager { get; set; }
         [Inject]
         private AuthenticationStateProvider _authenticationStateProvider { get; set; }
-        public async Task Logout()
+        public async Task LogoutAsync()
         {
             var admegatestAuthenticationStateProvider = (AdmegatestAuthenticationStateProvider)_authenticationStateProvider;
-            await admegatestAuthenticationStateProvider.MarkUserAsLoggedOut();
+            await admegatestAuthenticationStateProvider.MarkUserAsLoggedOutAsync();
             _navigationManager.NavigateTo("/login");
         }
     }

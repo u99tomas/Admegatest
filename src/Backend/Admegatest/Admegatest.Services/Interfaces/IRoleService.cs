@@ -4,6 +4,6 @@ namespace Admegatest.Services.Interfaces.Account
 {
     public interface IRoleService
     {
-        public Task<List<Role>> GetAllRolesOfUser(int userId);
+        public Task<List<Role>> GetAllRolesOfUserAsync(int userId);
     }
 }

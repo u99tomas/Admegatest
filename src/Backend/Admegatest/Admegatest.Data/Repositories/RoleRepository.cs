@@ -13,7 +13,7 @@ namespace Admegatest.Data.Repositories.Account
         {
             _admegatestDbContext = admegatestDBContext;
         }
-        public async Task<List<Role>> GetAllRolesOfUser(int userId)
+        public async Task<List<Role>> GetAllRolesOfUserAsync(int userId)
         {
             return await _admegatestDbContext.UserRoles.Where(ur => ur.UserId == userId)
                 .Select(ur => ur.Role).ToListAsync();

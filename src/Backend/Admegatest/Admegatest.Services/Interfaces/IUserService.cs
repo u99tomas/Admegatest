@@ -4,8 +4,8 @@ namespace Admegatest.Services.Interfaces.Account
 {
     public interface IUserService
     {
-        public Task<User?> Login(User user);
-        public Task<User?> GetUserByToken(string token);
-        public Task<List<User>> GetAllUsers();
+        public Task<User?> LoginAsync(User user);
+        public Task<User?> GetUserByTokenAsync(string token);
+        public Task<List<User>> GetAllUsersAsync();
     }
 }
