@@ -23,7 +23,7 @@ namespace Admegatest.Data.Repositories.Account
             _jwtsettings = jwtsettings.Value;
         }
 
-        public async Task<User?> GetUserByToken(string token)
+        public async Task<User?> GetUserByTokenAsync(string token)
         {
             int userId = GetUserIdFromToken(token);
 
@@ -82,7 +82,7 @@ namespace Admegatest.Data.Repositories.Account
             return -1;
         }
 
-        public async Task<User?> Login(User user)
+        public async Task<User?> LoginAsync(User user)
         {
             user.Password = user.Password.ToMD5();
 
@@ -132,7 +132,7 @@ namespace Admegatest.Data.Repositories.Account
             return tokenDescriptor;
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<User>> GetAllUsersAsync()
         {
             return await _admegatestDbContext.Users.ToListAsync();
         }
