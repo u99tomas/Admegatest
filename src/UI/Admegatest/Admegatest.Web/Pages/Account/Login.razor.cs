@@ -39,7 +39,7 @@ namespace Admegatest.Web.Pages.Account
             }
         }
 
-        private async void ValidateUser()
+        private async Task ValidateUser()
         {
             Errors.Clear();
             ShowLoadingButton();
