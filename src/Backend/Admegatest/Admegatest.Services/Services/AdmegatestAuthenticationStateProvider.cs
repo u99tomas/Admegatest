@@ -44,9 +44,9 @@ namespace Admegatest.Services.Services.Account
         {
             await _localStorageService.SetItemAsync("token", user.Token);
 
-            var authenticationState = GetAuthenticationStateAsync(user);
+            var authenticationState = await GetAuthenticationStateAsync(user);
 
-            NotifyAuthenticationStateChanged(authenticationState);
+            NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
         public async Task MarkUserAsLoggedOutAsync()

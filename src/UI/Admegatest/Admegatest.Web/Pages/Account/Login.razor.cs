@@ -62,7 +62,6 @@ namespace Admegatest.Web.Pages.Account
                 var user = await GetUserAsync();
                 RedirectToRoleHomePage(user);
             }
-
         }
 
         private void ShowLoadingButton()

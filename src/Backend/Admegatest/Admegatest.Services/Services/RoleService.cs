@@ -14,9 +14,9 @@ namespace Admegatest.Services.Services.Account
             _roleRepository = new RoleRepository(admegatestDbContext);
         }
 
-        public async Task<List<Role>> GetAllRolesOfUserAsync(int userId)
+        public Task<List<Role>> GetAllRolesOfUserAsync(int userId)
         {
-            return await _roleRepository.GetAllRolesOfUserAsync(userId);
+            return _roleRepository.GetAllRolesOfUserAsync(userId);
         }
     }
 }

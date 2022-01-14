@@ -15,19 +15,8 @@ namespace Admegatest.Data.Repositories.Account
         }
         public async Task<List<Role>> GetAllRolesOfUserAsync(int userId)
         {
-            //return await _admegatestDbContext.UserRoles.Where(ur => ur.UserId == userId)
-            //    .Select(ur => ur.Role).ToListAsync();
-
-            //var sql = @"SELECT * FROM dbo.Roles r
-            //            WHERE r.Id IN 
-            //            (SELECT RoleId FROM UserRoles WHERE UserId = 1)";
-
-            //var roles = await _admegatestDbContext.Roles.FromSqlRaw(sql).ToListAsync();
-
-            //return roles;
-            var roles = new List<Role>();
-            roles.Add(new Role { Id = 1, RoleDescription = "", RoleName = "IsCustomer" });
-            return await Task.FromResult(roles);
+            return await _admegatestDbContext.UserRoles.Where(ur => ur.UserId == userId)
+                .Select(ur => ur.Role).ToListAsync();
         }
     }
 }
