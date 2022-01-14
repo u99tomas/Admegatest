@@ -39,14 +39,11 @@
             </MudCardActions>
         </MudCard>
 
-        @if (Errors.Count != 0)
+        @if (Error != null)
         {
             <MudExpansionPanels Class="mt-5">
-                <MudExpansionPanel Text="@($"Ver Errores ({Errors.Count})")">
-                    @foreach (var error in Errors)
-                    {
-                        <MudText Color="@Color.Error">@error</MudText>
-                    }
+                <MudExpansionPanel Text="Error">
+                    <MudText Color="@Color.Error">@Error</MudText>
                 </MudExpansionPanel>
             </MudExpansionPanels>
         }

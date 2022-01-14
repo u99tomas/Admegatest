@@ -20,7 +20,7 @@ namespace Admegatest.Web.Pages.Account
         private bool _success;
         private MudTextField<string> _userField;
         private MudTextField<string> _passwordField;
-        private List<string> Errors = new List<string>();
+        private string Error = null;
         private bool _loggingIn = false;
 
         protected async override Task OnInitializedAsync()
@@ -41,7 +41,7 @@ namespace Admegatest.Web.Pages.Account
 
         private async Task ValidateUserAsync()
         {
-            Errors.Clear();
+            Error = null;
             ShowLoadingButton();
             var userFromForm = GetUserFromForm();
             var returnedUser = await _userService.LoginAsync(userFromForm);
@@ -58,7 +58,7 @@ namespace Admegatest.Web.Pages.Account
                 await RedirectToRoleHomePageAsync();
             }
 
-        }1
+        }
 
         private void ShowLoadingButton()
         {
@@ -75,7 +75,8 @@ namespace Admegatest.Web.Pages.Account
         private void ShowErrorInvalidUser()
         {
             var invalidUser = "El usuario ingresado es incorrecto.";
-            ShowErrorToUser(invalidUser);
+            Error = invalidUser;
+            StateHasChanged();
         }
 
         private User GetUserFromForm()
@@ -101,12 +102,6 @@ namespace Admegatest.Web.Pages.Account
                 _navigationManager.NavigateTo("/employee/home");
                 return;
             }
-        }
-
-        private void ShowErrorToUser(string error)
-        {
-            Errors.Add(error);
-            StateHasChanged();
         }
 
         private async Task<ClaimsPrincipal> GetUserAsync()
