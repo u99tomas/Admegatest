@@ -25,10 +25,10 @@ namespace Admegatest.Web.Pages.Account
 
         protected async override Task OnInitializedAsync()
         {
-            await CheckIfUserIsAuthenticated();
+            await CheckIfUserIsAuthenticatedAsync();
         }
 
-        private async Task CheckIfUserIsAuthenticated()
+        private async Task CheckIfUserIsAuthenticatedAsync()
         {
             var user = await GetUserAsync();
 
@@ -39,7 +39,7 @@ namespace Admegatest.Web.Pages.Account
             }
         }
 
-        private async Task ValidateUser()
+        private async Task ValidateUserAsync()
         {
             Errors.Clear();
             ShowLoadingButton();
@@ -58,7 +58,7 @@ namespace Admegatest.Web.Pages.Account
                 await RedirectToRoleHomePageAsync();
             }
 
-        }
+        }1
 
         private void ShowLoadingButton()
         {
