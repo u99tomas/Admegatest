@@ -5,6 +5,7 @@
 @using Admegatest.Services.Interfaces
 
 <MudTable ServerData="@(new Func<TableState, Task<TableData<User>>>(ServerReload))"
+          FixedFooter="true" FixedHeader="true"
           Dense="true" Hover="true" Striped="true" Bordered="true" @ref="table">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Usuarios</MudText>

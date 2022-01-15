@@ -2,25 +2,30 @@
 
 namespace Admegatest.Services.Helpers.Pagination
 {
-    public class PaginationHelper<T>
+    public class PaginationHelper
     {
-        private readonly IQueryable<T> _queryable;
-        private readonly AdmTableState _admTableState;
+        //public IQueryable<T> Queryable { get; set; }
+        //private readonly AdmTableState _admTableState;
 
-        public PaginationHelper(IQueryable<T> queryable, AdmTableState admTableState)
-        {
-            _queryable = queryable;
-            _admTableState = admTableState;
-        }
+        //public PaginationHelper(IQueryable<T> queryable, AdmTableState admTableState)
+        //{
+        //    Queryable = queryable;
+        //    _admTableState = admTableState;
+        //}
 
-        public async Task<AdmTableData<T>> GetTableDataAsync()
+        //public async Task<AdmTableData<T>> GetTableDataAsync(string[] searchFields, string[] sortLabels)
+        //{
+
+        //}
+
+        public static async Task<AdmTableData<T>> GetTableDataAsync<T>(IQueryable<T> queryable, AdmTableState admTableState)
         {
             var admTableData = new AdmTableData<T>();
 
-            admTableData.TotalItems = await _queryable.CountAsync();
+            admTableData.TotalItems = await queryable.CountAsync();
 
-            admTableData.Items = await _queryable.Skip(_admTableState.PageNumber * _admTableState.PageSize)
-                .Take(_admTableState.PageSize).ToListAsync();
+            admTableData.Items = await queryable.Skip(admTableState.PageNumber * admTableState.PageSize)
+                .Take(admTableState.PageSize).ToListAsync();
 
             return admTableData;
         }

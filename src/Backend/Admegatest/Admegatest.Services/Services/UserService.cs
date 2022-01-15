@@ -33,7 +33,7 @@ namespace Admegatest.Services.Services
         public async Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
         {
             var queryable = _userRepository.GetUsersAsQueryable();
-            var paginationHelper = new PaginationHelper<User>(queryable, admTableState);
+
 
             if (!string.IsNullOrEmpty(admTableState.SearchString))
             {
@@ -47,7 +47,7 @@ namespace Admegatest.Services.Services
                     break;
             }
 
-            return await paginationHelper.GetTableDataAsync();
+            return await PaginationHelper.GetTableDataAsync<User>(queryable, admTableState);
         }
 
     }
