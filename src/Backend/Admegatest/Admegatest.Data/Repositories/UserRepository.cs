@@ -84,8 +84,6 @@ namespace Admegatest.Data.Repositories
 
         public async Task<User?> LoginAsync(User user)
         {
-            user.Password = user.Password.ToMD5();
-
             var userFound = await _admegatestDbContext.Users
                 .Where(u => u.Name == user.Name && u.Password == user.Password)
                 .FirstOrDefaultAsync();
@@ -132,9 +130,9 @@ namespace Admegatest.Data.Repositories
             return tokenDescriptor;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public IQueryable<User> GetUsersAsQueryable()
         {
-            return await _admegatestDbContext.Users.ToListAsync();
+            return _admegatestDbContext.Users.AsQueryable();
         }
     }
 }

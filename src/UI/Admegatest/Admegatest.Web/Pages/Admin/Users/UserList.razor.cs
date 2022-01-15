@@ -1,6 +1,7 @@
 ﻿using Admegatest.Core.Models;
 using Admegatest.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using MudBlazor;
 
 namespace Admegatest.Web.Pages.Admin.Users
@@ -18,29 +19,25 @@ namespace Admegatest.Web.Pages.Admin.Users
 
         private async Task<TableData<User>> ServerReload(TableState state)
         {
-            IEnumerable<User> data = await _userService.GetAllUsersAsync();
+            var data = _userService.GetUsersAsQueryable();
 
-            data = data.Where(element =>
+            if (!string.IsNullOrEmpty(searchString))
             {
-                if (string.IsNullOrWhiteSpace(searchString))
-                    return true;
-                if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
-                    return true;
-                return false;
-            }).ToArray();
-
-            totalItems = data.Count();
+                data = data.Where(u => u.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
 
             switch (state.SortLabel)
             {
-                case "name_field":
+                case "Name":
                     data = data.OrderByDirection(state.SortDirection, o => o.Name);
                     break;
             }
 
-            pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
+            totalItems = await data.CountAsync();
 
-            return new TableData<User>() { TotalItems = totalItems, Items = pagedData };
+            var users = await data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToListAsync();
+
+            return new TableData<User>() { TotalItems = totalItems, Items = users };
         }
 
         private void OnSearch(string text)

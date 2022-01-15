@@ -1,4 +1,4 @@
-﻿using Admegatest.Services.Services.Account;
+﻿using Admegatest.Services.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
