@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Admegatest.Configuration\Admegatest.Configuration.csproj" />
     <ProjectReference Include="..\Admegatest.Core\Admegatest.Core.csproj" />
-    <ProjectReference Include="..\Admegatest.Extensions\Admegatest.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

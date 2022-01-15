@@ -1,12 +1,11 @@
 ﻿using Admegatest.Configuration;
 using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
+using Admegatest.Data.Extensions;
 using Admegatest.Data.Repositories;
-using Admegatest.Services.DTOs;
 using Admegatest.Services.Extensions;
 using Admegatest.Services.Helpers.Pagination;
 using Admegatest.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Admegatest.Services.Services
@@ -34,18 +33,22 @@ namespace Admegatest.Services.Services
         public async Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
         {
             var queryable = _userRepository.GetUsersAsQueryable();
+            var paginationHelper = new PaginationHelper<User>(queryable, admTableState);
 
-            var tableData = new PaginationHelper<User>(queryable, admTableState);
-
-            tableData.Sort((sort) =>
+            if (!string.IsNullOrEmpty(admTableState.SearchString))
             {
-                switch (sort.SortLabel)
-                {
-    
-                }
-            });
+                queryable = queryable.Where(u => u.Name.Contains(admTableState.SearchString, StringComparison.OrdinalIgnoreCase));
+            }
 
-            return await tableData.GetTableDataAsync();
+            switch (admTableState.SortLabel)
+            {
+                case "Name":
+                    queryable = queryable.OrderByDirection(admTableState.SortDirection, o => o.Name);
+                    break;
+            }
+
+            return await paginationHelper.GetTableDataAsync();
         }
+
     }
 }

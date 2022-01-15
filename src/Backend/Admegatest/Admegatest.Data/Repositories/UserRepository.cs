@@ -1,8 +1,8 @@
 ﻿using Admegatest.Configuration;
 using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
+using Admegatest.Data.Extensions;
 using Admegatest.Data.Interfaces;
-using Admegatest.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

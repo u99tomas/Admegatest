@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Backend\Admegatest\Admegatest.Extensions\Admegatest.Extensions.csproj" />
     <ProjectReference Include="..\..\..\src\Backend\Admegatest\Admegatest.Services\Admegatest.Services.csproj" />
   </ItemGroup>
 

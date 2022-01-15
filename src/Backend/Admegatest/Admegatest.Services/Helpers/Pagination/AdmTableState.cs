@@ -1,4 +1,4 @@
-﻿using Admegatest.Core.Enums;
+﻿using Admegatest.Data.Enums;
 
 namespace Admegatest.Services.Helpers.Pagination
 {

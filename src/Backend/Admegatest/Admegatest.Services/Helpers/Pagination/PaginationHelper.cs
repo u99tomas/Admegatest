@@ -1,6 +1,4 @@
-﻿using Admegatest.Core.Enums;
-using Admegatest.Services.DTOs;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Admegatest.Services.Helpers.Pagination
 {
@@ -25,24 +23,6 @@ namespace Admegatest.Services.Helpers.Pagination
                 .Take(_admTableState.PageSize).ToListAsync();
 
             return admTableData;
-        }
-
-        public void Search(Action<SearchContext<T>> callback)
-        {
-            if (!string.IsNullOrEmpty(_admTableState.SearchString))
-            {
-                var searchContext = new SearchContext<T>(_queryable, _admTableState);
-                callback(searchContext);
-            }
-        }
-
-        public void Sort(Action<SortContext<T>> callback)
-        {
-            if (!string.IsNullOrEmpty(_admTableState.SortLabel))
-            {
-                var sortContext = new SortContext<T>(_queryable, _admTableState);
-                callback(sortContext);
-            }
         }
     }
 }

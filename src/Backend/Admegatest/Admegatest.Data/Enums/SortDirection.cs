@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Admegatest.Core.Enums
+namespace Admegatest.Data.Enums
 {
     public enum SortDirection
     {
