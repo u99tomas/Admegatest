@@ -16,11 +16,6 @@ namespace Admegatest.Services.Services
             _userRepository = new UserRepository(admegatestDbContext, jwtsettings);
         }
 
-        public Task<List<User>> GetAllUsersAsync()
-        {
-            return _userRepository.GetAllUsersAsync();
-        }
-
         public Task<User?> GetUserByTokenAsync(string token)
         {
             return _userRepository.GetUserByTokenAsync(token);
