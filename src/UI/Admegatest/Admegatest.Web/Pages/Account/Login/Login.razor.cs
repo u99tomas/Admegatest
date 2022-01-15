@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using System.Security.Claims;
 
-namespace Admegatest.Web.Pages.Account
+namespace Admegatest.Web.Pages.Account.Login
 {
     public partial class Login
     {
