@@ -1,5 +1,4 @@
 ﻿using Admegatest.Core.Models;
-using Admegatest.Services.Helpers.Pagination;
 using Admegatest.Services.Interfaces;
 using Admegatest.Web.Mappings;
 using Microsoft.AspNetCore.Components;
@@ -12,10 +11,7 @@ namespace Admegatest.Web.Pages.Admin.Users
         [Inject]
         private IUserService _userService { get; set; }
 
-        private IEnumerable<User> pagedData;
         private MudTable<User> table;
-
-        private int totalItems;
         private string searchString = null;
 
         private async Task<TableData<User>> ServerReload(TableState state)
