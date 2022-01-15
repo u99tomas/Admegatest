@@ -1,4 +1,4 @@
-﻿using Admegatest.Core.Models.Account;
+﻿using Admegatest.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Admegatest.Data.DbContexts

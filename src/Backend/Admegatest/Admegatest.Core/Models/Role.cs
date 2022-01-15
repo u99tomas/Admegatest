@@ -1,4 +1,4 @@
-﻿namespace Admegatest.Core.Models.Account
+﻿namespace Admegatest.Core.Models
 {
     public class Role
     {

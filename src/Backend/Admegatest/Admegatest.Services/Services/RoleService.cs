@@ -1,9 +1,9 @@
-﻿using Admegatest.Core.Models.Account;
+﻿using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
-using Admegatest.Data.Repositories.Account;
-using Admegatest.Services.Interfaces.Account;
+using Admegatest.Data.Repositories;
+using Admegatest.Services.Interfaces;
 
-namespace Admegatest.Services.Services.Account
+namespace Admegatest.Services.Services
 {
     public class RoleService : IRoleService
     {

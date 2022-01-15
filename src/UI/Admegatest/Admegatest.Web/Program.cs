@@ -1,7 +1,7 @@
-using Admegatest.Configuration.Account;
+using Admegatest.Configuration;
 using Admegatest.Data.DbContexts;
-using Admegatest.Services.Interfaces.Account;
-using Admegatest.Services.Services.Account;
+using Admegatest.Services.Interfaces;
+using Admegatest.Services.Services;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;

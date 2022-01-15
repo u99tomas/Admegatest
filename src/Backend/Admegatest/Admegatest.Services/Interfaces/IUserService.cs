@@ -1,6 +1,6 @@
-﻿using Admegatest.Core.Models.Account;
+﻿using Admegatest.Core.Models;
 
-namespace Admegatest.Services.Interfaces.Account
+namespace Admegatest.Services.Interfaces
 {
     public interface IUserService
     {

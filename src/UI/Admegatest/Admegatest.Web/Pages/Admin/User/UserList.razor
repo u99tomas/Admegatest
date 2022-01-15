@@ -1,8 +1,8 @@
 ﻿@page "/admin/user/list"
 
 @using System.Net.Http.Json
-@using Admegatest.Core.Models.Account
-@using Admegatest.Services.Interfaces.Account
+@using Admegatest.Core.Models
+@using Admegatest.Services.Interfaces
 
 <MudTable ServerData="@(new Func<TableState, Task<TableData<User>>>(ServerReload))"
           Dense="true" Hover="true" Striped="true" Bordered="true" @ref="table">

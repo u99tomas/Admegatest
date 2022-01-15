@@ -1,6 +1,6 @@
-﻿using Admegatest.Core.Models.Account;
+﻿using Admegatest.Core.Models;
 
-namespace Admegatest.Data.Interfaces.Account
+namespace Admegatest.Data.Interfaces
 {
     public interface IRoleRepository
     {

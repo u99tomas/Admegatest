@@ -1,9 +1,9 @@
-﻿using Admegatest.Core.Models.Account;
+﻿using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
-using Admegatest.Data.Interfaces.Account;
+using Admegatest.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Admegatest.Data.Repositories.Account
+namespace Admegatest.Data.Repositories
 {
     public class RoleRepository : IRoleRepository
     {

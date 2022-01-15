@@ -1,4 +1,4 @@
-﻿namespace Admegatest.Configuration.Account
+﻿namespace Admegatest.Configuration
 {
     public class JWTSettings
     {

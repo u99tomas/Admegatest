@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Admegatest.Core.Models.Account
+namespace Admegatest.Core.Models
 {
     public class User
     {

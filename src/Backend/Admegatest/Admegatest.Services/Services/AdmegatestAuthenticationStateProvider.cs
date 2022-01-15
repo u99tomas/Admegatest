@@ -1,11 +1,10 @@
-﻿using Admegatest.Core.Models.Account;
-using Admegatest.Services.Interfaces.Account;
+﻿using Admegatest.Core.Models;
+using Admegatest.Services.Interfaces;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
-using System.Linq;
 
-namespace Admegatest.Services.Services.Account
+namespace Admegatest.Services.Services
 {
     public class AdmegatestAuthenticationStateProvider : AuthenticationStateProvider
     {

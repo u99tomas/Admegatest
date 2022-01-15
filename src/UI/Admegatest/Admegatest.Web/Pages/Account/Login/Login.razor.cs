@@ -1,6 +1,6 @@
-﻿using Admegatest.Core.Models.Account;
-using Admegatest.Services.Interfaces.Account;
-using Admegatest.Services.Services.Account;
+﻿using Admegatest.Core.Models;
+using Admegatest.Services.Interfaces;
+using Admegatest.Services.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;

@@ -1,7 +1,7 @@
-﻿using Admegatest.Configuration.Account;
-using Admegatest.Core.Models.Account;
+﻿using Admegatest.Configuration;
+using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
-using Admegatest.Data.Interfaces.Account;
+using Admegatest.Data.Interfaces;
 using Admegatest.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -10,7 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Admegatest.Data.Repositories.Account
+namespace Admegatest.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
