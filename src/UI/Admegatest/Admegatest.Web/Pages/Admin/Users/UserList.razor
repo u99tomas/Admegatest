@@ -2,6 +2,10 @@
 
 @using Admegatest.Core.Models
 
+<MudPaper Class="pa-2 my-4">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary">Añadir</MudButton>
+</MudPaper>
+
 <MudTable ServerData="@(new Func<TableState, Task<TableData<User>>>(ServerReload))" 
           OnRowClick="RowClickEvent" T="User"
           Dense="true" Hover="true" Striped="true" Bordered="true" @ref="table">
