@@ -23,7 +23,7 @@ namespace Admegatest.Web.Pages.Admin.Users
             }
 
             var totalItems = users.Count();
-            users.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+            users = users.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
 
             switch (state.SortLabel)
             {
