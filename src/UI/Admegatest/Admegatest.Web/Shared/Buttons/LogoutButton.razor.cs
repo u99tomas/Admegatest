@@ -1,13 +1,8 @@
 ﻿using Admegatest.Services.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Admegatest.Web.Components.Buttons
+namespace Admegatest.Web.Shared.Buttons
 {
     public partial class LogoutButton
     {
