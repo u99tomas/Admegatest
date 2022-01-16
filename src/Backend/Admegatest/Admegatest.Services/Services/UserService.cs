@@ -26,11 +26,11 @@ namespace Admegatest.Services.Services
 
         public Task<User?> LoginAsync(User user)
         {
-            user.Password = user.Password.ToMD5();
+            //user.Password = user.Password.ToMD5();
             return _userRepository.LoginAsync(user);
         }
 
-        public Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
+        public async Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
         {
             var queryable = _userRepository.GetUsersAsQueryable();
 
@@ -47,7 +47,7 @@ namespace Admegatest.Services.Services
                     break;
             }
 
-            return PaginationHelper.GetTableDataAsync<User>(queryable, admTableState);
+            return await PaginationHelper.GetTableDataAsync(queryable, admTableState);
         }
 
     }
