@@ -1,1 +1,31 @@
 ﻿@page "/admin/role/list"
+
+@using Admegatest.Core.Models
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<Role>>>(ServerReload))" 
+          OnRowClick="RowClickEvent" T="Role"
+          Dense="true" Hover="true" Striped="true" Bordered="true" @ref="table">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Roles</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="RoleName" T="User">Rol</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="RoleDescription" T="User">Descripción</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.RoleName</MudTd>
+        <MudTd DataLabel="Name">@context.RoleDescription</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

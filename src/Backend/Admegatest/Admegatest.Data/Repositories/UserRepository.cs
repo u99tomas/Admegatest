@@ -13,12 +13,12 @@ namespace Admegatest.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AdmegatestDbContext _admegatestDbContext;
+        private readonly AdmegatestDbContext _context;
         private readonly JWTSettings _jwtsettings;
 
         public UserRepository(AdmegatestDbContext admegatestDBContext, IOptions<JWTSettings> jwtsettings)
         {
-            _admegatestDbContext = admegatestDBContext;
+            _context = admegatestDBContext;
             _jwtsettings = jwtsettings.Value;
         }
 
@@ -28,7 +28,7 @@ namespace Admegatest.Data.Repositories
 
             if (userId > 0)
             {
-                return await _admegatestDbContext.Users
+                return await _context.Users
                     .Where(u => u.Id == Convert.ToInt32(userId)).FirstOrDefaultAsync();
             }
 
@@ -83,7 +83,7 @@ namespace Admegatest.Data.Repositories
 
         public async Task<User?> LoginAsync(User user)
         {
-            var userFound = await _admegatestDbContext.Users
+            var userFound = await _context.Users
                 .Where(u => u.Name == user.Name && u.Password == user.Password)
                 .FirstOrDefaultAsync();
 
@@ -131,7 +131,7 @@ namespace Admegatest.Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await _admegatestDbContext.Users.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
     }
 }
