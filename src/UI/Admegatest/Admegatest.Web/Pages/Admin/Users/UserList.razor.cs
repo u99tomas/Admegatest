@@ -2,6 +2,7 @@
 using Admegatest.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using static MudBlazor.CategoryTypes;
 
 namespace Admegatest.Web.Pages.Admin.Users
 {
@@ -33,6 +34,11 @@ namespace Admegatest.Web.Pages.Admin.Users
             }
 
             return new TableData<User> { Items = users, TotalItems = totalItems };
+        }
+
+        private void RowClickEvent(TableRowClickEventArgs<User> selectedUser)
+        {
+
         }
 
         private void OnSearch(string text)
