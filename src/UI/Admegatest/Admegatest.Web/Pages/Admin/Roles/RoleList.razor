@@ -16,12 +16,12 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="RoleName" T="User">Rol</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="RoleDescription" T="User">Descripción</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="RoleName" T="Role">Rol</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="RoleDescription" T="Role">Descripción</MudTableSortLabel></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Name">@context.RoleName</MudTd>
-        <MudTd DataLabel="Name">@context.RoleDescription</MudTd>
+        <MudTd DataLabel="RoleName">@context.RoleName</MudTd>
+        <MudTd DataLabel="RoleDescription">@context.RoleDescription</MudTd>
     </RowTemplate>
     <NoRecordsContent>
         <MudText>No se encontraron registros coincidentes</MudText>
