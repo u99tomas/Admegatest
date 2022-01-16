@@ -6,6 +6,6 @@ namespace Admegatest.Data.Interfaces
     {
         public Task<User?> LoginAsync(User user);
         public Task<User?> GetUserByTokenAsync(string token);
-        public IQueryable<User> GetUsersAsQueryable();
+        public Task<IEnumerable<User>> GetAllUsersAsync();
     }
 }

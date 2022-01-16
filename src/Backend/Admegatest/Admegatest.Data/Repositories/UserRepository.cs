@@ -1,7 +1,6 @@
 ﻿using Admegatest.Configuration;
 using Admegatest.Core.Models;
 using Admegatest.Data.DbContexts;
-using Admegatest.Data.Extensions;
 using Admegatest.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -130,9 +129,9 @@ namespace Admegatest.Data.Repositories
             return tokenDescriptor;
         }
 
-        public IQueryable<User> GetUsersAsQueryable()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return _admegatestDbContext.Users.AsQueryable();
+            return await _admegatestDbContext.Users.ToListAsync();
         }
     }
 }
