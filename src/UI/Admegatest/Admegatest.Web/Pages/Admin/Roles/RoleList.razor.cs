@@ -12,9 +12,13 @@ namespace Admegatest.Web.Pages.Admin.Roles
 
         private MudTable<Role> table;
         private string searchString = null;
+        private bool _loading;
 
         private async Task<TableData<Role>> ServerReload(TableState state)
         {
+            _loading = true;
+            StateHasChanged();
+
             var roles = await _roleService.GetAllRolesAsync();
 
             if (!string.IsNullOrEmpty(searchString))

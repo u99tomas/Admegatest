@@ -13,9 +13,13 @@ namespace Admegatest.Web.Pages.Admin.Users
 
         private MudTable<User> table;
         private string searchString = null;
+        private bool _loading;
 
         private async Task<TableData<User>> ServerReload(TableState state)
         {
+            _loading = true;
+            StateHasChanged();
+
             var users = await _userService.GetAllUsersAsync();
 
             if (!string.IsNullOrEmpty(searchString))
