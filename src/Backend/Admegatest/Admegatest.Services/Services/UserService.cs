@@ -30,14 +30,14 @@ namespace Admegatest.Services.Services
             return _userRepository.LoginAsync(user);
         }
 
-        public async Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
+        public Task<AdmTableData<User>> GetUsersAsTableDataAsync(AdmTableState admTableState)
         {
             var queryable = _userRepository.GetUsersAsQueryable();
 
 
             if (!string.IsNullOrEmpty(admTableState.SearchString))
             {
-                queryable = queryable.Where(u => u.Name.Contains(admTableState.SearchString, StringComparison.OrdinalIgnoreCase));
+                queryable = queryable.Where(u => u.Name.Contains(admTableState.SearchString));
             }
 
             switch (admTableState.SortLabel)
@@ -47,7 +47,7 @@ namespace Admegatest.Services.Services
                     break;
             }
 
-            return await PaginationHelper.GetTableDataAsync(queryable, admTableState);
+            return PaginationHelper.GetTableDataAsync(queryable, admTableState);
         }
 
     }
