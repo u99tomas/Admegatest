@@ -4,6 +4,7 @@ namespace Admegatest.Data.Interfaces
 {
     public interface IRoleRepository
     {
-        public Task<List<Role>> GetAllRolesOfUserAsync(int userId);
+        public Task<IEnumerable<Role>> GetAllRolesOfUserAsync(int userId);
+        public Task<IEnumerable<Role>> GetAllRolesAsync();
     }
 }

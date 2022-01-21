@@ -12,10 +12,11 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="MudBlazor" Version="6.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Admegatest.Web.Components\Admegatest.Web.Components.csproj" />
+	  <ProjectReference Include="..\..\..\Backend\Admegatest\Admegatest.Services\Admegatest.Services.csproj" />
 	</ItemGroup>
 
 </Project>

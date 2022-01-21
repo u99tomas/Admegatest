@@ -29,8 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Web", "src\UI\Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Services.Tests", "tests\Admegatest\Admegatest.Services.Tests\Admegatest.Services.Tests.csproj", "{0DFD9F55-EE86-43A3-9892-CD1644D93056}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Admegatest.Web.Components", "src\UI\Admegatest\Admegatest.Web.Components\Admegatest.Web.Components.csproj", "{DAEEF70B-BFFE-4F89-98BA-402325894823}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,10 +59,6 @@ Global
 		{0DFD9F55-EE86-43A3-9892-CD1644D93056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DFD9F55-EE86-43A3-9892-CD1644D93056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DFD9F55-EE86-43A3-9892-CD1644D93056}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAEEF70B-BFFE-4F89-98BA-402325894823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAEEF70B-BFFE-4F89-98BA-402325894823}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAEEF70B-BFFE-4F89-98BA-402325894823}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAEEF70B-BFFE-4F89-98BA-402325894823}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,7 +75,6 @@ Global
 		{7A1A6E46-B376-43DD-AFD2-84C26D08A779} = {75AA253E-6DE9-4DC8-A12B-AAA02D8D30BE}
 		{D3EBC7D7-FBF8-4C7B-8485-380186A0F6A5} = {718E55E0-5656-4EC4-8687-3D84E6CA1EE0}
 		{0DFD9F55-EE86-43A3-9892-CD1644D93056} = {0D17A48F-E313-443B-8D1A-AC3CFCA36C60}
-		{DAEEF70B-BFFE-4F89-98BA-402325894823} = {718E55E0-5656-4EC4-8687-3D84E6CA1EE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5677BA1-D7CD-4258-8E86-E569CA8EF6BE}
