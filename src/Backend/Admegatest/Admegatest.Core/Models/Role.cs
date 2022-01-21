@@ -1,4 +1,6 @@
-﻿namespace Admegatest.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Admegatest.Core.Models
 {
     public class Role
     {
