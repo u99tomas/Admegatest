@@ -54,6 +54,11 @@ namespace AdMegasoft.Application.Services
 
             var foundUser = await _userRepository.GetByIdAsync(userId);
 
+            if(foundUser == null)
+            {
+                return new UserFromTokenResponse { FoundAUser = false };
+            }
+
             return new UserFromTokenResponse
             {
                 FoundAUser = true,

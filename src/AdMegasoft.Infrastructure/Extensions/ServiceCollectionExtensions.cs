@@ -1,4 +1,4 @@
-﻿using AdMegasoft.Core.Repositories;
+﻿using AdMegasoft.Core.Abstractions;
 using AdMegasoft.Infrastructure.Contexts;
 using AdMegasoft.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

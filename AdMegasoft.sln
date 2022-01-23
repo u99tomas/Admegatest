@@ -9,11 +9,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{940619FD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Infrastructure", "src\AdMegasoft.Infrastructure\AdMegasoft.Infrastructure.csproj", "{23EE6C82-6892-4C5F-B9DF-D80F8ACAA4A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMegasoft.Core", "src\AdMegasoft.Core\AdMegasoft.Core.csproj", "{089592F5-FE82-4670-B664-C0D433899D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Core", "src\AdMegasoft.Core\AdMegasoft.Core.csproj", "{089592F5-FE82-4670-B664-C0D433899D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMegasoft.Application", "src\AdMegasoft.Application\AdMegasoft.Application.csproj", "{C3B2A2E6-A8CD-4A6B-A207-A1BA921A76FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Application", "src\AdMegasoft.Application\AdMegasoft.Application.csproj", "{C3B2A2E6-A8CD-4A6B-A207-A1BA921A76FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMegasoft.Web", "src\AdMegasoft.Web\AdMegasoft.Web.csproj", "{DA3137E4-0314-451A-8CB1-C1F7DBD0C9C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Web", "src\AdMegasoft.Web\AdMegasoft.Web.csproj", "{DA3137E4-0314-451A-8CB1-C1F7DBD0C9C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{38AEC5CB-C5FA-4B69-A1F5-403D117707F8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
