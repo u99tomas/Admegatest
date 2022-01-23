@@ -1,5 +1,4 @@
-﻿using AdMegasoft.Application.Configurations;
-using AdMegasoft.Application.Services;
+﻿using AdMegasoft.Application.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 

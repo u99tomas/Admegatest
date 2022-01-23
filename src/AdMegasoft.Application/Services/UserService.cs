@@ -2,7 +2,6 @@
 using AdMegasoft.Application.Services.Requests;
 using AdMegasoft.Application.Services.Responses;
 using AdMegasoft.Core.Abstractions;
-using AdMegasoft.Core.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

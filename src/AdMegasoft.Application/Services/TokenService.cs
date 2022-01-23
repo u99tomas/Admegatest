@@ -1,10 +1,6 @@
 ﻿using AdMegasoft.Application.Configurations;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.JSInterop;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace AdMegasoft.Application.Services
 {
