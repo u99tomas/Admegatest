@@ -1,4 +1,4 @@
-﻿using AdMegasoft.Core.Repositories;
+﻿using AdMegasoft.Core.Abstractions;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace AdMegasoft.Application.Services

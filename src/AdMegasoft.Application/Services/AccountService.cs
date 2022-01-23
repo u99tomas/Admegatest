@@ -1,5 +1,5 @@
 ﻿using AdMegasoft.Application.Configurations;
-using AdMegasoft.Core.Repositories;
+using AdMegasoft.Core.Abstractions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
