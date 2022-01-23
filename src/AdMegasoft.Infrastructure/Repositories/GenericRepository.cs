@@ -41,14 +41,10 @@ namespace AdMegasoft.Infrastructure.Repositories
             await Context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
-        {
-            return await DbSet.ToListAsync();
-        }
+        public async Task<List<T>> GetAllAsync() => await DbSet.ToListAsync();
 
-        public async Task<T> GetByIdAsync(int id)
-        {
-            return await DbSet.FindAsync(id);
-        }
+        public async Task<T> GetByIdAsync(int id) => await DbSet.FindAsync(id);
+
+        public IQueryable<T> AsQueryable() => DbSet.AsQueryable();
     }
 }

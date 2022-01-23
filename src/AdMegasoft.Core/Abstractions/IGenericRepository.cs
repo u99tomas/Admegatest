@@ -10,5 +10,6 @@ namespace AdMegasoft.Core.Abstractions
         Task DeleteAsync(T entity);
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
+        IQueryable<T> AsQueryable();
     }
 }
