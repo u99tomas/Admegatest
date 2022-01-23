@@ -10,7 +10,8 @@ namespace AdMegasoft.Application.Extensions
         public static void AddAdMegasoftApplication(this IServiceCollection services)
         {
             services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
-            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>(); // TODO: or addSingleton?
+            services.AddScoped<IUserService, UserService>(); // TODO: or addSingleton?
         }
     }
 }
