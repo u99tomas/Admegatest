@@ -8,14 +8,14 @@ namespace AdMegasoft.Infrastructure.Repositories
     public class GenericRepository<T> : IGenericRepository<T>
         where T : class, IEntity
     {
+        public AdMegasoftDbContext Context { get; }
+        public DbSet<T> DbSet { get; }
+
         public GenericRepository(AdMegasoftDbContext context, DbSet<T> dbSet)
         {
             Context = context;
             DbSet = dbSet;
         }
-
-        public AdMegasoftDbContext Context { get; }
-        public DbSet<T> DbSet { get; }
 
         public async Task AddAsync(T model)
         {
