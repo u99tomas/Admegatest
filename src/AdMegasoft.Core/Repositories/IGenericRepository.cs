@@ -1,11 +1,13 @@
-﻿namespace AdMegasoft.Core.Repositories
+﻿using AdMegasoft.Core.Common;
+
+namespace AdMegasoft.Core.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class, IEntity
     {
-        Task AddAsync(T model);
-        Task UpdateAsync(T model);
-        Task AddOrUpdateAsync(T model);
-        Task DeleteAsync(T model);
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task AddOrUpdateAsync(T entity);
+        Task DeleteAsync(T entity);
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
     }

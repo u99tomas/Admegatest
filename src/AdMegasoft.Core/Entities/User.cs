@@ -1,8 +1,9 @@
-﻿namespace AdMegasoft.Core.Models
+﻿using AdMegasoft.Core.Common;
+
+namespace AdMegasoft.Core.Entities
 {
-    public class User
+    public class User : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }

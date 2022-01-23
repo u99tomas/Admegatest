@@ -1,4 +1,4 @@
-﻿using AdMegasoft.Core.Models;
+﻿using AdMegasoft.Core.Entities;
 
 namespace AdMegasoft.Core.Repositories
 {

@@ -1,11 +1,12 @@
-﻿using AdMegasoft.Core.Repositories;
+﻿using AdMegasoft.Core.Common;
+using AdMegasoft.Core.Repositories;
 using AdMegasoft.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdMegasoft.Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T>
-        where T : class
+        where T : class, IEntity
     {
         public GenericRepository(AdMegasoftDbContext context, DbSet<T> dbSet)
         {

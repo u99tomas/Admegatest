@@ -1,4 +1,4 @@
-﻿using AdMegasoft.Core.Models;
+﻿using AdMegasoft.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdMegasoft.Infrastructure.Contexts

@@ -1,8 +1,9 @@
-﻿namespace AdMegasoft.Core.Models
+﻿using AdMegasoft.Core.Common;
+
+namespace AdMegasoft.Core.Entities
 {
-    public class Group
+    public class Group : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

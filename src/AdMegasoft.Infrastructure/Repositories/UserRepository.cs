@@ -1,4 +1,4 @@
-﻿using AdMegasoft.Core.Models;
+﻿using AdMegasoft.Core.Entities;
 using AdMegasoft.Core.Repositories;
 using AdMegasoft.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
