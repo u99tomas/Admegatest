@@ -13,5 +13,10 @@ namespace AdMegasoft.Core.Extensions
         {
             return queryable.Where(u => u.Password == password);
         }
+
+        public static IQueryable<User> IsActive(this IQueryable<User> queryable)
+        {
+            return queryable.Where(u => u.IsActive == true);
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using AdMegasoft.Application.Configurations;
+using AdMegasoft.Application.Services.Requests;
+using AdMegasoft.Application.Services.Responses;
 using AdMegasoft.Core.Abstractions;
 using AdMegasoft.Core.Entities;
 using Microsoft.Extensions.Options;
@@ -22,29 +24,42 @@ namespace AdMegasoft.Application.Services
             _jwtsettings = jwtsettings.Value;
         }
 
-        public void Login(string name, string password)
+        public async Task<LoginAttemptResponse> Login(LoginAttemptRequest loginAttemptRequest)
         {
-            var userFound = _userRepository.GetUserByPasswordNameAsync(name, password);
+            var userFound = await _userRepository
+                .GetActiveUserByPasswordNameAsync(loginAttemptRequest.Name, loginAttemptRequest.Password);
 
             if (userFound == null)
             {
-                // return LoginAttempResponse
+                return new LoginAttemptResponse { Success = false };
             }
 
-            //userFound.Token = GenerateAccessToken(userFound.Id);
-            //return userFound;
+            return new LoginAttemptResponse
+            {
+                Success = true,
+                Token = GenerateAccessToken(userFound.Id),
+                UserId = userFound.Id,
+                UserName = userFound.Name,
+            };
         }
 
-        public async Task<User> GetUserFromTokenAsync(string token)
+        public async Task<UserFromTokenResponse> GetUserFromTokenAsync(UserFromTokenRequest userFromTokenRequest)
         {
-            var userId = GetUserIdFromToken(token);
+            var userId = GetUserIdFromToken(userFromTokenRequest.Token);
 
-            if(userId == TheTokenHasNoId)
+            if (userId == TheTokenHasNoId)
             {
-                //return null; return UserFromTokenResponse
+                return new UserFromTokenResponse { FoundAUser = false };
             }
 
-            return await _userRepository.GetByIdAsync(userId);
+            var foundUser = await _userRepository.GetByIdAsync(userId);
+
+            return new UserFromTokenResponse
+            {
+                FoundAUser = true,
+                UserId = userId,
+                UserName = foundUser.Name,
+            };
         }
 
         #region Private methods

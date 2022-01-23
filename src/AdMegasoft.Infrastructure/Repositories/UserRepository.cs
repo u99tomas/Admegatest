@@ -10,7 +10,7 @@ namespace AdMegasoft.Infrastructure.Repositories
     {
         public UserRepository(AdMegasoftDbContext context) : base(context, context.Users) { }
 
-        public async Task<User> GetUserByPasswordNameAsync(string name, string password) =>
-            await AsQueryable().WithName(name).WithPassword(password).SingleOrDefaultAsync();
+        public async Task<User> GetActiveUserByPasswordNameAsync(string name, string password) =>
+            await AsQueryable().WithName(name).WithPassword(password).IsActive().SingleOrDefaultAsync();
     }
 }
