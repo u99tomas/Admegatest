@@ -43,6 +43,9 @@ namespace AdMegasoft.Infrastructure.Repositories
 
         public async Task<List<T>> GetAllAsync() => await DbSet.ToListAsync();
 
+        public async Task<List<T>> ToPaginatedListAsync(int pageNumber, int pageSize) =>
+            await AsQueryable().Skip(pageNumber * pageSize).Take(pageSize).ToListAsync();
+
         public async Task<T?> GetByIdAsync(int id) => await DbSet.FindAsync(id);
 
         public IQueryable<T> AsQueryable() => DbSet.AsQueryable();
