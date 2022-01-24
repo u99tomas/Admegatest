@@ -18,4 +18,16 @@
     <ProjectReference Include="..\AdMegasoft.Core\AdMegasoft.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Groups\Commands\Add\" />
+    <Folder Include="Features\Groups\Commands\Update\" />
+    <Folder Include="Features\Groups\Queries\GetAllPaged\" />
+    <Folder Include="Features\Roles\Commands\Add\" />
+    <Folder Include="Features\Roles\Commands\Update\" />
+    <Folder Include="Features\Roles\Queries\GetAllPaged\" />
+    <Folder Include="Features\Users\Commands\Add\" />
+    <Folder Include="Features\Users\Commands\Update\" />
+    <Folder Include="Features\Users\Queries\GetAllPaged\" />
+  </ItemGroup>
+
 </Project>

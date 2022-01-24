@@ -15,11 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Application", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Web", "src\AdMegasoft.Web\AdMegasoft.Web.csproj", "{DA3137E4-0314-451A-8CB1-C1F7DBD0C9C4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{38AEC5CB-C5FA-4B69-A1F5-403D117707F8}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
