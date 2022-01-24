@@ -26,4 +26,9 @@
     <Folder Include="Features\Users\Queries\GetAllPaged\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdMegasoft.Abstractions\AdMegasoft.Abstractions.csproj" />
+    <ProjectReference Include="..\AdMegasoft.Domain\AdMegasoft.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
