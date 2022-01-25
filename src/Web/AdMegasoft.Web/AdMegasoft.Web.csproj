@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Groups\" />
-    <Folder Include="Pages\Admin\Roles\" />
-    <Folder Include="Pages\Admin\Users\" />
+    <Folder Include="Pages\Admin\Groups\List\" />
+    <Folder Include="Pages\Admin\Roles\List\" />
+    <Folder Include="Pages\Admin\Users\List\" />
     <Folder Include="wwwroot\Images\Avatars\" />
     <Folder Include="wwwroot\Images\Logos\" />
   </ItemGroup>
