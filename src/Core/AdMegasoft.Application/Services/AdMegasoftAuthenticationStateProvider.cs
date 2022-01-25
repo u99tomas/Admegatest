@@ -1,5 +1,5 @@
 ﻿using AdMegasoft.Abstractions.Abstractions;
-using AdMegasoft.Application.Services.Requests;
+using AdMegasoft.Application.Requests;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 

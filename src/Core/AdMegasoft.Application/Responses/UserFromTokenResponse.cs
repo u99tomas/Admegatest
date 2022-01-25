@@ -1,4 +1,4 @@
-﻿namespace AdMegasoft.Application.Services.Responses
+﻿namespace AdMegasoft.Application.Responses
 {
     public class UserFromTokenResponse
     {

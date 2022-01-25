@@ -1,4 +1,4 @@
-﻿namespace AdMegasoft.Application.Services.Requests
+﻿namespace AdMegasoft.Application.Requests
 {
     public class LoginAttemptRequest
     {

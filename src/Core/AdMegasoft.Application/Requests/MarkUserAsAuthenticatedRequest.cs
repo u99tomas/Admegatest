@@ -1,10 +1,9 @@
-﻿namespace AdMegasoft.Application.Services.Responses
+﻿namespace AdMegasoft.Application.Requests
 {
-    public class LoginAttemptResponse
+    public class MarkUserAsAuthenticatedRequest
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Token { get; set; }
-        public bool Success { get; set; }
     }
 }

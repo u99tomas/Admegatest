@@ -1,5 +1,5 @@
-﻿using AdMegasoft.Application.Services.Requests;
-using AdMegasoft.Application.Services.Responses;
+﻿using AdMegasoft.Application.Requests;
+using AdMegasoft.Application.Responses;
 
 namespace AdMegasoft.Application.Services
 {
