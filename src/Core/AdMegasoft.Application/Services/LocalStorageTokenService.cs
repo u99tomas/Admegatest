@@ -4,11 +4,11 @@ using Microsoft.JSInterop;
 
 namespace AdMegasoft.Application.Services
 {
-    public class TokenService : ITokenService
+    public class LocalStorageTokenService : ILocalStorageTokenService
     {
         private readonly IJSRuntime _jsRuntime;
 
-        public TokenService(IJSRuntime jsRuntime, IOptions<JWTSettings> jwtsettings)
+        public LocalStorageTokenService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
         }

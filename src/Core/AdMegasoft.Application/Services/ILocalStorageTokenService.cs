@@ -1,6 +1,6 @@
 ﻿namespace AdMegasoft.Application.Services
 {
-    public interface ITokenService
+    public interface ILocalStorageTokenService
     {
         Task<string> GetTokenAsync();
         Task<bool> SaveTokenAsync(string token);

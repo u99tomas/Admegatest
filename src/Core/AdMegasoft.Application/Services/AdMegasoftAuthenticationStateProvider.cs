@@ -7,11 +7,11 @@ namespace AdMegasoft.Application.Services
 {
     public class AdMegasoftAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private readonly ITokenService _tokenService;
+        private readonly ILocalStorageTokenService _tokenService;
         private readonly IUserService _userService;
         private readonly IRoleRepository _roleRepository;
 
-        public AdMegasoftAuthenticationStateProvider(ITokenService tokenService,
+        public AdMegasoftAuthenticationStateProvider(ILocalStorageTokenService tokenService,
             IUserService userService, IRoleRepository roleRepository)
         {
             _tokenService = tokenService;
@@ -28,7 +28,7 @@ namespace AdMegasoft.Application.Services
                 return await Task.FromResult(GetAnonymousAuthenticationState());
             }
 
-            var userFromTokenResponse = await _userService.GetUserFromTokenAsync(new UserFromTokenRequest { Token = token });
+            var userFromTokenResponse = await _userService.GetUserFromTokenAsync(token);
 
             if (userFromTokenResponse.FoundAUser)
             {

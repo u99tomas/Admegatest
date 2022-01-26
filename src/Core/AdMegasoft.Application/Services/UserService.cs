@@ -1,26 +1,18 @@
 ﻿using AdMegasoft.Abstractions.Abstractions;
-using AdMegasoft.Application.Configurations;
 using AdMegasoft.Application.Requests;
 using AdMegasoft.Application.Responses;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace AdMegasoft.Application.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly JWTSettings _jwtsettings;
+        private readonly IJWTService _jWTService;
 
-        public const int TheTokenHasNoId = -1;
-
-        public UserService(IUserRepository userRepository, IOptions<JWTSettings> jwtsettings)
+        public UserService(IUserRepository userRepository, IJWTService jWTService)
         {
             _userRepository = userRepository;
-            _jwtsettings = jwtsettings.Value;
+            _jWTService = jWTService;
         }
 
         public async Task<LoginAttemptResponse> Login(LoginAttemptRequest loginAttemptRequest)
@@ -36,22 +28,22 @@ namespace AdMegasoft.Application.Services
             return new LoginAttemptResponse
             {
                 Success = true,
-                Token = GenerateAccessToken(userFound.Id),
+                Token = _jWTService.GenerateAccessToken(userFound.Id),
                 UserId = userFound.Id,
                 UserName = userFound.Name,
             };
         }
 
-        public async Task<UserFromTokenResponse> GetUserFromTokenAsync(UserFromTokenRequest userFromTokenRequest)
+        public async Task<UserFromTokenResponse> GetUserFromTokenAsync(string token)
         {
-            var userId = GetUserIdFromToken(userFromTokenRequest.Token);
+            var userId = _jWTService.GetUserIdFromToken(token);
 
-            if (userId == TheTokenHasNoId)
+            if (userId == null)
             {
                 return new UserFromTokenResponse { FoundAUser = false };
             }
 
-            var foundUser = await _userRepository.GetByIdAsync(userId);
+            var foundUser = await _userRepository.GetByIdAsync(userId.Value);
 
             if (foundUser == null)
             {
@@ -61,89 +53,9 @@ namespace AdMegasoft.Application.Services
             return new UserFromTokenResponse
             {
                 FoundAUser = true,
-                UserId = userId,
+                UserId = userId.Value,
                 UserName = foundUser.Name,
             };
         }
-
-        #region Private methods
-        private string GenerateAccessToken(int userId)
-        {
-            var tokenDescriptor = GetSecurityTokenDescriptor(userId);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-
-        private SecurityTokenDescriptor GetSecurityTokenDescriptor(int userId)
-        {
-            var key = Encoding.ASCII.GetBytes(_jwtsettings.Key);
-
-            var claimsIdentity = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Name, Convert.ToString(userId))
-            });
-
-            var oneDay = DateTime.UtcNow.AddDays(1);
-
-            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = claimsIdentity,
-                Expires = oneDay,
-                SigningCredentials = signingCredentials,
-            };
-
-            return tokenDescriptor;
-        }
-        private int GetUserIdFromToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var key = Encoding.ASCII.GetBytes(_jwtsettings.Key);
-
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            };
-
-            SecurityToken securityToken;
-            ClaimsPrincipal claimsPrincipal;
-
-            try
-            {
-                claimsPrincipal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
-            }
-            catch (Exception)
-            {
-                return TheTokenHasNoId;
-            }
-
-            JwtSecurityToken? jwtSecurityToken = securityToken as JwtSecurityToken;
-
-            if (jwtSecurityToken == null)
-            {
-                return TheTokenHasNoId;
-            }
-
-            bool signatureAlgorithmIsValid = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
-                StringComparison.InvariantCultureIgnoreCase);
-
-            if (signatureAlgorithmIsValid)
-            {
-                var userId = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value;
-                return userId == null ? TheTokenHasNoId : Convert.ToInt32(userId);
-            }
-
-            return TheTokenHasNoId;
-        }
-        #endregion
-
     }
 }
