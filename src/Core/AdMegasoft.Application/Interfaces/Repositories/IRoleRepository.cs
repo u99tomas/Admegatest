@@ -1,6 +1,6 @@
 ﻿using AdMegasoft.Domain.Entities;
 
-namespace AdMegasoft.Abstractions.Abstractions
+namespace AdMegasoft.Application.Interfaces.Repositories
 {
     public interface IRoleRepository : IGenericRepository<Role>
     {

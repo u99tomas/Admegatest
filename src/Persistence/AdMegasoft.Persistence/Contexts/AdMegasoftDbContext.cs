@@ -1,7 +1,7 @@
 ﻿using AdMegasoft.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdMegasoft.Infrastructure.Contexts
+namespace AdMegasoft.Persistence.Contexts
 {
     public class AdMegasoftDbContext : DbContext
     {

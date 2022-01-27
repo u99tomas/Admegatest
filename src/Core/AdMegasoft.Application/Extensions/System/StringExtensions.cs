@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace AdMegasoft.Application.Extensions
+namespace AdMegasoft.Application.Extensions.System
 {
     public static class StringExtensions
     {

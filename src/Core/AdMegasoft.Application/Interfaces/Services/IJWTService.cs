@@ -1,6 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-
-namespace AdMegasoft.Application.Services
+﻿namespace AdMegasoft.Application.Interfaces.Services
 {
     public interface IJWTService
     {

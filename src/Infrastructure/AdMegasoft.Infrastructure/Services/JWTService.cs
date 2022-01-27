@@ -1,11 +1,13 @@
 ﻿using AdMegasoft.Application.Configurations;
+using AdMegasoft.Application.Interfaces.Services;
+using AdMegasoft.Application.Responses;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace AdMegasoft.Application.Services
+namespace AdMegasoft.Infrastructure.Services
 {
     public class JWTService : IJWTService
     {

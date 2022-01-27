@@ -24,6 +24,8 @@
     <Folder Include="Features\Users\Commands\Add\" />
     <Folder Include="Features\Users\Commands\Update\" />
     <Folder Include="Features\Users\Queries\GetAllPaged\" />
+    <Folder Include="Interfaces\Repositories\" />
+    <Folder Include="Interfaces\Services\" />
   </ItemGroup>
 
   <ItemGroup>

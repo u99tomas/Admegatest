@@ -1,6 +1,6 @@
-﻿using AdMegasoft.Abstractions.Abstractions;
+﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Domain.Entities;
-using AdMegasoft.Infrastructure.Contexts;
+using AdMegasoft.Infrastructure.Persistence.Contexts;
 
 namespace AdMegasoft.Infrastructure.Repositories
 {

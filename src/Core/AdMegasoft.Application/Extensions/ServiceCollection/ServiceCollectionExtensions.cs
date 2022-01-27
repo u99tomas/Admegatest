@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Application.Extensions
+namespace AdMegasoft.Application.Extensions.ServiceCollection
 {
     public static class ServiceCollectionExtensions
     {
@@ -10,9 +10,6 @@ namespace AdMegasoft.Application.Extensions
         {
             // TODO: or addSingleton?
             services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
-            services.AddScoped<ILocalStorageTokenService, LocalStorageTokenService>(); 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IJWTService, JWTService>();
         }
     }
 }

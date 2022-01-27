@@ -1,6 +1,6 @@
 ﻿using AdMegasoft.Domain.Common;
 
-namespace AdMegasoft.Abstractions.Abstractions
+namespace AdMegasoft.Application.Interfaces.Repositories
 {
     public interface IGenericRepository<T> where T : class, IEntity
     {

@@ -1,6 +1,6 @@
 ﻿using AdMegasoft.Domain.Entities;
 
-namespace AdMegasoft.Abstractions.Extensions
+namespace AdMegasoft.Application.Extensions.Repositories
 {
     public static class UserRepositoryExtensions
     {
