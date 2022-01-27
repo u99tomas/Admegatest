@@ -3,6 +3,7 @@ using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Infrastructure.Persistence.Contexts;
 using AdMegasoft.Infrastructure.Repositories;
 using AdMegasoft.Infrastructure.Services;
+using Blazored.LocalStorage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,9 @@ namespace AdMegasoft.Infrastructure.Extensions.ServiceCollection
     {
         public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            // NuGet packages
+            services.AddBlazoredLocalStorage();
+
             // Database
             services.AddDbContext<AdMegasoftDbContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("AdMegasoftDb")) // TODO: AdMegasoftDb should by a const?
