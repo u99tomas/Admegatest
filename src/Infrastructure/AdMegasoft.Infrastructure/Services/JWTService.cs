@@ -1,6 +1,5 @@
 ﻿using AdMegasoft.Application.Configurations;
 using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Responses;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
