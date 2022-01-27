@@ -3,25 +3,30 @@ using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Infrastructure.Persistence.Contexts;
 using AdMegasoft.Infrastructure.Repositories;
 using AdMegasoft.Infrastructure.Services;
+using AdMegasoft.Shared.Constants.Application;
 using Blazored.LocalStorage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Infrastructure.Extensions.ServiceCollection
+namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
 {
-    public static class ServiceCollectionExtensions
+    public static class DependencyInjection
     {
-        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAdMegasoftPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            // NuGet packages
             services.AddBlazoredLocalStorage();
 
-            // Database
             services.AddDbContext<AdMegasoftDbContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("AdMegasoftDb")) // TODO: AdMegasoftDb should by a const?
-                );
+                options => options.UseSqlServer(
+                    configuration.GetConnectionString(ApplicationSettingsConstants.Database))
+            );
 
+            return services;
+        }
+
+        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services)
+        {
             // Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJWTService, JWTService>();
