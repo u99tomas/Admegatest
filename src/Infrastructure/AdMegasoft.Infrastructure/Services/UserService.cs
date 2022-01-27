@@ -2,6 +2,7 @@
 using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Requests;
 using AdMegasoft.Application.Responses;
+using AdMegasoft.Shared.Constants.Storage;
 using Blazored.LocalStorage;
 
 namespace AdMegasoft.Infrastructure.Services
@@ -49,14 +50,14 @@ namespace AdMegasoft.Infrastructure.Services
 
             if (userFound == null) return false;
 
-            await _localStorageService.SetItemAsync("token", _jWTService.GenerateAccessToken(userFound.Id));
+            await _localStorageService.SetItemAsync(StorageConstants.Token, _jWTService.GenerateAccessToken(userFound.Id));
 
             return true;
         }
 
         public async Task LogoutAsync()
         {
-            await _localStorageService.RemoveItemAsync("token"); // TODO: Token should by a const
+            await _localStorageService.RemoveItemAsync(StorageConstants.Token); 
         }
     }
 }

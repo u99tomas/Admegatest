@@ -9,7 +9,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.1" />
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
   </ItemGroup>
@@ -24,12 +23,9 @@
     <Folder Include="Features\Users\Commands\Add\" />
     <Folder Include="Features\Users\Commands\Update\" />
     <Folder Include="Features\Users\Queries\GetAllPaged\" />
-    <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="Interfaces\Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdMegasoft.Abstractions\AdMegasoft.Abstractions.csproj" />
     <ProjectReference Include="..\AdMegasoft.Domain\AdMegasoft.Domain.csproj" />
   </ItemGroup>
 

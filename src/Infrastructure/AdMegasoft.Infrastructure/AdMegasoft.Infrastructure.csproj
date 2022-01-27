@@ -7,16 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Persistence\Configurations\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\AdMegasoft.Abstractions\AdMegasoft.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Core\AdMegasoft.Domain\AdMegasoft.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\AdMegasoft.Application\AdMegasoft.Application.csproj" />
   </ItemGroup>
 
 </Project>
