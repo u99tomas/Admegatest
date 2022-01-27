@@ -2,6 +2,9 @@
 {
     public static class StorageConstants
     {
-        public const string Token = "Token";
+        public static class LocalStorage
+        {
+            public const string Token = "Token";
+        }
     }
 }

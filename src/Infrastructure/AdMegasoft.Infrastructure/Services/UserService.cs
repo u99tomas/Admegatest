@@ -50,14 +50,14 @@ namespace AdMegasoft.Infrastructure.Services
 
             if (userFound == null) return false;
 
-            await _localStorageService.SetItemAsync(StorageConstants.Token, _jWTService.GenerateAccessToken(userFound.Id));
+            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.Token, _jWTService.GenerateAccessToken(userFound.Id));
 
             return true;
         }
 
         public async Task LogoutAsync()
         {
-            await _localStorageService.RemoveItemAsync(StorageConstants.Token); 
+            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.Token); 
         }
     }
 }
