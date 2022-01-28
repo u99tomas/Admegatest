@@ -58,6 +58,7 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
+        #region Private methods
         private AuthenticationState GetAnonymousAuthenticationState()
         {
             var identity = new ClaimsIdentity();
@@ -87,5 +88,6 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
             var userRoles = await _roleService.GetRolesByUserIdAsync(userId);
             return userRoles.Select(r => new Claim(ClaimTypes.Role, r.Name));
         }
+        #endregion
     }
 }
