@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Web", "src\Web\A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D829F7FA-23BC-4A12-9514-707D5CE70EC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMegasoft.Shared", "src\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj", "{1F01D2F5-B20C-4427-9D65-6D1886DAC750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdMegasoft.Shared", "src\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj", "{1F01D2F5-B20C-4427-9D65-6D1886DAC750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMegasoft.Web.Infrastructure", "src\Web\AdMegasoft.Web.Infrastructure\AdMegasoft.Web.Infrastructure.csproj", "{30D6D068-68B1-48BB-BC16-116A451DDF16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{1F01D2F5-B20C-4427-9D65-6D1886DAC750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F01D2F5-B20C-4427-9D65-6D1886DAC750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F01D2F5-B20C-4427-9D65-6D1886DAC750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D6D068-68B1-48BB-BC16-116A451DDF16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D6D068-68B1-48BB-BC16-116A451DDF16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D6D068-68B1-48BB-BC16-116A451DDF16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D6D068-68B1-48BB-BC16-116A451DDF16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{BB85DC0B-190B-494C-B9CC-8F0DFB954B9B} = {C1D5CCD6-159A-4AD9-A56B-A490C7615052}
 		{D829F7FA-23BC-4A12-9514-707D5CE70EC4} = {F92654A1-5661-421A-B90C-86480767B95F}
 		{1F01D2F5-B20C-4427-9D65-6D1886DAC750} = {D829F7FA-23BC-4A12-9514-707D5CE70EC4}
+		{30D6D068-68B1-48BB-BC16-116A451DDF16} = {C1D5CCD6-159A-4AD9-A56B-A490C7615052}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBF5A8F9-A952-4E90-ADD8-609012BBCB80}

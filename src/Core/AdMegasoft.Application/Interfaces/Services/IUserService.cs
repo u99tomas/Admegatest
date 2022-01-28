@@ -6,14 +6,18 @@ namespace AdMegasoft.Application.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<bool> LoginAsync(LoginAttemptRequest loginAttemptRequest);
-        Task LogoutAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginAttemptRequest"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
+        Task<LoginAttemptResponse> LoginAsync(LoginAttemptRequest loginAttemptRequest);
 
         /// <summary>
         /// Obtiene el id del usuario almacenado dentro del token.<br></br>
-        /// Luego intenta obtener el usuario realizando una búsqueda por id en la base datos.
+        /// Busca el usuario realizando una búsqueda por id en la base datos.
         /// </summary>
-        /// <param name="token"></param>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="InvalidTokenException"></exception>
         Task<UserFromTokenResponse> GetUserFromTokenAsync(string token);

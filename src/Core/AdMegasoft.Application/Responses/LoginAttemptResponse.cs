@@ -1,6 +1,6 @@
-﻿namespace AdMegasoft.Application.Requests
+﻿namespace AdMegasoft.Application.Responses
 {
-    public class MarkUserAsAuthenticatedRequest
+    public class LoginAttemptResponse
     {
         public int UserId { get; set; }
         public string UserName { get; set; }

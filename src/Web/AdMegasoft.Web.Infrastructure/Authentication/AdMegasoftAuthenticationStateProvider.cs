@@ -1,55 +1,57 @@
-﻿using AdMegasoft.Application.Requests;
+﻿using AdMegasoft.Application.Interfaces.Services;
+using AdMegasoft.Shared.Constants.Storage;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace AdMegasoft.Application.Services
+namespace AdMegasoft.Web.Infrastructure.Authentication
 {
     public class AdMegasoftAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private readonly ILocalStorageTokenService _tokenService;
         private readonly IUserService _userService;
-        private readonly IRoleRepository _roleRepository;
+        private readonly IRoleService _roleService;
+        private readonly ILocalStorageService _localStorageService;
 
-        public AdMegasoftAuthenticationStateProvider(ILocalStorageTokenService tokenService,
-            IUserService userService, IRoleRepository roleRepository)
+        public AdMegasoftAuthenticationStateProvider(IUserService userService,
+            IRoleService roleService, ILocalStorageService localStorageService)
         {
-            _tokenService = tokenService;
             _userService = userService;
-            _roleRepository = roleRepository;
+            _roleService = roleService;
+            _localStorageService = localStorageService;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await _tokenService.GetTokenAsync();
+            string token = await _localStorageService.GetItemAsync<string>(StorageConstants.LocalStorage.Token);
 
             if (string.IsNullOrEmpty(token))
             {
                 return await Task.FromResult(GetAnonymousAuthenticationState());
             }
 
-            var userFromTokenResponse = await _userService.GetUserFromTokenAsync(token);
-
-            if (userFromTokenResponse.FoundAUser)
+            try
             {
+                var userFromTokenResponse = await _userService.GetUserFromTokenAsync(token);
                 return await GetAuthenticationStateAsync(userFromTokenResponse.UserName, userFromTokenResponse.UserId);
             }
-
-            return await Task.FromResult(GetAnonymousAuthenticationState());
+            catch (Exception)
+            {
+                return await Task.FromResult(GetAnonymousAuthenticationState());
+            }
         }
 
-        public async Task MarkUserAsAuthenticatedAsync(MarkUserAsAuthenticatedRequest markUserAsAuthenticatedRequest)
+        public async Task MarkUserAsAuthenticatedAsync(int userId, string userName, string token)
         {
-            await _tokenService.SaveTokenAsync(markUserAsAuthenticatedRequest.Token);
+            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.Token, token);
 
-            var authenticationState = await GetAuthenticationStateAsync(markUserAsAuthenticatedRequest.UserName,
-                markUserAsAuthenticatedRequest.UserId);
+            var authenticationState = await GetAuthenticationStateAsync(userName, userId);
 
             NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
         }
 
         public async Task MarkUserAsLoggedOutAsync()
         {
-            await _tokenService.DestroyTokenAsync();
+            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.Token);
 
             var authenticationState = GetAnonymousAuthenticationState();
 
@@ -82,7 +84,7 @@ namespace AdMegasoft.Application.Services
 
         private async Task<IEnumerable<Claim>> GetAllRolesOfUserAsClaimAsync(int userId)
         {
-            var userRoles = await _roleRepository.GetRolesByUserIdAsync(userId);
+            var userRoles = await _roleService.GetRolesByUserIdAsync(userId);
             return userRoles.Select(r => new Claim(ClaimTypes.Role, r.Name));
         }
     }

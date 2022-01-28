@@ -12,13 +12,11 @@ namespace AdMegasoft.Infrastructure.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IJWTService _jWTService;
-        private readonly ILocalStorageService _localStorageService;
 
-        public UserService(IUserRepository userRepository, IJWTService jWTService, ILocalStorageService localStorageService)
+        public UserService(IUserRepository userRepository, IJWTService jWTService)
         {
             _userRepository = userRepository;
             _jWTService = jWTService;
-            _localStorageService = localStorageService;
         }
 
         public async Task<UserFromTokenResponse> GetUserFromTokenAsync(string token)
@@ -39,21 +37,23 @@ namespace AdMegasoft.Infrastructure.Services
             };
         }
 
-        public async Task<bool> LoginAsync(LoginAttemptRequest loginAttemptRequest)
+        public async Task<LoginAttemptResponse> LoginAsync(LoginAttemptRequest loginAttemptRequest)
         {
             var userFound = await _userRepository
                 .GetActiveUserByPasswordNameAsync(loginAttemptRequest.Name, loginAttemptRequest.Password);
 
-            if (userFound == null) return false;
+            if (userFound == null)
+            {
+                throw new UserNotFoundException($"No se ha encontrado en la base de datos un usuario con nombre: " +
+                    $"{loginAttemptRequest.Name} y contraseña: {loginAttemptRequest.Password}");
+            }
 
-            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.Token, _jWTService.GenerateAccessToken(userFound.Id));
-
-            return true;
-        }
-
-        public async Task LogoutAsync()
-        {
-            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.Token);
+            return new LoginAttemptResponse
+            {
+                UserId = userFound.Id,
+                UserName = userFound.Name,
+                Token = _jWTService.GenerateAccessToken(userFound.Id),
+            };
         }
     }
 }
