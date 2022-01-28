@@ -1,4 +1,5 @@
 ﻿using AdMegasoft.Application.Configurations;
+using AdMegasoft.Application.Exceptions;
 using AdMegasoft.Application.Interfaces.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -49,7 +50,7 @@ namespace AdMegasoft.Infrastructure.Services
             return tokenDescriptor;
         }
 
-        public int? GetUserIdFromToken(string token)
+        public int GetUserIdFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -73,26 +74,29 @@ namespace AdMegasoft.Infrastructure.Services
             }
             catch (Exception)
             {
-                return null;
+                throw new InvalidTokenException("El token es invalido");
             }
 
-            JwtSecurityToken? jwtSecurityToken = securityToken as JwtSecurityToken;
-
-            if (jwtSecurityToken == null)
-            {
-                return null;
-            }
+            JwtSecurityToken jwtSecurityToken = (JwtSecurityToken) securityToken;
 
             bool signatureAlgorithmIsValid = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
                 StringComparison.InvariantCultureIgnoreCase);
 
-            if (signatureAlgorithmIsValid)
+            if (!signatureAlgorithmIsValid)
             {
-                var userId = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value;
-                return userId == null ? null : Convert.ToInt32(userId);
+                throw new InvalidTokenException("El algoritmo de firma es inválido");
             }
 
-            return null;
+            var userId = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value;
+            int number;
+            bool success = int.TryParse(userId, out number);
+
+            if (success)
+            {
+                return number;
+            }
+
+            throw new InvalidTokenException("El token no contiene el id del usuario");
         }
     }
 }

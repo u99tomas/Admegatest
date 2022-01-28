@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Application.Interfaces.Repositories;
+﻿using AdMegasoft.Application.Exceptions;
+using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Requests;
 using AdMegasoft.Application.Responses;
@@ -20,25 +21,20 @@ namespace AdMegasoft.Infrastructure.Services
             _localStorageService = localStorageService;
         }
 
-        public async Task<UserFromTokenResponse?> GetUserFromTokenAsync(string token)
+        public async Task<UserFromTokenResponse> GetUserFromTokenAsync(string token)
         {
             var userId = _jWTService.GetUserIdFromToken(token);
 
-            if (userId == null)
-            {
-                return null;
-            }
-
-            var foundUser = await _userRepository.GetByIdAsync(userId.Value);
+            var foundUser = await _userRepository.GetByIdAsync(userId);
 
             if (foundUser == null)
             {
-                return null;
+                throw new UserNotFoundException($"No se ha encontrado en la base de datos un usuario con el id: {userId}");
             }
 
             return new UserFromTokenResponse
             {
-                UserId = userId.Value,
+                UserId = userId,
                 UserName = foundUser.Name,
             };
         }
@@ -57,7 +53,7 @@ namespace AdMegasoft.Infrastructure.Services
 
         public async Task LogoutAsync()
         {
-            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.Token); 
+            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.Token);
         }
     }
 }
