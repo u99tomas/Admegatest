@@ -3,8 +3,6 @@ using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Requests;
 using AdMegasoft.Application.Responses;
-using AdMegasoft.Shared.Constants.Storage;
-using Blazored.LocalStorage;
 
 namespace AdMegasoft.Infrastructure.Services
 {
