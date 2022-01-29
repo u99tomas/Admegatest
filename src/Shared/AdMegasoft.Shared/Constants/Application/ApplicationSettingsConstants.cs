@@ -2,7 +2,7 @@
 {
     public static class ApplicationSettingsConstants
     {
-        public const string Database = "Admegasoft";
+        public const string Database = "AdMegasoft";
         public const string JWTSettings = "JWTSettings";
     }
 }

@@ -4,7 +4,7 @@
     {
         public static class LocalStorage
         {
-            public const string Token = "Token";
+            public const string AccessToken = "Token";
         }
     }
 }
