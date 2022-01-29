@@ -1,5 +1,4 @@
 ﻿using AdMegasoft.Application.Models;
-using AdMegasoft.Domain.Entities;
 
 namespace AdMegasoft.Application.Interfaces.Services
 {

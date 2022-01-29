@@ -5,7 +5,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace AdMegasoft.Web.Infrastructure.Authentication
+namespace AdMegasoft.Web.Authentication
 {
     public class AdMegasoftAuthenticationStateProvider : AuthenticationStateProvider
     {
@@ -21,7 +21,7 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var accessToken = await _localStorageService.GetItemAsync<string>(StorageConstants.Local.AccessToken);
+            var accessToken = await _localStorageService.GetItemAsync<string>(StorageConstants.LocalStorage.AccessToken);
 
             ClaimsIdentity identity = new ClaimsIdentity();
 
@@ -42,7 +42,7 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
 
         public async Task MarkUserAsAuthenticated(UserModel userModel)
         {
-            await _localStorageService.SetItemAsync(StorageConstants.Local.AccessToken, userModel.AccessToken);
+            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.AccessToken, userModel.AccessToken);
 
             var identity = GetClaimsIdentityAsync(userModel);
 
@@ -53,7 +53,7 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
 
         public async Task MarkUserAsLoggedOut()
         {
-            await _localStorageService.RemoveItemAsync(StorageConstants.Local.AccessToken);
+            await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.AccessToken);
 
             var identity = new ClaimsIdentity();
 

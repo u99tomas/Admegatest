@@ -16,7 +16,7 @@ namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
         {
             services.AddDbContext<AdMegasoftDbContext>(
                 options => options.UseSqlServer(
-                    configuration.GetConnectionString(ApplicationSettingsConstants.Database))
+                    configuration.GetConnectionString(AppSettingsConstants.DatabaseName))
             );
 
             return services;
@@ -26,8 +26,6 @@ namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
         {
             // Services
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IJWTService, JWTService>();
-            services.AddScoped<IRoleService, RoleService>();
 
             // Repositories
             services.AddTransient<IRoleRepository, RoleRepository>();

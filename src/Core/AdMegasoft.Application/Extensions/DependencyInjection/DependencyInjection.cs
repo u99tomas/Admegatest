@@ -6,7 +6,6 @@ namespace AdMegasoft.Application.Extensions.DependencyInjection
     {
         public static void AddAdMegasoftApplication(this IServiceCollection services)
         {
-            // TODO: configurar JWTSettings
         }
     }
 }

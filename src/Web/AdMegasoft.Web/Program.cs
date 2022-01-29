@@ -1,3 +1,9 @@
+using AdMegasoft.Application.Configurations;
+using AdMegasoft.Application.Extensions.DependencyInjection;
+using AdMegasoft.Infrastructure.Extensions.DependencyInjection;
+using AdMegasoft.Web.Authentication;
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +12,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-//Nuget packages
+#region Admegasoft.Web
+// Authorization
+builder.Services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
+
+// Nuget packages
 builder.Services.AddMudServices();
+builder.Services.AddBlazoredLocalStorage();
+#endregion
+
+#region Admegasoft.Application
+builder.Services.AddAdMegasoftApplication();
+
+// Bad, should be in AddAdMegasoftApplication() method
+var jwtSection = builder.Configuration.GetSection("JWTSettings");
+builder.Services.Configure<JWTSettings>(jwtSection);
+// end Bad (=
+
+#endregion
+
+#region Admegasoft.Infrastructure
+builder.Services.AddAdMegasoftPersistence(builder.Configuration);
+builder.Services.AddAdMegasoftInfrastructure();
+#endregion
 
 var app = builder.Build();
 
@@ -24,6 +51,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
