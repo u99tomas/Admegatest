@@ -27,7 +27,7 @@ namespace AdMegasoft.Infrastructure.Services
             var userFound = await _userRepository
                 .GetActiveUserByPasswordNameAsync(name, password);
 
-            return new UserWithToken
+            return new UserWithToken // Podria ser un mapping
             {
                 Name = name,
                 Password = password,
