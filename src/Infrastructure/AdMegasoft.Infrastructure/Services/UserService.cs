@@ -35,7 +35,7 @@ namespace AdMegasoft.Infrastructure.Services
             };
         }
 
-        private async Task<User> GetUserFromAccessTokenAsync(string accessToken)
+        public async Task<User> GetUserFromAccessTokenAsync(string accessToken)
         {
             try
             {
