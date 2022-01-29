@@ -4,19 +4,19 @@ namespace AdMegasoft.Application.Extensions.Repositories
 {
     public static class UserRepositoryExtensions
     {
-        public static IQueryable<User> WithName(this IQueryable<User> queryable, string name)
+        public static IQueryable<User> WithName(this IQueryable<User> q, string name)
         {
-            return queryable.Where(u => u.Name == name);
+            return q.Where(u => u.Name == name);
         }
 
-        public static IQueryable<User> WithPassword(this IQueryable<User> queryable, string password)
+        public static IQueryable<User> WithPassword(this IQueryable<User> q, string password)
         {
-            return queryable.Where(u => u.Password == password);
+            return q.Where(u => u.Password == password);
         }
 
-        public static IQueryable<User> IsActive(this IQueryable<User> queryable)
+        public static IQueryable<User> IsActive(this IQueryable<User> q)
         {
-            return queryable.Where(u => u.IsActive == true);
+            return q.Where(u => u.IsActive == true);
         }
     }
 }

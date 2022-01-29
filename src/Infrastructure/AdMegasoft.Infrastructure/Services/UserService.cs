@@ -1,8 +1,8 @@
 ﻿using AdMegasoft.Application.Configurations;
 using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
+using AdMegasoft.Application.Mappings;
 using AdMegasoft.Application.Models;
-using AdMegasoft.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,28 +14,29 @@ namespace AdMegasoft.Infrastructure.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly JWTSettings _jwtsettings;
 
-        public UserService(IUserRepository userRepository, IOptions<JWTSettings> jwtsettings)
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IOptions<JWTSettings> jwtsettings)
         {
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
             _jwtsettings = jwtsettings.Value;
         }
 
-        public async Task<UserWithToken> LoginAsync(string name, string password)
+        public async Task<UserModel?> LoginAsync(string name, string password)
         {
             var userFound = await _userRepository
                 .GetActiveUserByPasswordNameAsync(name, password);
 
-            return new UserWithToken // Podria ser un mapping
-            {
-                Name = name,
-                Password = password,
-                AccessToken = userFound == null ? null : GenerateAccessToken(userFound.Id)
-            };
+            if (userFound == null) return null;// TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si existe el usuario primero y despues obtenerlo
+
+            var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
+
+            return userFound.ToModel(roles.ToModel(), GenerateAccessToken(userFound.Id));
         }
 
-        public async Task<User> GetUserFromAccessTokenAsync(string accessToken)
+        public async Task<UserModel?> GetUserFromAccessTokenAsync(string accessToken)
         {
             try
             {
@@ -60,15 +61,22 @@ namespace AdMegasoft.Infrastructure.Services
                 {
                     var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
 
-                    return await _userRepository.GetByIdAsync(Convert.ToInt32(userId)) ?? new User();
+                    var userFound = await _userRepository.GetByIdAsync(Convert.ToInt32(userId));
+
+                    if (userFound == null)
+                    {
+                        return null; // TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si el token es valido primero y despues obtenerlo
+                    }
+
+                    var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
+
+                    return userFound.ToModel(roles.ToModel(), accessToken);
                 }
             }
             catch (Exception)
-            {
-                return new User();
-            }
+            { }
 
-            return new User();
+            return null;
         }
 
         private string GenerateAccessToken(int userId)

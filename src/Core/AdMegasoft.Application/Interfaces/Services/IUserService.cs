@@ -5,7 +5,7 @@ namespace AdMegasoft.Application.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<UserWithToken> LoginAsync(string name, string password);
-        Task<User> GetUserFromAccessTokenAsync(string accessToken);
+        Task<UserModel?> LoginAsync(string name, string password);
+        Task<UserModel?> GetUserFromAccessTokenAsync(string accessToken);
     }
 }

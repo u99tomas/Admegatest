@@ -7,16 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Groups\List\" />
-    <Folder Include="Pages\Admin\Roles\List\" />
-    <Folder Include="Pages\Admin\Users\List\" />
-    <Folder Include="Pages\Customer\" />
-    <Folder Include="Pages\Employee\" />
-    <Folder Include="wwwroot\Images\Avatars\" />
-    <Folder Include="wwwroot\Images\Logos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MudBlazor" Version="6.0.5" />
   </ItemGroup>
 

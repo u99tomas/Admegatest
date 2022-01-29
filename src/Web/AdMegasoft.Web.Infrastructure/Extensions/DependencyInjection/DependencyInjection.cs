@@ -1,5 +1,4 @@
-﻿using AdMegasoft.Web.Infrastructure.Authentication;
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +14,7 @@ namespace AdMegasoft.Web.Infrastructure.Extensions.DependencyInjection
 
         public static IServiceCollection AddAdMegasoftWebInfrastructure(this IServiceCollection services)
         {
-            services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
+            //services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
             return services;
         }
     }
