@@ -22,7 +22,7 @@ namespace AdMegasoft.Web.Infrastructure.Authentication
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await _localStorageService.GetItemAsync<string>(StorageConstants.LocalStorage.Token);
+            string token = await _localStorageService.GetItemAsync<string>(StorageConstants.LocalStorage.AccessToken);
 
             if (string.IsNullOrEmpty(token))
             {
