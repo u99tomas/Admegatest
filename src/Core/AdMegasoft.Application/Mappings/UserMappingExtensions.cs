@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Application.Models;
+﻿using AdMegasoft.Application.Features.Users.Queries.GetAllPaged;
+using AdMegasoft.Application.Models;
 using AdMegasoft.Domain.Entities;
 
 namespace AdMegasoft.Application.Mappings
@@ -15,6 +16,20 @@ namespace AdMegasoft.Application.Mappings
                 AccessToken = accessToken,
                 Roles = roles
             };
+        }
+
+        public static GetAllPagedUsersResponse ToGetAllPagedUsersResponse(this User user)
+        {
+            return new GetAllPagedUsersResponse
+            {
+                Name = user.Name,
+                Password = user.Password,
+            };
+        }
+
+        public static List<GetAllPagedUsersResponse> ToGetAllPagedUsersResponse(this List<User> users)
+        {
+            return users.Select(u => u.ToGetAllPagedUsersResponse()).ToList();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AdMegasoft.Application.Features.Users.Queries.GetAllPaged;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AdMegasoft.Application.Extensions.DependencyInjection
 {
@@ -6,6 +8,7 @@ namespace AdMegasoft.Application.Extensions.DependencyInjection
     {
         public static void AddAdMegasoftApplication(this IServiceCollection services)
         {
+            services.AddMediatR(typeof(GetAllPagedUsersQuery));
         }
     }
 }

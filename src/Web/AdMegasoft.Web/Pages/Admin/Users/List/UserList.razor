@@ -1,0 +1,22 @@
+﻿@page "/admin/users/list"
+@using AdMegasoft.Application.Features.Users.Queries.GetAllPaged
+@inject IMediator _mediator
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Usuarios</MudText>
+
+@code
+{
+    private bool _loading;
+    private List<GetAllPagedUsersResponse> _users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _loading = true;
+
+        _users = await _mediator.Send(new GetAllPagedUsersQuery { PageNumber = 0, PageSize = 100 });
+
+        _loading = false;
+    }
+
+
+}
