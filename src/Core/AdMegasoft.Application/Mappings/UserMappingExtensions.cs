@@ -18,18 +18,18 @@ namespace AdMegasoft.Application.Mappings
             };
         }
 
-        public static GetAllPagedUsersResponse ToGetAllPagedUsersResponse(this User user)
+        public static GetAllUsersResponse ToGetAllPagedUsersResponse(this User user)
         {
-            return new GetAllPagedUsersResponse
+            return new GetAllUsersResponse
             {
                 Name = user.Name,
                 Password = user.Password,
             };
         }
 
-        public static List<GetAllPagedUsersResponse> ToGetAllPagedUsersResponse(this List<User> users)
+        public static IEnumerable<GetAllUsersResponse> ToGetAllPagedUsersResponse(this IEnumerable<User> users)
         {
-            return users.Select(u => u.ToGetAllPagedUsersResponse()).ToList();
+            return users.Select(u => u.ToGetAllPagedUsersResponse());
         }
     }
 }

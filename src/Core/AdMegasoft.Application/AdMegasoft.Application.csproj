@@ -14,11 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Groups\Queries\GetAllPaged\" />
-    <Folder Include="Features\Roles\Queries\GetAllPaged\" />
+    <Folder Include="Features\Groups\Queries\GetAll\" />
+    <Folder Include="Features\Roles\Queries\GetAll\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj" />
     <ProjectReference Include="..\AdMegasoft.Domain\AdMegasoft.Domain.csproj" />
   </ItemGroup>
 
