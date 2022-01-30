@@ -1,22 +1,39 @@
-﻿@page "/"
+﻿@layout LoginLayout
+@page "/"
 @page "/authentication/login"
-
+@using FluentValidation
 @using AdMegasoft.Web.Pages.Authentication.Login.Components
 @using AdMegasoft.Web.Shared.Layouts
-@layout LoginLayout
 
 <RedirectToDashboard></RedirectToDashboard>
-
 <MudText Typo="Typo.h6" GutterBottom="true">Iniciar sesión</MudText>
 
-<MudTextField @bind-Value="@_user" Label="Usuario" Variant="Variant.Outlined" Class="my-6"></MudTextField>
+<MudForm Model="@_model" @ref="@_form" IsValidChanged="IsValidChanged">
 
-<PasswordField @bind-Password="@_password"></PasswordField>
+    <MudTextField @bind-Value="@_model.Name"
+                  Validation="@(_validator.ValidateValue)"
+                  For="@(() => _model.Name)"
+                  Immediate="true"
+                  Label="Usuario"
+                  Variant="Variant.Outlined"
+                  Class="my-6" />
+
+    <MudTextField @bind-Value="@_model.Password"
+                  Validation="@(_validator.ValidateValue)"
+                  For="@(() => _model.Password)"
+                  Immediate="true"
+                  Label="Contraseña"
+                  Variant="Variant.Outlined"
+                  Adornment="Adornment.End"
+                  AdornmentIcon="@_passwordInputIcon"
+                  OnAdornmentClick="TogglePasswordVisibility"
+                  InputType="@_passwordInput" />
+</MudForm>
 
 <MudButton Variant="Variant.Filled" Class="mt-4" Color="Color.Primary"
-           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync>Iniciar sesión</MudButton>
+           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync Disabled="@(_form == null || !_form.IsValid)">Iniciar sesión</MudButton>
 
-@if (_error)
+@if (_userEnteredIsIncorrect)
 {
-    <MudAlert Severity="Severity.Info" Class="mt-8 mud-width-full">El usuario ingresado es incorrecto</MudAlert>
+    <MudAlert Severity="MudBlazor.Severity.Warning" Class="mt-8 mud-width-full">El usuario ingresado es incorrecto</MudAlert>
 }

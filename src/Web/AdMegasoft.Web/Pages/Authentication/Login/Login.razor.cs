@@ -1,7 +1,10 @@
 ﻿using AdMegasoft.Application.Interfaces.Services;
+using AdMegasoft.Application.Models;
+using AdMegasoft.Application.Validators;
 using AdMegasoft.Web.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using MudBlazor;
 
 namespace AdMegasoft.Web.Pages.Authentication.Login
 {
@@ -16,17 +19,23 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         private IUserService _userService { get; set; }
         #endregion
 
-        private string _user { get; set; } = "";
-        private string _password { get; set; } = "";
-        private bool _error = false;
+        private UnauthorizedUserModel _model = new UnauthorizedUserModel();
+        private UnauthorizedUserModelValidator _validator = new UnauthorizedUserModelValidator();
+        private MudForm _form;
+
+        private bool _userEnteredIsIncorrect;
+
+        private bool _passwordVisibility;
+        private InputType _passwordInput = InputType.Password;
+        private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
 
         private async Task LoginAsync()
         {
-            var userModel = await _userService.LoginAsync(_user, _password);
+            var userModel = await _userService.LoginAsync(_model);
 
             if (userModel == null)
             {
-                _error = true;
+                _userEnteredIsIncorrect = true;
             }
             else
             {
@@ -34,6 +43,27 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
                 await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticated(userModel);
                 _navigationManager.NavigateTo("/dashboard");
             }
+        }
+
+        private void TogglePasswordVisibility()
+        {
+            if (_passwordVisibility)
+            {
+                _passwordVisibility = false;
+                _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+                _passwordInput = InputType.Password;
+            }
+            else
+            {
+                _passwordVisibility = true;
+                _passwordInputIcon = Icons.Material.Filled.Visibility;
+                _passwordInput = InputType.Text;
+            }
+        }
+
+        private void IsValidChanged()
+        {
+            StateHasChanged();
         }
     }
 }

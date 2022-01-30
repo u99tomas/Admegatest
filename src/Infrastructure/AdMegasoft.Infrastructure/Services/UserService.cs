@@ -25,11 +25,11 @@ namespace AdMegasoft.Infrastructure.Services
             _jwtsettings = jwtsettings.Value;
         }
 
-        public async Task<UserModel?> LoginAsync(string name, string password)
+        public async Task<UserModel?> LoginAsync(UnauthorizedUserModel unauthorizedUserMode)
         {
             
             var userFound = await _userRepository
-                .GetActiveUserByPasswordNameAsync(name, password.ToMD5());
+                .GetActiveUserByPasswordNameAsync(unauthorizedUserMode.Name, unauthorizedUserMode.Password.ToMD5());
 
             if (userFound == null) return null;// TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si existe el usuario primero y despues obtenerlo
 
