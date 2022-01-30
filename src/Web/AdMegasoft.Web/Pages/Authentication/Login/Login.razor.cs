@@ -44,7 +44,6 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
             }
 
             ToggleLoading();
-            await Task.Delay(1000);
             var userModel = await _userService.LoginAsync(_model);
 
             if (userModel == null)
