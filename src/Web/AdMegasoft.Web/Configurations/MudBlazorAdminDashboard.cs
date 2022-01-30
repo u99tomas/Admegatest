@@ -1,6 +1,6 @@
 ﻿using MudBlazor;
 
-namespace AdMegasoft.Web.Models
+namespace AdMegasoft.Web.Configurations
 {
     public class MudBlazorAdminDashboard : MudTheme
     {

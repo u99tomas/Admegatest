@@ -8,11 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MudBlazor" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AdMegasoft.Application\AdMegasoft.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\AdMegasoft.Infrastructure\AdMegasoft.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj" />
   </ItemGroup>
 

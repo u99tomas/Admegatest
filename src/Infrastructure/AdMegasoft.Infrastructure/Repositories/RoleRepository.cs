@@ -1,6 +1,7 @@
 ﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Domain.Entities;
 using AdMegasoft.Infrastructure.Persistence.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdMegasoft.Infrastructure.Repositories
 {
@@ -8,9 +9,14 @@ namespace AdMegasoft.Infrastructure.Repositories
     {
         public RoleRepository(AdMegasoftDbContext context) : base(context, context.Roles) { }
 
-        public Task<List<Role>> GetRolesByUserIdAsync(int userId)
+        public async Task<List<Role>> GetRolesByUserIdAsync(int userId)
         {
-            throw new NotImplementedException();
+            var sql = @"SELECT R.* FROM UserGroups UG
+                        JOIN GroupRoles GR ON UG.Id = GR.GroupId
+                        JOIN Roles R ON R.Id = GR.RoleId
+                        WHERE UG.Id = {0}";
+
+            return await DbSet.FromSqlRaw(sql, userId).ToListAsync();
         }
     }
 }
