@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AdMegasoft.Application.Validators
 {
-    public class UnauthorizedUserModelValidator : AbstractValidator<UnauthorizedUserModel>
+    public class UnauthorizedUserModelValidator : GenericValidator<UnauthorizedUserModel>
     {
         public UnauthorizedUserModelValidator()
         {

@@ -27,7 +27,7 @@ namespace AdMegasoft.Infrastructure.Services
 
         public async Task<UserModel?> LoginAsync(UnauthorizedUserModel unauthorizedUserMode)
         {
-            
+
             var userFound = await _userRepository
                 .GetActiveUserByPasswordNameAsync(unauthorizedUserMode.Name, unauthorizedUserMode.Password.ToMD5());
 
