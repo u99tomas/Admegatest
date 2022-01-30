@@ -3,6 +3,7 @@ using AdMegasoft.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdMegasoft.Infrastructure.persistence.Migrations
 {
     [DbContext(typeof(AdMegasoftDbContext))]
-    partial class AdMegasoftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220130064850_UserConfig")]
+    partial class UserConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
