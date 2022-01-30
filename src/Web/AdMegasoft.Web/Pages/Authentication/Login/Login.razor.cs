@@ -19,22 +19,37 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         private IUserService _userService { get; set; }
         #endregion
 
-        private UnauthorizedUserModel _model = new();
-        private UnauthorizedUserModelValidator _validator = new();
-        private MudForm _form;
-
-        private bool _userEnteredIsIncorrect;
-
+        #region (Properties) Password field behavior
         private bool _passwordVisibility;
         private InputType _passwordInput = InputType.Password;
         private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+        #endregion
+
+        #region (Properties) Login button behavior
+        private bool _loading = false;
+        #endregion
+
+        private UnauthorizedUserModel _model = new();
+        private UnauthorizedUserModelValidator _validator = new();
+        private MudForm _form;
+        private bool _userEnteredIsIncorrect;
 
         private async Task LoginAsync()
         {
+            await _form.Validate();
+
+            if (!_form.IsValid)
+            {
+                return;
+            }
+
+            ToggleLoading();
+            await Task.Delay(1000);
             var userModel = await _userService.LoginAsync(_model);
 
             if (userModel == null)
             {
+                ToggleLoading();
                 _userEnteredIsIncorrect = true;
             }
             else
@@ -45,6 +60,7 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
             }
         }
 
+        #region (Methods) Password field behavior
         private void TogglePasswordVisibility()
         {
             if (_passwordVisibility)
@@ -60,10 +76,14 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
                 _passwordInput = InputType.Text;
             }
         }
+        #endregion
 
-        private void IsValidChanged()
+        #region (Methods) Login button behavior
+        private void ToggleLoading()
         {
-            StateHasChanged();
+            _loading = !_loading;
+
         }
+        #endregion
     }
 }

@@ -1,14 +1,14 @@
 ﻿@layout LoginLayout
 @page "/"
 @page "/authentication/login"
+@using AdMegasoft.Web.Shared.Components.Navigation
 @using FluentValidation
-@using AdMegasoft.Web.Pages.Authentication.Login.Components
 @using AdMegasoft.Web.Shared.Layouts
 
 <RedirectToDashboard></RedirectToDashboard>
 <MudText Typo="Typo.h6" GutterBottom="true">Iniciar sesión</MudText>
 
-<MudForm Model="@_model" @ref="@_form" IsValidChanged="IsValidChanged">
+<MudForm Model="@_model" @ref="@_form">
 
     <MudTextField @bind-Value="@_model.Name"
                   Validation="@(_validator.ValidateValue)"
@@ -31,7 +31,17 @@
 </MudForm>
 
 <MudButton Variant="Variant.Filled" Class="mt-4" Color="Color.Primary"
-           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync Disabled="@(_form == null || !_form.IsValid)">Iniciar sesión</MudButton>
+           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync Disabled="_loading">
+    @if (_loading)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+        <MudText Class="ms-2">Iniciando sesion</MudText>
+    }
+    else
+    {
+        <MudText>Iniciar sesión</MudText>
+    }
+</MudButton>
 
 @if (_userEnteredIsIncorrect)
 {
