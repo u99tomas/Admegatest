@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="design/images/logos/megasoft-260x190.png" />
+  <img src="design/megasoft-260x190.png" />
 </p>
 
 # Instalando la aplicación

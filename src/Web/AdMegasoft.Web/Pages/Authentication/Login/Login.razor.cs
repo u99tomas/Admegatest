@@ -24,14 +24,16 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         {
             var userModel = await _userService.LoginAsync(_user, _password);
 
-            if (userModel != null)
+            if (userModel == null)
+            {
+                _error = true;
+            }
+            else
             {
                 var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider)_authenticationStateProvider;
                 await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticated(userModel);
                 _navigationManager.NavigateTo("/dashboard");
             }
-
-            _error = true;
         }
     }
 }

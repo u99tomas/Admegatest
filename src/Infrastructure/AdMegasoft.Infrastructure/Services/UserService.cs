@@ -1,4 +1,5 @@
 ﻿using AdMegasoft.Application.Configurations;
+using AdMegasoft.Application.Extensions.System;
 using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Mappings;
@@ -26,8 +27,9 @@ namespace AdMegasoft.Infrastructure.Services
 
         public async Task<UserModel?> LoginAsync(string name, string password)
         {
+            
             var userFound = await _userRepository
-                .GetActiveUserByPasswordNameAsync(name, password);
+                .GetActiveUserByPasswordNameAsync(name, password.ToMD5());
 
             if (userFound == null) return null;// TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si existe el usuario primero y despues obtenerlo
 
