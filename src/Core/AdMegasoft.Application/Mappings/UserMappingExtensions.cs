@@ -22,6 +22,7 @@ namespace AdMegasoft.Application.Mappings
         {
             return new GetAllUsersResponse
             {
+                Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
             };
