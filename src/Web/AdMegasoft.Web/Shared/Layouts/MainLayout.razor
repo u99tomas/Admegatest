@@ -1,5 +1,6 @@
 ﻿@using AdMegasoft.Web.Configurations
 @using AdMegasoft.Web.Shared.Components.Cards
+@using AdMegasoft.Web.Shared.Components.Menus
 @using AdMegasoft.Web.Shared.Components.Navigation
 @inherits LayoutComponentBase
 
@@ -27,17 +28,7 @@
                     <MudText Typo="Typo.subtitle2">AdMegasoft</MudText>
                 </MudHidden>
                 <MudSpacer />
-                <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-                    <ActivatorContent>
-                        <MudAvatar Color="Color.Default">TA</MudAvatar>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <PersonCard Class="mt-n2" />
-                        <MudDivider Class="mb-2" />
-                        <MudListItem Text="Mi cuenta" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
-                        <MudListItem Text="Cerrar Sesión" Icon="@Icons.Material.Outlined.Login" Href="/pages/authentication/login" />
-                    </ChildContent>
-                </MudMenu>
+                <AccountMenu></AccountMenu>
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
                 <NavMenu />
@@ -62,7 +53,6 @@
     </NotAuthorized>
 
 </AuthorizeView>
-
 
 @code {
     private MudBlazorAdminDashboard _theme = new();

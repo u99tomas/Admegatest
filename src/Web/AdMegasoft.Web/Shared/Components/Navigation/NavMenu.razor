@@ -1,6 +1,6 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Cards
 
-<PersonCard Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text);"/>
+<PersonCard Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text);" />
 <MudDivider Class="mb-4" />
 <MudNavMenu>
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
@@ -8,9 +8,13 @@
     <MudNavLink Href="/customer/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
 
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
-    <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
-        <MudNavLink Href="/admin/users/list" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
-        <MudNavLink Href="/admin/roles/list" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
-        <MudNavLink Href="/admin/groups/list" Icon="@Icons.Outlined.GroupWork">Grupos</MudNavLink>
-    </MudNavGroup>
+
+    <AuthorizeView Roles="Administrador">
+        <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
+            <MudNavLink Href="/admin/users/list" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
+            <MudNavLink Href="/admin/roles/list" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
+            <MudNavLink Href="/admin/groups/list" Icon="@Icons.Outlined.GroupWork">Grupos</MudNavLink>
+        </MudNavGroup>
+    </AuthorizeView>
+
 </MudNavMenu>

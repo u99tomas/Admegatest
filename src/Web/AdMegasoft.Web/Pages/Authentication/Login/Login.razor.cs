@@ -19,8 +19,8 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         private IUserService _userService { get; set; }
         #endregion
 
-        private UnauthorizedUserModel _model = new UnauthorizedUserModel();
-        private UnauthorizedUserModelValidator _validator = new UnauthorizedUserModelValidator();
+        private UnauthorizedUserModel _model = new();
+        private UnauthorizedUserModelValidator _validator = new();
         private MudForm _form;
 
         private bool _userEnteredIsIncorrect;
@@ -40,7 +40,7 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
             else
             {
                 var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider)_authenticationStateProvider;
-                await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticated(userModel);
+                await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticatedAsync(userModel);
                 _navigationManager.NavigateTo("/dashboard");
             }
         }

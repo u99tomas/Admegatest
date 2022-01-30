@@ -31,7 +31,7 @@ namespace AdMegasoft.Web.Authentication
 
                 if (userModel != null) // TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si el token es valido primero y despues obtenerlo
                 {
-                    identity = GetClaimsIdentityAsync(userModel);
+                    identity = GetClaimsIdentity(userModel);
                 }
             }
 
@@ -40,18 +40,18 @@ namespace AdMegasoft.Web.Authentication
             return await Task.FromResult(new AuthenticationState(claimsPrincipal));
         }
 
-        public async Task MarkUserAsAuthenticated(UserModel userModel)
+        public async Task MarkUserAsAuthenticatedAsync(UserModel userModel)
         {
             await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.AccessToken, userModel.AccessToken);
 
-            var identity = GetClaimsIdentityAsync(userModel);
+            var identity = GetClaimsIdentity(userModel);
 
             var claimsPrincipal = new ClaimsPrincipal(identity);
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
-        public async Task MarkUserAsLoggedOut()
+        public async Task MarkUserAsLoggedOutAsync()
         {
             await _localStorageService.RemoveItemAsync(StorageConstants.LocalStorage.AccessToken);
 
@@ -62,7 +62,7 @@ namespace AdMegasoft.Web.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
 
-        private ClaimsIdentity GetClaimsIdentityAsync(UserModel userModel)
+        private ClaimsIdentity GetClaimsIdentity(UserModel userModel)
         {
             var claimsIdentity = new ClaimsIdentity(new[]
             {

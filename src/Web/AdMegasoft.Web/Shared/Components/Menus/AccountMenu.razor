@@ -1,0 +1,26 @@
+﻿@using AdMegasoft.Web.Authentication
+@using AdMegasoft.Web.Shared.Components.Cards
+
+<MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+    <ActivatorContent>
+        <MudAvatar Color="Color.Default">TA</MudAvatar>
+    </ActivatorContent>
+    <ChildContent>
+        <PersonCard Class="mt-n2" />
+        <MudDivider Class="mb-2" />
+        <MudListItem Text="Mi cuenta" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
+        <MudListItem Text="Cerrar Sesión" Icon="@Icons.Material.Outlined.Login" OnClick="LogOut" />
+    </ChildContent>
+</MudMenu>
+
+
+@code {
+    [Inject]
+    private AuthenticationStateProvider _authenticationStateProvider { get; set; }
+
+    protected async Task LogOut()
+    {
+        var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider) _authenticationStateProvider;
+        await adMegasoftAuthenticationStateProvider.MarkUserAsLoggedOutAsync();
+    }
+}
