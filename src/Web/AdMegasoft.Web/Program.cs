@@ -1,6 +1,6 @@
 using AdMegasoft.Application.Configurations;
 using AdMegasoft.Application.Extensions.DependencyInjection;
-using AdMegasoft.Infrastructure.Extensions.DependencyInjection;
+using AdMegasoft.Infrastructure;
 using AdMegasoft.Web.Authentication;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;

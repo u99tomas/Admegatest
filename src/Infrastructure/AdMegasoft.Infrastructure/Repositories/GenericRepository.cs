@@ -1,6 +1,6 @@
 ﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Domain.Common;
-using AdMegasoft.Infrastructure.Persistence.Contexts;
+using AdMegasoft.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdMegasoft.Infrastructure.Repositories

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace AdMegasoft.Infrastructure.Persistence.Contexts
+namespace AdMegasoft.Infrastructure.Persistence
 {
     public class AdMegasoftDbContext : DbContext
     {

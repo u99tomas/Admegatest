@@ -1,14 +1,13 @@
 ﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Infrastructure.Persistence.Contexts;
+using AdMegasoft.Infrastructure.Persistence;
 using AdMegasoft.Infrastructure.Repositories;
 using AdMegasoft.Infrastructure.Services;
-using AdMegasoft.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
+namespace AdMegasoft.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -16,7 +15,7 @@ namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
         {
             services.AddDbContext<AdMegasoftDbContext>(
                 options => options.UseSqlServer(
-                    configuration.GetConnectionString(AppSettingsConstants.DatabaseName))
+                    configuration.GetConnectionString("AdMegasoftDb"))
             );
 
             return services;
