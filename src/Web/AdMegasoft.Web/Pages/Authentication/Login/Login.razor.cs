@@ -81,7 +81,7 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         private void ToggleLoading()
         {
             _loading = !_loading;
-
+            StateHasChanged();
         }
         #endregion
     }
