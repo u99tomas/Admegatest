@@ -62,7 +62,7 @@ namespace AdMegasoft.Infrastructure.Services
                 {
                     var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
 
-                    var userFound = await _userRepository.GetByIdAsync(Convert.ToInt32(userId));
+                    var userFound = await _userRepository.FindAsync(Convert.ToInt32(userId));
 
                     if (userFound == null)
                     {
