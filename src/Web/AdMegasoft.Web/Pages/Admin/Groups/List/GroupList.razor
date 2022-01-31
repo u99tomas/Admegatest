@@ -1,0 +1,30 @@
+﻿@page "/admin/groups/list"
+@using AdMegasoft.Application.Features.Groups.Queries.GetAll
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Grupos</MudText>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllGroupsResponse>>>(ServerReload))" T="GetAllGroupsResponse" Loading="@_loading"
+          Dense="true" Hover="true" Striped="true" @ref="table">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllGroupsResponse">Grupo</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllGroupsResponse">Descripción</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Name">@context.Description</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

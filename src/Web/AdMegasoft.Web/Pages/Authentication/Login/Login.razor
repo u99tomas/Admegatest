@@ -1,0 +1,49 @@
+﻿@layout LoginLayout
+@page "/"
+@page "/authentication/login"
+@using AdMegasoft.Web.Shared.Components.Navigation
+@using FluentValidation
+@using AdMegasoft.Web.Shared.Layouts
+
+<RedirectToDashboard></RedirectToDashboard>
+<MudText Typo="Typo.h6" GutterBottom="true">Iniciar sesión</MudText>
+
+<MudForm Model="@_model" @ref="@_form">
+
+    <MudTextField @bind-Value="@_model.Name"
+                  Validation="@(_validator.ValidateValue)"
+                  For="@(() => _model.Name)"
+                  Immediate="true"
+                  Label="Usuario"
+                  Variant="Variant.Outlined"
+                  Class="my-6" />
+
+    <MudTextField @bind-Value="@_model.Password"
+                  Validation="@(_validator.ValidateValue)"
+                  For="@(() => _model.Password)"
+                  Immediate="true"
+                  Label="Contraseña"
+                  Variant="Variant.Outlined"
+                  Adornment="Adornment.End"
+                  AdornmentIcon="@_passwordInputIcon"
+                  OnAdornmentClick="TogglePasswordVisibility"
+                  InputType="@_passwordInput" />
+</MudForm>
+
+<MudButton Variant="Variant.Filled" Class="mt-4" Color="Color.Primary"
+           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync Disabled="_loading">
+    @if (_loading)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+        <MudText Class="ms-2">Iniciando sesion</MudText>
+    }
+    else
+    {
+        <MudText>Iniciar sesión</MudText>
+    }
+</MudButton>
+
+@if (_userEnteredIsIncorrect)
+{
+    <MudAlert Severity="MudBlazor.Severity.Warning" Class="mt-8 mud-width-full">El usuario ingresado es incorrecto</MudAlert>
+}
