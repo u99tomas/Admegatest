@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Groups\Queries\GetAll\" />
-    <Folder Include="Features\Roles\Queries\GetAll\" />
   </ItemGroup>
 
   <ItemGroup>

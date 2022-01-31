@@ -1,0 +1,31 @@
+﻿@page "/admin/roles/list"
+@using AdMegasoft.Application.Features.Roles.Queries.GetAll
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Roles</MudText>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllRolesResponse>>>(ServerReload))" T="GetAllRolesResponse" Loading="@_loading"
+          Dense="true" Hover="true" Striped="true" Bordered="true" @ref="table">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Usuarios</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllRolesResponse">Rol</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllRolesResponse">Descripción</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Name">@context.Description</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

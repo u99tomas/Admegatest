@@ -8,7 +8,7 @@ namespace AdMegasoft.Application.Extensions.DependencyInjection
     {
         public static void AddAdMegasoftApplication(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetAllUsersQuery));
+            services.AddMediatR(typeof(GetAllUsersQuery)); // TODO: add with reflection
         }
     }
 }
