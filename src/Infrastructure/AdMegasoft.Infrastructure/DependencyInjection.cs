@@ -23,13 +23,15 @@ namespace AdMegasoft.Infrastructure
 
         public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services)
         {
-            // Services
+            #region Services
             services.AddScoped<IUserService, UserService>();
+            #endregion
 
-            // Repositories
+            #region Repositories
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
+            #endregion
 
             return services;
         }
