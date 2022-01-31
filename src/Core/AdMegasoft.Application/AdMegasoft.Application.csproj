@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Groups\Queries\GetAll\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj" />
     <ProjectReference Include="..\AdMegasoft.Domain\AdMegasoft.Domain.csproj" />
   </ItemGroup>

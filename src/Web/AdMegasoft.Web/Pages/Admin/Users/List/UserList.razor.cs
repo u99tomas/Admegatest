@@ -35,7 +35,7 @@ namespace AdMegasoft.Web.Pages.Admin.Users.List
             switch (state.SortLabel)
             {
                 case "Name":
-                    _users = _users.OrderByDirection(state.SortDirection, o => o.Name);
+                    _users = _users.OrderByDirection(state.SortDirection, u => u.Name);
                     break;
             }
             #endregion

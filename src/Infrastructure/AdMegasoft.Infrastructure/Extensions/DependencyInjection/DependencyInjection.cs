@@ -30,6 +30,7 @@ namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
             // Repositories
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
 
             return services;
         }

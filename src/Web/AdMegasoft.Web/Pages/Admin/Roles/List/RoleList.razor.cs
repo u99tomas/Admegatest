@@ -25,10 +25,9 @@ namespace AdMegasoft.Web.Pages.Admin.Roles.List
             #region filters
             if (!string.IsNullOrEmpty(_searchString))
             {
-                _roles = _roles.Where(u => u.Name.Contains(
+                _roles = _roles.Where(r => r.Name.Contains(
                     _searchString, StringComparison.OrdinalIgnoreCase) ||
-                    u.Description.Contains(_searchString, StringComparison.OrdinalIgnoreCase)
-                    );
+                    r.Description.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
             }
 
             var totalItems = _roles.Count();
@@ -38,11 +37,11 @@ namespace AdMegasoft.Web.Pages.Admin.Roles.List
             switch (state.SortLabel)
             {
                 case "Name":
-                    _roles = _roles.OrderByDirection(state.SortDirection, o => o.Name);
+                    _roles = _roles.OrderByDirection(state.SortDirection, r => r.Name);
                     break;
 
                 case "Description":
-                    _roles = _roles.OrderByDirection(state.SortDirection, o => o.Description);
+                    _roles = _roles.OrderByDirection(state.SortDirection, r => r.Description);
                     break;
             }
             #endregion
