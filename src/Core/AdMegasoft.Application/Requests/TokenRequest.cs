@@ -1,6 +1,6 @@
-﻿namespace AdMegasoft.Application.Models
+﻿namespace AdMegasoft.Application.Requests
 {
-    public class UnauthorizedUserModel
+    public class TokenRequest
     {
         public string Name { get; set; }
         public string Password { get; set; }

@@ -2,13 +2,13 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Application.Extensions.DependencyInjection
+namespace AdMegasoft.Application.Extensions
 {
     public static class DependencyInjection
     {
         public static void AddAdMegasoftApplication(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetAllUsersQuery)); // TODO: add with reflection
+            services.AddMediatR(typeof(GetAllUsersQuery));
         }
     }
 }

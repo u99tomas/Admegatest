@@ -1,36 +1,34 @@
 ﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Infrastructure.Persistence.Contexts;
+using AdMegasoft.Infrastructure.Persistence;
 using AdMegasoft.Infrastructure.Repositories;
 using AdMegasoft.Infrastructure.Services;
-using AdMegasoft.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Infrastructure.Extensions.DependencyInjection
+namespace AdMegasoft.Infrastructure.Extensions
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddAdMegasoftPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            #region Persistence
             services.AddDbContext<AdMegasoftDbContext>(
                 options => options.UseSqlServer(
-                    configuration.GetConnectionString(AppSettingsConstants.DatabaseName))
+                    configuration.GetConnectionString("AdMegasoftDb"))
             );
+            #endregion
 
-            return services;
-        }
-
-        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services)
-        {
-            // Services
+            #region Services
             services.AddScoped<IUserService, UserService>();
+            #endregion
 
-            // Repositories
+            #region Repositories
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
+            #endregion
 
             return services;
         }

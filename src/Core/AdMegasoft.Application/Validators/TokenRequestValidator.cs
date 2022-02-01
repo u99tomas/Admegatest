@@ -1,11 +1,11 @@
-﻿using AdMegasoft.Application.Models;
+﻿using AdMegasoft.Application.Requests;
 using FluentValidation;
 
 namespace AdMegasoft.Application.Validators
 {
-    public class UnauthorizedUserModelValidator : GenericValidator<UnauthorizedUserModel>
+    public class TokenRequestValidator : GenericValidator<TokenRequest>
     {
-        public UnauthorizedUserModelValidator()
+        public TokenRequestValidator()
         {
             RuleFor(u => u.Name)
                 .NotEmpty()

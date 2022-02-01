@@ -1,6 +1,6 @@
 ﻿using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Domain.Common;
-using AdMegasoft.Infrastructure.Persistence.Contexts;
+using AdMegasoft.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdMegasoft.Infrastructure.Repositories
@@ -46,8 +46,8 @@ namespace AdMegasoft.Infrastructure.Repositories
         public async Task<List<T>> ToPaginatedListAsync(int pageNumber, int pageSize) =>
             await AsQueryable().Skip(pageNumber * pageSize).Take(pageSize).ToListAsync();
 
-        public async Task<T?> GetByIdAsync(int id) => await DbSet.FindAsync(id);
+        public async Task<T?> FindAsync(int id) => await DbSet.FindAsync(id);
 
-        public IQueryable<T> AsQueryable() => DbSet.AsQueryable();
+        public IQueryable<T> AsQueryable() => DbSet.AsQueryable(); // TODO: No puede ser publico!!!
     }
 }

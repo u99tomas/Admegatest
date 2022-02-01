@@ -1,9 +1,10 @@
 ﻿using AdMegasoft.Application.Configurations;
-using AdMegasoft.Application.Extensions.System;
+using AdMegasoft.Application.Extensions;
 using AdMegasoft.Application.Interfaces.Repositories;
 using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Mappings;
-using AdMegasoft.Application.Models;
+using AdMegasoft.Application.Requests;
+using AdMegasoft.Application.Responses;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -25,19 +26,19 @@ namespace AdMegasoft.Infrastructure.Services
             _jwtsettings = jwtsettings.Value;
         }
 
-        public async Task<UserModel?> LoginAsync(UnauthorizedUserModel unauthorizedUserMode)
+        public async Task<UserResponse?> LoginAsync(TokenRequest tokenRequest)
         {
             var userFound = await _userRepository
-                .GetActiveUserByPasswordNameAsync(unauthorizedUserMode.Name, unauthorizedUserMode.Password.ToMD5());
+                .GetActiveUserByPasswordNameAsync(tokenRequest.Name, tokenRequest.Password.ToMD5());
 
             if (userFound == null) return null;// TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si existe el usuario primero y despues obtenerlo
 
             var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
 
-            return userFound.ToModel(roles.ToModel(), GenerateAccessToken(userFound.Id));
+            return userFound.ToUserResponse(roles.ToRoleResponse(), GenerateAccessToken(userFound.Id));
         }
 
-        public async Task<UserModel?> GetUserFromAccessTokenAsync(string accessToken)
+        public async Task<UserResponse?> GetUserFromAccessTokenAsync(string accessToken)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace AdMegasoft.Infrastructure.Services
                 {
                     var userId = principle.FindFirst(ClaimTypes.Name)?.Value;
 
-                    var userFound = await _userRepository.GetByIdAsync(Convert.ToInt32(userId));
+                    var userFound = await _userRepository.FindAsync(Convert.ToInt32(userId));
 
                     if (userFound == null)
                     {
@@ -71,7 +72,7 @@ namespace AdMegasoft.Infrastructure.Services
 
                     var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
 
-                    return userFound.ToModel(roles.ToModel(), accessToken);
+                    return userFound.ToUserResponse(roles.ToRoleResponse(), accessToken);
                 }
             }
             catch (Exception)

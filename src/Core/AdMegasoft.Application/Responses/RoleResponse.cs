@@ -1,6 +1,6 @@
-﻿namespace AdMegasoft.Application.Models
+﻿namespace AdMegasoft.Application.Responses
 {
-    public class RoleModel
+    public class RoleResponse
     {
         public string Name { get; set; }
         public string Description { get; set; }

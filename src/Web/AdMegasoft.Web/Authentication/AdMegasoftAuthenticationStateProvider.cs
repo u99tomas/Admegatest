@@ -1,5 +1,5 @@
 ﻿using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Models;
+using AdMegasoft.Application.Responses;
 using AdMegasoft.Shared.Constants.Storage;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -40,11 +40,11 @@ namespace AdMegasoft.Web.Authentication
             return await Task.FromResult(new AuthenticationState(claimsPrincipal));
         }
 
-        public async Task MarkUserAsAuthenticatedAsync(UserModel userModel)
+        public async Task MarkUserAsAuthenticatedAsync(UserResponse userResponse)
         {
-            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.AccessToken, userModel.AccessToken);
+            await _localStorageService.SetItemAsync(StorageConstants.LocalStorage.AccessToken, userResponse.AccessToken);
 
-            var identity = GetClaimsIdentity(userModel);
+            var identity = GetClaimsIdentity(userResponse);
 
             var claimsPrincipal = new ClaimsPrincipal(identity);
 
@@ -62,14 +62,14 @@ namespace AdMegasoft.Web.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
 
-        private ClaimsIdentity GetClaimsIdentity(UserModel userModel)
+        private ClaimsIdentity GetClaimsIdentity(UserResponse userResponse)
         {
             var claimsIdentity = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, userModel.Name),
+                new Claim(ClaimTypes.Name, userResponse.Name),
             }, "jwt");
 
-            var claimsRoles = userModel.Roles.Select(r => new Claim(ClaimTypes.Role, r.Name));
+            var claimsRoles = userResponse.Roles.Select(r => new Claim(ClaimTypes.Role, r.Name));
             claimsIdentity.AddClaims(claimsRoles);
 
             return claimsIdentity;

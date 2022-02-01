@@ -10,7 +10,7 @@ namespace AdMegasoft.Application.Interfaces.Repositories
         Task DeleteAsync(T entity);
         Task<List<T>> GetAllAsync();
         Task<List<T>> ToPaginatedListAsync(int pageNumber, int pageSize);
-        Task<T?> GetByIdAsync(int id);
+        Task<T?> FindAsync(int id);
         IQueryable<T> AsQueryable();
     }
 }

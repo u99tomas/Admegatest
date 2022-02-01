@@ -1,10 +1,11 @@
-﻿using AdMegasoft.Application.Models;
+﻿using AdMegasoft.Application.Requests;
+using AdMegasoft.Application.Responses;
 
 namespace AdMegasoft.Application.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<UserModel?> LoginAsync(UnauthorizedUserModel unauthorizedUserModel);
-        Task<UserModel?> GetUserFromAccessTokenAsync(string accessToken);
+        Task<UserResponse?> LoginAsync(TokenRequest tokenRequest);
+        Task<UserResponse?> GetUserFromAccessTokenAsync(string accessToken);
     }
 }
