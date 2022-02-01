@@ -20,7 +20,7 @@ namespace AdMegasoft.Application.Features.Users.Queries.GetAllPaged
         public async Task<IEnumerable<GetAllUsersResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             var users = await _userRepository.GetAllAsync();
-            return users.ToGetAllPagedUsersResponse();
+            return users.ToGetAllUsersResponse();
         }
     }
 }

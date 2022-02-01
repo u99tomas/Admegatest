@@ -1,11 +1,11 @@
-﻿namespace AdMegasoft.Application.Models
+﻿namespace AdMegasoft.Application.Responses
 {
-    public class UserModel
+    public class UserResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public string AccessToken { get; set; }
-        public IEnumerable<RoleModel> Roles { get; set; }
+        public IEnumerable<RoleResponse> Roles { get; set; }
     }
 }

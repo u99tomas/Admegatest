@@ -1,6 +1,6 @@
 using AdMegasoft.Application.Configurations;
-using AdMegasoft.Application.Extensions.DependencyInjection;
-using AdMegasoft.Infrastructure;
+using AdMegasoft.Application.Extensions;
+using AdMegasoft.Infrastructure.Extensions;
 using AdMegasoft.Web.Authentication;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -32,8 +32,7 @@ builder.Services.Configure<JWTSettings>(jwtSection);
 #endregion
 
 #region Admegasoft.Infrastructure
-builder.Services.AddAdMegasoftPersistence(builder.Configuration);
-builder.Services.AddAdMegasoftInfrastructure();
+builder.Services.AddAdMegasoftInfrastructure(builder.Configuration);
 #endregion
 
 var app = builder.Build();

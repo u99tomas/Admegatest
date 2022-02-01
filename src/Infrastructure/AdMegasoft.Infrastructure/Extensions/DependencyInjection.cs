@@ -7,22 +7,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdMegasoft.Infrastructure
+namespace AdMegasoft.Infrastructure.Extensions
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddAdMegasoftPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            #region Persistence
             services.AddDbContext<AdMegasoftDbContext>(
                 options => options.UseSqlServer(
                     configuration.GetConnectionString("AdMegasoftDb"))
             );
+            #endregion
 
-            return services;
-        }
-
-        public static IServiceCollection AddAdMegasoftInfrastructure(this IServiceCollection services)
-        {
             #region Services
             services.AddScoped<IUserService, UserService>();
             #endregion

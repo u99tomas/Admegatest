@@ -1,5 +1,5 @@
 ﻿using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Models;
+using AdMegasoft.Application.Requests;
 using AdMegasoft.Application.Validators;
 using AdMegasoft.Web.Authentication;
 using Microsoft.AspNetCore.Components;
@@ -29,8 +29,8 @@ namespace AdMegasoft.Web.Pages.Authentication.Login
         private bool _loading = false;
         #endregion
 
-        private UnauthorizedUserModel _model = new();
-        private UnauthorizedUserModelValidator _validator = new();
+        private TokenRequest _model = new();
+        private TokenRequestValidator _validator = new();
         private MudForm _form;
         private bool _userEnteredIsIncorrect;
 
