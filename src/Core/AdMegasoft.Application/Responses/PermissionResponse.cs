@@ -1,6 +1,6 @@
 ﻿namespace AdMegasoft.Application.Responses
 {
-    public class RoleResponse
+    public class PermissionResponse
     {
         public string Name { get; set; }
         public string Description { get; set; }

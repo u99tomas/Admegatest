@@ -2,7 +2,7 @@
 
 namespace AdMegasoft.Domain.Entities
 {
-    public class Group : IEntity
+    public class Permission : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -6,7 +6,7 @@ namespace AdMegasoft.Application.Mappings
 {
     public static class UserMappingExtensions
     {
-        public static UserResponse ToUserResponse(this User user, IEnumerable<RoleResponse> roles, string accessToken)
+        public static UserResponse ToUserResponse(this User user, IEnumerable<PermissionResponse> permissions, string accessToken)
         {
             return new UserResponse
             {
@@ -14,7 +14,7 @@ namespace AdMegasoft.Application.Mappings
                 Name = user.Name,
                 Password = user.Password,
                 AccessToken = accessToken,
-                Roles = roles
+                Permissions = permissions
             };
         }
 

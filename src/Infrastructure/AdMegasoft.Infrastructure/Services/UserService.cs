@@ -16,13 +16,13 @@ namespace AdMegasoft.Infrastructure.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IRoleRepository _roleRepository;
+        private readonly IPermissionRepository _permissionRepository;
         private readonly JWTSettings _jwtsettings;
 
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IOptions<JWTSettings> jwtsettings)
+        public UserService(IUserRepository userRepository, IPermissionRepository permissionRepository, IOptions<JWTSettings> jwtsettings)
         {
             _userRepository = userRepository;
-            _roleRepository = roleRepository;
+            _permissionRepository = permissionRepository;
             _jwtsettings = jwtsettings.Value;
         }
 
@@ -33,9 +33,9 @@ namespace AdMegasoft.Infrastructure.Services
 
             if (userFound == null) return null;// TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si existe el usuario primero y despues obtenerlo
 
-            var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
+            var permissions = await _permissionRepository.GetPermissionsByUserIdAsync(userFound.Id);
 
-            return userFound.ToUserResponse(roles.ToRoleResponse(), GenerateAccessToken(userFound.Id));
+            return userFound.ToUserResponse(permissions.ToPermissionResponse(), GenerateAccessToken(userFound.Id));
         }
 
         public async Task<UserResponse?> GetUserFromAccessTokenAsync(string accessToken)
@@ -70,9 +70,9 @@ namespace AdMegasoft.Infrastructure.Services
                         return null; // TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si el token es valido primero y despues obtenerlo
                     }
 
-                    var roles = await _roleRepository.GetRolesByUserIdAsync(userFound.Id);
+                    var permissions = await _permissionRepository.GetPermissionsByUserIdAsync(userFound.Id);
 
-                    return userFound.ToUserResponse(roles.ToRoleResponse(), accessToken);
+                    return userFound.ToUserResponse(permissions.ToPermissionResponse(), accessToken);
                 }
             }
             catch (Exception)

@@ -2,15 +2,17 @@
 using AdMegasoft.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace AdMegasoft.Infrastructure.persistence.Migrations
 {
     [DbContext(typeof(AdMegasoftDbContext))]
-    [Migration("20220129220602_Initial")]
-    partial class Initial
+    [Migration("20220201034354_UserRoles")]
+    partial class UserRoles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +23,7 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AdMegasoft.Domain.Entities.Group", b =>
+            modelBuilder.Entity("AdMegasoft.Domain.Entities.Permission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,30 +41,7 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("AdMegasoft.Domain.Entities.GroupRoles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("GroupRoles");
+                    b.ToTable("Permission");
                 });
 
             modelBuilder.Entity("AdMegasoft.Domain.Entities.Role", b =>
@@ -75,15 +54,43 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("AdMegasoft.Domain.Entities.RolePermissions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermissions");
                 });
 
             modelBuilder.Entity("AdMegasoft.Domain.Entities.User", b =>
@@ -99,7 +106,8 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -107,10 +115,13 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AdMegasoft.Domain.Entities.UserGroups", b =>
+            modelBuilder.Entity("AdMegasoft.Domain.Entities.UserRoles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,7 +129,7 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("GroupId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -126,18 +137,18 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("RoleId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserGroups");
+                    b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("AdMegasoft.Domain.Entities.GroupRoles", b =>
+            modelBuilder.Entity("AdMegasoft.Domain.Entities.RolePermissions", b =>
                 {
-                    b.HasOne("AdMegasoft.Domain.Entities.Group", "Group")
+                    b.HasOne("AdMegasoft.Domain.Entities.Permission", "Permission")
                         .WithMany()
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -147,16 +158,16 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Group");
+                    b.Navigation("Permission");
 
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("AdMegasoft.Domain.Entities.UserGroups", b =>
+            modelBuilder.Entity("AdMegasoft.Domain.Entities.UserRoles", b =>
                 {
-                    b.HasOne("AdMegasoft.Domain.Entities.Group", "Group")
+                    b.HasOne("AdMegasoft.Domain.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -166,7 +177,7 @@ namespace AdMegasoft.Infrastructure.persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Group");
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
