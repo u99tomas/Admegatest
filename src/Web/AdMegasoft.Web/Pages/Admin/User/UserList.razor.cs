@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace AdMegasoft.Web.Pages.Admin.Users.List
+namespace AdMegasoft.Web.Pages.Admin.User
 {
     public partial class UserList
     {

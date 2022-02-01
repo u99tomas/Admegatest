@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace AdMegasoft.Web.Pages.Admin.Roles.List
+namespace AdMegasoft.Web.Pages.Admin.Role
 {
     public partial class RoleList
     {

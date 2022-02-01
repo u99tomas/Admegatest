@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 
-namespace AdMegasoft.Web.Pages.Authentication.Login
+namespace AdMegasoft.Web.Pages.Authentication
 {
     public partial class Login
     {
