@@ -1,4 +1,5 @@
-﻿@page "/admin/users/list"
+﻿@attribute [Authorize(Roles = "Usuarios.Ver")]
+@page "/admin/users/list"
 @using AdMegasoft.Application.Features.Users.Queries.GetAllPaged
 
 <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Usuarios</MudText>

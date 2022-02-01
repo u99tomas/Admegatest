@@ -1,4 +1,6 @@
-﻿@using AdMegasoft.Web.Shared.Components.Cards
+﻿@using AdMegasoft.Web.Authentication
+@using AdMegasoft.Web.Shared.Components.Cards
+@using System.Security.Claims
 
 <PersonCard Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text);" />
 <MudDivider Class="mb-4" />
@@ -9,12 +11,13 @@
 
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
 
-    <AuthorizeView Roles="Administrador">
-        <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
+    <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
+        <AuthorizeView Roles="Usuarios.Ver">
             <MudNavLink Href="/admin/users/list" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Roles="Roles.Ver">
             <MudNavLink Href="/admin/roles/list" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
-            <MudNavLink Href="/admin/groups/list" Icon="@Icons.Outlined.GroupWork">Grupos</MudNavLink>
-        </MudNavGroup>
-    </AuthorizeView>
+        </AuthorizeView>
+    </MudNavGroup>
 
 </MudNavMenu>

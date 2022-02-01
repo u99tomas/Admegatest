@@ -27,6 +27,8 @@ namespace AdMegasoft.Infrastructure.Extensions
             #region Repositories
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IPermissionRepository, PermissionRepository>();
             #endregion
 
             return services;
