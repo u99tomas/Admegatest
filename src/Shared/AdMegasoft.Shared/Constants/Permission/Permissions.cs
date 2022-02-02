@@ -4,18 +4,18 @@
     {
         public static class Users
         {
-            public const string View = "Usuarios.Ver";
-            public const string Create = "Usuarios.Crear";
-            public const string Edit = "Usuarios.Editar";
-            public const string Search = "Usuarios.Buscar";
+            public const string View = "Permisos.Usuarios.Ver";
+            public const string Create = "Permisos.Usuarios.Crear";
+            public const string Edit = "Permisos.Usuarios.Editar";
+            public const string Search = "Permisos.Usuarios.Buscar";
         }
 
         public static class Roles
         {
-            public const string View = "Roles.Ver";
-            public const string Create = "Roles.Crear";
-            public const string Edit = "Roles.Editar";
-            public const string Search = "Roles.Buscar";
+            public const string View = "Permisos.Roles.Ver";
+            public const string Create = "Permisos.Roles.Crear";
+            public const string Edit = "Permisos.Roles.Editar";
+            public const string Search = "Permisos.Roles.Buscar";
         }
     }
 }
