@@ -1,4 +1,5 @@
-﻿@attribute [Authorize(Roles = "Roles.Ver")]
+﻿@using AdMegasoft.Shared.Constants.Permission
+@attribute [Authorize(Roles = Permissions.Roles.View)]
 @page "/admin/roles/list"
 @using AdMegasoft.Application.Features.Roles.Queries.GetAll
 
