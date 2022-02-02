@@ -3,9 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace AdMegasoft.Web.Pages.Admin.User
+namespace AdMegasoft.Web.Pages.Identity
 {
-    public partial class UserList
+    public partial class Users
     {
         [Inject]
         private IMediator _mediator { get; set; }
