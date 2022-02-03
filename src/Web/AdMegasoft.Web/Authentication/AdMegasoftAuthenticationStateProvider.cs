@@ -1,8 +1,8 @@
 ﻿using AdMegasoft.Application.Interfaces.Services;
 using AdMegasoft.Application.Responses;
-using AdMegasoft.Shared.Constants.Storage;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using Shared.Constants.Storage;
 using System.Security.Claims;
 
 namespace AdMegasoft.Web.Authentication

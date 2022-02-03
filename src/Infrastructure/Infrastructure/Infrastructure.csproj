@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
     <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Persistence\Configurations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\AdMegasoft.Application\AdMegasoft.Application.csproj" />
+    <ProjectReference Include="..\..\Core\Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

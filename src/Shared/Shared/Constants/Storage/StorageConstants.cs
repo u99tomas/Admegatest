@@ -1,4 +1,4 @@
-﻿namespace AdMegasoft.Shared.Constants.Storage
+﻿namespace Shared.Constants.Storage
 {
     public static class StorageConstants
     {
