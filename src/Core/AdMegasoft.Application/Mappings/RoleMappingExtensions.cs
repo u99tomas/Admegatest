@@ -1,5 +1,4 @@
 ﻿using AdMegasoft.Application.Features.Roles.Queries.GetAll;
-using AdMegasoft.Application.Responses;
 using AdMegasoft.Domain.Entities;
 
 namespace AdMegasoft.Application.Mappings

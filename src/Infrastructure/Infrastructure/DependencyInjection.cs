@@ -20,10 +20,12 @@ namespace Infrastructure
 
             #region Repositories
             services.AddTransient(typeof(IRepositoryAsync<,>), typeof(RepositoryAsync<,>));
+            services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+
+            //services.AddTransient(IUserRepository, UserRepository);
             #endregion
 
             #region Services
-            services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             #endregion
 
             return services;

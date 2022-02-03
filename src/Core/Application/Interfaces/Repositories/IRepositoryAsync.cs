@@ -6,6 +6,8 @@ namespace Application.Interfaces.Repositories
     {
         IQueryable<T> Entities { get; }
 
+        IQueryable<T> FromSqlRaw(string sql, params object[] parameters);
+
         Task<T> GetByIdAsync(TId id);
 
         Task<List<T>> GetAllAsync();

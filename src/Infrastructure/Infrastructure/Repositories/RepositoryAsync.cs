@@ -16,6 +16,11 @@ namespace Infrastructure.Repositories
 
         public IQueryable<T> Entities => _context.Set<T>();
 
+        public IQueryable<T> FromSqlRaw(string sql, params object[] parameters)
+        {
+            return _context.Set<T>().FromSqlRaw(sql, parameters);
+        }
+
         public async Task<T> AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

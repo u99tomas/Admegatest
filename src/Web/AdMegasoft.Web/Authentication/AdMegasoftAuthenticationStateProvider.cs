@@ -68,7 +68,7 @@ namespace AdMegasoft.Web.Authentication
             {
                 new Claim(ClaimTypes.Name, userResponse.Name),
             }, "jwt");
-            
+
             var claimsRoles = userResponse.Permissions.Select(p => new Claim(ClaimTypes.Role, p.Name));
             claimsIdentity.AddClaims(claimsRoles);
 
