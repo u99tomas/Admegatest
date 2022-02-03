@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AdMegasoft.Application\AdMegasoft.Application.csproj" />
-    <ProjectReference Include="..\..\Shared\AdMegasoft.Shared\AdMegasoft.Shared.csproj" />
   </ItemGroup>
 
 </Project>

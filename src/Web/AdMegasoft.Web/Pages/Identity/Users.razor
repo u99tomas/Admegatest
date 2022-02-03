@@ -1,4 +1,4 @@
-﻿@using AdMegasoft.Shared.Constants.Permission
+﻿@using global::Shared.Constants.Permission
 @attribute [Authorize(Roles = Permissions.Users.View)]
 @page "/admin/users/list"
 @using AdMegasoft.Application.Features.Users.Queries.GetAllPaged

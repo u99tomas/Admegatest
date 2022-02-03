@@ -1,4 +1,4 @@
-﻿namespace AdMegasoft.Shared.Constants.Permission
+﻿namespace Shared.Constants.Permission
 {
     public static class Permissions
     {
