@@ -1,31 +1,39 @@
-﻿@using global::Shared.Constants.Permission
+﻿@using Application.Features.Roles.Queries.GetAllPaged
+@using global::Shared.Constants.Permission
 @attribute [Authorize(Roles = Permissions.Roles.View)]
 @page "/admin/roles/list"
-@using AdMegasoft.Application.Features.Roles.Queries.GetAll
+
 
 <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Roles</MudText>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllRolesResponse>>>(ServerReload))" T="GetAllRolesResponse" Loading="@_loading"
-          Dense="true" Hover="true" Striped="true" @ref="table">
+<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllPagedRolesResponse>>>(ServerReload))"
+          T="GetAllPagedRolesResponse" Loading="@_loading"
+          Dense="true" Hover="true" Striped="true" @ref="_table">
+
     <ToolBarContent>
         <MudSpacer />
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
+
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllRolesResponse">Rol</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllRolesResponse">Descripción</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedRolesResponse">Rol</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllPagedRolesResponse">Descripción</MudTableSortLabel></MudTh>
     </HeaderContent>
+
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Name">@context.Description</MudTd>
     </RowTemplate>
+
     <NoRecordsContent>
         <MudText>No se encontraron registros coincidentes</MudText>
     </NoRecordsContent>
+
     <LoadingContent>
         <MudText>Cargando...</MudText>
     </LoadingContent>
+
     <PagerContent>
         <MudTablePager />
     </PagerContent>

@@ -1,8 +1,8 @@
-using AdMegasoft.Application.Configurations;
-using AdMegasoft.Application.Extensions;
-using AdMegasoft.Infrastructure.Extensions;
 using AdMegasoft.Web.Authentication;
+using Application;
+using Application.Configurations;
 using Blazored.LocalStorage;
+using Infrastructure;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-#region Admegasoft.Web
+#region Web
 // Authorization
 builder.Services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
 
@@ -21,8 +21,8 @@ builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
 #endregion
 
-#region Admegasoft.Application
-builder.Services.AddAdMegasoftApplication();
+#region Application
+builder.Services.AddApplication();
 
 // Bad, should be in AddAdMegasoftApplication() method
 var jwtSection = builder.Configuration.GetSection("JWTSettings");
@@ -31,8 +31,8 @@ builder.Services.Configure<JWTSettings>(jwtSection);
 
 #endregion
 
-#region Admegasoft.Infrastructure
-builder.Services.AddAdMegasoftInfrastructure(builder.Configuration);
+#region Infrastructure
+builder.Services.AddInfrastructure(builder.Configuration);
 #endregion
 
 var app = builder.Build();

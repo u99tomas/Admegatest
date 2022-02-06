@@ -45,16 +45,6 @@ namespace Infrastructure.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
-        {
-            return await _context
-                .Set<T>()
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
         public Task UpdateAsync(T entity)
         {
             T exist = _context.Set<T>().Find(entity.Id);

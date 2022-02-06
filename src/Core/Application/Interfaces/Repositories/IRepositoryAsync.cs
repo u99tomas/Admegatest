@@ -12,8 +12,6 @@ namespace Application.Interfaces.Repositories
 
         Task<List<T>> GetAllAsync();
 
-        Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize);
-
         Task<T> AddAsync(T entity);
 
         Task UpdateAsync(T entity);

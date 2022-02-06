@@ -1,7 +1,7 @@
-﻿using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Requests;
-using AdMegasoft.Application.Validators;
-using AdMegasoft.Web.Authentication;
+﻿using AdMegasoft.Web.Authentication;
+using Application.Interfaces.Services;
+using Application.Requests;
+using Application.Validators;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;

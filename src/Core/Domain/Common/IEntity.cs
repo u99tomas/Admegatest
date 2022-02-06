@@ -1,11 +1,7 @@
 ﻿namespace Domain.Common
 {
-    public interface IEntity<TId> : IEntity
+    public interface IEntity<TId>
     {
         public TId Id { get; set; }
-    }
-
-    public interface IEntity
-    {
     }
 }
