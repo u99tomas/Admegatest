@@ -35,8 +35,8 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             if (!string.IsNullOrEmpty(request.SearchString))
             {
                 roles = roles.Where(
-                    r => r.Name.Contains(request.SearchString, StringComparison.OrdinalIgnoreCase) ||
-                    r.Description.Contains(request.SearchString, StringComparison.OrdinalIgnoreCase)
+                    r => r.Name.Contains(request.SearchString) ||
+                    r.Description.Contains(request.SearchString)
                 );
             }
 
