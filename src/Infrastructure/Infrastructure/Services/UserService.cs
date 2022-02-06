@@ -7,10 +7,10 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Shared.Constants.Application;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
 
 namespace Infrastructure.Services
 {
@@ -27,7 +27,7 @@ namespace Infrastructure.Services
 
         public async Task<UserResponse?> LoginAsync(TokenRequest tokenRequest)
         {
-            var userResponse = await GetUserResponseAsync(tokenRequest.Name, tokenRequest.Password);
+            var userResponse = await GetUserResponseAsync(tokenRequest.AccountName, tokenRequest.Password);
 
             if (userResponse == null) return null; // AVOID NULL REFERENCE
 
@@ -61,12 +61,12 @@ namespace Infrastructure.Services
 
                 if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var userIdAsString = principle.FindFirst(ClaimTypes.Name)?.Value;
+                    var userIdAsString = principle.FindFirst(ApplicationConstants.ClaimTypes.UserId)?.Value;
                     var userIdAsInt = Convert.ToInt32(userIdAsString);
 
                     var userResponse = await _unitOfWork.Repository<User>()
                         .Entities
-                        .Select(u => new UserResponse { Id = u.Id, Name = u.Name })
+                        .Select(u => new UserResponse { Id = u.Id, AccountName = u.AccountName })
                         .Where(u => u.Id == userIdAsInt)
                         .FirstOrDefaultAsync();
 
@@ -87,15 +87,15 @@ namespace Infrastructure.Services
             return null;
         }
 
-        private async Task<UserResponse?> GetUserResponseAsync(string name, string password)
+        private async Task<UserResponse?> GetUserResponseAsync(string accountName, string password)
         {
             var userResponse = await _unitOfWork.Repository<User>()
                 .Entities
-                .Where(u => u.Name == name && u.Password == password && u.IsActive)
+                .Where(u => u.AccountName == accountName && u.Password == password && u.IsActive)
                 .Select(u => new UserResponse
                 {
                     Id = u.Id,
-                    Name = u.Name,
+                    AccountName = u.AccountName,
                     Password = u.Password,
                 })
                 .FirstOrDefaultAsync();
@@ -132,7 +132,7 @@ namespace Infrastructure.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, Convert.ToString(userId))
+                    new Claim(ApplicationConstants.ClaimTypes.UserId, Convert.ToString(userId))
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

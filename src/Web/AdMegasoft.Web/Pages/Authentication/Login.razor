@@ -10,11 +10,11 @@
 
 <MudForm Model="@_model" @ref="@_form">
 
-    <MudTextField @bind-Value="@_model.Name"
+    <MudTextField @bind-Value="@_model.AccountName"
                   Validation="@(_validator.ValidateValue)"
-                  For="@(() => _model.Name)"
+                  For="@(() => _model.AccountName)"
                   Immediate="true"
-                  Label="Usuario"
+                  Label="Nombre de la cuenta"
                   Variant="Variant.Outlined"
                   Class="my-6" />
 

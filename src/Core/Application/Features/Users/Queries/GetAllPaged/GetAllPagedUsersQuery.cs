@@ -34,17 +34,17 @@ namespace Application.Features.Users.Queries.GetAllPaged
 
             if (!string.IsNullOrEmpty(query.SearchString))
             {
-                users = users.Where(u => u.Name.Contains(query.SearchString));
+                users = users.Where(u => u.AccountName.Contains(query.SearchString));
             }
 
             switch (query.SortLabel)
             {
-                case "Name":
+                case "AccountName":
 
                     if (query.SortDirection == "Descending")
-                        users = users.OrderByDescending(u => u.Name);
+                        users = users.OrderByDescending(u => u.AccountName);
                     else
-                        users = users.OrderBy(u => u.Name);
+                        users = users.OrderBy(u => u.AccountName);
                     break;
             }
 
@@ -52,7 +52,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                 new GetAllPagedUsersResponse
                 {
                     Id = r.Id,
-                    Name = r.Name,
+                    AccountName = r.AccountName,
                 }).ToPagedResponseAsync(query.Page, query.PageSize);
         }
     }
