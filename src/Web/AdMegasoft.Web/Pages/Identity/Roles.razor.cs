@@ -16,8 +16,7 @@ namespace AdMegasoft.Web.Pages.Identity
 
         private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(TableState state)
         {
-            _loading = true;
-            StateHasChanged();
+            ToggleLoading();
 
             var _response = await _mediator.Send(
                  new GetAllPagedRolesQuery
@@ -25,15 +24,20 @@ namespace AdMegasoft.Web.Pages.Identity
                      Page = state.Page,
                      PageSize = state.PageSize,
                      SearchString = _searchString,
-                     SortDirection = state.SortDirection.ToString().ToLower(),
+                     SortDirection = state.SortDirection.ToString(),
                      SortLabel = state.SortLabel,
                  }
              );
 
-            _loading = false;
-            StateHasChanged();
+            ToggleLoading();
 
             return new TableData<GetAllPagedRolesResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
+        }
+
+        private void ToggleLoading()
+        {
+            _loading = !_loading;
+            StateHasChanged();
         }
 
         private void OnSearch(string text)

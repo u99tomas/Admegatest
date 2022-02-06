@@ -44,7 +44,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             {
                 case "Name":
 
-                    if (request.SortDirection == "descending")
+                    if (request.SortDirection == "Descending")
                         roles = roles.OrderByDescending(r => r.Name);
                     else
                         roles = roles.OrderBy(r => r.Name);
@@ -52,7 +52,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
 
                 case "Description":
 
-                    if (request.SortDirection == "descending")
+                    if (request.SortDirection == "Descending")
                         roles = roles.OrderByDescending(r => r.Description);
                     else
                         roles = roles.OrderBy(r => r.Description);
