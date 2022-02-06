@@ -1,16 +1,16 @@
-﻿@using AdMegasoft.Web.Configurations
-@using AdMegasoft.Web.Shared.Components.Cards
+﻿@using AdMegasoft.Web.Shared.Components.Cards
 @using AdMegasoft.Web.Shared.Components.Menus
 @using AdMegasoft.Web.Shared.Components.Navigation
 @inherits LayoutComponentBase
 
-
-<MudThemeProvider Theme="_theme" />
-<MudDialogProvider />
+<MudThemeProvider />
+<MudDialogProvider FullWidth="true"
+                   CloseButton="true"
+                   DisableBackdropClick="true"
+                   CloseOnEscapeKey="true"/>
 <MudSnackbarProvider />
 
 <AuthorizeView>
-
     <Authorized>
 
         <MudLayout>
@@ -34,13 +34,7 @@
                 <NavMenu />
             </MudDrawer>
             <MudMainContent>
-                <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                    <MudToolBar DisableGutters="true">
-                        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
-                        <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                    </MudToolBar>
-                </MudHidden>
-                <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+                <MudContainer MaxWidth="MaxWidth.False" Class="my-4">
                     @Body
                 </MudContainer>
             </MudMainContent>
@@ -51,12 +45,9 @@
     <NotAuthorized>
         <RedirectToLogin></RedirectToLogin>
     </NotAuthorized>
-
 </AuthorizeView>
 
 @code {
-    private MudBlazorAdminDashboard _theme = new();
-
     public bool _drawerOpen = true;
 
     void DrawerToggle()
@@ -68,10 +59,4 @@
     {
         StateHasChanged();
     }
-
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Usuarios", href: "/admin/users/list"),
-        new BreadcrumbItem("Añadir", href: "/admin/users/add", disabled: true)
-    };
 }

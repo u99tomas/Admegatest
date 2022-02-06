@@ -35,7 +35,7 @@ namespace Infrastructure.Repositories
             return (IRepositoryAsync<TEntity, TId>)_repositories[type];
         }
 
-        public async Task<int> Commit(CancellationToken cancellationToken)
+        public async Task<int> CommitAsync(CancellationToken cancellationToken)
         {
             return await _context.SaveChangesAsync(cancellationToken);
         }

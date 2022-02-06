@@ -1,7 +1,7 @@
-﻿using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Requests;
-using AdMegasoft.Application.Validators;
-using AdMegasoft.Web.Authentication;
+﻿using AdMegasoft.Web.Authentication;
+using Application.Interfaces.Services;
+using Application.Requests;
+using Application.Validators;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
@@ -55,7 +55,7 @@ namespace AdMegasoft.Web.Pages.Authentication
             {
                 var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider)_authenticationStateProvider;
                 await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticatedAsync(userModel);
-                _navigationManager.NavigateTo("/user/dashboard");
+                _navigationManager.NavigateTo("/content/dashboard");
             }
         }
 

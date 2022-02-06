@@ -1,0 +1,44 @@
+﻿@using Application.Features.Users.Queries.GetAllPaged
+@using global::Shared.Constants.Permission
+@attribute [Authorize(Roles = Permissions.Users.View)]
+@page "/identity/users"
+
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Usuarios</MudText>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllPagedUsersResponse>>>(ServerReload))"
+          T="GetAllPagedUsersResponse" Loading="@_loading"
+          Dense="true" Hover="true" Striped="true" @ref="_table">
+
+    <ToolBarContent>
+
+        <AuthorizeView Roles=@Permissions.Users.Create>
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">CREAR</MudButton>
+        </AuthorizeView>
+
+        <MudSpacer />
+
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedUsersResponse">Usuario</MudTableSortLabel></MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

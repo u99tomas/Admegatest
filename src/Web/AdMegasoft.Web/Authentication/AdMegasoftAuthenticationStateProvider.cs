@@ -1,5 +1,5 @@
-﻿using AdMegasoft.Application.Interfaces.Services;
-using AdMegasoft.Application.Responses;
+﻿using Application.Interfaces.Services;
+using Application.Responses;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Shared.Constants.Storage;
@@ -68,7 +68,7 @@ namespace AdMegasoft.Web.Authentication
             {
                 new Claim(ClaimTypes.Name, userResponse.Name),
             }, "jwt");
-            
+
             var claimsRoles = userResponse.Permissions.Select(p => new Claim(ClaimTypes.Role, p.Name));
             claimsIdentity.AddClaims(claimsRoles);
 

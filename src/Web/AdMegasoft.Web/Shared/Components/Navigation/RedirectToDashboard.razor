@@ -8,13 +8,13 @@
     protected async override Task OnInitializedAsync()
     {
         var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider) _authenticationStateProvider;
-        var authenticationState = await adMegasoftAuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authenticationState = await adMegasoftAuthenticationStateProvider.GetAuthenticationStateAsync(); // Bad!
         var user = authenticationState.User;
         var authenticated = user.Identity?.IsAuthenticated ?? false;
 
         if (authenticated)
         {
-            _navigationManager.NavigateTo("/dashboard");
+            _navigationManager.NavigateTo("/content/dashboard");
         }
     }
 }

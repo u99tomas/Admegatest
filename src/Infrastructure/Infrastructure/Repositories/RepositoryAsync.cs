@@ -16,6 +16,11 @@ namespace Infrastructure.Repositories
 
         public IQueryable<T> Entities => _context.Set<T>();
 
+        public IQueryable<T> FromSqlRaw(string sql, params object[] parameters)
+        {
+            return _context.Set<T>().FromSqlRaw(sql, parameters);
+        }
+
         public async Task<T> AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -38,16 +43,6 @@ namespace Infrastructure.Repositories
         public async Task<T> GetByIdAsync(TId id)
         {
             return await _context.Set<T>().FindAsync(id);
-        }
-
-        public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
-        {
-            return await _context
-                .Set<T>()
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .AsNoTracking()
-                .ToListAsync();
         }
 
         public Task UpdateAsync(T entity)

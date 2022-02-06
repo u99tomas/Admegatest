@@ -6,11 +6,11 @@ namespace Application.Interfaces.Repositories
     {
         IQueryable<T> Entities { get; }
 
+        IQueryable<T> FromSqlRaw(string sql, params object[] parameters);
+
         Task<T> GetByIdAsync(TId id);
 
         Task<List<T>> GetAllAsync();
-
-        Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize);
 
         Task<T> AddAsync(T entity);
 
