@@ -9,17 +9,17 @@
 
 <MudNavMenu>
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
-    <MudNavLink Href="/user/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
-    <MudNavLink Href="/customer/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
+    <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
+    <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
 
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
 
     <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
         <AuthorizeView Roles=@Permissions.Users.View>
-            <MudNavLink Href="/admin/users/list" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
+            <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
         </AuthorizeView>
         <AuthorizeView Roles=@Permissions.Roles.View>
-            <MudNavLink Href="/admin/roles/list" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
+            <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
         </AuthorizeView>
     </MudNavGroup>
 

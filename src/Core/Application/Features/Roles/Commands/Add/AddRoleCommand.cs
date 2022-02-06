@@ -28,6 +28,7 @@ namespace Application.Features.Roles.Commands.Add
             };
 
             await _unitOfWork.Repository<Role>().AddAsync(newRole);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return newRole.Id;
         }
