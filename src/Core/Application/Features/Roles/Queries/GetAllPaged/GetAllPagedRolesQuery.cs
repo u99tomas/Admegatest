@@ -11,8 +11,8 @@ namespace Application.Features.Roles.Queries.GetAllPaged
         public int PageSize { get; set; }
         public int Page { get; set; }
         /// <summary>
-        /// "ascending" ordena de forma ascendente <br></br>
-        /// "descending" ordena de forma descendente
+        /// "Ascending" ordena de forma ascendente <br></br>
+        /// "Descending" ordena de forma descendente
         /// </summary>
         public string SortDirection { get; set; }
         public string SortLabel { get; set; }
