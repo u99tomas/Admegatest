@@ -1,9 +1,6 @@
-﻿@using AdMegasoft.Web.Configurations
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 
-
-<MudThemeProvider Theme="_currentTheme" />
-<MudSnackbarProvider />
+<MudThemeProvider />
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
     <div class="d-flex flex-column mud-width-full">
@@ -15,7 +12,3 @@
         </MudPaper>
     </div>
 </MudContainer>
-
-@code {
-    private MudTheme _currentTheme = new MudBlazorAdminDashboard();
-}

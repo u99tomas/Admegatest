@@ -3,8 +3,10 @@
 @using System.Security.Claims
 @using global::Shared.Constants.Permission
 
-<PersonCard Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text);" />
+<PersonCard />
+
 <MudDivider Class="mb-4" />
+
 <MudNavMenu>
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
     <MudNavLink Href="/user/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
