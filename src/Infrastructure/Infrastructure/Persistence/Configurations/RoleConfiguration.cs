@@ -9,14 +9,14 @@ namespace Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.Property(r => r.Name)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder.HasIndex(r => r.Name)
                 .IsUnique();
 
             builder.Property(r => r.Description)
-                .HasMaxLength(300)
+                .HasMaxLength(100)
                 .IsRequired();
         }
     }

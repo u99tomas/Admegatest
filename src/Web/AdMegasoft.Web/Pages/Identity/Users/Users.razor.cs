@@ -1,25 +1,25 @@
-﻿using Application.Features.Roles.Queries.GetAllPaged;
+﻿using Application.Features.Users.Queries.GetAllPaged;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace AdMegasoft.Web.Pages.Identity
+namespace AdMegasoft.Web.Pages.Identity.Users
 {
-    public partial class Roles
+    public partial class Users
     {
         [Inject]
         private IMediator _mediator { get; set; }
 
-        private MudTable<GetAllPagedRolesResponse> _table;
+        private MudTable<GetAllPagedUsersResponse> _table;
         private bool _loading = false;
         private string _searchString = String.Empty;
 
-        private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(TableState state)
+        private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(TableState state)
         {
             ToggleLoading();
 
             var _response = await _mediator.Send(
-                 new GetAllPagedRolesQuery
+                 new GetAllPagedUsersQuery
                  {
                      Page = state.Page,
                      PageSize = state.PageSize,
@@ -31,7 +31,7 @@ namespace AdMegasoft.Web.Pages.Identity
 
             ToggleLoading();
 
-            return new TableData<GetAllPagedRolesResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedUsersResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
         }
 
         private void ToggleLoading()

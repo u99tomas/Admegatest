@@ -3,8 +3,11 @@
 @using AdMegasoft.Web.Shared.Components.Navigation
 @inherits LayoutComponentBase
 
-<MudThemeProvider  />
-<MudDialogProvider />
+<MudThemeProvider />
+<MudDialogProvider FullWidth="true"
+                   CloseButton="true"
+                   DisableBackdropClick="true"
+                   CloseOnEscapeKey="true"/>
 <MudSnackbarProvider />
 
 <AuthorizeView>

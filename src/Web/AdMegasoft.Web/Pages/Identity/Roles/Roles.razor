@@ -11,8 +11,17 @@
           Dense="true" Hover="true" Striped="true" @ref="_table">
 
     <ToolBarContent>
-         <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">CREAR</MudButton>
+
+        <AuthorizeView Roles=@Permissions.Roles.Create>
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
+                       OnClick=@AddRole>
+                CREAR
+            </MudButton>
+        </AuthorizeView>
+
         <MudSpacer />
+
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
