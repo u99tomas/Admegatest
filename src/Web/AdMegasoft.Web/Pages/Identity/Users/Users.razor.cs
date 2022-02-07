@@ -8,6 +8,8 @@ namespace AdMegasoft.Web.Pages.Identity.Users
     public partial class Users
     {
         [Inject]
+        private IDialogService _dialogService { get; set; }
+        [Inject]
         private IMediator _mediator { get; set; }
 
         private MudTable<GetAllPagedUsersResponse> _table;
@@ -44,6 +46,17 @@ namespace AdMegasoft.Web.Pages.Identity.Users
         {
             _searchString = text;
             _table.ReloadServerData();
+        }
+
+        private async Task ShowAddUserDialogAsync()
+        {
+            var dialog = _dialogService.Show<AddUserDialog>();
+            var result = await dialog.Result;
+
+            if (result.Data != null)
+            {
+                await _table.ReloadServerData();
+            }
         }
     }
 }

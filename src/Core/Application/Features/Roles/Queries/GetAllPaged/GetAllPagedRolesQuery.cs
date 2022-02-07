@@ -28,23 +28,23 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PagedResponse<GetAllPagedRolesResponse>> Handle(GetAllPagedRolesQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<GetAllPagedRolesResponse>> Handle(GetAllPagedRolesQuery query, CancellationToken cancellationToken)
         {
             var roles = _unitOfWork.Repository<Role>().Entities;
 
-            if (!string.IsNullOrEmpty(request.SearchString))
+            if (!string.IsNullOrEmpty(query.SearchString))
             {
                 roles = roles.Where(
-                    r => r.Name.Contains(request.SearchString) ||
-                    r.Description.Contains(request.SearchString)
+                    r => r.Name.Contains(query.SearchString) ||
+                    r.Description.Contains(query.SearchString)
                 );
             }
 
-            switch (request.SortLabel)
+            switch (query.SortLabel)
             {
                 case "Name":
 
-                    if (request.SortDirection == "Descending")
+                    if (query.SortDirection == "Descending")
                         roles = roles.OrderByDescending(r => r.Name);
                     else
                         roles = roles.OrderBy(r => r.Name);
@@ -52,7 +52,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
 
                 case "Description":
 
-                    if (request.SortDirection == "Descending")
+                    if (query.SortDirection == "Descending")
                         roles = roles.OrderByDescending(r => r.Description);
                     else
                         roles = roles.OrderBy(r => r.Description);
@@ -65,7 +65,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
                     Id = r.Id,
                     Name = r.Name,
                     Description = r.Description
-                }).ToPagedResponseAsync(request.Page, request.PageSize);
+                }).ToPagedResponseAsync(query.Page, query.PageSize);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         private AddRoleCommand _model = new();
         private AddRoleCommandValidator _validator = new();
 
-        private async void SubmitAsync()
+        private async void SaveAsync()
         {
             _form.Validate();
 
@@ -30,7 +30,8 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             }
 
             var response = await _mediator.Send(_model);
-            MudDialog.Close();
+
+            MudDialog.Close(response);
 
             _snackbar.Add($"Se ha creado el Rol {_model.Name}", Severity.Success);
         }

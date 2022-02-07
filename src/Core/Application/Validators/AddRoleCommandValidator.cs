@@ -12,20 +12,8 @@ namespace Application.Validators
                 .WithMessage("El nombre es requerido");
 
             RuleFor(u => u.Name)
-                .MinimumLength(5)
-                .WithMessage("Ingresa al menos 5 caracteres");
-
-            RuleFor(u => u.Name)
                 .MaximumLength(50)
                 .WithMessage("El nombre no puede exceder los 50 caracteres");
-
-            RuleFor(u => u.Description)
-                .NotEmpty()
-                .WithMessage("La descripción es requerida");
-
-            RuleFor(u => u.Description)
-                .MinimumLength(10)
-                .WithMessage("Ingresa al menos 10 caracteres");
 
             RuleFor(u => u.Description)
                 .MaximumLength(100)

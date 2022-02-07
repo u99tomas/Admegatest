@@ -36,11 +36,6 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             return new TableData<GetAllPagedRolesResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
         }
 
-        private void AddRole()
-        {
-            _dialogService.Show<AddRoleDialog>();
-        }
-
         private void ToggleLoading()
         {
             _loading = !_loading;
@@ -51,6 +46,17 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         {
             _searchString = text;
             _table.ReloadServerData();
+        }
+
+        private async Task ShowAddRoleDialogAsync()
+        {
+            var dialog = _dialogService.Show<AddRoleDialog>();
+            var result = await dialog.Result;
+
+            if(result.Data != null)
+            {
+                await _table.ReloadServerData();
+            }
         }
     }
 }

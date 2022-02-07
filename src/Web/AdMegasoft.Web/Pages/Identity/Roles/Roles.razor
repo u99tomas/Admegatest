@@ -15,7 +15,7 @@
         <AuthorizeView Roles=@Permissions.Roles.Create>
             <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
                        StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
-                       OnClick=@AddRole>
+                       OnClick=@ShowAddRoleDialogAsync>
                 CREAR
             </MudButton>
         </AuthorizeView>

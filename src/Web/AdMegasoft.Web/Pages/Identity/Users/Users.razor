@@ -13,7 +13,11 @@
     <ToolBarContent>
 
         <AuthorizeView Roles=@Permissions.Users.Create>
-            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">CREAR</MudButton>
+            <MudButton DisableElevation Variant="Variant.Filled"
+                       Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                       IconColor="Color.Surface" OnClick=@ShowAddUserDialogAsync>
+                CREAR
+            </MudButton>
         </AuthorizeView>
 
         <MudSpacer />
