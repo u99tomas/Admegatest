@@ -28,10 +28,17 @@
 
     <HeaderContent>
         <MudTh><MudTableSortLabel SortLabel="AccountName" T="GetAllPagedUsersResponse">Nombre de la cuenta</MudTableSortLabel></MudTh>
+        <MudTh Style="text-align:right">Acciones</MudTh>
     </HeaderContent>
 
     <RowTemplate>
         <MudTd DataLabel="AccountName">@context.AccountName</MudTd>
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                <MudMenuItem>Editar</MudMenuItem>
+                <MudMenuItem>Deshabilitar usuario</MudMenuItem>
+            </MudMenu>
+        </MudTd>
     </RowTemplate>
 
     <NoRecordsContent>
