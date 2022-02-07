@@ -31,9 +31,9 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             var response = await _mediator.Send(_model);
 
-            MudDialog.Close(response);
+            MudDialog.Close();
 
-            _snackbar.Add($"Se ha creado el Rol {_model.Name}", Severity.Success);
+            _snackbar.Add($"Se ha creado el Rol: {_model.Name}", Severity.Success);
         }
 
     }

@@ -1,4 +1,6 @@
-﻿using Application.Features.Roles.Queries.GetAllPaged;
+﻿using Application.Features.Roles.Commands.Delete;
+using Application.Features.Roles.Queries.GetAllPaged;
+using BlazorHero.CleanArchitecture.Client.Shared.Dialogs;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -7,6 +9,8 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 {
     public partial class Roles
     {
+        [Inject]
+        private ISnackbar _snackbar { get; set; }
         [Inject]
         private IDialogService _dialogService { get; set; }
         [Inject]
@@ -53,9 +57,27 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             var dialog = _dialogService.Show<AddRoleDialog>();
             var result = await dialog.Result;
 
-            if(result.Data != null)
+            if (!result.Cancelled)
             {
                 await _table.ReloadServerData();
+            }
+        }
+
+        private async Task Delete(GetAllPagedRolesResponse item)
+        {
+            var parameters = new DialogParameters
+            {
+                {nameof(DeleteConfirmationDialog.ContentText), $"¿Deseas eliminar el rol {item.Name}?"}
+            };
+
+            var dialog = _dialogService.Show<DeleteConfirmationDialog>("", parameters);
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                var response = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
+                await _table.ReloadServerData();
+                _snackbar.Add($"Se ha eliminado el Rol: {item.Name}", Severity.Success);
             }
         }
     }

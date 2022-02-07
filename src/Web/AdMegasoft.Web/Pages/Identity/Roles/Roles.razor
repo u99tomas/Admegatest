@@ -39,7 +39,7 @@
             <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
                 <MudMenuItem>Administrar permisos</MudMenuItem>
                 <MudMenuItem>Editar</MudMenuItem>
-                <MudMenuItem>Eliminar</MudMenuItem>
+                <MudMenuItem @onclick="@(() => Delete(@context))">Eliminar</MudMenuItem>
             </MudMenu>
         </MudTd>
     </RowTemplate>
