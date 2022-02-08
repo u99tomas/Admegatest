@@ -1,4 +1,5 @@
-﻿using Application.Features.Roles.Commands.Delete;
+﻿using Application.Features.Roles.Commands.Add;
+using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
 using BlazorHero.CleanArchitecture.Client.Shared.Dialogs;
 using MediatR;
@@ -17,6 +18,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         private IMediator _mediator { get; set; }
 
         private MudTable<GetAllPagedRolesResponse> _table;
+        private List<GetAllPagedRolesResponse> _roles;
         private bool _loading = false;
         private string _searchString = String.Empty;
 
@@ -35,9 +37,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                  }
              );
 
+            _roles = _response.Items;
+
             ToggleLoading();
 
-            return new TableData<GetAllPagedRolesResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
         }
 
         private void ToggleLoading()
@@ -52,9 +56,23 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             _table.ReloadServerData();
         }
 
-        private async Task ShowAddRoleDialogAsync()
+        private async Task ShowAddRoleDialogAsync(int id = 0)
         {
-            var dialog = _dialogService.Show<AddRoleDialog>();
+            var parameters = new DialogParameters();
+
+            if (id != 0)
+            {
+                var role = _roles.FirstOrDefault(r => r.Id == id);
+
+                parameters.Add(nameof(AddEditRoleDialog.AddEditRoleCommand), new AddEditRoleCommand
+                {
+                    Id = id,
+                    Description = role.Description,
+                    Name = role.Name,
+                });
+            }
+
+            var dialog = _dialogService.Show<AddEditRoleDialog>("Crear", parameters);
             var result = await dialog.Result;
 
             if (!result.Cancelled)

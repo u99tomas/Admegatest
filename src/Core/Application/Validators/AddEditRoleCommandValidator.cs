@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    public class AddRoleCommandValidator : Validator<AddRoleCommand>
+    public class AddEditRoleCommandValidator : Validator<AddEditRoleCommand>
     {
-        public AddRoleCommandValidator()
+        public AddEditRoleCommandValidator()
         {
             RuleFor(u => u.Name)
                 .NotEmpty()

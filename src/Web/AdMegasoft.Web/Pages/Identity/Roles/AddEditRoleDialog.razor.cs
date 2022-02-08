@@ -6,7 +6,7 @@ using MudBlazor;
 
 namespace AdMegasoft.Web.Pages.Identity.Roles
 {
-    public partial class AddRoleDialog
+    public partial class AddEditRoleDialog
     {
         [Inject]
         private ISnackbar _snackbar { get; set; }
@@ -16,9 +16,10 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         [CascadingParameter]
         MudDialogInstance MudDialog { get; set; }
 
+        [Parameter]
+        public AddEditRoleCommand AddEditRoleCommand { get; set; } = new();
         private MudForm _form;
-        private AddRoleCommand _model = new();
-        private AddRoleCommandValidator _validator = new();
+        private AddEditRoleCommandValidator _validator = new();
 
         private async void SaveAsync()
         {
@@ -29,11 +30,19 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                 return;
             }
 
-            var response = await _mediator.Send(_model);
+            var response = await _mediator.Send(AddEditRoleCommand);
 
             MudDialog.Close();
 
-            _snackbar.Add($"Se ha creado el Rol: {_model.Name}", Severity.Success);
+            if (AddEditRoleCommand.Id == 0)
+            {
+                _snackbar.Add($"Se ha creado el Rol {AddEditRoleCommand.Name}", Severity.Success);
+            }
+            else
+            {
+                _snackbar.Add($"Se ha actualizado el Rol {AddEditRoleCommand.Name}", Severity.Success);
+            }
+            
         }
 
     }

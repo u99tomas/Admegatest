@@ -18,15 +18,15 @@ namespace Application.Features.Roles.Commands.Delete
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteRoleCommand command, CancellationToken cancellationToken)
         {
             var roleRepository = _unitOfWork.Repository<Role>();
-            var foundRole = await roleRepository.GetByIdAsync(request.Id);
+            var foundRole = await roleRepository.GetByIdAsync(command.Id);
 
             await _unitOfWork.Repository<Role>().DeleteAsync(foundRole);
             await _unitOfWork.CommitAsync(cancellationToken);
 
-            return request.Id;
+            return command.Id;
         }
     }
 }
