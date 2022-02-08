@@ -14,16 +14,16 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         private IMediator _mediator { get; set; }
 
         [CascadingParameter]
-        MudDialogInstance MudDialog { get; set; }
-
+        private MudDialogInstance _mudDialog { get; set; }
         [Parameter]
         public AddEditRoleCommand AddEditRoleCommand { get; set; } = new();
+
         private MudForm _form;
         private AddEditRoleCommandValidator _validator = new();
 
         private async void SaveAsync()
         {
-            _form.Validate();
+            await _form.Validate();
 
             if (!_form.IsValid)
             {
@@ -32,7 +32,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             var response = await _mediator.Send(AddEditRoleCommand);
 
-            MudDialog.Close();
+            _mudDialog.Close();
 
             if (AddEditRoleCommand.Id == 0)
             {

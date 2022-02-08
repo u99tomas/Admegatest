@@ -48,12 +48,12 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             _table.ReloadServerData();
         }
 
-        private async Task ShowAddUserDialogAsync()
+        private async Task ShowDialog()
         {
-            var dialog = _dialogService.Show<AddUserDialog>();
+            var dialog = _dialogService.Show<AddEditUserDialog>();
             var result = await dialog.Result;
 
-            if (result.Data != null)
+            if (!result.Cancelled)
             {
                 await _table.ReloadServerData();
             }

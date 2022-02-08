@@ -56,7 +56,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             _table.ReloadServerData();
         }
 
-        private async Task ShowAddRoleDialogAsync(int id = 0)
+        private async Task ShowDialog(int id = 0)
         {
             var parameters = new DialogParameters();
 

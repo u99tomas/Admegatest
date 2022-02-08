@@ -16,8 +16,8 @@
                           For="@(() => AddEditRoleCommand.Name)"
                           Immediate="true"
                           Label="Nombre"
-                          Variant="Variant.Outlined"
-                          Class="my-2" />
+                          Variant="Variant.Outlined" 
+                          Class="my-2"/>
 
             <MudTextField @bind-Value="@AddEditRoleCommand.Description"
                           Validation="@(_validator.ValidateValue)"
@@ -25,8 +25,8 @@
                           Immediate="true"
                           Label="Descripción"
                           Variant="Variant.Outlined"
-                          Lines="2"
-                          Class="my-2" />
+                          Lines="2" 
+                          Class="my-2"/>
         </MudForm>
 
     </DialogContent>
