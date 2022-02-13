@@ -1,8 +1,8 @@
 using AdMegasoft.Web.Authentication;
-using Application;
 using Application.Configurations;
+using Application.Extensions;
 using Blazored.LocalStorage;
-using Infrastructure;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;

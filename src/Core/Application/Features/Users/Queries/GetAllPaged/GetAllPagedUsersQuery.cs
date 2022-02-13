@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.Repositories;
+﻿using Application.Extensions;
+using Application.Interfaces.Repositories;
 using Application.Mappings;
 using Application.Wrappers;
 using Domain.Entities;
@@ -10,10 +11,6 @@ namespace Application.Features.Users.Queries.GetAllPaged
     {
         public int PageSize { get; set; }
         public int Page { get; set; }
-        /// <summary>
-        /// "Ascending" ordena de forma ascendente <br></br>
-        /// "Descending" ordena de forma descendente
-        /// </summary>
         public string SortDirection { get; set; }
         public string SortLabel { get; set; }
         public string SearchString { get; set; }
