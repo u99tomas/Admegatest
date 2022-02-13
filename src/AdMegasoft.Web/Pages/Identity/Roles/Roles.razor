@@ -1,10 +1,10 @@
-﻿@using Application.Features.Roles.Queries.GetAllPaged
+﻿@using AdMegasoft.Web.Shared.Components.Text
+@using Application.Features.Roles.Queries.GetAllPaged
 @using global::Shared.Constants.Permission
 @attribute [Authorize(Roles = Permissions.Roles.View)]
 @page "/identity/roles"
 
-
-<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Roles</MudText>
+<MegaTitle Title="Roles"></MegaTitle>
 
 <MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllPagedRolesResponse>>>(ServerReload))"
           T="GetAllPagedRolesResponse" Loading="@_loading"
