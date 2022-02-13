@@ -29,16 +29,17 @@
                           OnAdornmentClick="TogglePasswordVisibility"
                           InputType="@_passwordInput"
                           Class="my-2" />
+
+            <MudSelect T="int" Label="Roles" MultiSelection="true"
+                       MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
+                       @bind-SelectedValues="_selectedRoleIds" Variant="Variant.Outlined" Class="my-2">
+                @foreach (var rol in _roles)
+                {
+                    <MudSelectItem T="int" Value="@rol.Id">@rol.Name (@rol.Description)</MudSelectItem>
+                }
+            </MudSelect>
         </MudForm>
 
-        <MudSelect T="int" Label="Roles" MultiSelection="true"
-                   MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
-                   @bind-SelectedValues="_selectedRoleIds" Variant="Variant.Outlined" Class="my-2">
-            @foreach (var rol in _roles)
-            {
-                <MudSelectItem T="int" Value="@rol.Id">@rol.Name (@rol.Description)</MudSelectItem>
-            }
-        </MudSelect>
     </Content>
 
 </MegaDialog>
