@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Mappings
 {
-    public static class IQueryableMappingExtensions
+    public static class IQueryableMapping
     {
         public static async Task<PagedResult<T>> ToPagedResponseAsync<T>(this IQueryable<T> queryable, int page, int pageSize)
         {
