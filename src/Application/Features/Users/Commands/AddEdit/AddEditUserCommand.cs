@@ -43,7 +43,7 @@ namespace Application.Features.Users.Commands.AddEdit
                     .ToList();
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
-                await _unitOfWork.CommitAsync(cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 return Result<int>.Success($"Se creo el usuario {user.AccountName}", user.Id);
             }

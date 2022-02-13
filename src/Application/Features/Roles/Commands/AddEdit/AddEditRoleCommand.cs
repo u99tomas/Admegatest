@@ -32,7 +32,7 @@ namespace Application.Features.Roles.Commands.Add
                 };
 
                 await _unitOfWork.Repository<Role>().AddAsync(newRole);
-                await _unitOfWork.CommitAsync(cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 return Result<int>.Success($"Se creo el Rol {newRole.Name}", newRole.Id);
             }
@@ -48,7 +48,7 @@ namespace Application.Features.Roles.Commands.Add
                 foundRole.Name = command.Name;
                 foundRole.Description = command.Description;
 
-                await _unitOfWork.CommitAsync(cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
                 return Result<int>.Success($"Se actualizo el Rol {foundRole.Name}", foundRole.Id);
             }
         }
