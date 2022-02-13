@@ -40,11 +40,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
             switch (query.SortLabel)
             {
                 case "AccountName":
-
-                    if (query.SortDirection == "Descending")
-                        users = users.OrderByDescending(u => u.AccountName);
-                    else
-                        users = users.OrderBy(u => u.AccountName);
+                    users = users.SortBy(u => u.AccountName, query.SortDirection);
                     break;
             }
 

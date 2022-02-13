@@ -43,19 +43,11 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             switch (query.SortLabel)
             {
                 case "Name":
-
-                    if (query.SortDirection == "Descending")
-                        roles = roles.OrderByDescending(r => r.Name);
-                    else
-                        roles = roles.OrderBy(r => r.Name);
+                    roles = roles.SortBy(r => r.Name, query.SortDirection);
                     break;
 
                 case "Description":
-
-                    if (query.SortDirection == "Descending")
-                        roles = roles.OrderByDescending(r => r.Description);
-                    else
-                        roles = roles.OrderBy(r => r.Description);
+                    roles = roles.SortBy(r => r.Description, query.SortDirection);
                     break;
             }
 

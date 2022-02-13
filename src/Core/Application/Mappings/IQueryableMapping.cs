@@ -1,6 +1,7 @@
 ﻿
 using Application.Wrappers;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Application.Mappings
 {
@@ -16,6 +17,16 @@ namespace Application.Mappings
                 .ToListAsync();
 
             return PagedResult<T>.Success(items, totalItems);
+        }
+
+        public static IOrderedQueryable<TSource> SortBy<TSource, TKey>(this IQueryable<TSource> queryable, Expression<Func<TSource, TKey>> keySelector, string sortDirection)
+        {
+            var isDescending = string.Equals(sortDirection, "Descending", StringComparison.OrdinalIgnoreCase);
+
+            if (isDescending)
+                return queryable.OrderByDescending(keySelector);
+            else
+                return queryable.OrderBy(keySelector);
         }
     }
 }
