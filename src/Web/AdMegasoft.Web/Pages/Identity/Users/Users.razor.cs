@@ -33,7 +33,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             ToggleLoading();
 
-            return new TableData<GetAllPagedUsersResponse> { Items = _response.Items, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedUsersResponse> { Items = _response.Data, TotalItems = _response.TotalItems };
         }
 
         private void ToggleLoading()

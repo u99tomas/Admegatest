@@ -15,11 +15,7 @@ namespace Application.Mappings
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new PagedResult<T>
-            {
-                Items = items,
-                TotalItems = totalItems
-            };
+            return PagedResult<T>.Success(items, totalItems);
         }
     }
 }

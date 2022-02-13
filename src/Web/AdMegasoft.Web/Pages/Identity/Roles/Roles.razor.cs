@@ -37,7 +37,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                  }
              );
 
-            _roles = _response.Items;
+            _roles = _response.Data;
 
             ToggleLoading();
 
