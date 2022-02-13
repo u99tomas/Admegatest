@@ -40,9 +40,6 @@ namespace Infrastructure.Extensions
         {
             return services
             .AddTransient(typeof(IRepositoryAsync<,>), typeof(RepositoryAsync<,>))
-            .AddTransient<IRoleRepository, RoleRepository>()
-            .AddTransient<IUserRepository, UserRepository>()
-            .AddTransient<IPermissionRepository, PermissionRepository>()
             .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }
     }
