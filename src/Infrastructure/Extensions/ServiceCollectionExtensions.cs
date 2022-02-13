@@ -22,7 +22,7 @@ namespace Infrastructure.Extensions
 
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(
+            services.AddDbContext<MegaDbContext>(
                 options => options.UseSqlServer(
                     configuration.GetConnectionString("AdMegasoftDb"))
             );

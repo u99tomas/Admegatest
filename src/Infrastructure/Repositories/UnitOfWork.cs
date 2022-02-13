@@ -7,11 +7,11 @@ namespace Infrastructure.Repositories
 {
     public class UnitOfWork<TId> : IUnitOfWork<TId>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly MegaDbContext _context;
         private bool disposed;
         private Hashtable _repositories;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(MegaDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

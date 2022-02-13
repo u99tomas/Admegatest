@@ -7,9 +7,9 @@ namespace Infrastructure.Repositories
 {
     public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : class, IEntity<TId>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly MegaDbContext _context;
 
-        public RepositoryAsync(ApplicationDbContext context)
+        public RepositoryAsync(MegaDbContext context)
         {
             _context = context;
         }
