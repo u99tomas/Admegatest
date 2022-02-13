@@ -1,7 +1,11 @@
-﻿@using AdMegasoft.Web.Enums
-@using AdMegasoft.Web.Shared.Components.Dialogs
+﻿@using AdMegasoft.Web.Shared.Components.Dialogs
 
-<MegaDialog EntityName="Rol" Operation=@(AddEditRoleCommand.Id == 0? Operation.Add : Operation.Edit) OnConfirmation=@SaveAsync>
+<MegaDialog OnSave="SaveAsync"
+            Icon=@(AddEditRoleCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
+    <Title>
+        @(AddEditRoleCommand.Id == 0? "Crear Rol" : "Editar Rol")
+    </Title>
+
     <Content>
         <MudForm Model="@AddEditRoleCommand" @ref="@_form">
 

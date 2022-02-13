@@ -1,7 +1,12 @@
-﻿@using AdMegasoft.Web.Enums
-@using AdMegasoft.Web.Shared.Components.Dialogs
+﻿@using AdMegasoft.Web.Shared.Components.Dialogs
 
-<MegaDialog EntityName="Usuario" Operation=@(AddEditUserCommand.Id == 0? Operation.Add : Operation.Edit) OnConfirmation=@SaveAsync>
+<MegaDialog OnSave="SaveAsync"
+            Icon=@(AddEditUserCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
+
+    <Title>
+        @(AddEditUserCommand.Id == 0? "Crear Usuario" : "Editar Usuario")
+    </Title>
+
     <Content>
         <MudForm Model="@AddEditUserCommand" @ref="@_form">
 
@@ -35,5 +40,6 @@
             }
         </MudSelect>
     </Content>
+
 </MegaDialog>
 

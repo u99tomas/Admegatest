@@ -1,10 +1,8 @@
-﻿using AdMegasoft.Web.Enums;
-using AdMegasoft.Web.Services;
+﻿using AdMegasoft.Web.Services;
 using AdMegasoft.Web.Shared.Components.Dialogs;
 using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
-using BlazorHero.CleanArchitecture.Client.Shared.Dialogs;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -86,13 +84,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
         private async Task Delete(GetAllPagedRolesResponse item)
         {
-            var parameters = new DialogParameters
-            {
-                {nameof(MegaDialog.ContentText), $"¿Deseas eliminar el rol {item.Name}?"},
-                {nameof(MegaDialog.Operation), Operation.Delete },
-            };
-
-            var dialog = _dialogService.Show<MegaDialog>("", parameters);
+            var dialog = _dialogService.Show<DeleteConfirmationDialog>();
             var result = await dialog.Result;
 
             if (!result.Cancelled)
