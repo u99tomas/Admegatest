@@ -1,12 +1,12 @@
 ﻿using Application.Interfaces.Repositories;
 using Application.Mappings;
-using Application.Wrapper;
+using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Users.Queries.GetAllPaged
 {
-    public class GetAllPagedUsersQuery : IRequest<PagedResponse<GetAllPagedUsersResponse>>
+    public class GetAllPagedUsersQuery : IRequest<PagedResult<GetAllPagedUsersResponse>>
     {
         public int PageSize { get; set; }
         public int Page { get; set; }
@@ -19,7 +19,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
         public string SearchString { get; set; }
     }
 
-    internal class GetAllPagedUsersHandler : IRequestHandler<GetAllPagedUsersQuery, PagedResponse<GetAllPagedUsersResponse>>
+    internal class GetAllPagedUsersHandler : IRequestHandler<GetAllPagedUsersQuery, PagedResult<GetAllPagedUsersResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -28,7 +28,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PagedResponse<GetAllPagedUsersResponse>> Handle(GetAllPagedUsersQuery query, CancellationToken cancellationToken)
+        public async Task<PagedResult<GetAllPagedUsersResponse>> Handle(GetAllPagedUsersQuery query, CancellationToken cancellationToken)
         {
             var users = _unitOfWork.Repository<User>().Entities;
 

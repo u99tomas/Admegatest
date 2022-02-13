@@ -1,12 +1,12 @@
 ﻿
-using Application.Wrapper;
+using Application.Wrappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Mappings
 {
     public static class IQueryableMappingExtensions
     {
-        public static async Task<PagedResponse<T>> ToPagedResponseAsync<T>(this IQueryable<T> queryable, int page, int pageSize)
+        public static async Task<PagedResult<T>> ToPagedResponseAsync<T>(this IQueryable<T> queryable, int page, int pageSize)
         {
             var totalItems = await queryable.CountAsync();
 
@@ -15,7 +15,7 @@ namespace Application.Mappings
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new PagedResponse<T>
+            return new PagedResult<T>
             {
                 Items = items,
                 TotalItems = totalItems

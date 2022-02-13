@@ -1,12 +1,12 @@
 ﻿using Application.Interfaces.Repositories;
 using Application.Mappings;
-using Application.Wrapper;
+using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Roles.Queries.GetAllPaged
 {
-    public class GetAllPagedRolesQuery : IRequest<PagedResponse<GetAllPagedRolesResponse>>
+    public class GetAllPagedRolesQuery : IRequest<PagedResult<GetAllPagedRolesResponse>>
     {
         public int PageSize { get; set; }
         public int Page { get; set; }
@@ -19,7 +19,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
         public string SearchString { get; set; }
     }
 
-    internal class GetAllPagedRolesHandler : IRequestHandler<GetAllPagedRolesQuery, PagedResponse<GetAllPagedRolesResponse>>
+    internal class GetAllPagedRolesHandler : IRequestHandler<GetAllPagedRolesQuery, PagedResult<GetAllPagedRolesResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -28,7 +28,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PagedResponse<GetAllPagedRolesResponse>> Handle(GetAllPagedRolesQuery query, CancellationToken cancellationToken)
+        public async Task<PagedResult<GetAllPagedRolesResponse>> Handle(GetAllPagedRolesQuery query, CancellationToken cancellationToken)
         {
             var roles = _unitOfWork.Repository<Role>().Entities;
 
