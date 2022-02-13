@@ -36,10 +36,9 @@ namespace Application.Features.Users.Commands.AddEdit
                 };
 
                 await _unitOfWork.Repository<User>().AddAsync(user);
-                await _unitOfWork.CommitAsync(cancellationToken);
 
                 var roles = command.RoleIds
-                    .Select(id => new UserRoles { RoleId = id, UserId = user.Id })
+                    .Select(id => new UserRoles { RoleId = id, User = user })
                     .ToList();
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
