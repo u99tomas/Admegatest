@@ -12,16 +12,40 @@
     <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
     <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
+    @if (CanViewUsers && CanViewRoles)
+    {
+        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
+    }
 
-    <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
-        <AuthorizeView Roles=@Permissions.Users.View>
-            <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
-        </AuthorizeView>
-        <AuthorizeView Roles=@Permissions.Roles.View>
-            <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
-        </AuthorizeView>
-    </MudNavGroup>
+    @if (CanViewUsers && CanViewRoles)
+    {
+        <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
+            @if (CanViewUsers)
+            {
+                <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
+            }
+            @if (CanViewRoles)
+            {
+                <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
+            }
+        </MudNavGroup>
+    }
 
 </MudNavMenu>
 
+@code {
+    [CascadingParameter]
+    Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    public bool CanViewUsers { get; set; }
+    public bool CanViewRoles { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        CanViewUsers = user.IsInRole(Permissions.Users.View);
+        CanViewRoles = user.IsInRole(Permissions.Roles.View);
+    }
+}
