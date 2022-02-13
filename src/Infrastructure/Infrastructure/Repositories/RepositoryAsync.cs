@@ -33,29 +33,23 @@ namespace Infrastructure.Repositories
             return entities;
         }
 
-        public Task DeleteAsync(T entity)
+        public Task RemoveAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             return Task.CompletedTask;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> ToListAsync()
         {
             return await _context
                 .Set<T>()
                 .ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(TId id)
+        public async Task<T?> GetByIdAsync(TId id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task UpdateAsync(T entity)
-        {
-            T exist = _context.Set<T>().Find(entity.Id);
-            _context.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.CompletedTask;
-        }
     }
 }

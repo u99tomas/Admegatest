@@ -42,7 +42,6 @@ namespace Application.Features.Roles.Commands.Add
                 foundRole.Name = command.Name;
                 foundRole.Description = command.Description;
 
-                await _unitOfWork.Repository<Role>().UpdateAsync(foundRole);
                 await _unitOfWork.CommitAsync(cancellationToken);
                 return foundRole.Id;
             }

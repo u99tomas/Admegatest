@@ -23,7 +23,7 @@ namespace Application.Features.Roles.Commands.Delete
             var roleRepository = _unitOfWork.Repository<Role>();
             var foundRole = await roleRepository.GetByIdAsync(command.Id);
 
-            await _unitOfWork.Repository<Role>().DeleteAsync(foundRole);
+            await _unitOfWork.Repository<Role>().RemoveAsync(foundRole);
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return command.Id;

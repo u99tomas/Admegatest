@@ -8,16 +8,14 @@ namespace Application.Interfaces.Repositories
 
         IQueryable<T> FromSqlRaw(string sql, params object[] parameters);
 
-        Task<T> GetByIdAsync(TId id);
+        Task<T?> GetByIdAsync(TId id);
 
-        Task<List<T>> GetAllAsync();
+        Task<List<T>> ToListAsync();
 
         Task<T> AddAsync(T entity);
 
         Task<List<T>> AddRangeAsync(List<T> entities);
 
-        Task UpdateAsync(T entity);
-
-        Task DeleteAsync(T entity);
+        Task RemoveAsync(T entity);
     }
 }
