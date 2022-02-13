@@ -7,7 +7,6 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Shared.Constants.Application;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -61,7 +60,7 @@ namespace Infrastructure.Services
 
                 if (jwtSecurityToken != null && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var userIdAsString = principle.FindFirst(ApplicationConstants.ClaimTypes.UserId)?.Value;
+                    var userIdAsString = principle.FindFirst(ClaimTypes.Name)?.Value;
                     var userIdAsInt = Convert.ToInt32(userIdAsString);
 
                     var userResponse = await _unitOfWork.Repository<User>()
@@ -132,7 +131,7 @@ namespace Infrastructure.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ApplicationConstants.ClaimTypes.UserId, Convert.ToString(userId))
+                    new Claim(ClaimTypes.Name, Convert.ToString(userId))
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

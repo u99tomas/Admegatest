@@ -1,15 +1,18 @@
-﻿<MudCard Elevation="0" Square="true" Class="@Class" Style="@Style">
+﻿<MudCard Elevation="0" Square="true" Class="@Class">
     <MudCardHeader>
         <CardHeaderAvatar>
             <MudAvatar Color="Color.Secondary">TA</MudAvatar>
         </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body2">Tomás Agú</MudText>
+            <AuthorizeView>
+                <Authorized>
+                    <MudText Typo="Typo.body2">@context.User.Identity.Name</MudText>
+                </Authorized>
+            </AuthorizeView>
         </CardHeaderContent>
     </MudCardHeader>
 </MudCard>
 
 @code {
     [Parameter] public string Class { get; set; }
-    [Parameter] public string Style { get; set; }
 }
