@@ -33,10 +33,8 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             var result = await _mediator.Send(AddEditRoleCommand);
 
-            _mudDialog.Close();
-
             _snackbar.ShowMessage(result);
-            
+
         }
 
     }

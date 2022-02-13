@@ -1,0 +1,35 @@
+﻿@using AdMegasoft.Web.Enums
+
+<MudDialog>
+
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icon" Class="mr-3 mb-n1" />
+            @Title
+        </MudText>
+    </TitleContent>
+
+    <DialogContent>
+        @Content
+        @ContentText
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">CANCELAR</MudButton>
+
+        @if (Operation == Operation.Delete)
+        {
+            <MudButton DisableElevation Color="Color.Error" Variant="Variant.Filled" OnClick="OnConfirmationAsync">
+                CONFIRMAR
+            </MudButton>
+        }
+        else
+        {
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success" OnClick="OnConfirmationAsync">
+                GUARDAR
+            </MudButton>
+        }
+
+    </DialogActions>
+
+</MudDialog>

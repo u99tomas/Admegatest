@@ -1,14 +1,8 @@
-﻿<MudDialog>
+﻿@using AdMegasoft.Web.Enums
+@using AdMegasoft.Web.Shared.Components.Dialogs
 
-    <TitleContent>
-        <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-            Crear Rol
-        </MudText>
-    </TitleContent>
-
-    <DialogContent>
-
+<MegaDialog EntityName="Rol" Operation=@(AddEditRoleCommand.Id == 0? Operation.Add : Operation.Edit) OnConfirmation=@SaveAsync>
+    <Content>
         <MudForm Model="@AddEditRoleCommand" @ref="@_form">
 
             <MudTextField @bind-Value="@AddEditRoleCommand.Name"
@@ -16,8 +10,8 @@
                           For="@(() => AddEditRoleCommand.Name)"
                           Immediate="true"
                           Label="Nombre"
-                          Variant="Variant.Outlined" 
-                          Class="my-2"/>
+                          Variant="Variant.Outlined"
+                          Class="my-2" />
 
             <MudTextField @bind-Value="@AddEditRoleCommand.Description"
                           Validation="@(_validator.ValidateValue)"
@@ -25,16 +19,8 @@
                           Immediate="true"
                           Label="Descripción"
                           Variant="Variant.Outlined"
-                          Lines="2" 
-                          Class="my-2"/>
+                          Lines="2"
+                          Class="my-2" />
         </MudForm>
-
-    </DialogContent>
-
-    <DialogActions>
-        <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success" OnClick=@SaveAsync>
-            GUARDAR
-        </MudButton>
-    </DialogActions>
-
-</MudDialog>
+    </Content>
+</MegaDialog>

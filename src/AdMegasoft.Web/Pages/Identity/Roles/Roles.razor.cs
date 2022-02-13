@@ -1,4 +1,6 @@
-﻿using AdMegasoft.Web.Services;
+﻿using AdMegasoft.Web.Enums;
+using AdMegasoft.Web.Services;
+using AdMegasoft.Web.Shared.Components.Dialogs;
 using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
@@ -86,10 +88,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         {
             var parameters = new DialogParameters
             {
-                {nameof(DeleteConfirmationDialog.ContentText), $"¿Deseas eliminar el rol {item.Name}?"}
+                {nameof(MegaDialog.ContentText), $"¿Deseas eliminar el rol {item.Name}?"},
+                {nameof(MegaDialog.Operation), Operation.Delete },
             };
 
-            var dialog = _dialogService.Show<DeleteConfirmationDialog>("", parameters);
+            var dialog = _dialogService.Show<MegaDialog>("", parameters);
             var result = await dialog.Result;
 
             if (!result.Cancelled)

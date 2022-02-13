@@ -58,7 +58,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             var result = await _mediator.Send(AddEditUserCommand);
 
-            _mudDialog.Close();
             _snackbar.ShowMessage(result);
         }
 
