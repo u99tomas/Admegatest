@@ -7,12 +7,12 @@ using System.Security.Claims;
 
 namespace AdMegasoft.Web.Authentication
 {
-    public class AdMegasoftAuthenticationStateProvider : AuthenticationStateProvider
+    public class MegaAuthenticationStateProvider : AuthenticationStateProvider
     {
         public ILocalStorageService _localStorageService { get; }
         public ICurrentUserService _userService { get; set; }
 
-        public AdMegasoftAuthenticationStateProvider(ILocalStorageService localStorageService,
+        public MegaAuthenticationStateProvider(ILocalStorageService localStorageService,
             ICurrentUserService userService)
         {
             _localStorageService = localStorageService;

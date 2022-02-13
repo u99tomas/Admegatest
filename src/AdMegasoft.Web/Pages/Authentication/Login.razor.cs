@@ -53,7 +53,7 @@ namespace AdMegasoft.Web.Pages.Authentication
             }
             else
             {
-                var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider)_authenticationStateProvider;
+                var adMegasoftAuthenticationStateProvider = (MegaAuthenticationStateProvider)_authenticationStateProvider;
                 await adMegasoftAuthenticationStateProvider.MarkUserAsAuthenticatedAsync(userModel);
                 _navigationManager.NavigateTo("/content/dashboard");
             }

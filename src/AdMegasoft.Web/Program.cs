@@ -16,7 +16,7 @@ builder.Services.AddServerSideBlazor();
 
 #region Web
 // Authorization
-builder.Services.AddScoped<AuthenticationStateProvider, AdMegasoftAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, MegaAuthenticationStateProvider>();
 
 // Nuget packages
 builder.Services.AddMudServices(config =>

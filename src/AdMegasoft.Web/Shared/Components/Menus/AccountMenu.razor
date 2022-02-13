@@ -20,7 +20,7 @@
 
     protected async Task LogOut()
     {
-        var adMegasoftAuthenticationStateProvider = (AdMegasoftAuthenticationStateProvider) _authenticationStateProvider;
+        var adMegasoftAuthenticationStateProvider = (MegaAuthenticationStateProvider) _authenticationStateProvider;
         await adMegasoftAuthenticationStateProvider.MarkUserAsLoggedOutAsync();
     }
 }
