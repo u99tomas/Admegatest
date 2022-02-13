@@ -1,17 +1,18 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Roles.Commands.Add
 {
-    public class AddEditRoleCommand : IRequest<int>
+    public class AddEditRoleCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
 
-    internal class AddEditRoleCommandHandler : IRequestHandler<AddEditRoleCommand, int>
+    internal class AddEditRoleCommandHandler : IRequestHandler<AddEditRoleCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -20,7 +21,7 @@ namespace Application.Features.Roles.Commands.Add
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(AddEditRoleCommand command, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditRoleCommand command, CancellationToken cancellationToken)
         {
             if(command.Id == 0)
             {
@@ -33,17 +34,22 @@ namespace Application.Features.Roles.Commands.Add
                 await _unitOfWork.Repository<Role>().AddAsync(newRole);
                 await _unitOfWork.CommitAsync(cancellationToken);
 
-                return newRole.Id;
+                return Result<int>.Success($"Se creo el Rol {newRole.Name}", newRole.Id);
             }
             else
             {
                 var foundRole = await _unitOfWork.Repository<Role>().GetByIdAsync(command.Id);
 
+                if(foundRole == null)
+                {
+                    return Result<int>.Failure($"Error: No se ha encontrado el Rol con Id {command.Id}");
+                }
+
                 foundRole.Name = command.Name;
                 foundRole.Description = command.Description;
 
                 await _unitOfWork.CommitAsync(cancellationToken);
-                return foundRole.Id;
+                return Result<int>.Success($"Se actualizo el Rol {foundRole.Name}", foundRole.Id);
             }
         }
     }

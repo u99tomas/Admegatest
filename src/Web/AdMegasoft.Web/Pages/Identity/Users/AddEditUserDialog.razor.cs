@@ -1,4 +1,5 @@
-﻿using Application.Features.Roles.Queries.GetAll;
+﻿using AdMegasoft.Web.Services;
+using Application.Features.Roles.Queries.GetAll;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Validators;
 using MediatR;
@@ -55,18 +56,10 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             AddEditUserCommand.RoleIds = _selectedRoleIds;
             AddEditUserCommand.IsActive = true;
 
-            var response = await _mediator.Send(AddEditUserCommand);
+            var result = await _mediator.Send(AddEditUserCommand);
 
             _mudDialog.Close();
-
-            if (AddEditUserCommand.Id == 0)
-            {
-                _snackbar.Add($"Se ha creado el Usuario {AddEditUserCommand.AccountName}", Severity.Success);
-            }
-            else
-            {
-                _snackbar.Add($"Se ha actualizado el Usuario {AddEditUserCommand.AccountName}", Severity.Success);
-            }
+            _snackbar.ShowMessage(result);
         }
 
         private string GetMultiSelectionTextForRoles(List<string> selectedValues)

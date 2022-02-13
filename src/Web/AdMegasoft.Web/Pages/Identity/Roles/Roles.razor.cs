@@ -1,4 +1,5 @@
-﻿using Application.Features.Roles.Commands.Add;
+﻿using AdMegasoft.Web.Services;
+using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
 using BlazorHero.CleanArchitecture.Client.Shared.Dialogs;
@@ -93,9 +94,9 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             if (!result.Cancelled)
             {
-                var response = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
+                var commandResult = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
                 await _table.ReloadServerData();
-                _snackbar.Add($"Se ha eliminado el Rol: {item.Name}", Severity.Success);
+                _snackbar.ShowMessage(commandResult);
             }
         }
     }

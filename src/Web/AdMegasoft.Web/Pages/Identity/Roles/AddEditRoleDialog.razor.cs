@@ -1,4 +1,5 @@
-﻿using Application.Features.Roles.Commands.Add;
+﻿using AdMegasoft.Web.Services;
+using Application.Features.Roles.Commands.Add;
 using Application.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Components;
@@ -30,18 +31,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                 return;
             }
 
-            var response = await _mediator.Send(AddEditRoleCommand);
+            var result = await _mediator.Send(AddEditRoleCommand);
 
             _mudDialog.Close();
 
-            if (AddEditRoleCommand.Id == 0)
-            {
-                _snackbar.Add($"Se ha creado el Rol {AddEditRoleCommand.Name}", Severity.Success);
-            }
-            else
-            {
-                _snackbar.Add($"Se ha actualizado el Rol {AddEditRoleCommand.Name}", Severity.Success);
-            }
+            _snackbar.ShowMessage(result);
             
         }
 

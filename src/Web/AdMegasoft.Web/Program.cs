@@ -1,4 +1,5 @@
 using AdMegasoft.Web.Authentication;
+using AdMegasoft.Web.Services;
 using Application.Configurations;
 using Application.Extensions;
 using Blazored.LocalStorage;
@@ -24,6 +25,7 @@ builder.Services.AddMudServices(config =>
     config.SnackbarConfiguration.ShowCloseIcon = true;
 });
 builder.Services.AddBlazoredLocalStorage();
+
 #endregion
 
 #region Application

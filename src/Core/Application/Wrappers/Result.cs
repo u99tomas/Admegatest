@@ -4,34 +4,34 @@
     {
         public T Data { get; set; }
         public bool Succeeded { get; set; }
-        public string[] Messages { get; set; }
+        public string Message { get; set; }
 
         public Result()
         {
 
         }
 
-        public Result(bool succeeded, IEnumerable<string> messages, T data)
+        public Result(bool succeeded, string message, T data)
         {
             Succeeded = succeeded;
-            Messages = messages.ToArray();
+            Message = message;
             Data = data;
         }
 
-        public Result(bool succeeded, IEnumerable<string> messages)
+        public Result(bool succeeded, string message)
         {
             Succeeded = succeeded;
-            Messages = messages.ToArray();
+            Message = message;
         }
 
-        public static Result<T> Success(IEnumerable<string> messages, T data)
+        public static Result<T> Success(string message, T data)
         {
-            return new Result<T>(true, messages, data);
+            return new Result<T>(true, message, data);
         }
 
-        public static Result<T> Failure(IEnumerable<string> messages)
+        public static Result<T> Failure(string message)
         {
-            return new Result<T>(false, messages);
+            return new Result<T>(false, message);
         }
     }
 }

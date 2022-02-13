@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using System.Collections;
 
 namespace Application.Features.Users.Commands.AddEdit
 {
-    public class AddEditUserCommand : IRequest<int>
+    public class AddEditUserCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
         public string AccountName { get; set; }
@@ -15,7 +16,7 @@ namespace Application.Features.Users.Commands.AddEdit
         public IEnumerable<int> RoleIds { get; set; }
     }
 
-    internal class AddEditUserCommandHandler : IRequestHandler<AddEditUserCommand, int>
+    internal class AddEditUserCommandHandler : IRequestHandler<AddEditUserCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -24,7 +25,7 @@ namespace Application.Features.Users.Commands.AddEdit
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(AddEditUserCommand command, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditUserCommand command, CancellationToken cancellationToken)
         {
             if (command.Id == 0)
             {
@@ -44,11 +45,11 @@ namespace Application.Features.Users.Commands.AddEdit
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
                 await _unitOfWork.CommitAsync(cancellationToken);
 
-                return user.Id;
+                return Result<int>.Success($"Se creo el usuario {user.AccountName}", user.Id);
             }
             else
             {
-                return command.Id;
+                throw new NotImplementedException();
             }
         }
     }
