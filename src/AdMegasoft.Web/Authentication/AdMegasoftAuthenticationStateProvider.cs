@@ -10,10 +10,10 @@ namespace AdMegasoft.Web.Authentication
     public class AdMegasoftAuthenticationStateProvider : AuthenticationStateProvider
     {
         public ILocalStorageService _localStorageService { get; }
-        public IUserService _userService { get; set; }
+        public ICurrentUserService _userService { get; set; }
 
         public AdMegasoftAuthenticationStateProvider(ILocalStorageService localStorageService,
-            IUserService userService)
+            ICurrentUserService userService)
         {
             _localStorageService = localStorageService;
             _userService = userService;

@@ -13,12 +13,12 @@ using System.Text;
 
 namespace Infrastructure.Services
 {
-    public class UserService : IUserService
+    public class CurrentUserService : ICurrentUserService
     {
         private readonly JWTSettings _jwtsettings;
         private readonly IUnitOfWork<int> _unitOfWork;
 
-        public UserService(IUnitOfWork<int> unitOfWork, IOptions<JWTSettings> jwtsettings)
+        public CurrentUserService(IUnitOfWork<int> unitOfWork, IOptions<JWTSettings> jwtsettings)
         {
             _jwtsettings = jwtsettings.Value;
             _unitOfWork = unitOfWork;

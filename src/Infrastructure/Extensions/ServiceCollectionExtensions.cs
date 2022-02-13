@@ -33,7 +33,7 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             return services
-                .AddScoped<IUserService, UserService>();
+                .AddScoped<ICurrentUserService, CurrentUserService>();
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)

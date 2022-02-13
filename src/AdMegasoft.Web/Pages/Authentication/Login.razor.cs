@@ -16,7 +16,7 @@ namespace AdMegasoft.Web.Pages.Authentication
         [Inject]
         private NavigationManager _navigationManager { get; set; }
         [Inject]
-        private IUserService _userService { get; set; }
+        private ICurrentUserService _userService { get; set; }
         #endregion
 
         #region (Properties) Password field behavior
