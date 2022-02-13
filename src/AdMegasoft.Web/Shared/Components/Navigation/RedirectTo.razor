@@ -1,0 +1,31 @@
+﻿@using AdMegasoft.Web.Authentication
+@inject NavigationManager _navigationManager
+
+@code {
+    [CascadingParameter]
+    Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    [Parameter]
+    public string Url { get; set; }
+    [Parameter]
+    public bool NeedAuthentication { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        if (NeedAuthentication)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
+                _navigationManager.NavigateTo(Url);
+            }
+        }
+        else
+        {
+            _navigationManager.NavigateTo(Url);
+        }
+
+    }
+}
