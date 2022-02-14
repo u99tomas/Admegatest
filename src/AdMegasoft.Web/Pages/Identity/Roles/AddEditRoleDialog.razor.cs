@@ -11,15 +11,18 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
     {
         [Inject]
         private ISnackbar _snackbar { get; set; }
+
         [Inject]
         private IMediator _mediator { get; set; }
 
         [CascadingParameter]
         private MudDialogInstance _mudDialog { get; set; }
+
         [Parameter]
         public AddEditRoleCommand AddEditRoleCommand { get; set; } = new();
 
         private MudForm _form;
+
         private AddEditRoleCommandValidator _validator = new();
 
         private async void SaveAsync()
@@ -32,10 +35,10 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             }
 
             var result = await _mediator.Send(AddEditRoleCommand);
+
             _mudDialog.Close();
 
             _snackbar.ShowMessage(result);
-
         }
 
     }
