@@ -49,7 +49,31 @@ namespace Application.Features.Users.Commands.AddEdit
             }
             else
             {
-                throw new NotImplementedException();
+                var user = await _unitOfWork.Repository<User>().GetByIdAsync(command.Id);
+
+                if (user == null)
+                {
+                    return Result<int>.Failure($"No se hallo el usuario");
+                }
+
+                user.AccountName = command.AccountName;
+                user.Password = command.Password;
+
+                var userRoles = await _unitOfWork.Repository<UserRoles>()
+                    .Entities
+                    .Where(u => u.UserId == command.Id)
+                    .ToListAsync();
+
+                await _unitOfWork.Repository<UserRoles>().RemoveRangeAsync(userRoles);
+
+                var newUserRoles = command.RoleIds.Select(id => new UserRoles { UserId = user.Id, RoleId = id })
+                    .ToList();
+
+                await _unitOfWork.Repository<UserRoles>().AddRangeAsync(newUserRoles);
+
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                return Result<int>.Success($"Se actualizo el usuario {user.AccountName}", user.Id);
             }
         }
     }

@@ -15,7 +15,7 @@
         <AuthorizeView Roles=@Permissions.Users.Create>
             <MudButton DisableElevation Variant="Variant.Filled"
                        Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                       IconColor="Color.Surface" OnClick=@ShowDialog>
+                       IconColor="Color.Surface" OnClick="@(() => ShowDialog())">
                 CREAR
             </MudButton>
         </AuthorizeView>
@@ -35,7 +35,7 @@
         <MudTd DataLabel="AccountName">@context.AccountName</MudTd>
         <MudTd DataLabel="Actions" Style="text-align: right">
             <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                <MudMenuItem>Editar</MudMenuItem>
+                <MudMenuItem  @onclick="@(() => ShowDialog(@context.Id))">Editar</MudMenuItem>
             </MudMenu>
         </MudTd>
     </RowTemplate>

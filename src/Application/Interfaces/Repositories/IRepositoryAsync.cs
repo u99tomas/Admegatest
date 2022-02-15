@@ -17,5 +17,7 @@ namespace Application.Interfaces.Repositories
         Task<List<T>> AddRangeAsync(List<T> entities);
 
         Task RemoveAsync(T entity);
+
+        Task RemoveRangeAsync(List<T> entities);
     }
 }

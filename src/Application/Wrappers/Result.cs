@@ -24,9 +24,20 @@
             Message = message;
         }
 
+        public Result(bool succeeded, T data)
+        {
+            Succeeded = succeeded;
+            Data = data;
+        }
+
         public static Result<T> Success(string message, T data)
         {
             return new Result<T>(true, message, data);
+        }
+
+        public static Result<T> Success(T data)
+        {
+            return new Result<T>(true, data);
         }
 
         public static Result<T> Failure(string message)

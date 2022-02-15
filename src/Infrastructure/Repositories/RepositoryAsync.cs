@@ -39,6 +39,12 @@ namespace Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
+        public Task RemoveRangeAsync(List<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+            return Task.CompletedTask;
+        }
+
         public async Task<List<T>> ToListAsync()
         {
             return await _context

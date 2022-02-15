@@ -16,11 +16,11 @@ namespace Application.Features.Users.Queries.GetAllPaged
         public string SearchString { get; set; }
     }
 
-    internal class GetAllPagedUsersHandler : IRequestHandler<GetAllPagedUsersQuery, PagedResult<GetAllPagedUsersResponse>>
+    internal class GetAllPagedUsersQueryHandler : IRequestHandler<GetAllPagedUsersQuery, PagedResult<GetAllPagedUsersResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
-        public GetAllPagedUsersHandler(IUnitOfWork<int> unitOfWork)
+        public GetAllPagedUsersQueryHandler(IUnitOfWork<int> unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -41,11 +41,12 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     break;
             }
 
-            return await users.Select(r =>
+            return await users.Select(u =>
                 new GetAllPagedUsersResponse
                 {
-                    Id = r.Id,
-                    AccountName = r.AccountName,
+                    Id = u.Id,
+                    AccountName = u.AccountName,
+                    Password = u.Password,
                 }).ToPagedResponseAsync(query.Page, query.PageSize);
         }
     }

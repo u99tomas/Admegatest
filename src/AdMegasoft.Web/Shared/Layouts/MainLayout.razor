@@ -7,44 +7,39 @@
 <MudDialogProvider FullWidth="true"
                    CloseButton="true"
                    DisableBackdropClick="true"
-                   CloseOnEscapeKey="true"/>
+                   CloseOnEscapeKey="true" />
 <MudSnackbarProvider />
 
 <AuthorizeView>
-    <Authorized>
 
+    <Authorized>
         <MudLayout>
-            <MudAppBar Elevation="25">
-                <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                    <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
-                </MudHidden>
-                <MudHidden Breakpoint="Breakpoint.MdAndUp">
-                    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                </MudHidden>
-                <MudHidden Breakpoint="Breakpoint.Xs">
-                    <MudText Typo="Typo.h6" Class="ml-4">AdMegasoft</MudText>
-                </MudHidden>
-                <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
-                    <MudText Typo="Typo.subtitle2">AdMegasoft</MudText>
-                </MudHidden>
-                <MudSpacer />
-                <AccountMenu></AccountMenu>
-            </MudAppBar>
+            <AppBar OnClickMenu="@DrawerToggle"></AppBar>
+
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
                 <NavMenu />
             </MudDrawer>
+
             <MudMainContent>
+
+                <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                    <MudToolBar DisableGutters="true">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
+                    </MudToolBar>
+                </MudHidden>
+
                 <MudContainer MaxWidth="MaxWidth.False" Class="my-4">
                     @Body
                 </MudContainer>
             </MudMainContent>
-        </MudLayout>
 
+        </MudLayout>
     </Authorized>
 
     <NotAuthorized>
         <RedirectTo Url="/authentication/login" NeedAuthentication="false"></RedirectTo>
     </NotAuthorized>
+
 </AuthorizeView>
 
 @code {

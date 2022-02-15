@@ -1,4 +1,5 @@
-﻿using Application.Features.Users.Queries.GetAllPaged;
+﻿using Application.Features.Users.Commands.AddEdit;
+using Application.Features.Users.Queries.GetAllPaged;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -13,6 +14,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
         private IMediator _mediator { get; set; }
 
         private MudTable<GetAllPagedUsersResponse> _table;
+        private List<GetAllPagedUsersResponse> _users;
         private bool _loading = false;
         private string _searchString = String.Empty;
 
@@ -20,7 +22,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
         {
             ToggleLoading();
 
-            var _response = await _mediator.Send(
+            var _result = await _mediator.Send(
                  new GetAllPagedUsersQuery
                  {
                      Page = state.Page,
@@ -31,9 +33,11 @@ namespace AdMegasoft.Web.Pages.Identity.Users
                  }
              );
 
+            _users = _result.Data;
+
             ToggleLoading();
 
-            return new TableData<GetAllPagedUsersResponse> { Items = _response.Data, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedUsersResponse> { Items = _result.Data, TotalItems = _result.TotalItems };
         }
 
         private void ToggleLoading()
@@ -48,9 +52,23 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             _table.ReloadServerData();
         }
 
-        private async Task ShowDialog()
+        private async Task ShowDialog(int id = -1)
         {
-            var dialog = _dialogService.Show<AddEditUserDialog>();
+            var parameters = new DialogParameters();
+
+            if (id != -1)
+            {
+                var user = _users.FirstOrDefault(u => u.Id == id);
+
+                parameters.Add(nameof(AddEditUserDialog.AddEditUserCommand), new AddEditUserCommand
+                {
+                    Id = user.Id,
+                    AccountName = user.AccountName,
+                    Password = user.Password,
+                });
+            }
+
+            var dialog = _dialogService.Show<AddEditUserDialog>("", parameters);
             var result = await dialog.Result;
 
             if (!result.Cancelled)

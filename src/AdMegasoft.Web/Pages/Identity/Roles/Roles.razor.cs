@@ -57,11 +57,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             _table.ReloadServerData();
         }
 
-        private async Task ShowDialog(int id = 0)
+        private async Task ShowDialog(int id = -1)
         {
             var parameters = new DialogParameters();
 
-            if (id != 0)
+            if (id != -1)
             {
                 var role = _roles.FirstOrDefault(r => r.Id == id);
 
@@ -73,7 +73,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                 });
             }
 
-            var dialog = _dialogService.Show<AddEditRoleDialog>("Crear", parameters);
+            var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
             var result = await dialog.Result;
 
             if (!result.Cancelled)
@@ -84,7 +84,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
         private async Task Delete(GetAllPagedRolesResponse item)
         {
-            var dialog = _dialogService.Show<DeleteConfirmationDialog>();
+            var dialog = _dialogService.Show<ConfirmationDialog>();
             var result = await dialog.Result;
 
             if (!result.Cancelled)

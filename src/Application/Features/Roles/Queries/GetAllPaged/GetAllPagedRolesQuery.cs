@@ -16,11 +16,11 @@ namespace Application.Features.Roles.Queries.GetAllPaged
         public string SearchString { get; set; }
     }
 
-    internal class GetAllPagedRolesHandler : IRequestHandler<GetAllPagedRolesQuery, PagedResult<GetAllPagedRolesResponse>>
+    internal class GetAllPagedRolesQueryHandler : IRequestHandler<GetAllPagedRolesQuery, PagedResult<GetAllPagedRolesResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
-        public GetAllPagedRolesHandler(IUnitOfWork<int> unitOfWork)
+        public GetAllPagedRolesQueryHandler(IUnitOfWork<int> unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

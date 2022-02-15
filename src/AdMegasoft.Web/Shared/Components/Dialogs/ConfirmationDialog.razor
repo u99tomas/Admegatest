@@ -2,8 +2,8 @@
 
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
-            Confirmación de eliminación
+            <MudIcon Icon="@Icons.Material.Filled.Warning" Class="mr-3 mb-n1" />
+            Advertencia
         </MudText>
     </TitleContent>
 
@@ -12,8 +12,8 @@
     </DialogContent>
 
     <DialogActions>
-        <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">CANCELAR</MudButton>
-        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Error" OnClick="Confirm">
+        <MudButton DisableElevation Variant="Variant.Text" OnClick="Cancel">CANCELAR</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="Confirm">
             CONFIRMAR
         </MudButton>
     </DialogActions>
