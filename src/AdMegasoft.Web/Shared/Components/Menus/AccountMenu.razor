@@ -3,7 +3,13 @@
 
 <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
     <ActivatorContent>
-        <MudAvatar Color="Color.Secondary">TA</MudAvatar>
+        <MudAvatar Color="Color.Secondary">
+            <AuthorizeView>
+                <Authorized>
+                    <MudText Typo="Typo.body2">@context.User.Identity.Name[0].ToString().ToUpper()</MudText>
+                </Authorized>
+            </AuthorizeView>
+        </MudAvatar>
     </ActivatorContent>
     <ChildContent>
         <PersonCard Class="mt-n2" />
@@ -20,7 +26,7 @@
 
     protected async Task LogOut()
     {
-        var adMegasoftAuthenticationStateProvider = (MegaAuthenticationStateProvider) _authenticationStateProvider;
+        var adMegasoftAuthenticationStateProvider = (MegaAuthenticationStateProvider)_authenticationStateProvider;
         await adMegasoftAuthenticationStateProvider.MarkUserAsLoggedOutAsync();
     }
 }
