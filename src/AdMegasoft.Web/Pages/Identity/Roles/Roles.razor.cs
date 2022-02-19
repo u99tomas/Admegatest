@@ -1,5 +1,6 @@
 ﻿using AdMegasoft.Web.Services;
-using AdMegasoft.Web.Shared.Components.Dialogs;
+using AdMegasoft.Web.Shared.Components.Dialog;
+using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
@@ -18,15 +19,12 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         [Inject]
         private IMediator _mediator { get; set; }
 
-        private MudTable<GetAllPagedRolesResponse> _table;
+        private MegaTable<GetAllPagedRolesResponse> _table;
         private List<GetAllPagedRolesResponse> _roles;
-        private bool _loading = false;
         private string _searchString = String.Empty;
 
         private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(TableState state)
         {
-            ToggleLoading();
-
             var _response = await _mediator.Send(
                  new GetAllPagedRolesQuery
                  {
@@ -40,18 +38,10 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             _roles = _response.Data;
 
-            ToggleLoading();
-
             return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
         }
 
-        private void ToggleLoading()
-        {
-            _loading = !_loading;
-            StateHasChanged();
-        }
-
-        private void OnSearch(string text)
+        private async Task OnSearch(string text)
         {
             _searchString = text;
             _table.ReloadServerData();
@@ -78,7 +68,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             if (!result.Cancelled)
             {
-                await _table.ReloadServerData();
+                _table.ReloadServerData();
             }
         }
 
@@ -90,7 +80,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             if (!result.Cancelled)
             {
                 var commandResult = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
-                await _table.ReloadServerData();
+                _table.ReloadServerData();
                 _snackbar.ShowMessage(commandResult);
             }
         }

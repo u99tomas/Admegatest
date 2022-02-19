@@ -1,0 +1,30 @@
+﻿@typeparam T
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<T>>>(ServerReload))"
+          T="T" Loading="@_loading" @ref="@_table"
+          Dense="true" Hover="true" Striped="true">
+
+    <ToolBarContent>
+        @ToolBarContent
+    </ToolBarContent>
+
+    <HeaderContent>
+        @HeaderContent
+    </HeaderContent>
+
+    <RowTemplate>
+        @RowTemplate(@context)
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

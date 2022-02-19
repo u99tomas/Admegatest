@@ -1,4 +1,5 @@
-﻿@using AdMegasoft.Web.Shared.Components.Text
+﻿@using AdMegasoft.Web.Shared.Components.Table
+@using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Users.Queries.GetAllPaged
 @using global::Shared.Constants.Permission
 @attribute [Authorize(Roles = Permissions.Users.View)]
@@ -6,12 +7,9 @@
 
 <MegaTitle Title="Usuarios"></MegaTitle>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllPagedUsersResponse>>>(ServerReload))"
-          T="GetAllPagedUsersResponse" Loading="@_loading"
-          Dense="true" Hover="true" Striped="true" @ref="_table">
-
+<MegaTable ServerData="@ServerReload"
+           T="GetAllPagedUsersResponse" @ref="_table">
     <ToolBarContent>
-
         <AuthorizeView Roles=@Permissions.Users.Create>
             <MudButton DisableElevation Variant="Variant.Filled"
                        Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
@@ -35,20 +33,8 @@
         <MudTd DataLabel="AccountName">@context.AccountName</MudTd>
         <MudTd DataLabel="Actions" Style="text-align: right">
             <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                <MudMenuItem  @onclick="@(() => ShowDialog(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem @onclick="@(() => ShowDialog(@context.Id))">Editar</MudMenuItem>
             </MudMenu>
         </MudTd>
     </RowTemplate>
-
-    <NoRecordsContent>
-        <MudText>No se encontraron registros coincidentes</MudText>
-    </NoRecordsContent>
-
-    <LoadingContent>
-        <MudText>Cargando...</MudText>
-    </LoadingContent>
-
-    <PagerContent>
-        <MudTablePager />
-    </PagerContent>
-</MudTable>
+</MegaTable>

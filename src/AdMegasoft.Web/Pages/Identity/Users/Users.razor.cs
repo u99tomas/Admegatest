@@ -1,4 +1,5 @@
-﻿using Application.Features.Users.Commands.AddEdit;
+﻿using AdMegasoft.Web.Shared.Components.Table;
+using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
 using MediatR;
 using Microsoft.AspNetCore.Components;
@@ -10,18 +11,18 @@ namespace AdMegasoft.Web.Pages.Identity.Users
     {
         [Inject]
         private IDialogService _dialogService { get; set; }
+
         [Inject]
         private IMediator _mediator { get; set; }
 
-        private MudTable<GetAllPagedUsersResponse> _table;
-        private List<GetAllPagedUsersResponse> _users;
-        private bool _loading = false;
-        private string _searchString = String.Empty;
+        private MegaTable<GetAllPagedUsersResponse> _table;
+
+        private List<GetAllPagedUsersResponse> _users { get; set; }
+
+        private string _searchString { get; set; } = String.Empty;
 
         private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(TableState state)
         {
-            ToggleLoading();
-
             var _result = await _mediator.Send(
                  new GetAllPagedUsersQuery
                  {
@@ -35,15 +36,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             _users = _result.Data;
 
-            ToggleLoading();
-
             return new TableData<GetAllPagedUsersResponse> { Items = _result.Data, TotalItems = _result.TotalItems };
-        }
-
-        private void ToggleLoading()
-        {
-            _loading = !_loading;
-            StateHasChanged();
         }
 
         private void OnSearch(string text)
@@ -73,7 +66,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             if (!result.Cancelled)
             {
-                await _table.ReloadServerData();
+                _table.ReloadServerData();
             }
         }
     }
