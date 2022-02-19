@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Web.Shared.Components.Table;
+﻿using AdMegasoft.Web.Models;
+using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
 using MediatR;
@@ -19,17 +20,15 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
         private List<GetAllPagedUsersResponse> _users { get; set; }
 
-        private string _searchString { get; set; } = String.Empty;
-
-        private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(TableState state)
+        private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(MegaTableState state)
         {
             var _result = await _mediator.Send(
                  new GetAllPagedUsersQuery
                  {
                      Page = state.Page,
                      PageSize = state.PageSize,
-                     SearchString = _searchString,
-                     SortDirection = state.SortDirection.ToString(),
+                     SearchString = state.SearchString,
+                     SortDirection = state.SortDirection,
                      SortLabel = state.SortLabel,
                  }
              );
@@ -37,12 +36,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             _users = _result.Data;
 
             return new TableData<GetAllPagedUsersResponse> { Items = _result.Data, TotalItems = _result.TotalItems };
-        }
-
-        private void OnSearch(string text)
-        {
-            _searchString = text;
-            _table.ReloadServerData();
         }
 
         private async Task ShowDialog(int id = -1)

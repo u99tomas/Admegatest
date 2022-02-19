@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Web.Services;
+﻿using AdMegasoft.Web.Models;
+using AdMegasoft.Web.Services;
 using AdMegasoft.Web.Shared.Components.Dialog;
 using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Roles.Commands.Add;
@@ -21,17 +22,16 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
         private MegaTable<GetAllPagedRolesResponse> _table;
         private List<GetAllPagedRolesResponse> _roles;
-        private string _searchString = String.Empty;
 
-        private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(TableState state)
+        private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(MegaTableState state)
         {
             var _response = await _mediator.Send(
                  new GetAllPagedRolesQuery
                  {
                      Page = state.Page,
                      PageSize = state.PageSize,
-                     SearchString = _searchString,
-                     SortDirection = state.SortDirection.ToString(),
+                     SearchString = state.SearchString,
+                     SortDirection = state.SortDirection,
                      SortLabel = state.SortLabel,
                  }
              );
@@ -39,12 +39,6 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             _roles = _response.Data;
 
             return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
-        }
-
-        private async Task OnSearch(string text)
-        {
-            _searchString = text;
-            _table.ReloadServerData();
         }
 
         private async Task ShowDialog(int id = -1)

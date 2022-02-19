@@ -5,15 +5,33 @@
           Dense="true" Hover="true" Striped="true">
 
     <ToolBarContent>
-        @ToolBarContent
+        @ToolBar
+        <MudSpacer />
+
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
 
     <HeaderContent>
-        @HeaderContent
+        @Header
+
+        @if (Actions != null)
+        {
+            <MudTh Style="text-align:right">Acciones</MudTh>
+        }
     </HeaderContent>
 
     <RowTemplate>
         @RowTemplate(@context)
+
+        @if (Actions != null)
+        {
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                    @Actions(@context)
+                </MudMenu>
+            </MudTd>
+        }
     </RowTemplate>
 
     <NoRecordsContent>

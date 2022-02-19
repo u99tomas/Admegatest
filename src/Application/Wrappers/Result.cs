@@ -2,9 +2,9 @@
 {
     public class Result<T>
     {
-        public T Data { get; set; }
-        public bool Succeeded { get; set; }
-        public string Message { get; set; }
+        public T Data { get; }
+        public bool Succeeded { get; }
+        public string Message { get; }
 
         public Result()
         {
@@ -28,6 +28,11 @@
         {
             Succeeded = succeeded;
             Data = data;
+        }
+
+        public Result(bool succeeded)
+        {
+            Succeeded = succeeded;
         }
 
         public static Result<T> Success(string message, T data)
