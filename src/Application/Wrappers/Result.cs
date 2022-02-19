@@ -30,11 +30,6 @@
             Data = data;
         }
 
-        public Result(bool succeeded)
-        {
-            Succeeded = succeeded;
-        }
-
         public static Result<T> Success(string message, T data)
         {
             return new Result<T>(true, message, data);
