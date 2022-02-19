@@ -7,11 +7,11 @@ namespace Application.Validators
     {
         public AddEditUserCommandValidator()
         {
-            RuleFor(u => u.AccountName)
+            RuleFor(u => u.Name)
                 .NotEmpty()
                 .WithMessage("El nombre de la cuenta es requerido");
 
-            RuleFor(u => u.AccountName)
+            RuleFor(u => u.Name)
                 .MaximumLength(50)
                 .WithMessage("El nombre de la cuenta no puede exceder los 50 caracteres");
 

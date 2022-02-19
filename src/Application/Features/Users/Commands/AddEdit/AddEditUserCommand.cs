@@ -10,7 +10,7 @@ namespace Application.Features.Users.Commands.AddEdit
     public class AddEditUserCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
-        public string AccountName { get; set; }
+        public string Name { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
         public IEnumerable<int> RoleIds { get; set; }
@@ -31,7 +31,7 @@ namespace Application.Features.Users.Commands.AddEdit
             {
                 var user = new User
                 {
-                    AccountName = command.AccountName,
+                    Name = command.Name,
                     Password = command.Password,
                     IsActive = command.IsActive,
                 };
@@ -45,7 +45,7 @@ namespace Application.Features.Users.Commands.AddEdit
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-                return Result<int>.Success($"Se creo el usuario {user.AccountName}", user.Id);
+                return Result<int>.Success($"Se creo el usuario {user.Name}", user.Id);
             }
             else
             {
@@ -56,7 +56,7 @@ namespace Application.Features.Users.Commands.AddEdit
                     return Result<int>.Failure($"No se hallo el usuario");
                 }
 
-                user.AccountName = command.AccountName;
+                user.Name = command.Name;
                 user.Password = command.Password;
 
                 var userRoles = await _unitOfWork.Repository<UserRoles>()
@@ -73,7 +73,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-                return Result<int>.Success($"Se actualizo el usuario {user.AccountName}", user.Id);
+                return Result<int>.Success($"Se actualizo el usuario {user.Name}", user.Id);
             }
         }
     }

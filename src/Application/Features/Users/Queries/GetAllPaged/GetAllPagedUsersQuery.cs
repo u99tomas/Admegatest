@@ -31,13 +31,13 @@ namespace Application.Features.Users.Queries.GetAllPaged
 
             if (!string.IsNullOrEmpty(query.SearchString))
             {
-                users = users.Where(u => u.AccountName.Contains(query.SearchString));
+                users = users.Where(u => u.Name.Contains(query.SearchString));
             }
 
             switch (query.SortLabel)
             {
-                case "AccountName":
-                    users = users.SortBy(u => u.AccountName, query.SortDirection);
+                case "Name":
+                    users = users.SortBy(u => u.Name, query.SortDirection);
                     break;
             }
 
@@ -45,7 +45,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                 new GetAllPagedUsersResponse
                 {
                     Id = u.Id,
-                    AccountName = u.AccountName,
+                    Name = u.Name,
                     Password = u.Password,
                 }).ToPagedResponseAsync(query.Page, query.PageSize);
         }

@@ -65,7 +65,7 @@ namespace Infrastructure.Services
 
                     var userResponse = await _unitOfWork.Repository<User>()
                         .Entities
-                        .Select(u => new UserResponse { Id = u.Id, AccountName = u.AccountName })
+                        .Select(u => new UserResponse { Id = u.Id, AccountName = u.Name })
                         .Where(u => u.Id == userIdAsInt)
                         .FirstOrDefaultAsync();
 
@@ -90,11 +90,11 @@ namespace Infrastructure.Services
         {
             var userResponse = await _unitOfWork.Repository<User>()
                 .Entities
-                .Where(u => u.AccountName == accountName && u.Password == password && u.IsActive)
+                .Where(u => u.Name == accountName && u.Password == password && u.IsActive)
                 .Select(u => new UserResponse
                 {
                     Id = u.Id,
-                    AccountName = u.AccountName,
+                    AccountName = u.Name,
                     Password = u.Password,
                 })
                 .FirstOrDefaultAsync();

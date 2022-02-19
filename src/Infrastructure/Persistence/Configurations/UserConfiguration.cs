@@ -8,11 +8,11 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(u => u.AccountName)
+            builder.Property(u => u.Name)
                 .HasMaxLength(25)
                 .IsRequired();
 
-            builder.HasIndex(u => u.AccountName)
+            builder.HasIndex(u => u.Name)
                 .IsUnique();
 
             builder.Property(u => u.Password)
