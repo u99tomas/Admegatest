@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Web.Models;
+﻿using AdMegasoft.Web.Extensions;
+using AdMegasoft.Web.Models;
 using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
@@ -10,6 +11,9 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 {
     public partial class Users
     {
+        [Inject]
+        private ISnackbar _snackbar { get; set; }
+
         [Inject]
         private IDialogService _dialogService { get; set; }
 
@@ -38,21 +42,31 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             return new TableData<GetAllPagedUsersResponse> { Items = _result.Data, TotalItems = _result.TotalItems };
         }
 
-        private async Task ShowDialog(int id = -1)
+        private async Task Add()
+        {
+            var dialog = _dialogService.Show<AddEditUserDialog>();
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
+        }
+
+        private async Task Edit(int id)
         {
             var parameters = new DialogParameters();
+            var user = _users.FirstOrDefault(u => u.Id == id);
 
-            if (id != -1)
+            var error = _snackbar.CheckIfNull(user);
+            if (error) return;
+
+            parameters.Add(nameof(AddEditUserDialog.AddEditUserCommand), new AddEditUserCommand
             {
-                var user = _users.FirstOrDefault(u => u.Id == id);
-
-                parameters.Add(nameof(AddEditUserDialog.AddEditUserCommand), new AddEditUserCommand
-                {
-                    Id = user.Id,
-                    AccountName = user.AccountName,
-                    Password = user.Password,
-                });
-            }
+                Id = user.Id,
+                AccountName = user.AccountName,
+                Password = user.Password,
+            });
 
             var dialog = _dialogService.Show<AddEditUserDialog>("", parameters);
             var result = await dialog.Result;

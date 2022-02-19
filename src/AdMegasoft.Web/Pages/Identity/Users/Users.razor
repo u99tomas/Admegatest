@@ -8,12 +8,11 @@
 <MegaTitle Title="Usuarios"></MegaTitle>
 
 <MegaTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
-
     <ToolBar>
         <AuthorizeView Roles=@Permissions.Users.Create>
             <MudButton DisableElevation Variant="Variant.Filled"
                        Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                       IconColor="Color.Surface" OnClick="@(() => ShowDialog())">
+                       IconColor="Color.Surface" OnClick="@(() => Add())">
                 CREAR
             </MudButton>
         </AuthorizeView>
@@ -28,6 +27,6 @@
     </RowTemplate>
 
     <Actions>
-        <MudMenuItem @onclick="@(() => ShowDialog(@context.Id))">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => Edit(@context.Id))">Editar</MudMenuItem>
     </Actions>
 </MegaTable>

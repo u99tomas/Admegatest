@@ -12,7 +12,7 @@
         <AuthorizeView Roles=@Permissions.Roles.Create>
             <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
                        StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
-                       OnClick="@(() => ShowDialog())">
+                       OnClick="@(() => Add())">
                 CREAR
             </MudButton>
         </AuthorizeView>
@@ -30,7 +30,7 @@
 
     <Actions>
         <MudMenuItem>Administrar permisos</MudMenuItem>
-        <MudMenuItem @onclick="@(() => ShowDialog(@context.Id))">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => Edit(@context.Id))">Editar</MudMenuItem>
         <MudMenuItem @onclick="@(() => Delete(@context))">Eliminar</MudMenuItem>
     </Actions>
 </MegaTable>

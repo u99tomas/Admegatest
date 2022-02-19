@@ -1,5 +1,5 @@
-﻿using AdMegasoft.Web.Models;
-using AdMegasoft.Web.Services;
+﻿using AdMegasoft.Web.Extensions;
+using AdMegasoft.Web.Models;
 using AdMegasoft.Web.Shared.Components.Dialog;
 using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Roles.Commands.Add;
@@ -15,13 +15,16 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
     {
         [Inject]
         private ISnackbar _snackbar { get; set; }
+
         [Inject]
         private IDialogService _dialogService { get; set; }
+
         [Inject]
         private IMediator _mediator { get; set; }
 
-        private MegaTable<GetAllPagedRolesResponse> _table;
-        private List<GetAllPagedRolesResponse> _roles;
+        private MegaTable<GetAllPagedRolesResponse> _table { get; set; }
+
+        private List<GetAllPagedRolesResponse> _roles { get; set; }
 
         private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(MegaTableState state)
         {
@@ -41,23 +44,33 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
         }
 
-        private async Task ShowDialog(int id = -1)
+        private async Task Edit(int id)
         {
             var parameters = new DialogParameters();
+            var role = _roles.FirstOrDefault(r => r.Id == id);
 
-            if (id != -1)
+            var error = _snackbar.CheckIfNull(role);
+            if (error) return;
+
+            parameters.Add(nameof(AddEditRoleDialog.AddEditRoleCommand), new AddEditRoleCommand
             {
-                var role = _roles.FirstOrDefault(r => r.Id == id);
-
-                parameters.Add(nameof(AddEditRoleDialog.AddEditRoleCommand), new AddEditRoleCommand
-                {
-                    Id = id,
-                    Description = role.Description,
-                    Name = role.Name,
-                });
-            }
+                Id = id,
+                Description = role.Description,
+                Name = role.Name,
+            });
 
             var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
+        }
+
+        private async Task Add()
+        {
+            var dialog = _dialogService.Show<AddEditRoleDialog>();
             var result = await dialog.Result;
 
             if (!result.Cancelled)
