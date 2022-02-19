@@ -58,8 +58,11 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             var parameters = new DialogParameters();
             var user = _users.FirstOrDefault(u => u.Id == id);
 
-            var error = _snackbar.CheckIfNull(user);
-            if (error) return;
+            if(user == null)
+            {
+                _snackbar.Add("Error de referencia nula", Severity.Error);
+                return;
+            }
 
             parameters.Add(nameof(AddEditUserDialog.AddEditUserCommand), new AddEditUserCommand
             {

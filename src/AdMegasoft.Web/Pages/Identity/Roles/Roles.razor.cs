@@ -49,8 +49,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             var parameters = new DialogParameters();
             var role = _roles.FirstOrDefault(r => r.Id == id);
 
-            var error = _snackbar.CheckIfNull(role);
-            if (error) return;
+            if (role == null)
+            {
+                _snackbar.Add("Error de referencia nula", Severity.Error);
+                return;
+            }
 
             parameters.Add(nameof(AddEditRoleDialog.AddEditRoleCommand), new AddEditRoleCommand
             {

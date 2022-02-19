@@ -17,15 +17,5 @@ namespace AdMegasoft.Web.Extensions
                 snackbar.Add(result.Message, Severity.Error);
             }
         }
-
-        public static bool CheckIfNull<T>(this ISnackbar snackbar, T? possibleNullValue)
-        {
-            if(possibleNullValue == null)
-            {
-                snackbar.Add("Error de referencia nula", Severity.Error);
-            }
-
-            return possibleNullValue == null;
-        }
     }
 }
