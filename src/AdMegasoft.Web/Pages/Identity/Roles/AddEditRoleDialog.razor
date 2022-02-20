@@ -1,30 +1,25 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
-<MegaDialog OnSave="SaveAsync"
+<MegaDialog Model="AddEditRoleCommand" OnValidSubmit="Submit"
             Icon=@(AddEditRoleCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
     <Title>
         @(AddEditRoleCommand.Id == 0? "Crear Rol" : "Editar Rol")
     </Title>
 
     <Content>
-        <MudForm Model="@AddEditRoleCommand" @ref="@_form">
+        <MudTextField @bind-Value="@AddEditRoleCommand.Name"
+                      For="@(() => AddEditRoleCommand.Name)"
+                      Immediate="true"
+                      Label="Nombre"
+                      Variant="Variant.Outlined"
+                      Class="my-3" />
 
-            <MudTextField @bind-Value="@AddEditRoleCommand.Name"
-                          Validation="@(_validator.ValidateValue)"
-                          For="@(() => AddEditRoleCommand.Name)"
-                          Immediate="true"
-                          Label="Nombre"
-                          Variant="Variant.Outlined"
-                          Class="my-3" />
-
-            <MudTextField @bind-Value="@AddEditRoleCommand.Description"
-                          Validation="@(_validator.ValidateValue)"
-                          For="@(() => AddEditRoleCommand.Description)"
-                          Immediate="true"
-                          Label="Descripción"
-                          Variant="Variant.Outlined"
-                          Lines="2"
-                          Class="my-3" />
-        </MudForm>
+        <MudTextField @bind-Value="@AddEditRoleCommand.Description"
+                      For="@(() => AddEditRoleCommand.Description)"
+                      Immediate="true"
+                      Label="Descripción"
+                      Variant="Variant.Outlined"
+                      Lines="2"
+                      Class="my-3" />
     </Content>
 </MegaDialog>

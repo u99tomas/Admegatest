@@ -21,19 +21,8 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         [Parameter]
         public AddEditRoleCommand AddEditRoleCommand { get; set; } = new();
 
-        private MudForm _form;
-
-        private AddEditRoleCommandValidator _validator = new();
-
-        private async void SaveAsync()
+        private async void Submit()
         {
-            await _form.Validate();
-
-            if (!_form.IsValid)
-            {
-                return;
-            }
-
             var result = await _mediator.Send(AddEditRoleCommand);
 
             _mudDialog.Close();

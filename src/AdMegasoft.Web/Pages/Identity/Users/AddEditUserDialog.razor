@@ -1,48 +1,43 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
-<MegaDialog OnSave="SaveAsync"
+<MegaDialog Model="AddEditUserCommand" OnValidSubmit="Submit"
             Icon=@(AddEditUserCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
     <Title>
         @(AddEditUserCommand.Id == 0? "Crear Usuario" : "Editar Usuario")
     </Title>
 
     <Content>
-        <MudForm Model="@AddEditUserCommand" @ref="@_form">
+        <MudTextField @bind-Value="@AddEditUserCommand.Name"
+                      For="@(() => AddEditUserCommand.Name)"
+                      Immediate="true"
+                      Label="Nombre"
+                      Variant="Variant.Outlined"
+                      Class="my-4" />
 
-            <MudTextField @bind-Value="@AddEditUserCommand.Name"
-                          Validation="@(_validator.ValidateValue)"
-                          For="@(() => AddEditUserCommand.Name)"
-                          Immediate="true"
-                          Label="Nombre"
-                          Variant="Variant.Outlined"
-                          Class="my-4" />
+        <MudTextField @bind-Value="@AddEditUserCommand.Password"
+                      For="@(() => AddEditUserCommand.Password)"
+                      Immediate="true"
+                      Label="Contraseña"
+                      Variant="Variant.Outlined"
+                      Adornment="Adornment.End"
+                      AdornmentIcon="@_passwordInputIcon"
+                      OnAdornmentClick="TogglePasswordVisibility"
+                      InputType="@_passwordInput"
+                      Class="mt-4" />
 
-            <MudTextField @bind-Value="@AddEditUserCommand.Password"
-                          Validation="@(_validator.ValidateValue)"
-                          For="@(() => AddEditUserCommand.Password)"
-                          Immediate="true"
-                          Label="Contraseña"
-                          Variant="Variant.Outlined"
-                          Adornment="Adornment.End"
-                          AdornmentIcon="@_passwordInputIcon"
-                          OnAdornmentClick="TogglePasswordVisibility"
-                          InputType="@_passwordInput"
-                          Class="mt-4" />
+        <MudSelect T="int" Label="Roles" MultiSelection="true"
+                   MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
+                   @bind-SelectedValues="_selectedRoles" Variant="Variant.Outlined" Class="my-4">
+            @foreach (var rol in _roles)
+            {
+                <MudSelectItem T="int" Value="@rol.Id">
+                    @rol.Name
 
-            <MudSelect T="int" Label="Roles" MultiSelection="true"
-                       MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
-                       @bind-SelectedValues="_selectedRoles" Variant="Variant.Outlined" Class="my-4">
-                @foreach (var rol in _roles)
-                {
-                    <MudSelectItem T="int" Value="@rol.Id">
-                        @rol.Name
-
-                        <MudText Typo="Typo.body2">
-                            @rol.Description 
-                        </MudText>
-                    </MudSelectItem>
-                }
-            </MudSelect>
-        </MudForm>
+                    <MudText Typo="Typo.body2">
+                        @rol.Description
+                    </MudText>
+                </MudSelectItem>
+            }
+        </MudSelect>
     </Content>
 </MegaDialog>

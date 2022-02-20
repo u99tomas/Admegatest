@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    public class TokenRequestValidator : Validator<TokenRequest>
+    public class TokenRequestValidator : AbstractValidator<TokenRequest>
     {
         public TokenRequestValidator()
         {

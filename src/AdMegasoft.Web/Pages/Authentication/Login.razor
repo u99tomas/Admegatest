@@ -9,10 +9,10 @@
 
 <MudText Typo="Typo.h6" GutterBottom="true">Iniciar sesión</MudText>
 
-<MudForm Model="@_model" @ref="@_form">
+<EditForm Model="@_model" OnValidSubmit="LoginAsync">
+    <FluentValidationValidator />
 
     <MudTextField @bind-Value="@_model.AccountName"
-                  Validation="@(_validator.ValidateValue)"
                   For="@(() => _model.AccountName)"
                   Immediate="true"
                   Label="Nombre de la cuenta"
@@ -20,7 +20,6 @@
                   Class="my-6" />
 
     <MudTextField @bind-Value="@_model.Password"
-                  Validation="@(_validator.ValidateValue)"
                   For="@(() => _model.Password)"
                   Immediate="true"
                   Label="Contraseña"
@@ -29,19 +28,21 @@
                   AdornmentIcon="@_passwordInputIcon"
                   OnAdornmentClick="TogglePasswordVisibility"
                   InputType="@_passwordInput" />
-</MudForm>
 
-<MudButton Variant="Variant.Filled" Class="mt-4" Color="Color.Primary"
-           Size="Size.Large" FullWidth="true" OnClick=@LoginAsync Disabled="_loading">
-    @if (_loading)
-    {
-        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-    }
-    else
-    {
-        <MudText>Iniciar sesión</MudText>
-    }
-</MudButton>
+    <MudButton Variant="Variant.Filled" Class="mt-4" Color="Color.Primary"
+               Size="Size.Large" FullWidth="true" Disabled="_loading" ButtonType="ButtonType.Submit">
+        @if (_loading)
+        {
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+        }
+        else
+        {
+            <MudText>Iniciar sesión</MudText>
+        }
+    </MudButton>
+</EditForm>
+
+
 
 @if (_userEnteredIsIncorrect)
 {

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Validators
 {
-    public class AddEditRoleCommandValidator : Validator<AddEditRoleCommand>
+    public class AddEditRoleCommandValidator : AbstractValidator<AddEditRoleCommand>
     {
         public AddEditRoleCommandValidator()
         {

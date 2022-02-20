@@ -28,8 +28,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
         private InputType _passwordInput = InputType.Password;
         private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
 
-        private MudForm _form;
-        private AddEditUserCommandValidator _validator { get; set; } = new();
         private List<GetAllRolesResponse> _roles { get; set; } = new();
         private IEnumerable<int> _selectedRoles { get; set; } = new HashSet<int>();
 
@@ -55,15 +53,8 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             _roles = result.Data;
         }
 
-        private async void SaveAsync()
+        private async void Submit()
         {
-            await _form.Validate();
-
-            if (!_form.IsValid)
-            {
-                return;
-            }
-
             AddEditUserCommand.RoleIds = _selectedRoles;
             AddEditUserCommand.IsActive = true;
 

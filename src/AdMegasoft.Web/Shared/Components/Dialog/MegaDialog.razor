@@ -1,24 +1,26 @@
-﻿<MudDialog>
+﻿<EditForm Model="Model" OnValidSubmit="Submit">
+    <FluentValidationValidator />
+    <MudDialog>
 
-    <TitleContent>
-        <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icon" Class="mr-3 mb-n1" />
-            @Title
-        </MudText>
-    </TitleContent>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icon" Class="mr-3 mb-n1" />
+                @Title
+            </MudText>
+        </TitleContent>
 
-    <DialogContent>
-        @Content
-    </DialogContent>
+        <DialogContent>
+            @Content
+        </DialogContent>
 
-    <DialogActions>
-        <MudButton DisableElevation Variant="Variant.Text" OnClick="Cancel">CANCELAR</MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SaveAsync">
-            GUARDAR
-        </MudButton>
-    </DialogActions>
-
-</MudDialog>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Text" OnClick="Cancel">CANCELAR</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Success" ButtonType="ButtonType.Submit">
+                GUARDAR
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
 
 @code {
     [CascadingParameter]
@@ -34,11 +36,14 @@
     public string Icon { get; set; }
 
     [Parameter]
-    public EventCallback OnSave { get; set; }
+    public object Model { get; set; }
 
-    private async Task SaveAsync()
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+    private async Task Submit()
     {
-        await OnSave.InvokeAsync();
+        await OnValidSubmit.InvokeAsync();
     }
 
     private void Cancel()

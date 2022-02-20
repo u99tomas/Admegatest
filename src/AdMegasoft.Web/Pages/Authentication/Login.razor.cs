@@ -30,19 +30,10 @@ namespace AdMegasoft.Web.Pages.Authentication
         #endregion
 
         private TokenRequest _model = new();
-        private TokenRequestValidator _validator = new();
-        private MudForm _form;
         private bool _userEnteredIsIncorrect;
 
         private async Task LoginAsync()
         {
-            await _form.Validate();
-
-            if (!_form.IsValid)
-            {
-                return;
-            }
-
             ToggleLoading();
             var userModel = await _userService.LoginAsync(_model);
 
