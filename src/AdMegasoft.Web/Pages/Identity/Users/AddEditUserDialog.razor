@@ -1,6 +1,6 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
-<MegaDialog Model="AddEditUserCommand" OnValidSubmit="Submit"
+<DialogForm Model="AddEditUserCommand" OnValidSubmit="Submit"
             Icon=@(AddEditUserCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
     <Title>
         @(AddEditUserCommand.Id == 0? "Crear Usuario" : "Editar Usuario")
@@ -40,4 +40,4 @@
             }
         </MudSelect>
     </Content>
-</MegaDialog>
+</DialogForm>

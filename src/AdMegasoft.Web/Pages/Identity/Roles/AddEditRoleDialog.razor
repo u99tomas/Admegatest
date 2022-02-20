@@ -1,6 +1,6 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
-<MegaDialog Model="AddEditRoleCommand" OnValidSubmit="Submit"
+<DialogForm Model="AddEditRoleCommand" OnValidSubmit="Submit"
             Icon=@(AddEditRoleCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
     <Title>
         @(AddEditRoleCommand.Id == 0? "Crear Rol" : "Editar Rol")
@@ -22,4 +22,4 @@
                       Lines="2"
                       Class="my-3" />
     </Content>
-</MegaDialog>
+</DialogForm>
