@@ -11,15 +11,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 {
     public partial class Users
     {
-        [Inject]
-        private ISnackbar _snackbar { get; set; }
-
-        [Inject]
-        private IDialogService _dialogService { get; set; }
-
-        [Inject]
-        private IMediator _mediator { get; set; }
-
         private MegaTable<GetAllPagedUsersResponse> _table;
 
         private List<GetAllPagedUsersResponse> _users { get; set; }
@@ -60,7 +51,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             if(user == null)
             {
-                _snackbar.Add("Error de referencia nula", Severity.Error);
+                _snackBar.Add("Error de referencia nula", Severity.Error);
                 return;
             }
 

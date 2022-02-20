@@ -9,12 +9,6 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 {
     public partial class AddEditRoleDialog
     {
-        [Inject]
-        private ISnackbar _snackbar { get; set; }
-
-        [Inject]
-        private IMediator _mediator { get; set; }
-
         [CascadingParameter]
         private MudDialogInstance _mudDialog { get; set; }
 
@@ -27,7 +21,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             _mudDialog.Close();
 
-            _snackbar.ShowMessage(result);
+            _snackBar.ShowMessage(result);
         }
 
     }

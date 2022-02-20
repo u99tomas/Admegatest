@@ -13,15 +13,6 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 {
     public partial class Roles
     {
-        [Inject]
-        private ISnackbar _snackbar { get; set; }
-
-        [Inject]
-        private IDialogService _dialogService { get; set; }
-
-        [Inject]
-        private IMediator _mediator { get; set; }
-
         private MegaTable<GetAllPagedRolesResponse> _table { get; set; }
 
         private List<GetAllPagedRolesResponse> _roles { get; set; }
@@ -51,7 +42,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             if (role == null)
             {
-                _snackbar.Add("Error de referencia nula", Severity.Error);
+                _snackBar.Add("Error de referencia nula", Severity.Error);
                 return;
             }
 
@@ -91,7 +82,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             {
                 var commandResult = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
                 _table.ReloadServerData();
-                _snackbar.ShowMessage(commandResult);
+                _snackBar.ShowMessage(commandResult);
             }
         }
     }

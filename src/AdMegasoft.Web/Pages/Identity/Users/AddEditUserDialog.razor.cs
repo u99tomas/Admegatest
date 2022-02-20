@@ -2,22 +2,13 @@
 using Application.Features.Roles.Queries.GetAll;
 using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;
-using Application.Validators;
-using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Collections.Generic;
 
 namespace AdMegasoft.Web.Pages.Identity.Users
 {
     public partial class AddEditUserDialog
     {
-        [Inject]
-        private ISnackbar _snackbar { get; set; }
-
-        [Inject]
-        private IMediator _mediator { get; set; }
-
         [CascadingParameter]
         private MudDialogInstance _mudDialog { get; set; }
 
@@ -61,7 +52,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             var result = await _mediator.Send(AddEditUserCommand);
             _mudDialog.Close();
 
-            _snackbar.ShowMessage(result);
+            _snackBar.ShowMessage(result);
         }
 
         private string GetMultiSelectionTextForRoles(List<string> selectedValues)
