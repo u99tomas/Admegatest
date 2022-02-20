@@ -1,6 +1,6 @@
-﻿using Application.Features.Roles.Queries.GetAllPaged;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application.Extensions
 {
@@ -8,7 +8,7 @@ namespace Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetAllPagedRolesQuery));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }
 }
