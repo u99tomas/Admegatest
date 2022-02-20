@@ -23,6 +23,5 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
             _snackBar.ShowMessage(result);
         }
-
     }
 }

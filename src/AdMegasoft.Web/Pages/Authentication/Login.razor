@@ -12,10 +12,10 @@
 <EditForm Model="@_model" OnValidSubmit="LoginAsync">
     <FluentValidationValidator />
 
-    <MudTextField @bind-Value="@_model.AccountName"
-                  For="@(() => _model.AccountName)"
+    <MudTextField @bind-Value="@_model.UserName"
+                  For="@(() => _model.UserName)"
                   Immediate="true"
-                  Label="Nombre de la cuenta"
+                  Label="Usuario"
                   Variant="Variant.Outlined"
                   Class="my-6" />
 

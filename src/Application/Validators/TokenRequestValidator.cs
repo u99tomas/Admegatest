@@ -7,9 +7,9 @@ namespace Application.Validators
     {
         public TokenRequestValidator()
         {
-            RuleFor(u => u.AccountName)
+            RuleFor(u => u.UserName)
                 .NotEmpty()
-                .WithMessage("Se requiere nombre de cuenta");
+                .WithMessage("Se requiere usuario");
 
             RuleFor(u => u.Password)
                 .NotEmpty()

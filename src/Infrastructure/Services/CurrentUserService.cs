@@ -26,7 +26,7 @@ namespace Infrastructure.Services
 
         public async Task<UserResponse?> LoginAsync(TokenRequest tokenRequest)
         {
-            var userResponse = await GetUserResponseAsync(tokenRequest.AccountName, tokenRequest.Password);
+            var userResponse = await GetUserResponseAsync(tokenRequest.UserName, tokenRequest.Password);
 
             if (userResponse == null) return null; // AVOID NULL REFERENCE
 
