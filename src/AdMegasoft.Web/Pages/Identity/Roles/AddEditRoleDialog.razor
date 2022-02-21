@@ -1,9 +1,9 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
 <DialogForm Model="Model" OnValidSubmit="Submit"
-            Icon=@(Model.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
+            Icon=@(EditMode? Icons.Material.Filled.Edit : Icons.Material.Filled.Add)>
     <Title>
-        @(Model.Id == 0? "Crear Rol" : "Editar Rol")
+        @(EditMode? "Editar Rol" : "Crear Rol")
     </Title>
 
     <Content>

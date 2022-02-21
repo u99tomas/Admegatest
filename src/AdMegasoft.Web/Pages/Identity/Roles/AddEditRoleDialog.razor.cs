@@ -15,6 +15,8 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         [Parameter]
         public AddEditRoleCommand Model { get; set; } = new();
 
+        private bool EditMode { get => Model.Id != 0; }
+
         private async void Submit()
         {
             var result = await _mediator.Send(Model);
