@@ -17,7 +17,9 @@ namespace AdMegasoft.Web.Pages.Authentication
         private ICurrentUserService _userService { get; set; }
 
         private bool _loading = false;
+
         private TokenRequest _model = new();
+
         private bool _userEnteredIsIncorrect;
 
         private async Task LoginAsync()
@@ -38,12 +40,10 @@ namespace AdMegasoft.Web.Pages.Authentication
             }
         }
 
-        #region (Methods) Login button behavior
         private void ToggleLoading()
         {
             _loading = !_loading;
             StateHasChanged();
         }
-        #endregion
     }
 }
