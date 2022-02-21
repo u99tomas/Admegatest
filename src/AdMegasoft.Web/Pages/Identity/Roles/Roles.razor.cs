@@ -46,7 +46,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                 return;
             }
 
-            parameters.Add(nameof(AddEditRoleDialog.AddEditRoleCommand), new AddEditRoleCommand
+            parameters.Add(nameof(AddEditRoleDialog.Model), new AddEditRoleCommand
             {
                 Id = id,
                 Description = role.Description,

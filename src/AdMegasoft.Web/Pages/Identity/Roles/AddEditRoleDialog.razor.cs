@@ -13,11 +13,11 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
         private MudDialogInstance _mudDialog { get; set; }
 
         [Parameter]
-        public AddEditRoleCommand AddEditRoleCommand { get; set; } = new();
+        public AddEditRoleCommand Model { get; set; } = new();
 
         private async void Submit()
         {
-            var result = await _mediator.Send(AddEditRoleCommand);
+            var result = await _mediator.Send(Model);
 
             _mudDialog.Close();
 

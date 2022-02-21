@@ -1,21 +1,21 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 
-<DialogForm Model="AddEditRoleCommand" OnValidSubmit="Submit"
-            Icon=@(AddEditRoleCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
+<DialogForm Model="Model" OnValidSubmit="Submit"
+            Icon=@(Model.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
     <Title>
-        @(AddEditRoleCommand.Id == 0? "Crear Rol" : "Editar Rol")
+        @(Model.Id == 0? "Crear Rol" : "Editar Rol")
     </Title>
 
     <Content>
-        <MudTextField @bind-Value="@AddEditRoleCommand.Name"
-                      For="@(() => AddEditRoleCommand.Name)"
+        <MudTextField @bind-Value="@Model.Name"
+                      For="@(() => Model.Name)"
                       Immediate="true"
                       Label="Nombre"
                       Variant="Variant.Outlined"
                       Class="my-3" />
 
-        <MudTextField @bind-Value="@AddEditRoleCommand.Description"
-                      For="@(() => AddEditRoleCommand.Description)"
+        <MudTextField @bind-Value="@Model.Description"
+                      For="@(() => Model.Description)"
                       Immediate="true"
                       Label="Descripción"
                       Variant="Variant.Outlined"
