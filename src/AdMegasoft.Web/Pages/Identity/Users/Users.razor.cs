@@ -55,7 +55,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
                 return;
             }
 
-            parameters.Add(nameof(AddEditUserDialog.AddEditUserCommand), new AddEditUserCommand
+            parameters.Add(nameof(AddEditUserDialog.Model), new AddEditUserCommand
             {
                 Id = user.Id,
                 Name = user.Name,

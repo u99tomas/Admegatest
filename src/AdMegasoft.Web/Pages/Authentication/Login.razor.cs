@@ -10,25 +10,13 @@ namespace AdMegasoft.Web.Pages.Authentication
 {
     public partial class Login
     {
-        #region Injections
         [Inject]
         private AuthenticationStateProvider _authenticationStateProvider { get; set; }
-        [Inject]
-        private NavigationManager _navigationManager { get; set; }
+
         [Inject]
         private ICurrentUserService _userService { get; set; }
-        #endregion
 
-        #region (Properties) Password field behavior
-        private bool _passwordVisibility;
-        private InputType _passwordInput = InputType.Password;
-        private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
-        #endregion
-
-        #region (Properties) Login button behavior
         private bool _loading = false;
-        #endregion
-
         private TokenRequest _model = new();
         private bool _userEnteredIsIncorrect;
 
@@ -49,24 +37,6 @@ namespace AdMegasoft.Web.Pages.Authentication
                 _navigationManager.NavigateTo("/content/dashboard");
             }
         }
-
-        #region (Methods) Password field behavior
-        private void TogglePasswordVisibility()
-        {
-            if (_passwordVisibility)
-            {
-                _passwordVisibility = false;
-                _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
-                _passwordInput = InputType.Password;
-            }
-            else
-            {
-                _passwordVisibility = true;
-                _passwordInputIcon = Icons.Material.Filled.Visibility;
-                _passwordInput = InputType.Text;
-            }
-        }
-        #endregion
 
         #region (Methods) Login button behavior
         private void ToggleLoading()

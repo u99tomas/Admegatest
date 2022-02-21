@@ -13,43 +13,29 @@ namespace AdMegasoft.Web.Pages.Identity.Users
         private MudDialogInstance _mudDialog { get; set; }
 
         [Parameter]
-        public AddEditUserCommand AddEditUserCommand { get; set; } = new();
+        public AddEditUserCommand Model { get; set; } = new();
 
-        private bool _passwordVisibility;
-        private InputType _passwordInput = InputType.Password;
-        private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+        private bool EditMode { get => Model.Id != 0; }
 
         private List<GetAllRolesResponse> _roles { get; set; } = new();
-        private IEnumerable<int> _selectedRoles { get; set; } = new HashSet<int>();
 
         protected override async Task<Task> OnInitializedAsync()
         {
-            await GetRoles();
-            await GetSelectedRoles();
-            return base.OnInitializedAsync();
-        }
+            _roles = (await _mediator.Send(new GetAllRolesQuery())).Data;
 
-        private async Task GetSelectedRoles()
-        {
-            if (AddEditUserCommand.Id != 0)
+            if (EditMode)
             {
-                var result = await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = AddEditUserCommand.Id });
-                _selectedRoles = result.Data;
+                Model.RoleIds = (await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = Model.Id })).Data; // Quizas deba ser un GetById para obtener un usuario completo
             }
-        }
 
-        private async Task GetRoles()
-        {
-            var result = await _mediator.Send(new GetAllRolesQuery());
-            _roles = result.Data;
+            return base.OnInitializedAsync();
         }
 
         private async void Submit()
         {
-            AddEditUserCommand.RoleIds = _selectedRoles;
-            AddEditUserCommand.IsActive = true;
+            Model.IsActive = true;
+            var result = await _mediator.Send(Model);
 
-            var result = await _mediator.Send(AddEditUserCommand);
             _mudDialog.Close();
 
             _snackBar.ShowMessage(result);
@@ -62,22 +48,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
                 .Select(r => r.Name);
 
             return string.Join(", ", nameOfSelectedRoles.ToArray());
-        }
-
-        private void TogglePasswordVisibility()
-        {
-            if (_passwordVisibility)
-            {
-                _passwordVisibility = false;
-                _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
-                _passwordInput = InputType.Password;
-            }
-            else
-            {
-                _passwordVisibility = true;
-                _passwordInputIcon = Icons.Material.Filled.Visibility;
-                _passwordInput = InputType.Text;
-            }
         }
     }
 }

@@ -1,33 +1,29 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
+@using AdMegasoft.Web.Shared.Components.Field
 
-<DialogForm Model="AddEditUserCommand" OnValidSubmit="Submit"
-            Icon=@(AddEditUserCommand.Id == 0? Icons.Material.Filled.Add : Icons.Material.Filled.Edit)>
+<DialogForm Model="Model" OnValidSubmit="Submit"
+            Icon=@(EditMode? Icons.Material.Filled.Edit : Icons.Material.Filled.Add)>
     <Title>
-        @(AddEditUserCommand.Id == 0? "Crear Usuario" : "Editar Usuario")
+        @(EditMode? "Editar Usuario" : "Crear Usuario")
     </Title>
 
     <Content>
-        <MudTextField @bind-Value="@AddEditUserCommand.Name"
-                      For="@(() => AddEditUserCommand.Name)"
+        <MudTextField @bind-Value="@Model.Name"
+                      For="@(() => Model.Name)"
                       Immediate="true"
                       Label="Nombre"
                       Variant="Variant.Outlined"
                       Class="my-4" />
 
-        <MudTextField @bind-Value="@AddEditUserCommand.Password"
-                      For="@(() => AddEditUserCommand.Password)"
+        <PasswordField @bind-Value="@Model.Password"
+                      For="@(() => Model.Password)"
                       Immediate="true"
                       Label="Contraseña"
-                      Variant="Variant.Outlined"
-                      Adornment="Adornment.End"
-                      AdornmentIcon="@_passwordInputIcon"
-                      OnAdornmentClick="TogglePasswordVisibility"
-                      InputType="@_passwordInput"
                       Class="mt-4" />
 
         <MudSelect T="int" Label="Roles" MultiSelection="true"
                    MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
-                   @bind-SelectedValues="_selectedRoles" Variant="Variant.Outlined" Class="my-4">
+                   @bind-SelectedValues="Model.RoleIds" Variant="Variant.Outlined" Class="my-4">
             @foreach (var rol in _roles)
             {
                 <MudSelectItem T="int" Value="@rol.Id">
