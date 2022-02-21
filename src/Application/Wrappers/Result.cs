@@ -6,9 +6,9 @@
         public bool Succeeded { get; }
         public string Message { get; }
 
-        public Result()
+        public Result(bool succeeded)
         {
-
+            Succeeded = succeeded;
         }
 
         public Result(bool succeeded, string message, T data)

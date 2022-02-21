@@ -2,13 +2,11 @@
 {
     public class PagedResult<T> : Result<T>
     {
-        public new bool Succeeded { get; }
         public new List<T> Data { get; }
         public int TotalItems { get; }
 
-        public PagedResult(bool succeeded, List<T> data, int totalItems)
+        public PagedResult(bool succeeded, List<T> data, int totalItems) : base(succeeded)
         {
-            Succeeded = succeeded;
             Data = data;
             TotalItems = totalItems;
         }
