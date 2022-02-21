@@ -1,5 +1,5 @@
 ﻿<EditForm Model="Model" OnValidSubmit="Submit">
-    <FluentValidationValidator @ref="_fluentValidationValidator"/>
+    <FluentValidationValidator />
     <MudDialog>
 
         <TitleContent>
@@ -15,7 +15,7 @@
 
         <DialogActions>
             <MudButton DisableElevation Variant="Variant.Text" OnClick="Cancel">CANCELAR</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Success" ButtonType="ButtonType.Submit" Disabled="@(!Validated)">
+            <MudButton Variant="Variant.Filled" Color="Color.Success" ButtonType="ButtonType.Submit">
                 GUARDAR
             </MudButton>
         </DialogActions>
@@ -40,10 +40,6 @@
 
     [Parameter]
     public EventCallback OnValidSubmit { get; set; }
-
-    private FluentValidationValidator _fluentValidationValidator;
-
-    private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
     private async Task Submit()
     {
