@@ -1,10 +1,7 @@
-﻿using AdMegasoft.Web.Extensions;
-using AdMegasoft.Web.Models;
+﻿using AdMegasoft.Web.Models;
 using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
-using MediatR;
-using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace AdMegasoft.Web.Pages.Identity.Users
@@ -49,7 +46,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             var parameters = new DialogParameters();
             var user = _users.FirstOrDefault(u => u.Id == id);
 
-            if(user == null)
+            if (user == null)
             {
                 _snackBar.Add("Error de referencia nula", Severity.Error);
                 return;

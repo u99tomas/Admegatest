@@ -1,5 +1,4 @@
 ﻿using Application.Features.Roles.Commands.Add;
-using Application.Interfaces.Repositories;
 using FluentValidation;
 
 namespace Application.Validators
@@ -11,7 +10,7 @@ namespace Application.Validators
             RuleFor(r => r.Name)
                 .NotEmpty()
                 .WithMessage("El nombre es requerido");
-            
+
             RuleFor(r => r.Name)
                 .MaximumLength(50)
                 .WithMessage("El nombre no puede exceder los 50 caracteres");

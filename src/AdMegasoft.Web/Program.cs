@@ -1,5 +1,4 @@
 using AdMegasoft.Web.Authentication;
-using AdMegasoft.Web.Extensions;
 using Application.Configurations;
 using Application.Extensions;
 using Blazored.LocalStorage;

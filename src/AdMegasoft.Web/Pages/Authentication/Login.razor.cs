@@ -1,10 +1,8 @@
 ﻿using AdMegasoft.Web.Authentication;
 using Application.Interfaces.Services;
 using Application.Requests;
-using Application.Validators;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using MudBlazor;
 
 namespace AdMegasoft.Web.Pages.Authentication
 {
