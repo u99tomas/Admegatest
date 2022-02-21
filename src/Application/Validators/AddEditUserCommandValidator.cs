@@ -9,13 +9,12 @@ namespace Application.Validators
         {
             RuleFor(u => u.Name)
                 .NotEmpty()
-                .WithMessage("El nombre de la cuenta es requerido");
+                .WithMessage("El nombre de usuario es requerido");
 
             RuleFor(u => u.Name)
                 .MaximumLength(50)
-                .WithMessage("El nombre de la cuenta no puede exceder los 50 caracteres");
+                .WithMessage("El nombre de usuario no puede exceder los 50 caracteres");
 
-            // password --> required, secured
             RuleFor(u => u.Password)
                 .NotEmpty()
                 .WithMessage("La contraseña es requerida");

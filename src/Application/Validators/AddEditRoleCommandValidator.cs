@@ -1,4 +1,5 @@
 ﻿using Application.Features.Roles.Commands.Add;
+using Application.Interfaces.Repositories;
 using FluentValidation;
 
 namespace Application.Validators
@@ -7,15 +8,15 @@ namespace Application.Validators
     {
         public AddEditRoleCommandValidator()
         {
-            RuleFor(u => u.Name)
+            RuleFor(r => r.Name)
                 .NotEmpty()
                 .WithMessage("El nombre es requerido");
-
-            RuleFor(u => u.Name)
+            
+            RuleFor(r => r.Name)
                 .MaximumLength(50)
                 .WithMessage("El nombre no puede exceder los 50 caracteres");
 
-            RuleFor(u => u.Description)
+            RuleFor(r => r.Description)
                 .MaximumLength(100)
                 .WithMessage("La descripción no puede exceder los 100 caracteres");
         }
