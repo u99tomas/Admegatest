@@ -1,5 +1,6 @@
 ﻿using AdMegasoft.Web.Models;
 using AdMegasoft.Web.Shared.Components.Table;
+using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
 using MudBlazor;
@@ -57,6 +58,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
                 Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
+                IsActive = user.IsActive,
             });
 
             var dialog = _dialogService.Show<AddEditUserDialog>("", parameters);

@@ -39,6 +39,10 @@ namespace Application.Features.Users.Queries.GetAllPaged
                 case "Name":
                     users = users.SortBy(u => u.Name, query.SortDirection);
                     break;
+
+                case "IsActive":
+                    users = users.SortBy(u => u.IsActive, query.SortDirection);
+                    break;
             }
 
             return await users.Select(u =>
@@ -47,6 +51,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     Id = u.Id,
                     Name = u.Name,
                     Password = u.Password,
+                    IsActive = u.IsActive,
                 }).ToPagedResponseAsync(query.Page, query.PageSize);
         }
     }

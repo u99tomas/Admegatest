@@ -25,7 +25,8 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
             if (EditMode)
             {
-                Model.RoleIds = (await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = Model.Id })).Data; // Quizas deba ser un GetById para obtener un usuario completo
+                // Se deberia obtener el usuario completo? _meaditor.Send(GetUserById) <-- trae los roles
+                Model.RoleIds = (await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = Model.Id })).Data; 
             }
 
             return base.OnInitializedAsync();
@@ -33,7 +34,6 @@ namespace AdMegasoft.Web.Pages.Identity.Users
 
         private async void Submit()
         {
-            Model.IsActive = true;
             var result = await _mediator.Send(Model);
 
             _mudDialog.Close();

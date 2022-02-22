@@ -57,6 +57,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
                 user.Name = command.Name;
                 user.Password = command.Password;
+                user.IsActive = command.IsActive;
 
                 var userRoles = await _unitOfWork.Repository<UserRoles>()
                     .Entities

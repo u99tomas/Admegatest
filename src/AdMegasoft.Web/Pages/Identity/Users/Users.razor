@@ -20,10 +20,15 @@
 
     <Header>
         <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedUsersResponse">Nombre</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="IsActive" T="GetAllPagedUsersResponse">Activo</MudTableSortLabel></MudTh>
     </Header>
 
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd>
+            <MudIcon Color="@(@context.IsActive ? Color.Success : Color.Error)"
+                     Icon="@(@context.IsActive ? @Icons.Material.Filled.CheckCircle : @Icons.Material.Filled.Cancel)" />
+        </MudTd>
     </RowTemplate>
 
     <Actions>

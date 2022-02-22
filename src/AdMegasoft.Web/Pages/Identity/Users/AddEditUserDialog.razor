@@ -16,10 +16,10 @@
                       Class="my-4" />
 
         <PasswordField @bind-Value="@Model.Password"
-                      For="@(() => Model.Password)"
-                      Immediate="true"
-                      Label="Contraseña"
-                      Class="mt-4" />
+                       For="@(() => Model.Password)"
+                       Immediate="true"
+                       Label="Contraseña"
+                       Class="mt-4" />
 
         <MudSelect T="int" Label="Roles" MultiSelection="true"
                    MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionTextForRoles))"
@@ -35,5 +35,10 @@
                 </MudSelectItem>
             }
         </MudSelect>
+
+        <MudCheckBox @bind-Checked="@Model.IsActive"
+                     For="@(() => Model.IsActive)"
+                     Color="Color.Primary"
+                     Label="Activo" />
     </Content>
 </DialogForm>
