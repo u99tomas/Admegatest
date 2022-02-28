@@ -1,9 +1,10 @@
-﻿@using AdMegasoft.Web.Shared.Components.Table
+﻿@attribute [Authorize(Roles = Permissions.Users.View)]
+@page "/identity/users"
+
+@using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Users.Queries.GetAllPaged
 @using global::Shared.Constants.Permission
-@attribute [Authorize(Roles = Permissions.Users.View)]
-@page "/identity/users"
 
 <MegaTitle Title="Usuarios"></MegaTitle>
 
@@ -12,7 +13,7 @@
         <AuthorizeView Roles=@Permissions.Users.Create>
             <MudButton DisableElevation Variant="Variant.Filled"
                        Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                       IconColor="Color.Surface" OnClick="@(() => Add())">
+                       IconColor="Color.Surface" OnClick="@(() => AddAsync())">
                 CREAR
             </MudButton>
         </AuthorizeView>
@@ -32,6 +33,6 @@
     </RowTemplate>
 
     <Actions>
-        <MudMenuItem @onclick="@(() => Edit(@context.Id))">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))">Editar</MudMenuItem>
     </Actions>
 </MegaTable>

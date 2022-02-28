@@ -31,7 +31,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             return new TableData<GetAllPagedUsersResponse> { Items = _result.Data, TotalItems = _result.TotalItems };
         }
 
-        private async Task Add()
+        private async Task AddAsync()
         {
             var dialog = _dialogService.Show<AddEditUserDialog>();
             var result = await dialog.Result;
@@ -42,7 +42,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             }
         }
 
-        private async Task Edit(int id)
+        private async Task EditAsync(int id)
         {
             var parameters = new DialogParameters();
             var user = _users.FirstOrDefault(u => u.Id == id);

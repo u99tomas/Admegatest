@@ -11,6 +11,7 @@ namespace Infrastructure.Persistence
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermissions> RolePermissions { get; set; }
+        public DbSet<PermissionGroup> PermissionGroups { get; set; }
 
         public MegaDbContext(DbContextOptions<MegaDbContext> options) : base(options)
         {

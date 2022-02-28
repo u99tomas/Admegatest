@@ -33,7 +33,23 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
         }
 
-        private async Task Edit(int id)
+        private async Task AddAsync()
+        {
+            var dialog = _dialogService.Show<AddEditRoleDialog>();
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
+        }
+
+        private void ManagePermissions()
+        {
+            _navigationManager.NavigateTo("/identity/permissions");
+        }
+
+        private async Task EditAsync(int id)
         {
             var parameters = new DialogParameters();
             var role = _roles.FirstOrDefault(r => r.Id == id);
@@ -60,18 +76,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             }
         }
 
-        private async Task Add()
-        {
-            var dialog = _dialogService.Show<AddEditRoleDialog>();
-            var result = await dialog.Result;
-
-            if (!result.Cancelled)
-            {
-                _table.ReloadServerData();
-            }
-        }
-
-        private async Task Delete(GetAllPagedRolesResponse item)
+        private async Task DeleteAsync(GetAllPagedRolesResponse item)
         {
             var dialog = _dialogService.Show<ConfirmationDialog>();
             var result = await dialog.Result;
