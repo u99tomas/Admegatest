@@ -15,7 +15,7 @@ namespace AdMegasoft.Web.Pages.Identity.Permissions
 
         private int _tabIndex;
 
-        private int _groupId { get => ++_tabIndex; }
+        private int _groupId { get => _tabIndex + 1; }
 
         //private HashSet<int> _selectedPermissions = new HashSet<int>();
 

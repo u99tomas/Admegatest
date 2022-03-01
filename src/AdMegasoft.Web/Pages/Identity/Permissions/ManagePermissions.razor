@@ -11,10 +11,7 @@
     @foreach (var group in _groups)
     {
         <MudTabPanel Text="@group.Name">
-            <MegaTable ServerData="@ServerReload" T="GetAllPagedPermissionsResponse"
-                   @ref="_table"
-                   MultiSelection="true">
-
+            <MegaTable ServerData="@ServerReload" T="GetAllPagedPermissionsResponse" @ref="_table" MultiSelection="true">
                 <ToolBar>
                     <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success"
                            StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface">
