@@ -6,7 +6,7 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Permissions.Queries.ManagePermissions
+namespace Application.Features.Permissions.Queries.GetAllPaged
 {
     public class GetAllPagedPermissionsQuery : IRequest<PagedResult<GetAllPagedPermissionsResponse>>
     {
@@ -38,7 +38,15 @@ namespace Application.Features.Permissions.Queries.ManagePermissions
 
             var permissions = _unitOfWork.Repository<Permission>()
                 .Entities
-                .Where(p => p.PermissionGroupId == query.GroupId);
+                .Select(p => new GetAllPagedPermissionsResponse
+                {
+                    Id = p.Id,
+                    GroupId = p.PermissionGroupId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Assigned = assignedPermissions.Contains(p.Id),
+                })
+                .Where(p => p.GroupId == query.GroupId);
 
             if (!string.IsNullOrEmpty(query.SearchString))
             {
@@ -54,17 +62,13 @@ namespace Application.Features.Permissions.Queries.ManagePermissions
                 case "Description":
                     permissions = permissions.SortBy(r => r.Description, query.SortDirection);
                     break;
+
+                case "State":
+                    permissions = permissions.SortBy(r => r.Assigned, query.SortDirection);
+                    break;
             }
 
-            return await permissions
-                .Select(p => new GetAllPagedPermissionsResponse
-                {
-                    Id = p.Id,
-                    GroupId = p.PermissionGroupId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Assigned = assignedPermissions.Contains(p.Id),
-                }).ToPagedResultAsync(query.Page, query.PageSize);
+            return await permissions.ToPagedResultAsync(query.Page, query.PageSize);
         }
     }
 }

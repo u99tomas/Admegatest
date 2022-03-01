@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Permissions.Queries.ManagePermissions
+﻿namespace Application.Features.Permissions.Queries.GetAllPaged
 {
     public class GetAllPagedPermissionsResponse
     {

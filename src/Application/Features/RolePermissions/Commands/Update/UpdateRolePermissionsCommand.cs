@@ -10,6 +10,8 @@ namespace Application.Features.RolePermissions.Commands.Update
     {
         public int RoleId { get; set; }
         public int[] PermissionsIds { get; set; }
+        public int PermissionId { get; set; }
+        public bool Assigned { get; set; }
     }
 
     internal class UpdateRolePermissionsCommandHandler : IRequestHandler<UpdateRolePermissionsCommand, Result<int[]>>

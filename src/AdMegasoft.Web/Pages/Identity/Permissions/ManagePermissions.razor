@@ -2,7 +2,7 @@
 
 @using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
-@using Application.Features.Permissions.Queries.ManagePermissions
+@using Application.Features.Permissions.Queries.GetAllPaged
 
 <MegaTitle title="Administrar permisos"></MegaTitle>
 
@@ -11,7 +11,7 @@
     @foreach (var group in _groups)
     {
         <MudTabPanel Text="@group.Name">
-            <MegaTable ServerData="@ServerReload" T="GetAllPagedPermissionsResponse" @ref="_table" MultiSelection="true">
+            <MegaTable ServerData="@ServerReload" T="GetAllPagedPermissionsResponse">
                 <ToolBar>
                     <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success"
                            StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface">
@@ -22,11 +22,15 @@
                 <Header>
                     <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedPermissionsResponse">Permiso</MudTableSortLabel></MudTh>
                     <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllPagedPermissionsResponse">Descripción</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="State" T="GetAllPagedPermissionsResponse">Estado</MudTableSortLabel></MudTh>
                 </Header>
 
                 <RowTemplate>
                     <MudTd DataLabel="Name">@context.Name</MudTd>
                     <MudTd DataLabel="Description">@context.Description</MudTd>
+                    <MudTd DataLabel="State">
+                        <MudCheckBox CheckedChanged="@((bool assigned) => AssignedChange(context, assigned))" Checked="context.Assigned" Color="Color.Primary"></MudCheckBox>
+                    </MudTd>
                 </RowTemplate>
             </MegaTable>
         </MudTabPanel>

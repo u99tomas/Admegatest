@@ -1,7 +1,8 @@
 ﻿using AdMegasoft.Web.Models;
 using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Groups.Queries.GetAll;
-using Application.Features.Permissions.Queries.ManagePermissions;
+using Application.Features.Permissions.Queries.GetAllPaged;
+using Application.Features.RolePermissions.Commands.Update;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Collections.Generic;
@@ -13,17 +14,15 @@ namespace AdMegasoft.Web.Pages.Identity.Permissions
         [Parameter]
         public int RoleId { get; set; }
 
-        private int _tabIndex;
-
-        private int _groupId { get => _tabIndex + 1; }
-
-        //private HashSet<int> _selectedPermissions = new HashSet<int>();
-
         private List<GetAllGroupsResponse> _groups { get; set; } = new();
 
-        private List<GetAllPagedPermissionsResponse> _permissions;
+        private List<GetAllPagedPermissionsResponse> _permissions { get; set; }
 
-        private MegaTable<GetAllPagedPermissionsResponse> _table;
+        private List<UpdateRolePermissionsCommand> _updatedPermissions { get; set; } = new();
+
+        private int _tabIndex { get; set; }
+
+        private int _groupId { get => _tabIndex + 1; }
 
         protected override async Task<Task> OnInitializedAsync()
         {
@@ -47,11 +46,43 @@ namespace AdMegasoft.Web.Pages.Identity.Permissions
              );
 
             _permissions = response.Data;
-            //_selectedPermissions = new HashSet<int>(_permissions.Select(p => p.Id));
-            //StateHasChanged();
+
+            UpdateAssignedState();
 
             return new TableData<GetAllPagedPermissionsResponse> { Items = _permissions, TotalItems = response.TotalItems };
         }
 
+        private void UpdateAssignedState()
+        {
+            var ids = (_permissions.Select(p => p.Id));
+            var matchingPermissions = _updatedPermissions.Where(up => ids.Contains(up.PermissionId));
+
+            foreach (var permission in matchingPermissions)
+            {
+                var permissionFound = _permissions.Find(p => p.Id == permission.PermissionId);
+                permissionFound.Assigned = permission.Assigned;
+            }
+        }
+
+        private void AssignedChange(GetAllPagedPermissionsResponse permission, bool assigned)
+        {
+            permission.Assigned = assigned;
+
+            var foundPermission = _updatedPermissions.Where(up => up.PermissionId == permission.Id)
+                .FirstOrDefault();
+
+            if (foundPermission == null)
+            {
+                _updatedPermissions.Add(new UpdateRolePermissionsCommand
+                {
+                    PermissionId = permission.Id,
+                    Assigned = permission.Assigned
+                });
+            }
+            else
+            {
+                foundPermission.Assigned = permission.Assigned;
+            }
+        }
     }
 }
