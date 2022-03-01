@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.Permissions.Queries.ManagePermissions
 {
-    public class ManagePermissionsResponse
+    public class GetAllPagedPermissionsResponse
     {
         public int Id { get; set; }
         public int GroupId { get; set; }

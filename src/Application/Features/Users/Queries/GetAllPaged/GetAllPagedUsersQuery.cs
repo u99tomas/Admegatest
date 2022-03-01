@@ -52,7 +52,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     Name = u.Name,
                     Password = u.Password,
                     IsActive = u.IsActive,
-                }).ToPagedResponseAsync(query.Page, query.PageSize);
+                }).ToPagedResultAsync(query.Page, query.PageSize);
         }
     }
 }

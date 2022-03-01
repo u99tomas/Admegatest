@@ -54,7 +54,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
                     Id = r.Id,
                     Name = r.Name,
                     Description = r.Description
-                }).ToPagedResponseAsync(query.Page, query.PageSize);
+                }).ToPagedResultAsync(query.Page, query.PageSize);
         }
     }
 }

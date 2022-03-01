@@ -2,6 +2,7 @@
 
 <MudTable ServerData="@(new Func<TableState, Task<TableData<T>>>(ServerReload))"
           T="T" Loading="@_loading" @ref="@_table"
+          MultiSelection="MultiSelection" @bind-SelectedItems="_selectedItems"
           Dense="true" Hover="true" Striped="true">
 
     <ToolBarContent>

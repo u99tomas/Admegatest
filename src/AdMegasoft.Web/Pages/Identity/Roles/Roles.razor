@@ -30,7 +30,7 @@
     </RowTemplate>
 
     <Actions>
-        <MudMenuItem @onclick="@(() => ManagePermissions())">Administrar permisos</MudMenuItem>
+        <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))">Administrar permisos</MudMenuItem>
         <MudMenuItem @onclick="@(() => EditAsync(@context.Id))">Editar</MudMenuItem>
         <MudMenuItem @onclick="@(() => DeleteAsync(@context))">Eliminar</MudMenuItem>
     </Actions>

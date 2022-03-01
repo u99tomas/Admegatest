@@ -21,6 +21,26 @@ namespace AdMegasoft.Web.Shared.Components.Table
         [Parameter]
         public Func<MegaTableState, Task<TableData<T>>> ServerData { get; set; }
 
+        [Parameter]
+        public bool MultiSelection { get; set; } = false;
+
+        [Parameter]
+        public EventCallback<HashSet<T>> SelectedItemsChanged { get; set; }
+
+        [Parameter]
+        public HashSet<T> SelectedItems
+        {
+            get => _selectedItems;
+            set
+            {
+                if (_selectedItems == value) return;
+                _selectedItems = value;
+                SelectedItemsChanged.InvokeAsync(value);
+            }
+        }
+
+        private HashSet<T> _selectedItems;
+
         private bool _loading { get; set; } = false;
 
         private string _searchString { get; set; } = String.Empty;

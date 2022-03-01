@@ -17,7 +17,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
         private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(MegaTableState state)
         {
-            var _response = await _mediator.Send(
+            var response = await _mediator.Send(
                  new GetAllPagedRolesQuery
                  {
                      Page = state.Page,
@@ -28,9 +28,9 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                  }
              );
 
-            _roles = _response.Data;
+            _roles = response.Data;
 
-            return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = response.TotalItems };
         }
 
         private async Task AddAsync()
@@ -44,9 +44,9 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             }
         }
 
-        private void ManagePermissions()
+        private void ManagePermissions(int roleId)
         {
-            _navigationManager.NavigateTo("/identity/permissions");
+            _navigationManager.NavigateTo($"/identity/permissions/{roleId}");
         }
 
         private async Task EditAsync(int id)
