@@ -32,7 +32,7 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             return base.OnInitializedAsync();
         }
 
-        private async void Submit()
+        private async void SubmitAsync()
         {
             var result = await _mediator.Send(Model);
 

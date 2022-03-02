@@ -14,7 +14,13 @@
             public const string View = "Permisos.Roles.Ver";
             public const string Create = "Permisos.Roles.Crear";
             public const string Edit = "Permisos.Roles.Editar";
-            private const string ManagePermissions = "Permisos.Roles.Administrar.Permisos";
+            public const string Delete = "Permisos.Roles.Eliminar";
+        }
+
+        public static class RolePermissions
+        {
+            public const string View = "Permisos.RolPermisos.Ver";
+            public const string Edit = "Permisos.RolPermisos.Editar";
         }
     }
 }

@@ -4,19 +4,16 @@
 @using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Roles.Queries.GetAllPaged
-@using global::Shared.Constants.Permission
 
 <MegaTitle Title="Roles"></MegaTitle>
 
-<MegaTable ServerData="@ServerReload" T="GetAllPagedRolesResponse" @ref="_table">
+<PagedTable ServerData="@ServerReload" T="GetAllPagedRolesResponse" @ref="_table">
     <ToolBar>
-        <AuthorizeView Roles=@Permissions.Roles.Create>
-            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
-                       OnClick="@(() => AddAsync())">
-                CREAR
-            </MudButton>
-        </AuthorizeView>
+        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
+                   OnClick="@(() => AddAsync())" Disabled="!_canCreateRoles">
+            CREAR
+        </MudButton>
     </ToolBar>
 
     <Header>
@@ -30,8 +27,8 @@
     </RowTemplate>
 
     <Actions>
-        <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))">Administrar permisos</MudMenuItem>
-        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))">Editar</MudMenuItem>
-        <MudMenuItem @onclick="@(() => DeleteAsync(@context))">Eliminar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))" Disabled="!_canViewRolePermissions">Administrar permisos</MudMenuItem>
+        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditRoles">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => DeleteAsync(@context.Id))" Disabled="!_canDeleteRoles">Eliminar</MudMenuItem>
     </Actions>
-</MegaTable>
+</PagedTable>

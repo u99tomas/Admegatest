@@ -9,9 +9,7 @@ namespace Application.Features.RolePermissions.Commands.Update
     public class UpdateRolePermissionsCommand : IRequest<Result<int[]>>
     {
         public int RoleId { get; set; }
-        public int[] PermissionsIds { get; set; }
-        public int PermissionId { get; set; }
-        public bool Assigned { get; set; }
+        public IEnumerable<int> PermissionsIds { get; set; }
     }
 
     internal class UpdateRolePermissionsCommandHandler : IRequestHandler<UpdateRolePermissionsCommand, Result<int[]>>
@@ -45,6 +43,8 @@ namespace Application.Features.RolePermissions.Commands.Update
 
             var result = await _unitOfWork.Repository<Domain.Entities.RolePermissions>()
                 .AddRangeAsync(newPermissions);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             var ids = newPermissions.Select(p => p.Id).ToArray();
 

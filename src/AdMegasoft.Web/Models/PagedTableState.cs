@@ -1,6 +1,6 @@
 ﻿namespace AdMegasoft.Web.Models
 {
-    public class MegaTableState
+    public class PagedTableState
     {
         public int Page { get; }
         public int PageSize { get; }
@@ -8,7 +8,7 @@
         public string SortDirection { get; }
         public string SortLabel { get; }
 
-        public MegaTableState(int page, int pageSize, string sortDirection, string sortLabel, string searchString)
+        public PagedTableState(int page, int pageSize, string sortDirection, string sortLabel, string searchString)
         {
             Page = page;
             PageSize = pageSize;

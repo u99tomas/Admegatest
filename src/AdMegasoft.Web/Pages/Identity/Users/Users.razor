@@ -4,19 +4,16 @@
 @using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Users.Queries.GetAllPaged
-@using global::Shared.Constants.Permission
 
 <MegaTitle Title="Usuarios"></MegaTitle>
 
-<MegaTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
+<PagedTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
     <ToolBar>
-        <AuthorizeView Roles=@Permissions.Users.Create>
-            <MudButton DisableElevation Variant="Variant.Filled"
-                       Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                       IconColor="Color.Surface" OnClick="@(() => AddAsync())">
-                CREAR
-            </MudButton>
-        </AuthorizeView>
+        <MudButton DisableElevation Variant="Variant.Filled"
+                   Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                   IconColor="Color.Surface" OnClick="@(() => AddAsync())" Disabled="!_canCreateUsers">
+            CREAR
+        </MudButton>
     </ToolBar>
 
     <Header>
@@ -33,6 +30,6 @@
     </RowTemplate>
 
     <Actions>
-        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))" Disabled="!_canEditUsers">Editar</MudMenuItem>
     </Actions>
-</MegaTable>
+</PagedTable>

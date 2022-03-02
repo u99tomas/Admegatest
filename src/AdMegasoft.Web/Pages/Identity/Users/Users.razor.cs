@@ -3,17 +3,36 @@ using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using Shared.Constants.Permission;
 
 namespace AdMegasoft.Web.Pages.Identity.Users
 {
     public partial class Users
     {
-        private MegaTable<GetAllPagedUsersResponse> _table;
+        [CascadingParameter]
+        Task<AuthenticationState> StateTask { get; set; }
+
+        private PagedTable<GetAllPagedUsersResponse> _table;
 
         private List<GetAllPagedUsersResponse> _users { get; set; }
 
-        private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(MegaTableState state)
+        private bool _canEditUsers { get; set; }
+
+        private bool _canCreateUsers { get; set; }
+
+        protected override async Task<Task> OnInitializedAsync()
+        {
+            var user = (await StateTask).User;
+            _canEditUsers = user.IsInRole(Permissions.Users.Edit);
+            _canCreateUsers = user.IsInRole(Permissions.Users.Create);
+
+            return base.OnInitializedAsync();
+        }
+
+        private async Task<TableData<GetAllPagedUsersResponse>> ServerReload(PagedTableState state)
         {
             var _result = await _mediator.Send(
                  new GetAllPagedUsersQuery
