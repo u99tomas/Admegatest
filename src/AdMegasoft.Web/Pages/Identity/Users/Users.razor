@@ -29,7 +29,7 @@
         <MudTd DataLabel="Name">@context.Name</MudTd>
     </RowTemplate>
 
-    <Actions>
+    <MenuTemplate>
         <MudMenuItem @onclick="@(() => EditAsync(@context.Id))" Disabled="!_canEditUsers">Editar</MudMenuItem>
-    </Actions>
+    </MenuTemplate>
 </PagedTable>

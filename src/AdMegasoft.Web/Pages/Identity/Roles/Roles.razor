@@ -26,9 +26,9 @@
         <MudTd DataLabel="Description">@context.Description</MudTd>
     </RowTemplate>
 
-    <Actions>
+    <MenuTemplate>
         <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))" Disabled="!_canViewRolePermissions">Administrar permisos</MudMenuItem>
         <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditRoles">Editar</MudMenuItem>
         <MudMenuItem @onclick="@(() => DeleteAsync(@context.Id))" Disabled="!_canDeleteRoles">Eliminar</MudMenuItem>
-    </Actions>
+    </MenuTemplate>
 </PagedTable>

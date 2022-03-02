@@ -13,7 +13,7 @@ namespace AdMegasoft.Web.Shared.Components.Table
         public RenderFragment Header { get; set; }
 
         [Parameter]
-        public RenderFragment<T>? Actions { get; set; }
+        public RenderFragment<T>? MenuTemplate { get; set; }
 
         [Parameter]
         public RenderFragment<T> RowTemplate { get; set; }
