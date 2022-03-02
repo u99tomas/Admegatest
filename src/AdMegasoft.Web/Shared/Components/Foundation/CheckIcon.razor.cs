@@ -10,18 +10,12 @@ namespace AdMegasoft.Web.Shared.Components.Foundation
 
         private string _icon
         {
-            get
-            {
-                return Checked ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Cancel;
-            }
+            get => Checked ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Cancel;
         }
 
         private Color _color
         {
-            get
-            {
-                return Checked ? Color.Success : Color.Error;
-            }
+            get => Checked ? Color.Success : Color.Error;
         }
     }
 }
