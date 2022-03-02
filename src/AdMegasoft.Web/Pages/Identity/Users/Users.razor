@@ -1,6 +1,7 @@
 ﻿@attribute [Authorize(Roles = Permissions.Users.View)]
 @page "/identity/users"
 
+@using AdMegasoft.Web.Shared.Components.Foundation
 @using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Users.Queries.GetAllPaged
@@ -22,10 +23,7 @@
     </Header>
 
     <RowTemplate>
-        <MudTd>
-            <MudIcon Color="@(@context.IsActive ? Color.Success : Color.Error)"
-                     Icon="@(@context.IsActive ? @Icons.Material.Filled.CheckCircle : @Icons.Material.Filled.Cancel)" />
-        </MudTd>
+        <MudTd><CheckIcon Checked="@context.IsActive"/></MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
     </RowTemplate>
 
