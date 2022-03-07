@@ -26,7 +26,11 @@ namespace AdMegasoft.Web.Pages.Identity.Users
             if (EditMode)
             {
                 // Se deberia obtener el usuario completo? _meaditor.Send(GetUserById) <-- trae los roles
-                Model.RoleIds = (await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = Model.Id })).Data; 
+                Model.RoleIds = (await _mediator.Send(new GetRolesIdsOfUserQuery { UserId = Model.Id })).Data;
+            }
+            else
+            {
+                Model.RoleIds = new List<int>();
             }
 
             return base.OnInitializedAsync();

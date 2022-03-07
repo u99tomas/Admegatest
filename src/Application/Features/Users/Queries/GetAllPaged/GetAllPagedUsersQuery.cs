@@ -37,11 +37,15 @@ namespace Application.Features.Users.Queries.GetAllPaged
             switch (query.SortLabel)
             {
                 case "Name":
-                    users = users.SortBy(u => u.Name, query.SortDirection);
+                    users = users.OrderBy(u => u.Name, query.SortDirection);
                     break;
 
                 case "IsActive":
-                    users = users.SortBy(u => u.IsActive, query.SortDirection);
+                    users = users.OrderBy(u => u.IsActive, query.SortDirection);
+                    break;
+
+                default:
+                    users = users.OrderBy(u => u.Name, "Ascending"); // Ascending: should be enum
                     break;
             }
 

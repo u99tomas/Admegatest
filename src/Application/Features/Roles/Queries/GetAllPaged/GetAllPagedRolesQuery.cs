@@ -40,11 +40,15 @@ namespace Application.Features.Roles.Queries.GetAllPaged
             switch (query.SortLabel)
             {
                 case "Name":
-                    roles = roles.SortBy(r => r.Name, query.SortDirection);
+                    roles = roles.OrderBy(r => r.Name, query.SortDirection);
                     break;
 
                 case "Description":
-                    roles = roles.SortBy(r => r.Description, query.SortDirection);
+                    roles = roles.OrderBy(r => r.Description, query.SortDirection);
+                    break;
+
+                default:
+                    roles = roles.OrderBy(r => r.Name, "Ascending"); // Ascending: should be enum
                     break;
             }
 
