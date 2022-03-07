@@ -56,20 +56,20 @@ namespace AdMegasoft.Web.Pages.Identity.RolePermissions
                     .ToList();
             }
 
-            //switch (state.SortLabel)
-            //{
-            //    case "Name":
-            //        data = _permissions.SortBy(r => r.Name, state.SortDirection);
-            //        break;
+            switch (state.SortLabel)
+            {
+                case "Name":
+                    data = data.OrderBy(r => r.Name, state.SortDirection);
+                    break;
 
-            //    case "Description":
-            //        data = _permissions.SortBy(r => r.Description, state.SortDirection);
-            //        break;
+                case "Description":
+                    data = data.OrderBy(r => r.Description, state.SortDirection);
+                    break;
 
-            //    case "State":
-            //        data = _permissions.SortBy(r => r.Assigned, state.SortDirection);
-            //        break;
-            //}
+                case "State":
+                    data = data.OrderBy(r => r.Assigned, state.SortDirection);
+                    break;
+            }
 
             var totalItems = data.Count();
 
