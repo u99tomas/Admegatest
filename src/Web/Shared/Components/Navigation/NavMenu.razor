@@ -8,16 +8,33 @@
 
     @foreach (var group in _navGroups)
     {
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">@group.Name</MudText>
+        var canViewGroup = group.NavElements.Any(ne =>
+        {
+            if (ne.GetType() == typeof(NavLinkGroup))
+            {
+                var navLinkGroup = (NavLinkGroup)ne;
+                return navLinkGroup.RequiredRoles.Any(r => _user.IsInRole(r));
+            }
+            else
+            {
+                var navLink = (Web.Models.Nav.NavLink)ne;
+                return _user.IsInRole(navLink.RequiredRole) || navLink.RequiredRole == string.Empty;
+            }
+        });
 
+        if (canViewGroup)
+        {
+            <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">@group.Name</MudText>
+        }
+        
         @foreach (var element in group.NavElements)
         {
             if (element.GetType() == typeof(NavLinkGroup))
             {
                 var linkGroup = (NavLinkGroup)element;
-                var canViewGroup = linkGroup.RequiredRoles.Any(r => _user.IsInRole(r) || r == string.Empty);
+                var canViewLinkGroup = linkGroup.RequiredRoles.Any(r => _user.IsInRole(r) || r == string.Empty);
 
-                if (canViewGroup)
+                if (canViewLinkGroup)
                 {
                     <MudNavGroup Title="@linkGroup.Name" Icon="@linkGroup.Icon" Expanded="_isSearching">
                         @foreach (var link in linkGroup.NavLinks)
