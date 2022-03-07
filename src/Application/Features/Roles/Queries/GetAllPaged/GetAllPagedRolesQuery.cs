@@ -30,13 +30,11 @@ namespace Application.Features.Roles.Queries.GetAllPaged
         {
             var roles = _unitOfWork.Repository<Role>().Entities;
 
-            if (query.SearchString != string.Empty)
-            {
-                roles = roles.Where(
-                    r => r.Name.Contains(query.SearchString) ||
-                    r.Description.Contains(query.SearchString)
-                );
-            }
+            roles = roles.Search(
+                r => r.Name.Contains(query.SearchString) ||
+                r.Description.Contains(query.SearchString),
+                query.SearchString
+            );
 
             switch (query.SortLabel)
             {
