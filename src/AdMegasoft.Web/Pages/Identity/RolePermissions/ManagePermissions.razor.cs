@@ -26,7 +26,7 @@ namespace AdMegasoft.Web.Pages.Identity.RolePermissions
 
         private List<ManagePermissionsPermissionsResponse> _permissions { get; set; } = new();
 
-        private MudTabs _tabs;
+        private MudTabs _tabs { get; set; }
 
         private int _groupId { get => (int)_tabs.ActivePanel.ID; }
 
