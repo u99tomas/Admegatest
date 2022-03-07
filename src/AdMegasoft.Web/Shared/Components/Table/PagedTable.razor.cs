@@ -1,4 +1,5 @@
-﻿using AdMegasoft.Web.Models;
+﻿using AdMegasoft.Web.Mappings;
+using AdMegasoft.Web.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -47,11 +48,10 @@ namespace AdMegasoft.Web.Shared.Components.Table
 
         private MudTable<T> _table;
 
-        private async Task<TableData<T>> ServerReload(TableState state)
+        private async Task<TableData<T>> ServerReload(MudBlazor.TableState state)
         {
             ToggleLoading();
-            var megaState = new PagedTableState(state.Page, state.PageSize, state.SortDirection.ToString(), state.SortLabel, _searchString);
-            var tableData = await ServerData(megaState);
+            var tableData = await ServerData(state.ToPagedTableState(_searchString));
             ToggleLoading();
 
             return tableData;

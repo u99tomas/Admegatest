@@ -1,20 +1,13 @@
-﻿namespace AdMegasoft.Web.Models
+﻿using Application.Enums;
+
+namespace AdMegasoft.Web.Models
 {
     public class PagedTableState
     {
-        public int Page { get; }
-        public int PageSize { get; }
-        public string SearchString { get; }
-        public string SortDirection { get; }
-        public string SortLabel { get; }
-
-        public PagedTableState(int page, int pageSize, string sortDirection, string sortLabel, string searchString)
-        {
-            Page = page;
-            PageSize = pageSize;
-            SortDirection = sortDirection;
-            SortLabel = sortLabel;
-            SearchString = searchString;
-        }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchString { get; set; }
+        public SortDirection SortDirection { get; set; }
+        public string SortLabel { get; set; }
     }
 }

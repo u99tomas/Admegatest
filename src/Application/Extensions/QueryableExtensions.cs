@@ -1,17 +1,22 @@
-﻿using System.Linq.Expressions;
+﻿using Application.Enums;
+using System.Linq.Expressions;
 
 namespace Application.Extensions
 {
     public static class QueryableExtensions
     {
-        public static IOrderedQueryable<TSource> OrderBy<TSource, TKey>(this IQueryable<TSource> queryable, Expression<Func<TSource, TKey>> keySelector, string sortDirection)
+        public static IQueryable<TSource> OrderBy<TSource, TKey>(this IQueryable<TSource> queryable, Expression<Func<TSource, TKey>> keySelector, SortDirection sortDirection)
         {
-            var isDescending = string.Equals(sortDirection, "Descending", StringComparison.OrdinalIgnoreCase);
-
-            if (isDescending)
+            if (sortDirection == SortDirection.Descending)
+            {
                 return queryable.OrderByDescending(keySelector);
-            else
+            }
+            else if (sortDirection == SortDirection.Ascending)
+            {
                 return queryable.OrderBy(keySelector);
+            }
+
+            return queryable;
         }
     }
 }

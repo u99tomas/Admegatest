@@ -1,4 +1,5 @@
-﻿using Application.Extensions;
+﻿using Application.Enums;
+using Application.Extensions;
 using Application.Interfaces.Repositories;
 using Application.Mappings;
 using Application.Wrappers;
@@ -11,7 +12,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
     {
         public int PageSize { get; set; }
         public int Page { get; set; }
-        public string SortDirection { get; set; }
+        public SortDirection SortDirection { get; set; }
         public string SortLabel { get; set; }
         public string SearchString { get; set; }
     }
@@ -45,7 +46,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     break;
 
                 default:
-                    users = users.OrderBy(u => u.Name, "Ascending"); // Ascending: should be enum
+                    users = users.OrderBy(u => u.Name, SortDirection.Ascending);
                     break;
             }
 
