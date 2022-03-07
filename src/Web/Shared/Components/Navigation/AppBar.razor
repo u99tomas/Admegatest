@@ -13,14 +13,3 @@
     <MudSpacer />
     <AccountMenu></AccountMenu>
 </MudAppBar>
-
-
-@code {
-    [Parameter]
-    public EventCallback OnClickMenu { get; set; }
-
-    private async void ClickMenu()
-    {
-        await OnClickMenu.InvokeAsync();
-    }
-}

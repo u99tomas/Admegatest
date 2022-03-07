@@ -19,20 +19,3 @@
     </DialogActions>
 
 </MudDialog>
-
-
-@code
-{
-    [CascadingParameter]
-    private MudDialogInstance _mudDialog { get; set; }
-
-    private void Confirm()
-    {
-        _mudDialog.Close(DialogResult.Ok(true));
-    }
-
-    private void Cancel()
-    {
-        _mudDialog.Cancel();
-    }
-}
