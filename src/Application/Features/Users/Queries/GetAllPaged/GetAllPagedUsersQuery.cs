@@ -30,7 +30,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
         {
             var users = _unitOfWork.Repository<User>().Entities;
 
-            if (!string.IsNullOrEmpty(query.SearchString))
+            if (query.SearchString != string.Empty)
             {
                 users = users.Where(u => u.Name.Contains(query.SearchString));
             }
