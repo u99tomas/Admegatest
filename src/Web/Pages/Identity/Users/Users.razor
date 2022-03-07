@@ -1,0 +1,33 @@
+﻿@attribute [Authorize(Roles = Permissions.Users.View)]
+@page "/identity/users"
+
+@using Web.Shared.Components.Foundation
+@using Web.Shared.Components.Table
+@using Web.Shared.Components.Text
+@using Application.Features.Users.Queries.GetAllPaged
+
+<MegaTitle Title="Usuarios"></MegaTitle>
+
+<PagedTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
+    <ToolBar>
+        <MudButton DisableElevation Variant="Variant.Filled"
+                   Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                   IconColor="Color.Surface" OnClick="@(() => AddAsync())" Disabled="!_canCreateUsers">
+            CREAR
+        </MudButton>
+    </ToolBar>
+
+    <Header>
+        <MudTh><MudTableSortLabel SortLabel="IsActive" T="GetAllPagedUsersResponse">Activo</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedUsersResponse">Nombre</MudTableSortLabel></MudTh>
+    </Header>
+
+    <RowTemplate>
+        <MudTd><CheckIcon Checked="@context.IsActive"/></MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+    </RowTemplate>
+
+    <MenuTemplate>
+        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))" Disabled="!_canEditUsers">Editar</MudMenuItem>
+    </MenuTemplate>
+</PagedTable>

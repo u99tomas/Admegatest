@@ -1,0 +1,50 @@
+﻿@using Web.Authentication
+@using Web.Shared.Components.Card
+@using System.Security.Claims
+@using global::Shared.Constants.Permission
+
+<PersonCard />
+
+<MudDivider Class="mb-4" />
+
+<MudNavMenu>
+    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
+    <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
+    <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
+
+    @if (_canViewUsers || _canViewRoles)
+    {
+        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
+    }
+
+    @if (_canViewUsers || _canViewRoles)
+    {
+        <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
+            @if (_canViewUsers)
+            {
+                <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
+            }
+            @if (_canViewRoles)
+            {
+                <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
+            }
+        </MudNavGroup>
+    }
+
+</MudNavMenu>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> _stateTask { get; set; }
+
+    private bool _canViewUsers { get; set; }
+    private bool _canViewRoles { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var user = (await _stateTask).User;
+
+        _canViewUsers = user.IsInRole(Permissions.Users.View);
+        _canViewRoles = user.IsInRole(Permissions.Roles.View);
+    }
+}

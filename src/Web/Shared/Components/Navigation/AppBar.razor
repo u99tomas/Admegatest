@@ -1,0 +1,26 @@
+﻿@using Web.Shared.Components.Menu
+
+<MudAppBar Elevation="25">
+    <MudHidden Breakpoint="Breakpoint.MdAndUp">
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="ClickMenu" />
+    </MudHidden>
+    <MudHidden Breakpoint="Breakpoint.Xs">
+        <MudText Typo="Typo.h6" Class="ml-1">AdMegasoft</MudText>
+    </MudHidden>
+    <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+        <MudText Typo="Typo.subtitle2">AdMegasoft</MudText>
+    </MudHidden>
+    <MudSpacer />
+    <AccountMenu></AccountMenu>
+</MudAppBar>
+
+
+@code {
+    [Parameter]
+    public EventCallback OnClickMenu { get; set; }
+
+    private async void ClickMenu()
+    {
+        await OnClickMenu.InvokeAsync();
+    }
+}
