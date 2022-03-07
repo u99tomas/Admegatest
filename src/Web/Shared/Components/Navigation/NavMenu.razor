@@ -3,12 +3,11 @@
 @using System.Security.Claims
 @using global::Shared.Constants.Permission
 
-<PersonCard />
-
-<MudDivider Class="mb-4" />
-
 <MudNavMenu>
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
+    <MudTextField @bind-Value="_searchString" Placeholder="Buscar" Adornment="Adornment.End"
+                  AdornmentIcon="@Icons.Filled.Search" IconSize="Size.Medium" Class="my-0 mx-2" Immediate="true"></MudTextField>
+
+    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 mb-3 mt-5">Personal</MudText>
     <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
     <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
 

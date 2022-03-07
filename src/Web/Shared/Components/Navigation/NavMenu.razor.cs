@@ -9,6 +9,8 @@ namespace Web.Shared.Components.Navigation
         [CascadingParameter]
         private Task<AuthenticationState> _stateTask { get; set; }
 
+        private string _searchString { get; set; }
+
         private bool _canViewUsers { get; set; }
         private bool _canViewRoles { get; set; }
 
