@@ -19,7 +19,7 @@ namespace Application.Extensions
             return queryable;
         }
 
-        public static IQueryable<TSource> Search<TSource>(this IQueryable<TSource> queryable, Expression<Func<TSource, bool>> predicate, string searchString)
+        public static IQueryable<TSource> Filter<TSource>(this IQueryable<TSource> queryable, Expression<Func<TSource, bool>> predicate, string searchString)
         {
             if(string.Empty == searchString) return queryable;
             return queryable.Where(predicate);

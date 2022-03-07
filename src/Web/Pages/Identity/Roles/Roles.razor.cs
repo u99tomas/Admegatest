@@ -1,5 +1,5 @@
 ﻿using Web.Extensions;
-using Web.Models;
+using Web.Models.Table;
 using Web.Shared.Components.Dialog;
 using Web.Shared.Components.Table;
 using Application.Features.Roles.Commands.Add;

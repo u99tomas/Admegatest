@@ -1,4 +1,4 @@
-﻿using Web.Models;
+﻿using Web.Models.Table;
 using Web.Shared.Components.Table;
 using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;

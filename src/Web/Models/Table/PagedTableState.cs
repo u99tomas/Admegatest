@@ -1,6 +1,6 @@
 ﻿using Application.Enums;
 
-namespace Web.Models
+namespace Web.Models.Table
 {
     public class PagedTableState
     {

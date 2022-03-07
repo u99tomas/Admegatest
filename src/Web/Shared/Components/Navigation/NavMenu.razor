@@ -1,4 +1,5 @@
 ﻿@using Web.Authentication
+@using Web.Models.Nav
 @using Web.Shared.Components.Card
 @using System.Security.Claims
 @using global::Shared.Constants.Permission
@@ -7,27 +8,39 @@
     <MudTextField @bind-Value="_searchString" Placeholder="Buscar" Adornment="Adornment.End"
                   AdornmentIcon="@Icons.Filled.Search" IconSize="Size.Medium" Class="my-0 mx-2" Immediate="true"></MudTextField>
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 mb-3 mt-5">Personal</MudText>
-    <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
-    <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
-
-    @if (_canViewUsers || _canViewRoles)
+    @foreach (var group in _navGroups)
     {
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
-    }
+        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">@group.Name</MudText>
 
-    @if (_canViewUsers || _canViewRoles)
-    {
-        <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
-            @if (_canViewUsers)
+        @foreach (var element in group.NavElements)
+        {
+            if (element.GetType() == typeof(NavLinkGroup))
             {
-                <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
-            }
-            @if (_canViewRoles)
-            {
-                <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
-            }
-        </MudNavGroup>
-    }
+                var linkGroup = (NavLinkGroup)element;
+                var canViewGroup = linkGroup.RequiredRoles.Any(r => _user.IsInRole(r) || r == string.Empty);
 
+                if (canViewGroup)
+                {
+                    <MudNavGroup Title="@linkGroup.Name" Icon="@linkGroup.Icon" Expanded="_isSearching">
+                        @foreach (var link in linkGroup.NavLinks)
+                        {
+                            if (_user.IsInRole(link.RequiredRole) || link.RequiredRole == string.Empty)
+                            {
+                                <MudNavLink Href="@link.Url" Icon="@link.Icon">@link.Name</MudNavLink>
+                            }
+                        }
+                    </MudNavGroup>
+                }
+
+            }
+            else
+            {
+                var link = (Web.Models.Nav.NavLink)element;
+                if (_user.IsInRole(link.RequiredRole) || link.RequiredRole == string.Empty)
+                {
+                    <MudNavLink Href="@link.Url" Icon="@link.Icon">@link.Name</MudNavLink>
+                }
+            }
+        }
+    }
 </MudNavMenu>

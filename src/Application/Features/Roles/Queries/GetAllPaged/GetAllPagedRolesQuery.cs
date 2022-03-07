@@ -30,7 +30,7 @@ namespace Application.Features.Roles.Queries.GetAllPaged
         {
             var roles = _unitOfWork.Repository<Role>().Entities;
 
-            roles = roles.Search(
+            roles = roles.Filter(
                 r => r.Name.Contains(query.SearchString) ||
                 r.Description.Contains(query.SearchString),
                 query.SearchString

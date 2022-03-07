@@ -1,5 +1,5 @@
 ﻿using Web.Mappings;
-using Web.Models;
+using Web.Models.Table;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
