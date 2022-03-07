@@ -15,7 +15,7 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
 
         private bool EditMode { get => Model.Id != 0; }
 
-        private async void Submit()
+        private async void SubmitAsync()
         {
             var result = await _mediator.Send(Model);
 

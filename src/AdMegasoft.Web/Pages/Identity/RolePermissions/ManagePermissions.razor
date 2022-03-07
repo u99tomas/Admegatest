@@ -1,0 +1,42 @@
+﻿@attribute [Authorize(Roles = Permissions.RolePermissions.View)]
+@page "/identity/role/permissions/{RoleId:int}"
+
+@using AdMegasoft.Web.Shared.Components.Table
+@using AdMegasoft.Web.Shared.Components.Text
+@using Application.Features.Permissions.Queries.ManagePermissions
+
+<MegaTitle title="Administrar permisos"></MegaTitle>
+
+<MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true"
+         AlwaysShowScrollButtons="true" @ref="_tabs">
+    @foreach (var group in _groups)
+    {
+        var selected = _permissions.Where(p => p.GroupId == group.Id).Count(p => p.Assigned);
+        var total = _permissions.Where(p => p.GroupId == group.Id).Count();
+
+        <MudTabPanel Text="@group.Name" ID="group.Id" BadgeData="@($"{selected}/{total}")" BadgeColor="@GetBadgeColor(selected, total)">
+            <PagedTable ServerData="@ServerReload" T="ManagePermissionsPermissionsResponse">
+                <ToolBar>
+                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Success"
+                           StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface" OnClick="SaveAsync" Disabled="!_canEditPermissions">
+                        Guardar
+                    </MudButton>
+                </ToolBar>
+
+                <Header>
+                    <MudTh><MudTableSortLabel SortLabel="Name" T="ManagePermissionsPermissionsResponse">Permiso</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="Description" T="ManagePermissionsPermissionsResponse">Descripción</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="State" T="ManagePermissionsPermissionsResponse">Estado</MudTableSortLabel></MudTh>
+                </Header>
+
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@context.Name</MudTd>
+                    <MudTd DataLabel="Description">@context.Description</MudTd>
+                    <MudTd DataLabel="State">
+                        <MudCheckBox @bind-Checked="context.Assigned" Color="Color.Primary" Disabled="!_canEditPermissions"></MudCheckBox>
+                    </MudTd>
+                </RowTemplate>
+            </PagedTable>
+        </MudTabPanel>
+    }
+</MudTabs>

@@ -12,19 +12,19 @@
     <MudNavLink Href="/content/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
     <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.Person">Mi cuenta</MudNavLink>
 
-    @if (CanViewUsers && CanViewRoles)
+    @if (_canViewUsers || _canViewRoles)
     {
         <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Páginas</MudText>
     }
 
-    @if (CanViewUsers && CanViewRoles)
+    @if (_canViewUsers || _canViewRoles)
     {
         <MudNavGroup Title="Admin" Icon="@Icons.Outlined.AdminPanelSettings" Expanded="true">
-            @if (CanViewUsers)
+            @if (_canViewUsers)
             {
                 <MudNavLink Href="/identity/users" Icon="@Icons.Outlined.People">Usuarios</MudNavLink>
             }
-            @if (CanViewRoles)
+            @if (_canViewRoles)
             {
                 <MudNavLink Href="/identity/roles" Icon="@Icons.Outlined.BackHand">Roles</MudNavLink>
             }
@@ -35,17 +35,16 @@
 
 @code {
     [CascadingParameter]
-    Task<AuthenticationState> authenticationStateTask { get; set; }
+    private Task<AuthenticationState> _stateTask { get; set; }
 
-    public bool CanViewUsers { get; set; }
-    public bool CanViewRoles { get; set; }
+    private bool _canViewUsers { get; set; }
+    private bool _canViewRoles { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        var authState = await authenticationStateTask;
-        var user = authState.User;
+        var user = (await _stateTask).User;
 
-        CanViewUsers = user.IsInRole(Permissions.Users.View);
-        CanViewRoles = user.IsInRole(Permissions.Roles.View);
+        _canViewUsers = user.IsInRole(Permissions.Users.View);
+        _canViewRoles = user.IsInRole(Permissions.Roles.View);
     }
 }

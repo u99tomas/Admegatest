@@ -11,5 +11,10 @@ namespace Infrastructure.Repositories
         {
             _repository = repository;
         }
+
+        public bool AnyWIthName(string name)
+        {
+            return _repository.Entities.Any(x => x.Name == name);
+        }
     }
 }

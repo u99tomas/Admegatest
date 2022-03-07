@@ -5,19 +5,44 @@ using AdMegasoft.Web.Shared.Components.Table;
 using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using Shared.Constants.Permission;
 
 namespace AdMegasoft.Web.Pages.Identity.Roles
 {
     public partial class Roles
     {
-        private MegaTable<GetAllPagedRolesResponse> _table { get; set; }
+        [CascadingParameter]
+        Task<AuthenticationState> StateTask { get; set; }
+
+        private PagedTable<GetAllPagedRolesResponse> _table { get; set; }
 
         private List<GetAllPagedRolesResponse> _roles { get; set; }
 
-        private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(MegaTableState state)
+        private bool _canEditRoles { get; set; }
+
+        private bool _canCreateRoles { get; set; }
+
+        private bool _canDeleteRoles { get; set; }
+
+        private bool _canViewRolePermissions { get; set; }
+
+        protected override async Task<Task> OnInitializedAsync()
         {
-            var _response = await _mediator.Send(
+            var user = (await StateTask).User;
+            _canEditRoles = user.IsInRole(Permissions.Roles.Edit);
+            _canCreateRoles = user.IsInRole(Permissions.Roles.Create);
+            _canDeleteRoles = user.IsInRole(Permissions.Roles.Delete);
+            _canViewRolePermissions = user.IsInRole(Permissions.RolePermissions.View);
+            
+            return base.OnInitializedAsync();
+        }
+
+        private async Task<TableData<GetAllPagedRolesResponse>> ServerReload(PagedTableState state)
+        {
+            var response = await _mediator.Send(
                  new GetAllPagedRolesQuery
                  {
                      Page = state.Page,
@@ -28,25 +53,34 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
                  }
              );
 
-            _roles = _response.Data;
+            _roles = response.Data;
 
-            return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = _response.TotalItems };
+            return new TableData<GetAllPagedRolesResponse> { Items = _roles, TotalItems = response.TotalItems };
         }
 
-        private async Task Edit(int id)
+        private async Task AddAsync()
+        {
+            var dialog = _dialogService.Show<AddEditRoleDialog>();
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
+        }
+
+        private void ManagePermissions(int roleId)
+        {
+            _navigationManager.NavigateTo($"/identity/role/permissions/{roleId}");
+        }
+
+        private async Task EditAsync(GetAllPagedRolesResponse role)
         {
             var parameters = new DialogParameters();
-            var role = _roles.FirstOrDefault(r => r.Id == id);
-
-            if (role == null)
-            {
-                _snackBar.Add("Error de referencia nula", Severity.Error);
-                return;
-            }
 
             parameters.Add(nameof(AddEditRoleDialog.Model), new AddEditRoleCommand
             {
-                Id = id,
+                Id = role.Id,
                 Description = role.Description,
                 Name = role.Name,
             });
@@ -60,25 +94,14 @@ namespace AdMegasoft.Web.Pages.Identity.Roles
             }
         }
 
-        private async Task Add()
-        {
-            var dialog = _dialogService.Show<AddEditRoleDialog>();
-            var result = await dialog.Result;
-
-            if (!result.Cancelled)
-            {
-                _table.ReloadServerData();
-            }
-        }
-
-        private async Task Delete(GetAllPagedRolesResponse item)
+        private async Task DeleteAsync(int id)
         {
             var dialog = _dialogService.Show<ConfirmationDialog>();
             var result = await dialog.Result;
 
             if (!result.Cancelled)
             {
-                var commandResult = await _mediator.Send(new DeleteRoleCommand { Id = item.Id });
+                var commandResult = await _mediator.Send(new DeleteRoleCommand { Id = id });
                 _table.ReloadServerData();
                 _snackBar.ShowMessage(commandResult);
             }

@@ -6,7 +6,7 @@ namespace Application.Mappings
 {
     public static class QueryableMappings
     {
-        public static async Task<PagedResult<T>> ToPagedResponseAsync<T>(this IQueryable<T> queryable, int page, int pageSize)
+        public static async Task<PagedResult<T>> ToPagedResultAsync<T>(this IQueryable<T> queryable, int page, int pageSize)
         {
             var totalItems = await queryable.CountAsync();
 

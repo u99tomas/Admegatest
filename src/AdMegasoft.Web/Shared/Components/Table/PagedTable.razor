@@ -2,6 +2,7 @@
 
 <MudTable ServerData="@(new Func<TableState, Task<TableData<T>>>(ServerReload))"
           T="T" Loading="@_loading" @ref="@_table"
+          MultiSelection="MultiSelection" @bind-SelectedItems="_selectedItems"
           Dense="true" Hover="true" Striped="true">
 
     <ToolBarContent>
@@ -15,7 +16,7 @@
     <HeaderContent>
         @Header
 
-        @if (Actions != null)
+        @if (MenuTemplate != null)
         {
             <MudTh Style="text-align:right">Acciones</MudTh>
         }
@@ -24,11 +25,11 @@
     <RowTemplate>
         @RowTemplate(@context)
 
-        @if (Actions != null)
+        @if (MenuTemplate != null)
         {
             <MudTd DataLabel="Actions" Style="text-align: right">
                 <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                    @Actions(@context)
+                    @MenuTemplate(@context)
                 </MudMenu>
             </MudTd>
         }

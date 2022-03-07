@@ -4,7 +4,7 @@ using MudBlazor;
 
 namespace AdMegasoft.Web.Shared.Components.Table
 {
-    public partial class MegaTable<T>
+    public partial class PagedTable<T>
     {
         [Parameter]
         public RenderFragment ToolBar { get; set; }
@@ -13,13 +13,33 @@ namespace AdMegasoft.Web.Shared.Components.Table
         public RenderFragment Header { get; set; }
 
         [Parameter]
-        public RenderFragment<T>? Actions { get; set; }
+        public RenderFragment<T>? MenuTemplate { get; set; }
 
         [Parameter]
         public RenderFragment<T> RowTemplate { get; set; }
 
         [Parameter]
-        public Func<MegaTableState, Task<TableData<T>>> ServerData { get; set; }
+        public Func<PagedTableState, Task<TableData<T>>> ServerData { get; set; }
+
+        [Parameter]
+        public bool MultiSelection { get; set; } = false;
+
+        [Parameter]
+        public EventCallback<HashSet<T>> SelectedItemsChanged { get; set; }
+
+        [Parameter]
+        public HashSet<T> SelectedItems
+        {
+            get => _selectedItems;
+            set
+            {
+                if (_selectedItems == value) return;
+                _selectedItems = value;
+                SelectedItemsChanged.InvokeAsync(value);
+            }
+        }
+
+        private HashSet<T> _selectedItems;
 
         private bool _loading { get; set; } = false;
 
@@ -30,7 +50,7 @@ namespace AdMegasoft.Web.Shared.Components.Table
         private async Task<TableData<T>> ServerReload(TableState state)
         {
             ToggleLoading();
-            var megaState = new MegaTableState(state.Page, state.PageSize, state.SortDirection.ToString(), state.SortLabel, _searchString);
+            var megaState = new PagedTableState(state.Page, state.PageSize, state.SortDirection.ToString(), state.SortLabel, _searchString);
             var tableData = await ServerData(megaState);
             ToggleLoading();
 

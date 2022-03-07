@@ -2,7 +2,7 @@
 
 @code {
     [CascadingParameter]
-    Task<AuthenticationState> authenticationStateTask { get; set; }
+    private Task<AuthenticationState> _stateTask { get; set; }
 
     [Parameter]
     public string Url { get; set; }
@@ -12,8 +12,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var authState = await authenticationStateTask;
-        var user = authState.User;
+        var user = (await _stateTask).User;
 
         if (NeedAuthentication)
         {

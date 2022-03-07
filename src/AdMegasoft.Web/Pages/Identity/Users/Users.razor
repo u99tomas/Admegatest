@@ -1,21 +1,20 @@
-﻿@using AdMegasoft.Web.Shared.Components.Table
+﻿@attribute [Authorize(Roles = Permissions.Users.View)]
+@page "/identity/users"
+
+@using AdMegasoft.Web.Shared.Components.Foundation
+@using AdMegasoft.Web.Shared.Components.Table
 @using AdMegasoft.Web.Shared.Components.Text
 @using Application.Features.Users.Queries.GetAllPaged
-@using global::Shared.Constants.Permission
-@attribute [Authorize(Roles = Permissions.Users.View)]
-@page "/identity/users"
 
 <MegaTitle Title="Usuarios"></MegaTitle>
 
-<MegaTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
+<PagedTable ServerData="@ServerReload" T="GetAllPagedUsersResponse" @ref="_table">
     <ToolBar>
-        <AuthorizeView Roles=@Permissions.Users.Create>
-            <MudButton DisableElevation Variant="Variant.Filled"
-                       Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
-                       IconColor="Color.Surface" OnClick="@(() => Add())">
-                CREAR
-            </MudButton>
-        </AuthorizeView>
+        <MudButton DisableElevation Variant="Variant.Filled"
+                   Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                   IconColor="Color.Surface" OnClick="@(() => AddAsync())" Disabled="!_canCreateUsers">
+            CREAR
+        </MudButton>
     </ToolBar>
 
     <Header>
@@ -24,14 +23,11 @@
     </Header>
 
     <RowTemplate>
-        <MudTd>
-            <MudIcon Color="@(@context.IsActive ? Color.Success : Color.Error)"
-                     Icon="@(@context.IsActive ? @Icons.Material.Filled.CheckCircle : @Icons.Material.Filled.Cancel)" />
-        </MudTd>
+        <MudTd><CheckIcon Checked="@context.IsActive"/></MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
     </RowTemplate>
 
-    <Actions>
-        <MudMenuItem @onclick="@(() => Edit(@context.Id))">Editar</MudMenuItem>
-    </Actions>
-</MegaTable>
+    <MenuTemplate>
+        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))" Disabled="!_canEditUsers">Editar</MudMenuItem>
+    </MenuTemplate>
+</PagedTable>

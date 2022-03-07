@@ -29,7 +29,7 @@ namespace AdMegasoft.Web.Authentication
             {
                 var userModel = await _userService.GetUserFromAccessTokenAsync(accessToken);
 
-                if (userModel != null) // TODO: No deberia retornar NULL, evitar referencias nulas. Fijarse si el token es valido primero y despues obtenerlo
+                if (userModel != null) // No deberia retornar NULL, evitar referencias nulas. Fijarse si el token es valido primero y despues obtenerlo
                 {
                     identity = GetClaimsIdentity(userModel);
                 }

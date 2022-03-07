@@ -1,7 +1,7 @@
 ﻿@using AdMegasoft.Web.Shared.Components.Dialog
 @using AdMegasoft.Web.Shared.Components.Field
 
-<DialogForm Model="Model" OnValidSubmit="Submit"
+<DialogForm Model="Model" OnValidSubmit="SubmitAsync"
             Icon=@(EditMode? Icons.Material.Filled.Edit : Icons.Material.Filled.Add)>
     <Title>
         @(EditMode? "Editar Usuario" : "Crear Usuario")
@@ -10,7 +10,6 @@
     <Content>
         <MudTextField @bind-Value="@Model.Name"
                       For="@(() => Model.Name)"
-                      Immediate="true"
                       Label="Nombre"
                       Variant="Variant.Outlined"
                       Class="my-4" />

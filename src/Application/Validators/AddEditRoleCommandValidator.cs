@@ -1,12 +1,21 @@
 ﻿using Application.Features.Roles.Commands.Add;
+using Application.Interfaces.Repositories;
 using FluentValidation;
 
 namespace Application.Validators
 {
     public class AddEditRoleCommandValidator : AbstractValidator<AddEditRoleCommand>
     {
-        public AddEditRoleCommandValidator()
+        private readonly IRoleRepository _roleRepository;
+
+        public AddEditRoleCommandValidator(IRoleRepository roleRepository)
         {
+            _roleRepository = roleRepository;
+
+            RuleFor(r => r.Name)
+                .Must(DoesExistInDatabase)
+                .WithMessage("Ya existe el rol");
+
             RuleFor(r => r.Name)
                 .NotEmpty()
                 .WithMessage("El nombre es requerido");
@@ -18,6 +27,11 @@ namespace Application.Validators
             RuleFor(r => r.Description)
                 .MaximumLength(100)
                 .WithMessage("La descripción no puede exceder los 100 caracteres");
+        }
+
+        private bool DoesExistInDatabase(string name)
+        {
+            return !_roleRepository.AnyWIthName(name);
         }
     }
 }
