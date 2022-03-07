@@ -69,6 +69,10 @@ namespace AdMegasoft.Web.Pages.Identity.RolePermissions
                 case "State":
                     data = data.OrderBy(r => r.Assigned, state.SortDirection);
                     break;
+
+                default:
+                    data = data.OrderBy(r =>r.Name, Application.Enums.SortDirection.Ascending);
+                    break;
             }
 
             var totalItems = data.Count();
