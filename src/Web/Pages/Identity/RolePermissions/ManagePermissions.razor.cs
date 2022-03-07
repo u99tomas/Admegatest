@@ -1,14 +1,12 @@
-﻿using Web.Extensions;
-using Web.Models.Table;
-using Web.Shared.Components.Table;
-using Application.Features.Groups.Queries.GetAll;
+﻿using Application.Features.Groups.Queries.GetAll;
 using Application.Features.Permissions.Queries.ManagePermissions;
 using Application.Features.RolePermissions.Commands.Update;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
-using System.Collections.Generic;
+using Web.Extensions;
+using Web.Models.Table;
 
 namespace Web.Pages.Identity.RolePermissions
 {
@@ -71,7 +69,7 @@ namespace Web.Pages.Identity.RolePermissions
                     break;
 
                 default:
-                    data = data.OrderBy(r =>r.Name, Application.Enums.SortDirection.Ascending);
+                    data = data.OrderBy(r => r.Name, Application.Enums.SortDirection.Ascending);
                     break;
             }
 

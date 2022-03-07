@@ -1,7 +1,7 @@
-﻿using Web.Mappings;
-using Web.Models.Table;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Web.Mappings;
+using Web.Models.Table;
 
 namespace Web.Shared.Components.Table
 {

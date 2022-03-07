@@ -1,9 +1,9 @@
-﻿using Web.Extensions;
-using Application.Features.Roles.Queries.GetAll;
+﻿using Application.Features.Roles.Queries.GetAll;
 using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Web.Extensions;
 
 namespace Web.Pages.Identity.Users
 {

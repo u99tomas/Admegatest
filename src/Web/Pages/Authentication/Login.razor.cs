@@ -1,8 +1,8 @@
-﻿using Web.Authentication;
-using Application.Interfaces.Services;
+﻿using Application.Interfaces.Services;
 using Application.Requests;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Web.Authentication;
 
 namespace Web.Pages.Authentication
 {

@@ -1,4 +1,3 @@
-using Web.Authentication;
 using Application.Configurations;
 using Application.Extensions;
 using Blazored.LocalStorage;
@@ -6,6 +5,7 @@ using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
+using Web.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 

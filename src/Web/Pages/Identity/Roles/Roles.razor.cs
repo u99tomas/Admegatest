@@ -1,14 +1,14 @@
-﻿using Web.Extensions;
-using Web.Models.Table;
-using Web.Shared.Components.Dialog;
-using Web.Shared.Components.Table;
-using Application.Features.Roles.Commands.Add;
+﻿using Application.Features.Roles.Commands.Add;
 using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
+using Web.Extensions;
+using Web.Models.Table;
+using Web.Shared.Components.Dialog;
+using Web.Shared.Components.Table;
 
 namespace Web.Pages.Identity.Roles
 {
@@ -36,7 +36,7 @@ namespace Web.Pages.Identity.Roles
             _canCreateRoles = user.IsInRole(Permissions.Roles.Create);
             _canDeleteRoles = user.IsInRole(Permissions.Roles.Delete);
             _canViewRolePermissions = user.IsInRole(Permissions.RolePermissions.View);
-            
+
             return base.OnInitializedAsync();
         }
 

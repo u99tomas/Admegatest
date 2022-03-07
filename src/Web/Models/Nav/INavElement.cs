@@ -1,6 +1,4 @@
-﻿using Application.Interfaces.Base;
-
-namespace Web.Models.Nav
+﻿namespace Web.Models.Nav
 {
     public interface INavElement
     {

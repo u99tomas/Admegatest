@@ -27,7 +27,7 @@ namespace Application.Validators
             RuleFor(u => u.Password)
                 .NotEmpty()
                 .WithMessage("La contraseña es requerida");
-            
+
         }
 
         private bool DoesExistInDatabase(string name)

@@ -1,12 +1,11 @@
-﻿using Web.Models.Table;
-using Web.Shared.Components.Table;
-using Application.Features.Roles.Queries.GetRolesIdsOfUser;
-using Application.Features.Users.Commands.AddEdit;
+﻿using Application.Features.Users.Commands.AddEdit;
 using Application.Features.Users.Queries.GetAllPaged;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
+using Web.Models.Table;
+using Web.Shared.Components.Table;
 
 namespace Web.Pages.Identity.Users
 {

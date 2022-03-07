@@ -12,7 +12,7 @@ namespace Web.Mappings
                 PageSize = state.PageSize,
                 SearchString = searchString,
                 SortDirection = (Application.Enums.SortDirection)state.SortDirection,
-                SortLabel = state.SortLabel?? string.Empty,
+                SortLabel = state.SortLabel ?? string.Empty,
             };
         }
     }

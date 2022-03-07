@@ -4,7 +4,7 @@ namespace Web.Shared.Components.Card
 {
     public partial class PersonCard
     {
-        [Parameter] 
+        [Parameter]
         public string Class { get; set; }
     }
 }

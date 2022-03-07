@@ -5,7 +5,7 @@ namespace Web.Models.Nav
     public class NavLinkGroup : INavElement, ICloneable<NavLinkGroup>
     {
         public string Name { get; }
-        public string Icon { get; set; }
+        public string Icon { get; }
         public List<NavLink> NavLinks { get; set; }
         public IEnumerable<string> RequiredRoles { get => NavLinks.Select(n => n.RequiredRole); }
 
