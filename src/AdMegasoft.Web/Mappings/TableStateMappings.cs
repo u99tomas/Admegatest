@@ -2,7 +2,7 @@
 
 namespace AdMegasoft.Web.Mappings
 {
-    public static class TableState
+    public static class TableStateMappings
     {
         public static PagedTableState ToPagedTableState(this MudBlazor.TableState state, string searchString)
         {
