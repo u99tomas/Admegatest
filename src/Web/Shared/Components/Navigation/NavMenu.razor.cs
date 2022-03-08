@@ -10,23 +10,13 @@ namespace Web.Shared.Components.Navigation
 {
     public partial class NavMenu
     {
-        [CascadingParameter]
-        private Task<AuthenticationState> _stateTask { get; set; }
 
         private string _searchString { get; set; } = String.Empty;
 
-        private bool _isSearching { get => _searchString != string.Empty; }
-
         private NavManager _navManager { get; set; } = new NavManager();
 
-        private List<NavGroup> _navGroups { get => _navManager.Filter(_searchString); }
-
-        private ClaimsPrincipal _user { get; set; }
-
-        protected async override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            _user = (await _stateTask).User;
-
             _navManager
                 .AddGroup("Dashboard")
                 .AddLink("Dashboard", "/content/dashboard", Icons.Material.Outlined.Dashboard)
@@ -36,31 +26,5 @@ namespace Web.Shared.Components.Navigation
                 .AddLink("Roles", "/identity/roles", Permissions.Roles.View, Icons.Outlined.BackHand);
         }
 
-        private bool CanViewNavGroup(NavGroup navGroup)
-        {
-            return navGroup.NavElements.Any(ne =>
-            {
-                if (ne.GetType() == typeof(NavLinkGroup))
-                {
-                    var navLinkGroup = (NavLinkGroup)ne;
-                    return navLinkGroup.RequiredRoles.Any(r => _user.IsInRole(r));
-                }
-                else
-                {
-                    var navLink = (Web.Models.Nav.NavLink)ne;
-                    return _user.IsInRole(navLink.RequiredRole) || navLink.RequiredRole == string.Empty;
-                }
-            });
-        }
-
-        private bool CanViewNavLinkGroup(NavLinkGroup navLinkGroup)
-        {
-            return navLinkGroup.RequiredRoles.Any(r => _user.IsInRole(r) || r == string.Empty);
-        }
-
-        private bool CanViewNavLink(NavLink navLink)
-        {
-            return _user.IsInRole(navLink.RequiredRole) || navLink.RequiredRole == string.Empty;
-        }
     }
 }
