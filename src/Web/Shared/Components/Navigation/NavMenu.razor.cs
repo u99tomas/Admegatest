@@ -35,5 +35,32 @@ namespace Web.Shared.Components.Navigation
                 .AddLink("Usuarios", "/identity/users", Permissions.Users.View, Icons.Outlined.People)
                 .AddLink("Roles", "/identity/roles", Permissions.Roles.View, Icons.Outlined.BackHand);
         }
+
+        private bool CanViewNavGroup(NavGroup navGroup)
+        {
+            return navGroup.NavElements.Any(ne =>
+            {
+                if (ne.GetType() == typeof(NavLinkGroup))
+                {
+                    var navLinkGroup = (NavLinkGroup)ne;
+                    return navLinkGroup.RequiredRoles.Any(r => _user.IsInRole(r));
+                }
+                else
+                {
+                    var navLink = (Web.Models.Nav.NavLink)ne;
+                    return _user.IsInRole(navLink.RequiredRole) || navLink.RequiredRole == string.Empty;
+                }
+            });
+        }
+
+        private bool CanViewNavLinkGroup(NavLinkGroup navLinkGroup)
+        {
+            return navLinkGroup.RequiredRoles.Any(r => _user.IsInRole(r) || r == string.Empty);
+        }
+
+        private bool CanViewNavLink(NavLink navLink)
+        {
+            return _user.IsInRole(navLink.RequiredRole) || navLink.RequiredRole == string.Empty;
+        }
     }
 }
