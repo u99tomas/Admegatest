@@ -1,11 +1,11 @@
-﻿using Application.Features.Roles.Commands.Add;
-using Application.Features.Roles.Commands.Delete;
+﻿using Application.Features.Roles.Commands.Delete;
 using Application.Features.Roles.Queries.GetAllPaged;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
-using Web.Extensions;
+using Web.Infrastructure.Extensions;
+using Web.Infrastructure.Mappings;
 using Web.Models.Table;
 using Web.Shared.Components.Dialog;
 using Web.Shared.Components.Table;
@@ -78,12 +78,7 @@ namespace Web.Pages.Identity.Roles
         {
             var parameters = new DialogParameters();
 
-            parameters.Add(nameof(AddEditRoleDialog.Model), new AddEditRoleCommand
-            {
-                Id = role.Id,
-                Description = role.Description,
-                Name = role.Name,
-            });
+            parameters.Add(nameof(AddEditRoleDialog.Model), role.ToAddEditRoleDialog());
 
             var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
             var result = await dialog.Result;

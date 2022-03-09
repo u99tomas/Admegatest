@@ -26,17 +26,15 @@ namespace Application.Features.Users.Commands.AddEdit
 
         public async Task<Result<int>> Handle(AddEditUserCommand command, CancellationToken cancellationToken)
         {
+            var exist = await _unitOfWork.Repository<User>().Entities.AnyAsync(u => u.Name == command.Name);
+
+            if (exist)
+            {
+                return Result<int>.Failure("El usuario ya existe");
+            }
+
             if (command.Id == 0)
             {
-                var exist = await _unitOfWork.Repository<User>()
-                    .Entities
-                    .AnyAsync(u => u.Name == command.Name);
-
-                if (exist)
-                {
-                    return Result<int>.Failure("El usuario ya existe");
-                }
-
                 var user = new User
                 {
                     Name = command.Name,

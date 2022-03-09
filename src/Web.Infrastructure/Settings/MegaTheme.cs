@@ -1,6 +1,6 @@
 ﻿using MudBlazor;
 
-namespace Web.Settings
+namespace Web.Infrastructure.Settings
 {
     public class MegaTheme
     {

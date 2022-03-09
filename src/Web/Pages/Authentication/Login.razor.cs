@@ -2,7 +2,7 @@
 using Application.Requests;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Web.Authentication;
+using Web.Infrastructure.Authentication;
 
 namespace Web.Pages.Authentication
 {

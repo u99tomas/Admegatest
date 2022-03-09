@@ -63,7 +63,7 @@ namespace Web.Pages.Identity.Users
         private async Task EditAsync(int id)
         {
             var parameters = new DialogParameters();
-            var user = _users.FirstOrDefault(u => u.Id == id);
+            var user = _users.FirstOrDefault(u => u.Id == id); // Quizas se deba hacer una peticion al mediator por Id y obtener el usuario
 
             if (user == null)
             {

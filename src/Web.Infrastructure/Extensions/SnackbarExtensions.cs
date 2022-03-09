@@ -1,7 +1,7 @@
 ﻿using Application.Wrappers;
 using MudBlazor;
 
-namespace Web.Extensions
+namespace Web.Infrastructure.Extensions
 {
     public static class SnackbarExtensions
     {

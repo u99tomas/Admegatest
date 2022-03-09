@@ -1,6 +1,6 @@
 ﻿using Application.Enums;
 
-namespace Web.Extensions
+namespace Web.Infrastructure.Extensions
 {
     public static class ListExtensions
     {

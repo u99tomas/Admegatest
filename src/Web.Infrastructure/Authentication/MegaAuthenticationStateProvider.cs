@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Shared.Constants.Storage;
 using System.Security.Claims;
 
-namespace Web.Authentication
+namespace Web.Infrastructure.Authentication
 {
     public class MegaAuthenticationStateProvider : AuthenticationStateProvider
     {

@@ -3,7 +3,7 @@ using Application.Features.Roles.Queries.GetRolesIdsOfUser;
 using Application.Features.Users.Commands.AddEdit;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Web.Extensions;
+using Web.Infrastructure.Extensions;
 
 namespace Web.Pages.Identity.Users
 {

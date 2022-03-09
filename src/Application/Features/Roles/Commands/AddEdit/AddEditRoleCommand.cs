@@ -24,17 +24,15 @@ namespace Application.Features.Roles.Commands.Add
 
         public async Task<Result<int>> Handle(AddEditRoleCommand command, CancellationToken cancellationToken)
         {
+            var exist = await _unitOfWork.Repository<Role>().Entities.AnyAsync(r => r.Name == command.Name);
+
+            if (exist)
+            {
+                return Result<int>.Failure("El rol ya existe");
+            }
+
             if (command.Id == 0)
             {
-                var exist = await _unitOfWork.Repository<Role>()
-                    .Entities
-                    .AnyAsync(r => r.Name == command.Name);
-
-                if (exist)
-                {
-                    return Result<int>.Failure("El rol ya existe");
-                }
-
                 var newRole = new Role
                 {
                     Name = command.Name,

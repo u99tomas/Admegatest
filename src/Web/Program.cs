@@ -5,7 +5,7 @@ using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
-using Web.Authentication;
+using Web.Infrastructure.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 

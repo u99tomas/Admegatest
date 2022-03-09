@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Web.Authentication;
+using Web.Infrastructure.Authentication;
 
 namespace Web.Shared.Components.Menu
 {

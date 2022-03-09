@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
-using Web.Extensions;
+using Web.Infrastructure.Extensions;
 using Web.Models.Table;
 
 namespace Web.Pages.Identity.RolePermissions

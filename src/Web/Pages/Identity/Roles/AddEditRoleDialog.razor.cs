@@ -1,7 +1,7 @@
 ﻿using Application.Features.Roles.Commands.Add;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Web.Extensions;
+using Web.Infrastructure.Extensions;
 
 namespace Web.Pages.Identity.Roles
 {

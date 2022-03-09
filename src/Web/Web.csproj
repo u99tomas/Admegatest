@@ -8,18 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
-    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MudBlazor" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\Web.Infrastructure\Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
