@@ -6,7 +6,7 @@ namespace Application.Validators
 {
     public class AddEditUserCommandValidator : AbstractValidator<AddEditUserCommand>
     {
-        public AddEditUserCommandValidator(IUserRepository userRepository)
+        public AddEditUserCommandValidator()
         {
             RuleFor(u => u.Name)
                 .NotEmpty()
