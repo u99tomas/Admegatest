@@ -2,6 +2,6 @@
 {
     public interface IRoleRepository
     {
-        bool AnyWIthName(string name);
+
     }
 }

@@ -28,6 +28,15 @@ namespace Application.Features.Users.Commands.AddEdit
         {
             if (command.Id == 0)
             {
+                var exist = await _unitOfWork.Repository<User>()
+                    .Entities
+                    .AnyAsync(u => u.Name == command.Name);
+
+                if (exist)
+                {
+                    return Result<int>.Failure("El usuario ya existe");
+                }
+
                 var user = new User
                 {
                     Name = command.Name,
@@ -42,7 +51,7 @@ namespace Application.Features.Users.Commands.AddEdit
                     .ToList();
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.Commit(cancellationToken);
 
                 return Result<int>.Success($"Se creo el usuario {user.Name}", user.Id);
             }
@@ -71,7 +80,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(newUserRoles);
 
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.Commit(cancellationToken);
 
                 return Result<int>.Success($"Se actualizo el usuario {user.Name}", user.Id);
             }

@@ -40,7 +40,10 @@ namespace Web.Pages.Identity.Users
         {
             var result = await _mediator.Send(Model);
 
-            _mudDialog.Close();
+            if (result.Succeeded)
+            {
+                _mudDialog.Close();
+            }
 
             _snackBar.ShowMessage(result);
         }

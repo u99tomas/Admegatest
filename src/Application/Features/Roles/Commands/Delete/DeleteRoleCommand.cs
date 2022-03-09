@@ -30,7 +30,7 @@ namespace Application.Features.Roles.Commands.Delete
             }
 
             await _unitOfWork.Repository<Role>().RemoveAsync(foundRole);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.Commit(cancellationToken);
 
             return Result<int>.Success($"Se elimino el Rol {foundRole.Name}", foundRole.Id);
         }

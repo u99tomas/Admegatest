@@ -2,6 +2,7 @@
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Roles.Commands.Add
 {
@@ -25,6 +26,15 @@ namespace Application.Features.Roles.Commands.Add
         {
             if (command.Id == 0)
             {
+                var exist = await _unitOfWork.Repository<Role>()
+                    .Entities
+                    .AnyAsync(r => r.Name == command.Name);
+
+                if (exist)
+                {
+                    return Result<int>.Failure("El rol ya existe");
+                }
+
                 var newRole = new Role
                 {
                     Name = command.Name,
@@ -32,7 +42,7 @@ namespace Application.Features.Roles.Commands.Add
                 };
 
                 await _unitOfWork.Repository<Role>().AddAsync(newRole);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.Commit(cancellationToken);
 
                 return Result<int>.Success($"Se creo el Rol {newRole.Name}", newRole.Id);
             }
@@ -48,7 +58,7 @@ namespace Application.Features.Roles.Commands.Add
                 foundRole.Name = command.Name;
                 foundRole.Description = command.Description;
 
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.Commit(cancellationToken);
                 return Result<int>.Success($"Se actualizo el Rol {foundRole.Name}", foundRole.Id);
             }
         }
