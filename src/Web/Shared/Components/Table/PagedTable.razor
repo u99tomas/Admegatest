@@ -1,0 +1,49 @@
+﻿@typeparam T
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<T>>>(ServerReload))"
+          T="T" Loading="@_loading" @ref="@_table"
+          MultiSelection="MultiSelection" @bind-SelectedItems="_selectedItems"
+          Dense="true" Hover="true" Striped="true">
+
+    <ToolBarContent>
+        @ToolBar
+        <MudSpacer />
+
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Buscar" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        @Header
+
+        @if (MenuTemplate != null)
+        {
+            <MudTh Style="text-align:right">Acciones</MudTh>
+        }
+    </HeaderContent>
+
+    <RowTemplate>
+        @RowTemplate(@context)
+
+        @if (MenuTemplate != null)
+        {
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                <MudMenu Label="Acciones" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                    @MenuTemplate(@context)
+                </MudMenu>
+            </MudTd>
+        }
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>No se encontraron registros coincidentes</MudText>
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <MudText>Cargando...</MudText>
+    </LoadingContent>
+
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

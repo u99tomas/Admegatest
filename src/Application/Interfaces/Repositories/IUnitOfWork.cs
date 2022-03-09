@@ -6,6 +6,6 @@ namespace Application.Interfaces.Repositories
     {
         IRepositoryAsync<T, TId> Repository<T>() where T : class, IEntity<TId>;
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> Commit(CancellationToken cancellationToken);
     }
 }

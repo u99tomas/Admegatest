@@ -1,0 +1,34 @@
+﻿@attribute [Authorize(Roles = Permissions.Roles.View)]
+@page "/identity/roles"
+
+@using Web.Shared.Components.Table
+@using Web.Shared.Components.Text
+@using Application.Features.Roles.Queries.GetAllPaged
+
+<MegaTitle Title="Roles"></MegaTitle>
+
+<PagedTable ServerData="@ServerReload" T="GetAllPagedRolesResponse" @ref="_table">
+    <ToolBar>
+        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
+                   OnClick="@(() => AddAsync())" Disabled="!_canCreateRoles">
+            CREAR
+        </MudButton>
+    </ToolBar>
+
+    <Header>
+        <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedRolesResponse">Rol</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Description" T="GetAllPagedRolesResponse">Descripción</MudTableSortLabel></MudTh>
+    </Header>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+    </RowTemplate>
+
+    <MenuTemplate>
+        <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))" Disabled="!_canViewRolePermissions">Administrar permisos</MudMenuItem>
+        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditRoles">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => DeleteAsync(@context.Id))" Disabled="!_canDeleteRoles">Eliminar</MudMenuItem>
+    </MenuTemplate>
+</PagedTable>

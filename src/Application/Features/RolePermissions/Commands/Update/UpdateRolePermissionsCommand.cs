@@ -44,7 +44,7 @@ namespace Application.Features.RolePermissions.Commands.Update
             var result = await _unitOfWork.Repository<Domain.Entities.RolePermissions>()
                 .AddRangeAsync(newPermissions);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.Commit(cancellationToken);
 
             var ids = newPermissions.Select(p => p.Id).ToArray();
 

@@ -1,0 +1,44 @@
+﻿@using Web.Infrastructure.Settings
+@using Web.Shared.Components.Card
+@using Web.Shared.Components.Menu
+@using Web.Shared.Components.Navigation
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="MegaTheme.DefaultTheme" />
+<MudDialogProvider FullWidth="true"
+                   CloseButton="true"
+                   DisableBackdropClick="true"
+                   CloseOnEscapeKey="true" />
+<MudSnackbarProvider />
+
+<AuthorizeView>
+
+    <Authorized>
+        <MudLayout>
+            <AppBar OnClickMenu="@DrawerToggle"></AppBar>
+
+            <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
+                <NavMenu />
+            </MudDrawer>
+
+            <MudMainContent>
+
+                <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                    <MudToolBar DisableGutters="true">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
+                    </MudToolBar>
+                </MudHidden>
+
+                <MudContainer MaxWidth="MaxWidth.False" Class="my-4">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+
+        </MudLayout>
+    </Authorized>
+
+    <NotAuthorized>
+        <RedirectTo Url="/authentication/login" NeedAuthentication="false"></RedirectTo>
+    </NotAuthorized>
+
+</AuthorizeView>
