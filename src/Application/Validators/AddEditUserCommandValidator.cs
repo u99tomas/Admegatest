@@ -19,7 +19,6 @@ namespace Application.Validators
             RuleFor(u => u.Password)
                 .NotEmpty()
                 .WithMessage("La contraseña es requerida");
-
         }
     }
 }
