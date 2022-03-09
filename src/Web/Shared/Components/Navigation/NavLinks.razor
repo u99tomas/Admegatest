@@ -1,6 +1,9 @@
 ﻿@using Web.Models.Nav
 
-@foreach (var group in _navGroups)
+<MudTextField @bind-Value="_searchString" Placeholder="Buscar" Adornment="Adornment.Start" Clearable="true"
+              AdornmentIcon="@Icons.Filled.Search" IconSize="Size.Medium" Class="my-0 mx-2" Immediate="true"></MudTextField>
+
+@foreach (var group in _navGroupsFiltered)
 {
     if (CanViewNavGroup(group))
     {
