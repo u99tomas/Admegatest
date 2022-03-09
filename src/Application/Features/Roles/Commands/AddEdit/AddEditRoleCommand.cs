@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Mappings;
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
@@ -24,7 +25,7 @@ namespace Application.Features.Roles.Commands.Add
 
         public async Task<Result<int>> Handle(AddEditRoleCommand command, CancellationToken cancellationToken)
         {
-            var exist = await _unitOfWork.Repository<Role>().Entities.AnyAsync(r => r.Name == command.Name);
+            var exist = await _unitOfWork.Repository<Role>().Entities.AnyAsync(r => r.Name == command.Name && r.Id != command.Id);
 
             if (exist)
             {
@@ -33,11 +34,7 @@ namespace Application.Features.Roles.Commands.Add
 
             if (command.Id == 0)
             {
-                var newRole = new Role
-                {
-                    Name = command.Name,
-                    Description = command.Description,
-                };
+                var newRole = command.ToRole();
 
                 await _unitOfWork.Repository<Role>().AddAsync(newRole);
                 await _unitOfWork.Commit(cancellationToken);

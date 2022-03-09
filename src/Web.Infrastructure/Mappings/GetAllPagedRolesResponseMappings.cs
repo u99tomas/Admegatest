@@ -5,13 +5,13 @@ namespace Web.Infrastructure.Mappings
 {
     public static class GetAllPagedRolesResponseMappings
     {
-        public static AddEditRoleCommand ToAddEditRoleDialog(this GetAllPagedRolesResponse rol)
+        public static AddEditRoleCommand ToAddEditRoleDialog(this GetAllPagedRolesResponse rolesResponse)
         {
             return new AddEditRoleCommand
             {
-                Id = rol.Id,
-                Description = rol.Description,
-                Name = rol.Name,
+                Id = rolesResponse.Id,
+                Description = rolesResponse.Description,
+                Name = rolesResponse.Name,
             };
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Mappings;
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
         public async Task<Result<int>> Handle(AddEditUserCommand command, CancellationToken cancellationToken)
         {
-            var exist = await _unitOfWork.Repository<User>().Entities.AnyAsync(u => u.Name == command.Name);
+            var exist = await _unitOfWork.Repository<User>().Entities.AnyAsync(u => u.Name == command.Name && u.Id != command.Id);
 
             if (exist)
             {
@@ -35,12 +36,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
             if (command.Id == 0)
             {
-                var user = new User
-                {
-                    Name = command.Name,
-                    Password = command.Password,
-                    IsActive = command.IsActive,
-                };
+                var user = command.ToUser();
 
                 await _unitOfWork.Repository<User>().AddAsync(user);
 
