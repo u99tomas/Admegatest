@@ -1,5 +1,5 @@
 ﻿@attribute [Authorize(Roles = Permissions.Roles.View)]
-@page "/identity/roles"
+@page "/admin/roles"
 
 @using Web.Shared.Components.Table
 @using Web.Shared.Components.Text
@@ -11,7 +11,7 @@
     <ToolBar>
         <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
                    StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
-                   OnClick="@(() => AddAsync())" Disabled="!_canCreateRoles">
+                   OnClick="@(() => AddAsync())" Disabled="!_canCreateRole">
             CREAR
         </MudButton>
     </ToolBar>
@@ -28,7 +28,7 @@
 
     <MenuTemplate>
         <MudMenuItem @onclick="@(() => ManagePermissions(@context.Id))" Disabled="!_canViewRolePermissions">Administrar permisos</MudMenuItem>
-        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditRoles">Editar</MudMenuItem>
-        <MudMenuItem @onclick="@(() => DeleteAsync(@context.Id))" Disabled="!_canDeleteRoles">Eliminar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditRole">Editar</MudMenuItem>
+        <MudMenuItem @onclick="@(() => DeleteAsync(@context.Id))" Disabled="!_canDeleteRole">Eliminar</MudMenuItem>
     </MenuTemplate>
 </PagedTable>

@@ -7,7 +7,7 @@ using Shared.Constants.Permission;
 using Web.Models.Table;
 using Web.Shared.Components.Table;
 
-namespace Web.Pages.Identity.Users
+namespace Web.Pages.Admin.Users
 {
     public partial class Users
     {

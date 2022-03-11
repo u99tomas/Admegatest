@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Web.Infrastructure.Extensions;
 
-namespace Web.Pages.Identity.Roles
+namespace Web.Pages.Admin.Roles
 {
     public partial class AddEditRoleDialog
     {

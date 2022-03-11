@@ -22,5 +22,12 @@
             public const string View = "Permisos.RolPermisos.Ver";
             public const string Edit = "Permisos.RolPermisos.Editar";
         }
+
+        public static class Companies
+        {
+            public const string View = "Permisos.Empresas.Ver";
+            public const string Create = "Permisos.Empresas.Crear";
+            public const string Edit = "Permisos.Empresas.Editar";
+        }
     }
 }

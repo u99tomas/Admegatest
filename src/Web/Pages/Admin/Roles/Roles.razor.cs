@@ -10,7 +10,7 @@ using Web.Models.Table;
 using Web.Shared.Components.Dialog;
 using Web.Shared.Components.Table;
 
-namespace Web.Pages.Identity.Roles
+namespace Web.Pages.Admin.Roles
 {
     public partial class Roles
     {
@@ -21,20 +21,21 @@ namespace Web.Pages.Identity.Roles
 
         private List<GetAllPagedRolesResponse> _roles { get; set; }
 
-        private bool _canEditRoles { get; set; }
+        private bool _canEditRole { get; set; }
 
-        private bool _canCreateRoles { get; set; }
+        private bool _canCreateRole { get; set; }
 
-        private bool _canDeleteRoles { get; set; }
+        private bool _canDeleteRole { get; set; }
 
         private bool _canViewRolePermissions { get; set; }
 
         protected override async Task<Task> OnInitializedAsync()
         {
             var user = (await StateTask).User;
-            _canEditRoles = user.IsInRole(Permissions.Roles.Edit);
-            _canCreateRoles = user.IsInRole(Permissions.Roles.Create);
-            _canDeleteRoles = user.IsInRole(Permissions.Roles.Delete);
+
+            _canEditRole = user.IsInRole(Permissions.Roles.Edit);
+            _canCreateRole = user.IsInRole(Permissions.Roles.Create);
+            _canDeleteRole = user.IsInRole(Permissions.Roles.Delete);
             _canViewRolePermissions = user.IsInRole(Permissions.RolePermissions.View);
 
             return base.OnInitializedAsync();

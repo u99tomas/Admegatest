@@ -8,7 +8,7 @@ using Shared.Constants.Permission;
 using Web.Infrastructure.Extensions;
 using Web.Models.Table;
 
-namespace Web.Pages.Identity.RolePermissions
+namespace Web.Pages.Admin.RolePermissions
 {
     public partial class ManagePermissions
     {
@@ -88,7 +88,7 @@ namespace Web.Pages.Identity.RolePermissions
                 PermissionsIds = _permissions.Where(p => p.Assigned).Select(p => p.PermissionId)
             });
 
-            _navigationManager.NavigateTo("/identity/roles");
+            _navigationManager.NavigateTo("/admin/roles");
 
             _snackBar.ShowMessage(result);
         }

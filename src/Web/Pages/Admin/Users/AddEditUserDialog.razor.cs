@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Web.Infrastructure.Extensions;
 
-namespace Web.Pages.Identity.Users
+namespace Web.Pages.Admin.Users
 {
     public partial class AddEditUserDialog
     {

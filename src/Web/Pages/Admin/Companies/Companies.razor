@@ -1,0 +1,32 @@
+﻿@attribute [Authorize(Roles = Permissions.Companies.View)]
+@page "/admin/companies"
+
+@using Application.Features.Companies.Queries.GetAllPaged
+@using Web.Shared.Components.Table
+@using Web.Shared.Components.Text
+
+<MegaTitle Title="Empresas"></MegaTitle>
+
+<PagedTable ServerData="@ServerReload" T="GetAllPagedCompaniesResponse" @ref="_table">
+    <ToolBar>
+@*        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
+                   OnClick="@(() => AddAsync())" Disabled="!_canCreateCompany">
+            CREAR
+        </MudButton>*@
+    </ToolBar>
+
+    <Header>
+        <MudTh><MudTableSortLabel SortLabel="CompanyName" T="GetAllPagedCompaniesResponse">Razón social</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Denomination" T="GetAllPagedCompaniesResponse">Denominación</MudTableSortLabel></MudTh>
+    </Header>
+
+    <RowTemplate>
+        <MudTd DataLabel="CompanyName">@context.CompanyName</MudTd>
+        <MudTd DataLabel="Denomination">@context.Denomination</MudTd>
+    </RowTemplate>
+
+    <MenuTemplate>
+@*        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditCompany">Editar</MudMenuItem>*@
+    </MenuTemplate>
+</PagedTable>
