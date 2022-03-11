@@ -34,27 +34,27 @@ namespace Application.Features.Roles.Commands.Add
 
             if (command.Id == 0)
             {
-                var newRole = command.ToRole();
+                var role = command.ToRole();
 
-                await _unitOfWork.Repository<Role>().AddAsync(newRole);
+                await _unitOfWork.Repository<Role>().AddAsync(role);
                 await _unitOfWork.Commit(cancellationToken);
 
-                return Result<int>.Success($"Se creo el Rol {newRole.Name}", newRole.Id);
+                return Result<int>.Success($"Se creo el Rol {role.Name}", role.Id);
             }
             else
             {
-                var foundRole = await _unitOfWork.Repository<Role>().GetByIdAsync(command.Id);
+                var role = await _unitOfWork.Repository<Role>().GetByIdAsync(command.Id);
 
-                if (foundRole == null)
+                if (role == null)
                 {
                     return Result<int>.Failure($"Error: No se ha encontrado el Rol con Id {command.Id}");
                 }
 
-                foundRole.Name = command.Name;
-                foundRole.Description = command.Description;
+                role.Name = command.Name;
+                role.Description = command.Description;
 
                 await _unitOfWork.Commit(cancellationToken);
-                return Result<int>.Success($"Se actualizo el Rol {foundRole.Name}", foundRole.Id);
+                return Result<int>.Success($"Se actualizo el Rol {role.Name}", role.Id);
             }
         }
     }

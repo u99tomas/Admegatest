@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{D5CD90B2-0F31-469B-924D-4C625A6AE149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Infrastructure", "src\Web.Infrastructure\Web.Infrastructure.csproj", "{86DDD76B-3DFB-40F7-A278-C47CE06807BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Infrastructure", "src\Web.Infrastructure\Web.Infrastructure.csproj", "{86DDD76B-3DFB-40F7-A278-C47CE06807BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
