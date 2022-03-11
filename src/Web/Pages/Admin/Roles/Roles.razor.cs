@@ -79,7 +79,7 @@ namespace Web.Pages.Admin.Roles
         {
             var parameters = new DialogParameters();
 
-            parameters.Add(nameof(AddEditRoleDialog.Model), role.ToAddEditRoleDialog());
+            parameters.Add(nameof(AddEditRoleDialog.Model), role.ToAddEditRoleCommand());
 
             var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
             var result = await dialog.Result;

@@ -5,7 +5,7 @@ namespace Web.Infrastructure.Mappings
 {
     public static class GetAllPagedRolesResponseMappings
     {
-        public static AddEditRoleCommand ToAddEditRoleDialog(this GetAllPagedRolesResponse rolesResponse)
+        public static AddEditRoleCommand ToAddEditRoleCommand(this GetAllPagedRolesResponse rolesResponse)
         {
             return new AddEditRoleCommand
             {

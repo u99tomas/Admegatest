@@ -21,7 +21,7 @@ namespace Application.Extensions
 
         public static IQueryable<TSource> Filter<TSource>(this IQueryable<TSource> queryable, Expression<Func<TSource, bool>> predicate, string searchString)
         {
-            if (string.Empty == searchString) return queryable;
+            if (searchString == string.Empty) return queryable;
             return queryable.Where(predicate);
         }
     }
