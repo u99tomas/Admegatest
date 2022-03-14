@@ -13,12 +13,12 @@ namespace Application.Validators
                 .WithMessage("La Razón social es requerida");
 
             RuleFor(c => c.CompanyName)
-                .MaximumLength(100)
-                .WithMessage("La Razón social no puede exceder los 100 caracteres");
+                .MaximumLength(50)
+                .WithMessage("La Razón social no puede exceder los 50 caracteres");
 
             RuleFor(c => c.Denomination)
-                .MaximumLength(100)
-                .WithMessage("La Denominación no puede exceder los 100 caracteres");
+                .MaximumLength(50)
+                .WithMessage("La Denominación no puede exceder los 50 caracteres");
         }
     }
 }

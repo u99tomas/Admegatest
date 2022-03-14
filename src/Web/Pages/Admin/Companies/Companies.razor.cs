@@ -1,6 +1,5 @@
 ﻿using Application.Features.Companies.Queries.GetAllPaged;
 using Application.Features.Companies.Queries.GetById;
-using Application.Features.Roles.Queries.GetAllPaged;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
@@ -8,7 +7,6 @@ using Shared.Constants.Permission;
 using Web.Infrastructure.Extensions;
 using Web.Infrastructure.Mappings;
 using Web.Models.Table;
-using Web.Pages.Admin.Roles;
 using Web.Shared.Components.Table;
 
 namespace Web.Pages.Admin.Companies
@@ -54,16 +52,16 @@ namespace Web.Pages.Admin.Companies
             return new TableData<GetAllPagedCompaniesResponse> { Items = _companies, TotalItems = response.TotalItems };
         }
 
-        //private async Task AddAsync()
-        //{
-        //    var dialog = _dialogService.Show<AddEditRoleDialog>();
-        //    var result = await dialog.Result;
+        private async Task AddAsync()
+        {
+            var dialog = _dialogService.Show<AddEditCompanyDialog>();
+            var result = await dialog.Result;
 
-        //    if (!result.Cancelled)
-        //    {
-        //        _table.ReloadServerData();
-        //    }
-        //}
+            if (!result.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
+        }
 
         private async Task EditAsync(int companyId)
         {

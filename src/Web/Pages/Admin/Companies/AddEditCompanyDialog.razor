@@ -9,6 +9,7 @@
     <Content>
         <MudTextField @bind-Value="@Model.CompanyName"
                       For="@(() => Model.CompanyName)"
+                      Immediate="true"
                       Label="Razón social"
                       Variant="Variant.Outlined"
                       Class="my-3" />

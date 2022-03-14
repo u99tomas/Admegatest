@@ -9,11 +9,11 @@
 
 <PagedTable ServerData="@ServerReload" T="GetAllPagedCompaniesResponse" @ref="_table">
     <ToolBar>
-@*        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
+        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary"
                    StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface"
-                   OnClick="@(() => AddAsync())" Disabled="!_canCreateCompany">
+                   OnClick="AddAsync" Disabled="!_canCreateCompany">
             CREAR
-        </MudButton>*@
+        </MudButton>
     </ToolBar>
 
     <Header>
