@@ -11,8 +11,8 @@
          AlwaysShowScrollButtons="true" @ref="_tabs">
     @foreach (var group in _groups)
     {
-        var selected = _permissions.Where(p => p.GroupId == group.Id).Count(p => p.Assigned);
-        var total = _permissions.Where(p => p.GroupId == group.Id).Count();
+        var selected = _permissions.Count(p => p.GroupId == group.Id && p.Assigned);
+        var total = _permissions.Count(p => p.GroupId == @group.Id);
 
         <MudTabPanel Text="@group.Name" ID="group.Id" BadgeData="@($"{selected}/{total}")" BadgeColor="@GetBadgeColor(selected, total)">
             <PagedTable ServerData="@ServerReload" T="ManagePermissionsPermissionsResponse">
