@@ -36,8 +36,8 @@
             }
         </MudSelect>
 
-        <MudCheckBox @bind-Checked="@Model.IsActive"
-                     For="@(() => Model.IsActive)"
+        <MudCheckBox @bind-Checked="@Model.Enabled"
+                     For="@(() => Model.Enabled)"
                      Color="Color.Primary"
                      Label="Habilitado" />
     </Content>

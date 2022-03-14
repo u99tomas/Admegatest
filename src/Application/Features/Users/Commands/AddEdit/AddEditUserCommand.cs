@@ -12,7 +12,7 @@ namespace Application.Features.Users.Commands.AddEdit
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public bool IsActive { get; set; }
+        public bool Enabled { get; set; }
         public IEnumerable<int> RoleIds { get; set; }
     }
 
@@ -58,7 +58,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
                 user.Name = command.Name;
                 user.Password = command.Password;
-                user.IsActive = command.IsActive;
+                user.Enabled = command.Enabled;
 
                 var userRoles = _unitOfWork.Repository<UserRoles>().Entities
                     .Where(u => u.UserId == command.Id);

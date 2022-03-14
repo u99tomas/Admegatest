@@ -76,7 +76,7 @@ namespace Web.Pages.Admin.Users
                 Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
-                IsActive = user.IsActive,
+                Enabled = user.Enabled,
             });
 
             var dialog = _dialogService.Show<AddEditUserDialog>("", parameters);

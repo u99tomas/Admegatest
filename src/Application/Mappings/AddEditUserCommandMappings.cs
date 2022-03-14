@@ -11,7 +11,7 @@ namespace Application.Mappings
             {
                 Id = userCommand.Id,
                 Name = userCommand.Name,
-                IsActive = userCommand.IsActive,
+                Enabled = userCommand.Enabled,
                 Password = userCommand.Password,
             };
         }

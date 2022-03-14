@@ -38,8 +38,8 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     users = users.OrderBy(u => u.Name, query.SortDirection);
                     break;
 
-                case "IsActive":
-                    users = users.OrderBy(u => u.IsActive, query.SortDirection);
+                case "Enabled":
+                    users = users.OrderBy(u => u.Enabled, query.SortDirection);
                     break;
 
                 default:
@@ -53,7 +53,7 @@ namespace Application.Features.Users.Queries.GetAllPaged
                     Id = u.Id,
                     Name = u.Name,
                     Password = u.Password,
-                    IsActive = u.IsActive,
+                    Enabled = u.Enabled,
                 }).ToPagedResultAsync(query.Page, query.PageSize);
         }
     }

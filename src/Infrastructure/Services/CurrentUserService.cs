@@ -90,7 +90,7 @@ namespace Infrastructure.Services
         {
             var userResponse = await _unitOfWork.Repository<User>()
                 .Entities
-                .Where(u => u.Name == accountName && u.Password == password && u.IsActive)
+                .Where(u => u.Name == accountName && u.Password == password && u.Enabled)
                 .Select(u => new UserResponse
                 {
                     Id = u.Id,

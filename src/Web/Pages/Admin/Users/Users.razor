@@ -18,12 +18,12 @@
     </ToolBar>
 
     <Header>
-        <MudTh><MudTableSortLabel SortLabel="IsActive" T="GetAllPagedUsersResponse">Habilitado</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="Enabled" T="GetAllPagedUsersResponse">Habilitado</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortLabel="Name" T="GetAllPagedUsersResponse">Nombre</MudTableSortLabel></MudTh>
     </Header>
 
     <RowTemplate>
-        <MudTd><CheckIcon Checked="@context.IsActive"/></MudTd>
+        <MudTd><CheckIcon Checked="@context.Enabled"/></MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
     </RowTemplate>
 
