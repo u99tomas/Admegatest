@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Shared.Constants.Permission;
 using Web.Infrastructure.Extensions;
+using Web.Infrastructure.Mappings;
 using Web.Models.Table;
 using Web.Pages.Admin.Roles;
 using Web.Shared.Components.Table;
@@ -68,17 +69,16 @@ namespace Web.Pages.Admin.Companies
         {
             var result = await _mediator.Send(new GetByIdCompanyQuery {Id = companyId});
             _snackBar.ShowMessage(result);
-            //var parameters = new DialogParameters();
 
-            //parameters.Add(nameof(AddEditRoleDialog.Model), role.ToAddEditRoleDialog());
+            var parameters = new DialogParameters {{nameof(AddEditCompanyDialog.Model), result.Data.ToAddEditCompanyCommand()}};
+            var dialog = _dialogService.Show<AddEditCompanyDialog>("", parameters);
 
-            //var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
-            //var result = await dialog.Result;
+            var dialogResult = await dialog.Result;
 
-            //if (!result.Cancelled)
-            //{
-            //    _table.ReloadServerData();
-            //}
+            if (!dialogResult.Cancelled)
+            {
+                _table.ReloadServerData();
+            }
         }
     }
 }

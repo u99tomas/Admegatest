@@ -1,0 +1,23 @@
+﻿@using Web.Shared.Components.Dialog
+
+<DialogForm Model="Model" OnValidSubmit="SubmitAsync"
+            Icon=@(EditMode? Icons.Material.Filled.Edit : Icons.Material.Filled.Add)>
+    <Title>
+        @(EditMode? "Editar Empresa" : "Crear Empresa")
+    </Title>
+
+    <Content>
+        <MudTextField @bind-Value="@Model.CompanyName"
+                      For="@(() => Model.CompanyName)"
+                      Label="Razón social"
+                      Variant="Variant.Outlined"
+                      Class="my-3" />
+
+        <MudTextField @bind-Value="@Model.Denomination"
+                      For="@(() => Model.Denomination)"
+                      Immediate="true"
+                      Label="Denominación"
+                      Variant="Variant.Outlined"
+                      Class="my-3" />
+    </Content>
+</DialogForm>

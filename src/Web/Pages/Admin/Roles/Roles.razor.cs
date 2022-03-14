@@ -77,9 +77,7 @@ namespace Web.Pages.Admin.Roles
 
         private async Task EditAsync(GetAllPagedRolesResponse role)
         {
-            var parameters = new DialogParameters();
-
-            parameters.Add(nameof(AddEditRoleDialog.Model), role.ToAddEditRoleCommand());
+            var parameters = new DialogParameters {{nameof(AddEditRoleDialog.Model), role.ToAddEditRoleCommand()}};
 
             var dialog = _dialogService.Show<AddEditRoleDialog>("", parameters);
             var result = await dialog.Result;

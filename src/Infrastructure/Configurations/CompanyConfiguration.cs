@@ -16,8 +16,7 @@ namespace Infrastructure.Configurations
                 .IsUnique();
 
             builder.Property(c => c.Denomination)
-                .HasMaxLength(100)
-                .IsRequired();
+                .HasMaxLength(100);
         }
     }
 }
