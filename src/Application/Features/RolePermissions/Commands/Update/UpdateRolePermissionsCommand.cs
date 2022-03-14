@@ -23,23 +23,21 @@ namespace Application.Features.RolePermissions.Commands.Update
 
         public async Task<Result<int[]>> Handle(UpdateRolePermissionsCommand command, CancellationToken cancellationToken)
         {
-            var oldPermissions = await _unitOfWork.Repository<Domain.Entities.RolePermissions>()
+            var oldPermissions = _unitOfWork.Repository<Domain.Entities.RolePermissions>()
                 .Entities
-                .Where(rp => rp.RoleId == command.RoleId)
-                .ToListAsync();
+                .Where(rp => rp.RoleId == command.RoleId);
 
             await _unitOfWork.Repository<Domain.Entities.RolePermissions>()
                 .RemoveRangeAsync(oldPermissions);
 
-            var newPermissions = await _unitOfWork.Repository<Permission>()
+            var newPermissions = _unitOfWork.Repository<Permission>()
                 .Entities
                 .Where(p => command.PermissionsIds.Contains(p.Id))
                 .Select(p => new Domain.Entities.RolePermissions
                 {
                     PermissionId = p.Id,
                     RoleId = command.RoleId,
-                })
-                .ToListAsync();
+                });
 
             var result = await _unitOfWork.Repository<Domain.Entities.RolePermissions>()
                 .AddRangeAsync(newPermissions);

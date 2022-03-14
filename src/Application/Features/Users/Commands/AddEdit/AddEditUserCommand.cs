@@ -40,9 +40,7 @@ namespace Application.Features.Users.Commands.AddEdit
 
                 await _unitOfWork.Repository<User>().AddAsync(user);
 
-                var roles = command.RoleIds
-                    .Select(id => new UserRoles { RoleId = id, User = user })
-                    .ToList();
+                var roles = command.RoleIds.Select(id => new UserRoles { RoleId = id, User = user });
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(roles);
                 await _unitOfWork.Commit(cancellationToken);
@@ -62,15 +60,12 @@ namespace Application.Features.Users.Commands.AddEdit
                 user.Password = command.Password;
                 user.IsActive = command.IsActive;
 
-                var userRoles = await _unitOfWork.Repository<UserRoles>()
-                    .Entities
-                    .Where(u => u.UserId == command.Id)
-                    .ToListAsync();
+                var userRoles = _unitOfWork.Repository<UserRoles>().Entities
+                    .Where(u => u.UserId == command.Id);
 
                 await _unitOfWork.Repository<UserRoles>().RemoveRangeAsync(userRoles);
 
-                var newUserRoles = command.RoleIds.Select(id => new UserRoles { UserId = user.Id, RoleId = id })
-                    .ToList();
+                var newUserRoles = command.RoleIds.Select(id => new UserRoles { UserId = user.Id, RoleId = id });
 
                 await _unitOfWork.Repository<UserRoles>().AddRangeAsync(newUserRoles);
 

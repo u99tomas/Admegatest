@@ -47,7 +47,7 @@ namespace Application.Features.Roles.Commands.Add
 
                 if (role == null)
                 {
-                    return Result<int>.Failure($"Error: No se ha encontrado el Rol con Id {command.Id}");
+                    return Result<int>.Failure($"No se ha encontrado el Rol");
                 }
 
                 role.Name = command.Name;

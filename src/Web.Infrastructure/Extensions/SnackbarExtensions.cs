@@ -7,11 +7,11 @@ namespace Web.Infrastructure.Extensions
     {
         public static void ShowMessage<T>(this ISnackbar snackbar, Result<T> result)
         {
-            if (result.Succeeded)
+            if (result.Succeeded && result.HasMessage)
             {
                 snackbar.Add(result.Message, Severity.Success);
             }
-            else
+            else if(result.HasMessage)
             {
                 snackbar.Add(result.Message, Severity.Error);
             }

@@ -14,10 +14,14 @@ namespace Application.Interfaces.Repositories
 
         Task<T> AddAsync(T entity);
 
-        Task<List<T>> AddRangeAsync(List<T> entities);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
+
+        Task<IQueryable<T>> AddRangeAsync(IQueryable<T> entities);
 
         Task RemoveAsync(T entity);
 
-        Task RemoveRangeAsync(List<T> entities);
+        Task RemoveRangeAsync(IEnumerable<T> entities);
+
+        Task RemoveRangeAsync(IQueryable<T> entities);
     }
 }

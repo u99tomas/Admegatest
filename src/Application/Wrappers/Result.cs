@@ -4,7 +4,8 @@
     {
         public T Data { get; }
         public bool Succeeded { get; }
-        public string Message { get; }
+        public string Message { get; } = string.Empty;
+        public bool HasMessage => Message != string.Empty;
 
         public Result(bool succeeded)
         {

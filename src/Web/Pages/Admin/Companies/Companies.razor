@@ -27,6 +27,6 @@
     </RowTemplate>
 
     <MenuTemplate>
-@*        <MudMenuItem @onclick="@(() => EditAsync(@context))" Disabled="!_canEditCompany">Editar</MudMenuItem>*@
+        <MudMenuItem @onclick="@(() => EditAsync(@context.Id))" Disabled="!_canEditCompany">Editar</MudMenuItem>
     </MenuTemplate>
 </PagedTable>

@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Common;
-using Infrastructure.Persistence;
+using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -27,7 +27,13 @@ namespace Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<List<T>> AddRangeAsync(List<T> entities)
+        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
+            return entities;
+        }
+
+        public async Task<IQueryable<T>> AddRangeAsync(IQueryable<T> entities)
         {
             await _context.Set<T>().AddRangeAsync(entities);
             return entities;
@@ -39,7 +45,13 @@ namespace Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public Task RemoveRangeAsync(List<T> entities)
+        public Task RemoveRangeAsync(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveRangeAsync(IQueryable<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
             return Task.CompletedTask;
