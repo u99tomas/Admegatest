@@ -12,6 +12,7 @@
 6. Habrá el proyecto que ha descargado con Visual Studio
 7. En el buscador de Visual Studio escriba **Package Manager Console**
 8. Dentro de la consola ejecute el siguientes comandos para crear las tablas necesarias en la base de datos: <br/><br/>
+`dotnet tool install --global dotnet-ef` <br/><br/>
 `dotnet ef migrations add Initial --verbose --project "src/Infrastructure" --startup-project "src/Web"` <br/><br/>
 `dotnet ef database update --verbose --project "src/Infrastructure" --startup-project "src/Web"`  
 
