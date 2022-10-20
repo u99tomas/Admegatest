@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Extensions
 {
+    using EntityFrameworkCore.UseRowNumberForPaging;
+
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
@@ -23,7 +25,7 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MegaDbContext>(
-                options => { options.UseSqlServer(configuration.GetConnectionString("AdMegasoftDb")); }
+                options => { options.UseSqlServer(configuration.GetConnectionString("AdMegasoftDb"), i => i.UseRowNumberForPaging()); }
                 , ServiceLifetime.Transient
             );
 
